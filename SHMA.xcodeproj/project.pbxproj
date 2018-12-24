@@ -18,6 +18,7 @@
 		393F4B7E21CBCBEF009B4239 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 393F4B7C21CBCBEF009B4239 /* LaunchScreen.storyboard */; };
 		393F4B8921CBCBEF009B4239 /* SHMATests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393F4B8821CBCBEF009B4239 /* SHMATests.swift */; };
 		393F4B9521CBD26C009B4239 /* General.swift in Sources */ = {isa = PBXBuildFile; fileRef = 393F4B9421CBD26C009B4239 /* General.swift */; };
+		3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952259D21D0FA5600FD411C /* CorporateView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,7 @@
 		393F4B8821CBCBEF009B4239 /* SHMATests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHMATests.swift; sourceTree = "<group>"; };
 		393F4B8A21CBCBEF009B4239 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		393F4B9421CBD26C009B4239 /* General.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = General.swift; sourceTree = "<group>"; };
+		3952259D21D0FA5600FD411C /* CorporateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,6 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				39282A1421CE49AD003E3AAA /* InitialView.swift */,
+				3952259D21D0FA5600FD411C /* CorporateView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -248,6 +251,7 @@
 				39282A0D21CE3D43003E3AAA /* MemberController.swift in Sources */,
 				39282A0F21CE3D4B003E3AAA /* CorporateController.swift in Sources */,
 				393F4B7421CBCBEF009B4239 /* AppDelegate.swift in Sources */,
+				3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */,
 				39282A1321CE4184003E3AAA /* InitialController+Handlers.swift in Sources */,
 				393F4B9521CBD26C009B4239 /* General.swift in Sources */,
 				39282A1121CE4174003E3AAA /* InitialViewModel.swift in Sources */,
