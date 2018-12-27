@@ -70,22 +70,6 @@ class InitialView: UIView {
         setupImageViewAndButtons()
     }
     
-//    override init(frame: CGRect) {
-//        super.init(frame: frame)
-//
-//        buttonStackView = UIStackView(arrangedSubviews: [memberButton, corporateButton])
-//        buttonStackView.axis = .vertical
-//        buttonStackView.spacing = 5
-//        buttonStackView.distribution = .fillEqually
-//        print(self.traitCollection.isIphonePortrait)
-//        initialViewModel = InitialViewModel(super.traitCollection, buttonStackView, shmaLogoIV, view: self)
-//
-//        addSubview(buttonStackView)
-//        addSubview(shmaLogoIV)
-//        setupImageViewAndButtons()
-//    }
-    
-    
     private func setupImageViewAndButtons() {
         shmaLogoIV.anchor(top: nil, left: nil, bottom: buttonStackView.topAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 20, paddingRight: 0, width: initialViewModel.getSHMALogoImageViewWidth(), height: initialViewModel.getSHMALogoImageViewHeight(), centerYAnchor: nil, centerXAnchor: centerXAnchor)
         

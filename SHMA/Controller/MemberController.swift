@@ -13,5 +13,6 @@ class MemberController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Member"
     }
 }
