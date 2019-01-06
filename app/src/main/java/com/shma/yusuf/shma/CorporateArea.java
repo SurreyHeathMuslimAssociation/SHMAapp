@@ -6,6 +6,12 @@ import android.util.Log;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
 public class CorporateArea extends AppCompatActivity {
 
     private TextView dobback ;
@@ -26,6 +32,11 @@ public class CorporateArea extends AppCompatActivity {
                 dobback.setText(date);
             }
         });
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("message");
+
+
 
     }
 }
