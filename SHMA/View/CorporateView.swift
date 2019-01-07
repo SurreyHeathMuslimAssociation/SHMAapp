@@ -17,6 +17,17 @@ class CorporateView: UIView {
     var corporateViewModel: CorporateViewModel!
     weak var delegate: CorporateViewDelegate?
     
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let iv = UIActivityIndicatorView()
+        iv.style = .whiteLarge
+        return iv
+    }()
+    let dimView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(white: 0.6, alpha: 0.5)
+        view.isHidden = true
+        return view
+    }()
     let mainlabel: UILabel = {
         let lable = UILabel()
         lable.numberOfLines = 0
@@ -24,9 +35,9 @@ class CorporateView: UIView {
         lable.text = "Please search the member using their First Name and DOB."
         return lable
     }()
-    let firstNameTextField: UITextField = {
+    let surnameTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "First Name"
+        tf.placeholder = "Last Name"
         tf.layer.borderWidth = 0.5
         tf.layer.borderColor = UIColor.lightGray.cgColor
         tf.textAlignment = .center
@@ -60,17 +71,22 @@ class CorporateView: UIView {
     
     required init(traitCollection: UITraitCollection) {
         super.init(frame: .zero)
+        backgroundColor = .white
         
-        corporateViewModel = CorporateViewModel(traitCollection, mainlabel, firstNameTextField, datePicker, self)
+        corporateViewModel = CorporateViewModel(traitCollection, mainlabel, surnameTextField, datePicker, self)
         
         addSubview(mainlabel)
-        addSubview(firstNameTextField)
+        addSubview(surnameTextField)
         addSubview(datePicker)
         addSubview(searchButton)
         
+        addSubview(dimView)
+        dimView.addSubview(activityIndicatorView)
+        
         disableAnchors()
         setupMainLabelAndSeachButton()
-        setupFirstNameTextFieldAndDatePicker()
+        setuplastNameTextFieldAndDatePicker()
+        setupDimViewAndActivityIndicatorView()
     }
     
     private func disableAnchors() {
@@ -108,10 +124,10 @@ class CorporateView: UIView {
         searchButton.titleLabel?.font = corporateViewModel.getSearchButtonFontForEachDevice()
     }
     
-    private func setupFirstNameTextFieldAndDatePicker() {
-        firstNameTextField.anchor(top: nil, left: nil, bottom: datePicker.topAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: corporateViewModel.getFirstNameTextFieldBottomPadding(), paddingRight: 0, width: 0, height: corporateViewModel.getFirstNameTextFieldHeightForEachDevice(), centerYAnchor: nil, centerXAnchor: datePicker.centerXAnchor)
-        firstNameTextField.widthAnchor.constraint(equalTo: datePicker.widthAnchor).isActive = true
-        firstNameTextField.font = corporateViewModel.getFirstNameTextFieldFontForEachDevice()
+    private func setuplastNameTextFieldAndDatePicker() {
+        surnameTextField.anchor(top: nil, left: nil, bottom: datePicker.topAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: corporateViewModel.getlastNameTextFieldBottomPadding(), paddingRight: 0, width: 0, height: corporateViewModel.getlastNameTextFieldHeightForEachDevice(), centerYAnchor: nil, centerXAnchor: datePicker.centerXAnchor)
+        surnameTextField.widthAnchor.constraint(equalTo: datePicker.widthAnchor).isActive = true
+        surnameTextField.font = corporateViewModel.getlastNameTextFieldFontForEachDevice()
         
         datePicker.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 150, centerYAnchor: centerYAnchor, centerXAnchor: nil)
         
@@ -120,6 +136,13 @@ class CorporateView: UIView {
         
         datePickerWidthAnchor = corporateViewModel.getDatePickerWidthAnchor()
         datePickerWidthAnchor?.isActive = true
+        
+    }
+    
+    private func setupDimViewAndActivityIndicatorView() {
+        activityIndicatorView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: centerYAnchor, centerXAnchor: centerXAnchor)
+        
+        dimView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -127,7 +150,7 @@ class CorporateView: UIView {
         corporateViewModel.traitCollection = traitCollection
         disableAnchors()
         setupMainLabelAndSeachButton()
-        setupFirstNameTextFieldAndDatePicker()
+        setuplastNameTextFieldAndDatePicker()
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,13 +16,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        // set window
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.backgroundColor = .white
-        
         let initialNavController = UINavigationController(rootViewController: InitialController())
         window?.rootViewController = initialNavController
         window?.makeKeyAndVisible()
+        
+        // configure firebase
+        FirebaseApp.configure()
+        
         return true
     }
 

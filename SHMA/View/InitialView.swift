@@ -21,7 +21,7 @@ class InitialView: UIView {
     
     lazy var corporateButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Corporate", for: .normal)
+        button.setTitle("Business", for: .normal)
         button.setTitleColor(UIColor.rgb(red: 0, green: 0, blue: 205), for: .normal)
         button.backgroundColor = UIColor(white: 0.6, alpha: 0.5)
         button.addTarget(self, action: #selector(handleCorporate), for: .touchUpInside)
@@ -54,6 +54,7 @@ class InitialView: UIView {
 
     required init(traitCollection: UITraitCollection) {
         super.init(frame: .zero)
+        backgroundColor = .white
         
         buttonStackView = UIStackView(arrangedSubviews: [memberButton, corporateButton])
         buttonStackView.axis = .vertical

@@ -12,14 +12,14 @@ class CorporateViewModel {
     
     var traitCollection: UITraitCollection
     let mainLabel: UILabel
-    let firstNameTextField: UITextField
+    let lastNameTextField: UITextField
     let datePicker: UIDatePicker
     let view: UIView
     
-    init(_ traitCollection: UITraitCollection, _ mainLabel: UILabel, _ firstNameTextField: UITextField, _ datePicker: UIDatePicker, _ view: UIView) {
+    init(_ traitCollection: UITraitCollection, _ mainLabel: UILabel, _ lastNameTextField: UITextField, _ datePicker: UIDatePicker, _ view: UIView) {
         self.traitCollection = traitCollection
         self.mainLabel = mainLabel
-        self.firstNameTextField = firstNameTextField
+        self.lastNameTextField = lastNameTextField
         self.datePicker = datePicker
         self.view = view
     }
@@ -29,16 +29,16 @@ class CorporateViewModel {
         if traitCollection.isIpad {
             return UIFont.systemFont(ofSize: 26)
         } else {
-            return UIFont.systemFont(ofSize: 18)
+            return UIFont.systemFont(ofSize: 16)
         }
     }
     
     func getMainLabelBottomAnchor() -> NSLayoutConstraint? {
         if !traitCollection.isIphoneLandscape {
             if traitCollection.isIpad {
-                return mainLabel.bottomAnchor.constraint(equalTo: firstNameTextField.topAnchor, constant: -30)
+                return mainLabel.bottomAnchor.constraint(equalTo: lastNameTextField.topAnchor, constant: -30)
             } else {
-                return mainLabel.bottomAnchor.constraint(equalTo: firstNameTextField.topAnchor, constant: -10)
+                return mainLabel.bottomAnchor.constraint(equalTo: lastNameTextField.topAnchor, constant: -10)
             }
         } else {
             return nil
@@ -82,7 +82,7 @@ class CorporateViewModel {
         if traitCollection.isIphoneLandscape {
             return datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4)
         } else {
-            return datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.65)
+            return datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         }
     }
     
@@ -94,8 +94,8 @@ class CorporateViewModel {
         }
     }
     
-    // firstNametextField
-    func getFirstNameTextFieldFontForEachDevice() -> UIFont {
+    // lastNameTextField
+    func getlastNameTextFieldFontForEachDevice() -> UIFont {
         if traitCollection.isIpad {
             return UIFont.systemFont(ofSize: 22)
         } else {
@@ -103,7 +103,7 @@ class CorporateViewModel {
         }
     }
     
-    func getFirstNameTextFieldHeightForEachDevice() -> CGFloat {
+    func getlastNameTextFieldHeightForEachDevice() -> CGFloat {
         if traitCollection.isIpad {
             return 45
         } else {
@@ -111,11 +111,29 @@ class CorporateViewModel {
         }
     }
     
-    func getFirstNameTextFieldBottomPadding() -> CGFloat {
+    func getlastNameTextFieldBottomPadding() -> CGFloat {
         if traitCollection.isIpad {
             return 10
         } else {
             return 5
+        }
+    }
+    
+    func getEmptyLastNameTextFeildAlertViewTitle() -> NSAttributedString {
+        let title = "Attention"
+        if traitCollection.isIpad {
+            return NSAttributedString.getAttributedStringUsing(text: title, font: 20, spaceFont: 4, isBold: true)
+        } else {
+            return NSAttributedString.getAttributedStringUsing(text: title, font: 16, spaceFont: nil, isBold: true)
+        }
+    }
+  
+    func getEmptyLastNameTextFeildAlertViewText() -> NSAttributedString {
+        let text = "Please ensure 'Surname' is entered."
+        if traitCollection.isIpad {
+            return NSAttributedString.getAttributedStringUsing(text: text, font: 16, spaceFont: nil, isBold: false)
+        } else {
+             return NSAttributedString.getAttributedStringUsing(text: text, font: 13, spaceFont: nil, isBold: false)
         }
     }
     
@@ -142,6 +160,92 @@ class CorporateViewModel {
             return [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
         } else {
             return [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
+        }
+    }
+    
+    // shma id alert
+    func getShmaIdsAlertTitle(fetchedShmaIds: [String]) -> NSAttributedString {
+        if fetchedShmaIds.isEmpty {
+            let title = "Member Not Found"
+            if traitCollection.isIpad {
+                return NSAttributedString.getAttributedStringUsing(text: title, font: 20, spaceFont: nil, isBold: true)
+            } else {
+                return NSAttributedString.getAttributedStringUsing(text: title, font: 16, spaceFont: nil, isBold: true)
+            }
+        } else {
+            let title = "Member Found"
+            if traitCollection.isIpad {
+                return NSAttributedString.getAttributedStringUsing(text: title, font: 20, spaceFont: 4, isBold: true)
+            } else {
+                return NSAttributedString.getAttributedStringUsing(text: title, font: 16, spaceFont: 2, isBold: true)
+            }
+        }
+    }
+    
+    func getShmaIdsAlertText(fetchedShmaIds: [String]) -> NSAttributedString {
+        if fetchedShmaIds.isEmpty {
+            let text = "Please re-enter the details."
+            if traitCollection.isIpad {
+                return NSAttributedString.getAttributedStringUsing(text: text, font: 16, spaceFont: nil, isBold: false)
+            } else {
+                return NSAttributedString.getAttributedStringUsing(text: text, font: 13, spaceFont: nil, isBold: false)
+            }
+        } else {
+            let confirmationText = "\n Please ask them to confirm."
+            if fetchedShmaIds.count < 2 {
+                let text = "Their SHMA ID is: "
+                return getOneShmaIdFoundText(fetchedShmaId: fetchedShmaIds[0], text: text, confirmationText: confirmationText)
+            } else {
+                let text = "Their SHMA ID is one of the following: "
+                return getMultipleShmaIdsFoundText(fetchedShmaIds: fetchedShmaIds, text: text, confirmationText: confirmationText)
+            }
+        }
+    }
+    
+    private func getOneShmaIdFoundText(fetchedShmaId: String, text: String, confirmationText: String) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString()
+        if traitCollection.isIpad {
+            attributedString.append(NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
+            attributedString.append(NSAttributedString(string: fetchedShmaId, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]))
+            attributedString.append(NSAttributedString(string: confirmationText, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
+            return attributedString
+        } else {
+            attributedString.append(NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
+            attributedString.append(NSAttributedString(string: fetchedShmaId, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 13)]))
+            attributedString.append(NSAttributedString(string: confirmationText, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
+            return attributedString
+        }
+    }
+    
+    private func getMultipleShmaIdsFoundText(fetchedShmaIds: [String], text: String, confirmationText: String) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString()
+        if traitCollection.isIpad {
+            attributedString.append(NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
+            attributedString.append(NSAttributedString(string: "\(fetchedShmaIds)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]))
+            attributedString.append(NSAttributedString(string: confirmationText, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
+            return attributedString
+        } else {
+            attributedString.append(NSAttributedString(string: text, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
+            attributedString.append(NSAttributedString(string: "\(fetchedShmaIds)", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 13)]))
+            attributedString.append(NSAttributedString(string: confirmationText, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)]))
+            return attributedString
+        }
+    }
+    
+    // no network alert
+    func getNoNetworkAlertTitle() -> NSAttributedString {
+        if traitCollection.isIpad {
+            return NSAttributedString.getAttributedStringUsing(text: "No Internet Connection", font: 20, spaceFont: 4, isBold: true)
+        } else {
+            return NSAttributedString.getAttributedStringUsing(text: "No Internet Connection", font: 16, spaceFont: 2, isBold: true)
+        }
+    }
+    
+    func getNoNetworkAlertText() -> NSAttributedString {
+        if traitCollection.isIpad {
+            return NSAttributedString.getAttributedStringUsing(text: "Please connect to the internet in order to search a member.", font: 16, spaceFont: nil, isBold: false)
+        } else {
+            return NSAttributedString.getAttributedStringUsing(text: "Please connect to the internet in order to search a member.", font: 13, spaceFont: nil, isBold: false)
         }
     }
 }

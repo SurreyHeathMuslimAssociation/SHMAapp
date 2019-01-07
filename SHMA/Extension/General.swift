@@ -83,3 +83,24 @@ extension UITraitCollection {
         return isIphoneLandscape || isIphonePortrait
     }
 }
+
+/// Helper alert method
+extension UIAlertController {
+    static func showAlert(title: NSAttributedString, text: NSAttributedString, viewController: UIViewController) {
+        let alert = self.init(title: "", message: "", preferredStyle: .alert)
+        alert.setValue(title, forKey: "attributedTitle")
+        alert.setValue(text, forKey: "attributedMessage")
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        viewController.present(alert, animated: true, completion: nil)
+    }
+}
+
+extension NSAttributedString {
+    
+    /// Gets the onboarding attributed string with desired fonts
+    static func getAttributedStringUsing(text: String, font: CGFloat, spaceFont: CGFloat?, isBold: Bool) -> NSAttributedString {
+        let attributedtext = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.font: (isBold ? UIFont.boldSystemFont(ofSize: font) : UIFont.systemFont(ofSize: font))])
+        attributedtext.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: spaceFont ?? 0)]))
+        return attributedtext
+    }
+}
