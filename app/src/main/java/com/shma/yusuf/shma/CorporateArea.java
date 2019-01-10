@@ -1,5 +1,7 @@
 package com.shma.yusuf.shma;
+import android.content.Intent;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,34 +44,8 @@ public class CorporateArea extends AppCompatActivity {
         super.onStart();
           String result = "test unchanged";
       //  users = new ArrayList<>();
+        readfromFirebase();
 
-       mDatabase.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    //getting artist
-                    String rs = String.valueOf(postSnapshot.exists());
-                  //  Log.d(TAG, "over here"+ rs  ); //comes back as true -> there is data
-                    User usersdb = postSnapshot.getValue(User.class);
-
-                    users.add(usersdb);
-                  }
-                for (User s : users) {
-                    Log.d(TAG, "each element " + s.getDOB() );
-                    Log.d(TAG, "each element " + s.getSurname() );
-                }
-                Log.d(TAG, "size of array list is  " + String.valueOf(users.size()) );
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
                    }
 
@@ -78,7 +54,46 @@ public void addtodatabase(String surname, String DOB){
         mDatabase.child("member_search").setValue(ting);
 }
 
-public void checkfields( ){
+public void readfromFirebase(){
+    mDatabase.addValueEventListener(new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
+
+            for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                //getting artist
+                String rs = String.valueOf(postSnapshot.exists());
+                //  Log.d(TAG, "over here"+ rs  ); //comes back as true -> there is data
+                User usersdb = postSnapshot.getValue(User.class);
+
+                users.add(usersdb);
+            }
+           /* for (User s : users) {
+                Log.d(TAG, "each element " + s.getDOB() );
+                Log.d(TAG, "each element " + s.getSurname() );
+            }
+            Log.d(TAG, "size of array list is  " + String.valueOf(users.size()) );*/
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    });
+}
+
+    public void Searchdb(View view){
+        Intent intent = new Intent(this, CorporateArea.class);
+        // EditText editText = (EditText) findViewById(R.id.editText);
+        // String message = editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        Snackbar mySnackbar = Snackbar.make(view, "Valid Member",4);
+
+    }
+
+public void checkfields(){
     Surnametxt = findViewById(R.id.SHMAid);
     dobback  = findViewById(R.id.DOBtitle);
     theDOB = findViewById(R.id.DOB);
