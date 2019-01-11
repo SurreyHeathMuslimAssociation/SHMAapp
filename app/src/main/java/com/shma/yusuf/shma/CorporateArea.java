@@ -24,7 +24,9 @@ public class CorporateArea extends AppCompatActivity {
     private TextView dobback ;
     private CalendarView theDOB ;
     private static final String TAG = "firebase check";
-       private DatabaseReference mDatabase ;
+    private static String date = "";
+    private static  String surname = "";
+    private DatabaseReference mDatabase ;
     private List<User> users = new ArrayList<>();
 
     @Override
@@ -32,9 +34,6 @@ public class CorporateArea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corporate_area);
         mDatabase = FirebaseDatabase.getInstance().getReference("member_search");
-
-        checkfields();
-
 
           }
 
@@ -89,22 +88,35 @@ public void readfromFirebase(){
         // EditText editText = (EditText) findViewById(R.id.editText);
         // String message = editText.getText().toString();
         //intent.putExtra(EXTRA_MESSAGE, message);
-        Snackbar mySnackbar = Snackbar.make(view, "Valid Member",4);
 
-    }
 
-public void checkfields(){
-    Surnametxt = findViewById(R.id.SHMAid);
-    dobback  = findViewById(R.id.DOBtitle);
-    theDOB = findViewById(R.id.DOB);
-    theDOB.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-        @Override
-        public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-            String date = (dayOfMonth + "/" + (month +1) +  "/" + year) ;
-            Log.d(TAG, "onSelectedDayChange: " + date);
-            Log.d(TAG, "size of array list is  " + String.valueOf(users.size()) );
-        }
+        Surnametxt = findViewById(R.id.SHMAid);
+        dobback  = findViewById(R.id.DOBtitle);
+        theDOB = findViewById(R.id.DOB);
+        theDOB.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+               date = (dayOfMonth + "/" + (month +1) +  "/" + year) ;
+                Log.d(TAG, "onSelectedDayChange: " + date);
+                //Log.d(TAG, "size of array list is  " + String.valueOf(users.size()) );
+
+       }
+
+
+
     });
+
+        for (User s : users) {
+
+            if (surname.equalsIgnoreCase(s.getSurname())) {
+                if(date == s.getDOB()){
+                    Log.d(TAG, "date entered is " + date + "surname entered is" + surname );
+                    Snackbar mySnackbar = Snackbar.make(view, "VALID MEMBER",4000);
+                    mySnackbar.show();
+                }
+
+            }
+        }
 
 
 }
