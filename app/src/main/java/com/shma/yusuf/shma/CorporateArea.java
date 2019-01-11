@@ -16,7 +16,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class CorporateArea extends AppCompatActivity {
@@ -34,6 +36,28 @@ public class CorporateArea extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_corporate_area);
         mDatabase = FirebaseDatabase.getInstance().getReference("member_search");
+        Surnametxt = findViewById(R.id.SHMAid);
+        dobback  = findViewById(R.id.DOBtitle);
+        theDOB = findViewById(R.id.DOB);
+
+        //way of doing it without the listener on the calendar view
+
+
+
+       /* theDOB.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
+                date = (dayOfMonth + "/" + (month +1) +  "/" + year) ;
+                Log.d(TAG, "onSelectedDayChange: " + date);
+                //Log.d(TAG, "size of array list is  " + String.valueOf(users.size()) );
+                }
+                });*/
+
+
+
+
+
+
 
           }
 
@@ -85,37 +109,24 @@ public void readfromFirebase(){
 
     public void Searchdb(View view){
         Intent intent = new Intent(this, CorporateArea.class);
-        // EditText editText = (EditText) findViewById(R.id.editText);
-        // String message = editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
+        //grab date at button press point
+         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        date = sdf.format(new Date(theDOB.getDate()));
 
-
-        Surnametxt = findViewById(R.id.SHMAid);
-        dobback  = findViewById(R.id.DOBtitle);
-        theDOB = findViewById(R.id.DOB);
-        theDOB.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-               date = (dayOfMonth + "/" + (month +1) +  "/" + year) ;
-                Log.d(TAG, "onSelectedDayChange: " + date);
-                //Log.d(TAG, "size of array list is  " + String.valueOf(users.size()) );
-
-       }
-
-
-
-    });
-
+        //loop through users to find the correct one if exists
         for (User s : users) {
 
-            if (surname.equalsIgnoreCase(s.getSurname())) {
-                if(date == s.getDOB()){
-                    Log.d(TAG, "date entered is " + date + "surname entered is" + surname );
-                    Snackbar mySnackbar = Snackbar.make(view, "VALID MEMBER",4000);
-                    mySnackbar.show();
-                }
+            Snackbar mySnackbar;
+            if (surname.equalsIgnoreCase(s.getSurname()) && date == s.getDOB()) {
+                Log.d(TAG, "date entered is " + date + "surname entered is" + surname);
+                mySnackbar = Snackbar.make(view, "VALID MEMBER", 4000);
 
+            } else {
+                mySnackbar = Snackbar.make(view, "INVALID MEMBER", 4000);
             }
+                 mySnackbar.show();
+
+
         }
 
 
