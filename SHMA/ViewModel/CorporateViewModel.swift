@@ -140,7 +140,7 @@ class CorporateViewModel {
     // searchButton
     func getSearchButtonFontForEachDevice() -> UIFont {
         if traitCollection.isIpad {
-            return UIFont.systemFont(ofSize: 25)
+            return UIFont.systemFont(ofSize: 22)
         } else {
             return UIFont.systemFont(ofSize: 16)
         }

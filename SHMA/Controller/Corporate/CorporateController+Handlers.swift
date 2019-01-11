@@ -10,7 +10,7 @@ import UIKit
 import FirebaseDatabase
 
 extension CorporateController: CorporateViewDelegate {
-    
+
     func didPressSearch() {
         if Reachability.isConnectedToNetwork() {
             guard let surname = corporateView.surnameTextField.text, surname.count > 0 else {
@@ -26,7 +26,7 @@ extension CorporateController: CorporateViewDelegate {
                 self.corporateView.activityIndicatorView.startAnimating()
             }
             formatSearchedDateToMatchFirebase(surname: capitalizedSurname)
-            
+
         } else {
             UIAlertController.showAlert(title: corporateView.corporateViewModel.getNoNetworkAlertTitle(), text: corporateView.corporateViewModel.getNoNetworkAlertText(), viewController: self)
         }
@@ -46,14 +46,17 @@ extension CorporateController: CorporateViewDelegate {
     private func searchMemberUsing(_ date: String, _ surname: String) {
         fetchedShmaIds = [String]()
         databaseManager.searchMemberUsing(date, surname) { (shmaId, wasFound) in
-            self.fetchedShmaIds.append(shmaId)
+            if wasFound {
+                guard let shmaId = shmaId else { return }
+                self.fetchedShmaIds.append(shmaId)
+            }
+            self.attemptPresentationOfShmaIdsAlert()
         }
-        self.attemptPresentationOfShmaIdsAlert()
     }
     
     private func attemptPresentationOfShmaIdsAlert() {
         self.timer?.invalidate()
-        self.timer = Timer.scheduledTimer(timeInterval: 0.8, target: self, selector: #selector(self.presentAlert), userInfo: nil, repeats: false)
+        self.timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.presentAlert), userInfo: nil, repeats: false)
     }
     
     @objc func presentAlert() {

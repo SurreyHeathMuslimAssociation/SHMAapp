@@ -18,7 +18,7 @@ class FirebaseDatabaseSessionMock: FirebaseDatabaseSession {
     let shmaId = "100"
     let wasFound = true
     
-    func searchMemberUsing(_ dob: String, _ surname: String, completion: @escaping (String, Bool) -> Void) {
+    func searchMemberUsing(_ dob: String, _ surname: String, completion: @escaping (String?, Bool) -> Void) {
         didInitiateDatabaseCall = true
         memberDob = dob
         memberSurname = surname

@@ -9,5 +9,5 @@
 import Foundation
 
 protocol FirebaseDatabaseSession {
-    func searchMemberUsing(_ dob: String,_ surname: String, completion: @escaping (String, Bool) -> Void)
+    func searchMemberUsing(_ dob: String,_ surname: String, completion: @escaping (String?, Bool) -> Void)
 }

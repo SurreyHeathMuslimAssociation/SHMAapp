@@ -7,6 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3905913B21E766BE00F297AC /* LoginRegistrationView+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905913A21E766BE00F297AC /* LoginRegistrationView+Handlers.swift */; };
+		3905913D21E780CB00F297AC /* LoginRegistrationController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905913C21E780CB00F297AC /* LoginRegistrationController+Handlers.swift */; };
+		3905913F21E78D8E00F297AC /* TermsAndConditionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905913E21E78D8E00F297AC /* TermsAndConditionsView.swift */; };
+		3905914121E7920D00F297AC /* TermsAndConditionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905914021E7920D00F297AC /* TermsAndConditionsController.swift */; };
+		3905914321E793C500F297AC /* TermsAndConditionsView+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905914221E793C500F297AC /* TermsAndConditionsView+Handlers.swift */; };
+		3905914921E798C800F297AC /* TermsAndConditionsController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905914821E798C800F297AC /* TermsAndConditionsController+Handlers.swift */; };
+		3905914B21E79C6D00F297AC /* Terms&Conditionsv8.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 3905914A21E79C6D00F297AC /* Terms&Conditionsv8.pdf */; };
+		3905914D21E7C30000F297AC /* TermsAndConditionsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3905914C21E7C30000F297AC /* TermsAndConditionsViewModel.swift */; };
+		39063E5221E62B9000A020EE /* MemberViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39063E5121E62B9000A020EE /* MemberViewModelTests.swift */; };
+		39063E5421E62B9800A020EE /* MemberViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39063E5321E62B9800A020EE /* MemberViewTests.swift */; };
+		39063E5621E6334B00A020EE /* MemberController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39063E5521E6334B00A020EE /* MemberController+Handlers.swift */; };
 		3911952321D267E5005D481C /* InitialViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3911952221D267E5005D481C /* InitialViewTests.swift */; };
 		39282A0D21CE3D43003E3AAA /* MemberController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A0C21CE3D43003E3AAA /* MemberController.swift */; };
 		39282A0F21CE3D4B003E3AAA /* CorporateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A0E21CE3D4B003E3AAA /* CorporateController.swift */; };
@@ -26,11 +37,21 @@
 		394731E921DFDE0B00DB9425 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394731E821DFDE0B00DB9425 /* Reachability.swift */; };
 		394C71DA21D3786E00BF9D0D /* CorporateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394C71D921D3786E00BF9D0D /* CorporateViewModel.swift */; };
 		3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952259D21D0FA5600FD411C /* CorporateView.swift */; };
+		39D4324421E4B3DF00F62B31 /* ReachabilityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4324321E4B3DF00F62B31 /* ReachabilityTests.swift */; };
+		39D4324721E4FF2700F62B31 /* MemberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4324621E4FF2700F62B31 /* MemberView.swift */; };
+		39D4324B21E51AD700F62B31 /* MemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4324A21E51AD700F62B31 /* MemberViewModel.swift */; };
 		39DE6E4621E3CC70003F8A99 /* FirebaseDatabaseSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE6E4521E3CC70003F8A99 /* FirebaseDatabaseSessionMock.swift */; };
 		39DE6E4821E3CE87003F8A99 /* FirebaseDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE6E4721E3CE87003F8A99 /* FirebaseDatabaseTests.swift */; };
 		39DF0CFD21D51F300099D631 /* CorporateViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF0CFC21D51F300099D631 /* CorporateViewModelTests.swift */; };
 		39DF0CFF21D53FB80099D631 /* CorporateController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF0CFE21D53FB80099D631 /* CorporateController+Handlers.swift */; };
 		39DF0D0121D5405F0099D631 /* CorporateViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF0D0021D5405F0099D631 /* CorporateViewTests.swift */; };
+		39DF57B021E8A03700387A74 /* LoginRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57AF21E8A03700387A74 /* LoginRegistrationViewModel.swift */; };
+		39DF57B221E8BAD800387A74 /* LoginRegistrationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57B121E8BAD800387A74 /* LoginRegistrationViewTests.swift */; };
+		39DF57B521E8E1D400387A74 /* TermsAndConditionsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57B421E8E1D400387A74 /* TermsAndConditionsViewModelTests.swift */; };
+		39DF57B721E8E3B400387A74 /* TermsAndConditionsViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57B621E8E3B400387A74 /* TermsAndConditionsViewTests.swift */; };
+		39F0DA1C21E634BB0073D047 /* LoginRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0DA1B21E634BB0073D047 /* LoginRegistrationController.swift */; };
+		39F0DA1E21E634EA0073D047 /* LoginRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0DA1D21E634EA0073D047 /* LoginRegistrationView.swift */; };
+		39F0DA2021E640E80073D047 /* LoginRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0DA1F21E640E80073D047 /* LoginRegistrationViewModel.swift */; };
 		B267AD6D82B37C3B8804A0A8 /* Pods_SHMA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C246D7473E93BE65986D8B /* Pods_SHMA.framework */; };
 		C7A3A43F0AACA6C88D59CEDF /* Pods_SHMATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D91D397A0595FDFFC2A45D /* Pods_SHMATests.framework */; };
 /* End PBXBuildFile section */
@@ -48,6 +69,17 @@
 /* Begin PBXFileReference section */
 		00C3BDD08A119C325654006B /* Pods-SHMATests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHMATests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SHMATests/Pods-SHMATests.debug.xcconfig"; sourceTree = "<group>"; };
 		32D91D397A0595FDFFC2A45D /* Pods_SHMATests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SHMATests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3905913A21E766BE00F297AC /* LoginRegistrationView+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginRegistrationView+Handlers.swift"; sourceTree = "<group>"; };
+		3905913C21E780CB00F297AC /* LoginRegistrationController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginRegistrationController+Handlers.swift"; sourceTree = "<group>"; };
+		3905913E21E78D8E00F297AC /* TermsAndConditionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsView.swift; sourceTree = "<group>"; };
+		3905914021E7920D00F297AC /* TermsAndConditionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsController.swift; sourceTree = "<group>"; };
+		3905914221E793C500F297AC /* TermsAndConditionsView+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TermsAndConditionsView+Handlers.swift"; sourceTree = "<group>"; };
+		3905914821E798C800F297AC /* TermsAndConditionsController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TermsAndConditionsController+Handlers.swift"; sourceTree = "<group>"; };
+		3905914A21E79C6D00F297AC /* Terms&Conditionsv8.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "Terms&Conditionsv8.pdf"; sourceTree = "<group>"; };
+		3905914C21E7C30000F297AC /* TermsAndConditionsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModel.swift; sourceTree = "<group>"; };
+		39063E5121E62B9000A020EE /* MemberViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewModelTests.swift; sourceTree = "<group>"; };
+		39063E5321E62B9800A020EE /* MemberViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewTests.swift; sourceTree = "<group>"; };
+		39063E5521E6334B00A020EE /* MemberController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MemberController+Handlers.swift"; sourceTree = "<group>"; };
 		3911952221D267E5005D481C /* InitialViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewTests.swift; sourceTree = "<group>"; };
 		39282A0C21CE3D43003E3AAA /* MemberController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberController.swift; sourceTree = "<group>"; };
 		39282A0E21CE3D4B003E3AAA /* CorporateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateController.swift; sourceTree = "<group>"; };
@@ -71,11 +103,21 @@
 		394731E821DFDE0B00DB9425 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		394C71D921D3786E00BF9D0D /* CorporateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateViewModel.swift; sourceTree = "<group>"; };
 		3952259D21D0FA5600FD411C /* CorporateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateView.swift; sourceTree = "<group>"; };
+		39D4324321E4B3DF00F62B31 /* ReachabilityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityTests.swift; sourceTree = "<group>"; };
+		39D4324621E4FF2700F62B31 /* MemberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberView.swift; sourceTree = "<group>"; };
+		39D4324A21E51AD700F62B31 /* MemberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewModel.swift; sourceTree = "<group>"; };
 		39DE6E4521E3CC70003F8A99 /* FirebaseDatabaseSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseSessionMock.swift; sourceTree = "<group>"; };
 		39DE6E4721E3CE87003F8A99 /* FirebaseDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseTests.swift; sourceTree = "<group>"; };
 		39DF0CFC21D51F300099D631 /* CorporateViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateViewModelTests.swift; sourceTree = "<group>"; };
 		39DF0CFE21D53FB80099D631 /* CorporateController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CorporateController+Handlers.swift"; sourceTree = "<group>"; };
 		39DF0D0021D5405F0099D631 /* CorporateViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateViewTests.swift; sourceTree = "<group>"; };
+		39DF57AF21E8A03700387A74 /* LoginRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationViewModel.swift; sourceTree = "<group>"; };
+		39DF57B121E8BAD800387A74 /* LoginRegistrationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationViewTests.swift; sourceTree = "<group>"; };
+		39DF57B421E8E1D400387A74 /* TermsAndConditionsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModelTests.swift; sourceTree = "<group>"; };
+		39DF57B621E8E3B400387A74 /* TermsAndConditionsViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewTests.swift; sourceTree = "<group>"; };
+		39F0DA1B21E634BB0073D047 /* LoginRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationController.swift; sourceTree = "<group>"; };
+		39F0DA1D21E634EA0073D047 /* LoginRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationView.swift; sourceTree = "<group>"; };
+		39F0DA1F21E640E80073D047 /* LoginRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationViewModel.swift; sourceTree = "<group>"; };
 		70BA31B67C1C4372261E5928 /* Pods-SHMATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHMATests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SHMATests/Pods-SHMATests.release.xcconfig"; sourceTree = "<group>"; };
 		89C246D7473E93BE65986D8B /* Pods_SHMA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SHMA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BE74F767F502C4651E2B20 /* Pods-SHMA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHMA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SHMA/Pods-SHMA.debug.xcconfig"; sourceTree = "<group>"; };
@@ -111,6 +153,48 @@
 				70BA31B67C1C4372261E5928 /* Pods-SHMATests.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		39063E5021E62B7000A020EE /* Member */ = {
+			isa = PBXGroup;
+			children = (
+				39063E5121E62B9000A020EE /* MemberViewModelTests.swift */,
+				39063E5321E62B9800A020EE /* MemberViewTests.swift */,
+				39DF57AE21E8A01B00387A74 /* LoginRegistration */,
+				39DF57B321E8E1A900387A74 /* TermsAndConditions */,
+			);
+			path = Member;
+			sourceTree = "<group>";
+		};
+		39063E5721E6341E00A020EE /* Initial */ = {
+			isa = PBXGroup;
+			children = (
+				393F4B7521CBCBEF009B4239 /* InitialController.swift */,
+				39282A1221CE4184003E3AAA /* InitialController+Handlers.swift */,
+			);
+			path = Initial;
+			sourceTree = "<group>";
+		};
+		39063E5821E6342400A020EE /* Corporate */ = {
+			isa = PBXGroup;
+			children = (
+				39282A0E21CE3D4B003E3AAA /* CorporateController.swift */,
+				39DF0CFE21D53FB80099D631 /* CorporateController+Handlers.swift */,
+			);
+			path = Corporate;
+			sourceTree = "<group>";
+		};
+		39063E5921E6342E00A020EE /* Member */ = {
+			isa = PBXGroup;
+			children = (
+				39282A0C21CE3D43003E3AAA /* MemberController.swift */,
+				39063E5521E6334B00A020EE /* MemberController+Handlers.swift */,
+				39F0DA1B21E634BB0073D047 /* LoginRegistrationController.swift */,
+				3905913C21E780CB00F297AC /* LoginRegistrationController+Handlers.swift */,
+				3905914021E7920D00F297AC /* TermsAndConditionsController.swift */,
+				3905914821E798C800F297AC /* TermsAndConditionsController+Handlers.swift */,
+			);
+			path = Member;
 			sourceTree = "<group>";
 		};
 		393F4B6721CBCBEF009B4239 = {
@@ -149,6 +233,7 @@
 				393F4B7C21CBCBEF009B4239 /* LaunchScreen.storyboard */,
 				393F4B7F21CBCBEF009B4239 /* Info.plist */,
 				394731DC21DFCB3900DB9425 /* GoogleService-Info.plist */,
+				3905914A21E79C6D00F297AC /* Terms&Conditionsv8.pdf */,
 			);
 			path = SHMA;
 			sourceTree = "<group>";
@@ -159,7 +244,9 @@
 				39DE6E4321E3CC5E003F8A99 /* FirebaseDatabase */,
 				39DF0CFA21D51EEE0099D631 /* Initial */,
 				39DF0CFB21D51F0A0099D631 /* Corporate */,
+				39063E5021E62B7000A020EE /* Member */,
 				393F4B8A21CBCBEF009B4239 /* Info.plist */,
+				39D4324321E4B3DF00F62B31 /* ReachabilityTests.swift */,
 			);
 			path = SHMATests;
 			sourceTree = "<group>";
@@ -209,6 +296,11 @@
 			children = (
 				39282A1421CE49AD003E3AAA /* InitialView.swift */,
 				3952259D21D0FA5600FD411C /* CorporateView.swift */,
+				39D4324621E4FF2700F62B31 /* MemberView.swift */,
+				39F0DA1D21E634EA0073D047 /* LoginRegistrationView.swift */,
+				3905913A21E766BE00F297AC /* LoginRegistrationView+Handlers.swift */,
+				3905913E21E78D8E00F297AC /* TermsAndConditionsView.swift */,
+				3905914221E793C500F297AC /* TermsAndConditionsView+Handlers.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -218,6 +310,9 @@
 			children = (
 				39282A1021CE4174003E3AAA /* InitialViewModel.swift */,
 				394C71D921D3786E00BF9D0D /* CorporateViewModel.swift */,
+				39D4324A21E51AD700F62B31 /* MemberViewModel.swift */,
+				39F0DA1F21E640E80073D047 /* LoginRegistrationViewModel.swift */,
+				3905914C21E7C30000F297AC /* TermsAndConditionsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -225,11 +320,9 @@
 		3952259C21D0F10600FD411C /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				393F4B7521CBCBEF009B4239 /* InitialController.swift */,
-				39282A1221CE4184003E3AAA /* InitialController+Handlers.swift */,
-				39282A0C21CE3D43003E3AAA /* MemberController.swift */,
-				39282A0E21CE3D4B003E3AAA /* CorporateController.swift */,
-				39DF0CFE21D53FB80099D631 /* CorporateController+Handlers.swift */,
+				39063E5721E6341E00A020EE /* Initial */,
+				39063E5821E6342400A020EE /* Corporate */,
+				39063E5921E6342E00A020EE /* Member */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -259,6 +352,24 @@
 				39DF0D0021D5405F0099D631 /* CorporateViewTests.swift */,
 			);
 			path = Corporate;
+			sourceTree = "<group>";
+		};
+		39DF57AE21E8A01B00387A74 /* LoginRegistration */ = {
+			isa = PBXGroup;
+			children = (
+				39DF57AF21E8A03700387A74 /* LoginRegistrationViewModel.swift */,
+				39DF57B121E8BAD800387A74 /* LoginRegistrationViewTests.swift */,
+			);
+			path = LoginRegistration;
+			sourceTree = "<group>";
+		};
+		39DF57B321E8E1A900387A74 /* TermsAndConditions */ = {
+			isa = PBXGroup;
+			children = (
+				39DF57B421E8E1D400387A74 /* TermsAndConditionsViewModelTests.swift */,
+				39DF57B621E8E3B400387A74 /* TermsAndConditionsViewTests.swift */,
+			);
+			path = TermsAndConditions;
 			sourceTree = "<group>";
 		};
 		CD4EA83B1E20D75D76B1E9CE /* Frameworks */ = {
@@ -357,6 +468,7 @@
 				393F4B7E21CBCBEF009B4239 /* LaunchScreen.storyboard in Resources */,
 				393F4B7B21CBCBEF009B4239 /* Assets.xcassets in Resources */,
 				394731DD21DFCB3900DB9425 /* GoogleService-Info.plist in Resources */,
+				3905914B21E79C6D00F297AC /* Terms&Conditionsv8.pdf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -448,19 +560,32 @@
 			buildActionMask = 2147483647;
 			files = (
 				393F4B7621CBCBEF009B4239 /* InitialController.swift in Sources */,
+				39F0DA1E21E634EA0073D047 /* LoginRegistrationView.swift in Sources */,
+				3905914121E7920D00F297AC /* TermsAndConditionsController.swift in Sources */,
+				3905913F21E78D8E00F297AC /* TermsAndConditionsView.swift in Sources */,
+				3905914D21E7C30000F297AC /* TermsAndConditionsViewModel.swift in Sources */,
 				394731E621DFDB9F00DB9425 /* FirebaseDatabase+Util.swift in Sources */,
 				39282A1521CE49AD003E3AAA /* InitialView.swift in Sources */,
 				394731E421DFDADD00DB9425 /* FirebaseDatabaseManager.swift in Sources */,
 				39282A0D21CE3D43003E3AAA /* MemberController.swift in Sources */,
 				39282A0F21CE3D4B003E3AAA /* CorporateController.swift in Sources */,
 				393F4B7421CBCBEF009B4239 /* AppDelegate.swift in Sources */,
+				39F0DA2021E640E80073D047 /* LoginRegistrationViewModel.swift in Sources */,
+				39D4324B21E51AD700F62B31 /* MemberViewModel.swift in Sources */,
 				3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */,
 				394731E921DFDE0B00DB9425 /* Reachability.swift in Sources */,
+				39063E5621E6334B00A020EE /* MemberController+Handlers.swift in Sources */,
 				394731E221DFD94E00DB9425 /* FirebaseDatabaseSession.swift in Sources */,
 				39282A1321CE4184003E3AAA /* InitialController+Handlers.swift in Sources */,
+				3905914921E798C800F297AC /* TermsAndConditionsController+Handlers.swift in Sources */,
+				3905914321E793C500F297AC /* TermsAndConditionsView+Handlers.swift in Sources */,
+				3905913D21E780CB00F297AC /* LoginRegistrationController+Handlers.swift in Sources */,
+				39F0DA1C21E634BB0073D047 /* LoginRegistrationController.swift in Sources */,
 				393F4B9521CBD26C009B4239 /* General.swift in Sources */,
 				394C71DA21D3786E00BF9D0D /* CorporateViewModel.swift in Sources */,
+				3905913B21E766BE00F297AC /* LoginRegistrationView+Handlers.swift in Sources */,
 				39282A1121CE4174003E3AAA /* InitialViewModel.swift in Sources */,
+				39D4324721E4FF2700F62B31 /* MemberView.swift in Sources */,
 				39DF0CFF21D53FB80099D631 /* CorporateController+Handlers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -469,10 +594,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				39DF57B521E8E1D400387A74 /* TermsAndConditionsViewModelTests.swift in Sources */,
+				39DF57B021E8A03700387A74 /* LoginRegistrationViewModel.swift in Sources */,
 				39DF0D0121D5405F0099D631 /* CorporateViewTests.swift in Sources */,
 				393F4B8921CBCBEF009B4239 /* InitialViewModelTests.swift in Sources */,
 				39DF0CFD21D51F300099D631 /* CorporateViewModelTests.swift in Sources */,
+				39DF57B721E8E3B400387A74 /* TermsAndConditionsViewTests.swift in Sources */,
 				39DE6E4821E3CE87003F8A99 /* FirebaseDatabaseTests.swift in Sources */,
+				39DF57B221E8BAD800387A74 /* LoginRegistrationViewTests.swift in Sources */,
+				39063E5421E62B9800A020EE /* MemberViewTests.swift in Sources */,
+				39063E5221E62B9000A020EE /* MemberViewModelTests.swift in Sources */,
+				39D4324421E4B3DF00F62B31 /* ReachabilityTests.swift in Sources */,
 				39DE6E4621E3CC70003F8A99 /* FirebaseDatabaseSessionMock.swift in Sources */,
 				3911952321D267E5005D481C /* InitialViewTests.swift in Sources */,
 			);

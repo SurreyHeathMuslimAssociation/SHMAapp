@@ -10,26 +10,30 @@ import UIKit
 import FirebaseDatabase
 
 extension Database: FirebaseDatabaseSession {
-//
-//    func fetchMemberUsing(_ shmaId: String, completion: @escaping (String?, String?) -> Void) {
-//        Database.database().reference().child("member_search").queryOrderedByKey().queryEqual(toValue: shmaId).observeSingleEvent(of: .value) { (snapshot) in
-//            print(snapshot.key)
-//
-//            guard let dob = snapshot.childSnapshot(forPath: "DOB").value as? String else { return }
-//            guard let surname = snapshot.childSnapshot(forPath: "surname").value as? String else { return }
-//            completion(dob, surname)
+
+    func searchMemberUsing(_ dob: String, _ surname: String, completion: @escaping (String?, Bool) -> Void) {
+//        Database.database().reference().child("member_search").queryOrdered(byChild: "DOB").queryEqual(toValue: dob).observe( .childAdded) { (snapshot) in
+//            let shmaId = snapshot.key
+//            if let lastName = snapshot.childSnapshot(forPath: "surname").value as? String {
+//                if lastName == surname {
+//                    completion(shmaId, true)
+//                }
+//            }
 //        }
-//    }
-    
-    func searchMemberUsing(_ dob: String, _ surname: String, completion: @escaping (String, Bool) -> Void) {
-        //Database.database().reference().child("member_search").child("144").updateChildValues(["surname": "Test", "DOB": "04/12/2018"])
-        Database.database().reference().child("member_search").queryOrdered(byChild: "DOB").queryEqual(toValue: dob).observe( .childAdded) { (snapshot) in
-            let shmaId = snapshot.key
-            if let lastName = snapshot.childSnapshot(forPath: "surname").value as? String {
-                if lastName == surname {
+        
+        Database.database().reference().child("member_search").observeSingleEvent(of: .value) { (snapshot) in
+            guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            allObjects.forEach({ (snapshot) in
+                guard let member = snapshot.value as? [String: Any] else { return }
+                let memberDOB = member["DOB"] as? String
+                let memberSurname = member["surname"] as? String
+                if dob == memberDOB && surname == memberSurname {
+                    let shmaId = snapshot.key
                     completion(shmaId, true)
+                } else {
+                    completion(nil, false)
                 }
-            }
+            })
         }
         
     }

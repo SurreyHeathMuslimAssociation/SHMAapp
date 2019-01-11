@@ -18,11 +18,12 @@ class CorporateController: UIViewController {
      
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         
         corporateView = CorporateView(traitCollection: traitCollection)
         corporateView.delegate = self
         view.addSubview(corporateView)
-        corporateView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        corporateView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         
         navigationItem.title = "SHMA Business"
         navigationController?.navigationBar.titleTextAttributes = corporateView.corporateViewModel.getNavigationBarTitleTextAttributes()
