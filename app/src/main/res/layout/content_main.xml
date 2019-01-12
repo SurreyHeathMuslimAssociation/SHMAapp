@@ -19,7 +19,7 @@
         android:layout_marginBottom="8dp"
         android:backgroundTint="@android:color/darker_gray"
         android:onClick="openCorp"
-        android:text="Corporate"
+        android:text="Business"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

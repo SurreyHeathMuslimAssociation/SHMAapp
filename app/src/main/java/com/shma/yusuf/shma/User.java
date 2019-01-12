@@ -1,7 +1,7 @@
 package com.shma.yusuf.shma;
 
 public class User {
-    //private String id;
+    private String id;
     private String surname ;
     private String DOB ;
 
@@ -32,13 +32,13 @@ public User ( String surname , String DOB) {
     }
 
 
-    /*public String getId() {
+    public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
-    }*/
+    }
 }
 
 
