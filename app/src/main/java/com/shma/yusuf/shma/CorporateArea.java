@@ -3,12 +3,14 @@ import android.app.DatePickerDialog;
 
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.view.ViewParentCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -29,7 +31,6 @@ public class CorporateArea extends AppCompatActivity {
     private TextView Surnametxt ;
     private TextView dobback ;
     private Button mybutton;
-    private TextView mDisplayDate;
     private static final String TAG = "firebase check";
     private static String date = "";
     private static  String surname = "";
@@ -45,8 +46,7 @@ public class CorporateArea extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference("member_search");
         Surnametxt = findViewById(R.id.SHMAid);
         dobback  = findViewById(R.id.DOBtitle);
-        mDisplayDate = findViewById(R.id.tvDate);
-       mybutton = findViewById(R.id.searchme);
+        mybutton = findViewById(R.id.searchme);
        mybutton.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View v) {
@@ -61,6 +61,7 @@ public class CorporateArea extends AppCompatActivity {
                        mDateSetListener,
                        day,month,year);
                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+               dialog.updateDate(1950,01,01);
                dialog.show();
            }
 
@@ -77,28 +78,33 @@ public class CorporateArea extends AppCompatActivity {
                 date = sdf.format(calendar.getTime());
                 surname = Surnametxt.getText().toString();
                 // Log.d(TAG, "the date " + date);
-                mDisplayDate.setText(date);
-                Snackbar mySnackbar;
+                 Snackbar mySnackbar;
+
                 for (User s : users) {
 
-                    Log.d(TAG, "date user " + date + "date arraylist" + s.getDOB());
-                    Log.d(TAG, "surname user " + surname + "arraylist surnmae" + s.getSurname());
+                   // Log.d(TAG, "date user " + date + "date arraylist" + s.getDOB());
+                    //Log.d(TAG, "surname user " + surname + "arraylist surnmae" + s.getSurname());
 
                     if (surname.equals(s.getSurname()) && date.equals(s.getDOB())) {
                         SHMAid.add(s.getId());
                     }
                 } //end of for loop
-                Log.d(TAG, "size is" + SHMAid.size());
+                //Log.d(TAG, "size is" + SHMAid.size());
                 if ( SHMAid.size() == 1) {
                     mySnackbar = Snackbar.make(parentLayout, "VALID MEMBER with ID of " + SHMAid.get(0), 6000);
-
+                    mySnackbar.getView().setBackgroundColor(Color.GREEN);
                 } else if (SHMAid.size() > 1) {
                     mySnackbar = Snackbar.make(parentLayout, "VALID MEMBERS with ID's of " + SHMAid.toString(), 6000);
+                    mySnackbar.getView().setBackgroundColor(Color.GREEN);
                 } else {
                     mySnackbar = Snackbar.make(parentLayout, "INVALID MEMBER", 6000);
+                    mySnackbar.getView().setBackgroundColor(Color.RED);
                 }
+                TextView mainTextView = (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
+                mainTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                mainTextView.setTextColor(Color.BLACK);
                 mySnackbar.show();
-
+                SHMAid.clear();
 
             }
         };
@@ -139,12 +145,12 @@ public void readfromFirebase(){
 //                Log.d(TAG, "each key " +   );
                 users.add(usersdb);
             }
-            for (User s : users) {
+            /*for (User s : users) {
                 Log.d(TAG, "each element " + s.getId() );
                 Log.d(TAG, "each element " + s.getDOB() );
                 Log.d(TAG, "each element " + s.getSurname() );
             }
-            Log.d(TAG, "size of array list is  " + String.valueOf(users.size()) );
+            Log.d(TAG, "size of array list is  " + String.valueOf(users.size()) );*/
         }
 
         @Override
