@@ -7,17 +7,17 @@ import android.os.Bundle;
 import android.view.View;
 
 public class MemberArea extends AppCompatActivity {
-    String sessionId= getIntent().getStringExtra("EXTRA_SESSION_INFO");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        View parentLayout = findViewById(android.R.id.content);
+        String sessionId= getIntent().getStringExtra("EXTRA_SESSION_INFO");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_area);
+        View parentLayout = findViewById(android.R.id.content);
         Snackbar mySnackbar;
-        mySnackbar = Snackbar.make(parentLayout, "Valid Member with ID of " + sessionId, 6000);
-        mySnackbar.getView().setBackgroundColor(Color.GREEN);
+        mySnackbar = Snackbar.make(parentLayout, "sessionID is " + sessionId, 6000);
         mySnackbar.show();
-        
+
     }
 }

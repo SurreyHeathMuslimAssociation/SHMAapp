@@ -7,7 +7,7 @@ import android.view.View;
 
 public class Members extends AppCompatActivity {
 
-    private  String check = "" ;
+      String check = "" ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,8 +27,7 @@ public class Members extends AppCompatActivity {
                 break;
             case R.id.Newmemb:
                 check = "Newmemb" ;
-            default:
-                throw new RuntimeException("Unknow button ID");
+            break;
         }
 
         intent.putExtra("EXTRA_SESSION_INFO",check);
