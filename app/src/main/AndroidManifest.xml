@@ -20,7 +20,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".CorporateArea" />
-        <activity android:name=".Members"></activity>
+        <activity android:name=".Members" />
+        <activity android:name=".MemberArea"></activity>
     </application>
 
 </manifest>
