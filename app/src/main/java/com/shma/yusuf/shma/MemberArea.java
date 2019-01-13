@@ -45,5 +45,14 @@ public void checks(String sessionId){
     }
     Title.setText(changed);
 }
+public void LoginNow(){
+
+}
+public void ExistingMember(){
+
+}
+public void NewMember(){
+
+}
 
 }
