@@ -85,24 +85,25 @@ public class CorporateArea extends AppCompatActivity {
                    // Log.d(TAG, "date user " + date + "date arraylist" + s.getDOB());
                     //Log.d(TAG, "surname user " + surname + "arraylist surnmae" + s.getSurname());
 
-                    if (surname.equals(s.getSurname()) && date.equals(s.getDOB())) {
+                    if (surname.equalsIgnoreCase(s.getSurname()) && date.equals(s.getDOB())) {
                         SHMAid.add(s.getId());
                     }
                 } //end of for loop
                 //Log.d(TAG, "size is" + SHMAid.size());
                 if ( SHMAid.size() == 1) {
-                    mySnackbar = Snackbar.make(parentLayout, "VALID MEMBER with ID of " + SHMAid.get(0), 6000);
+                    mySnackbar = Snackbar.make(parentLayout, "Valid Member with ID of " + SHMAid.get(0), 6000);
                     mySnackbar.getView().setBackgroundColor(Color.GREEN);
                 } else if (SHMAid.size() > 1) {
-                    mySnackbar = Snackbar.make(parentLayout, "VALID MEMBERS with ID's of " + SHMAid.toString(), 6000);
+                    mySnackbar = Snackbar.make(parentLayout, "Valid Members, ID's: " + SHMAid.toString(), 6000);
                     mySnackbar.getView().setBackgroundColor(Color.GREEN);
                 } else {
-                    mySnackbar = Snackbar.make(parentLayout, "INVALID MEMBER", 6000);
+                    mySnackbar = Snackbar.make(parentLayout, "Invalid Member", 6000);
                     mySnackbar.getView().setBackgroundColor(Color.RED);
                 }
                 TextView mainTextView = (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
                 mainTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 mainTextView.setTextColor(Color.BLACK);
+                mainTextView.setTextSize(24);
                 mySnackbar.show();
                 SHMAid.clear();
 

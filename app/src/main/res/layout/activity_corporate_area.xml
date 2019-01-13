@@ -7,6 +7,22 @@
     android:layout_height="match_parent"
     tools:context=".CorporateArea">
 
+    <TextView
+        android:id="@+id/BusinessTitle"
+        android:layout_width="236dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:text="Business"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <EditText
         android:id="@+id/SHMAid"
         android:layout_width="wrap_content"
@@ -21,23 +37,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/SHMAidTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/SHMAidTitle"
+        app:layout_constraintVertical_bias="0.532" />
 
 
     <TextView
         android:id="@+id/SHMAidTitle"
-        android:layout_width="399dp"
-        android:layout_height="67dp"
+        android:layout_width="391dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
-        android:text="Please enter your name and date of birth"
+        android:text="Please Enter The Name and Press Search"
         android:textAlignment="center"
-        android:textSize="24sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/BusinessTitle" />
 
     <Button
         android:id="@+id/searchme"
@@ -45,10 +63,9 @@
         android:layout_height="90dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="7dp"
-        android:layout_marginBottom="72dp"
-        android:onClick="Searchdb"
+        android:layout_marginBottom="76dp"
         android:text="Search"
-        android:textSize="30sp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/tvDate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
@@ -60,10 +77,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="196dp"
+        android:layout_marginBottom="124dp"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
