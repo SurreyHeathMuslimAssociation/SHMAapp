@@ -86,7 +86,7 @@ public class CorporateArea extends AppCompatActivity {
                     //Log.d(TAG, "surname user " + surname + "arraylist surnmae" + s.getSurname());
 
                     if (surname.equalsIgnoreCase(s.getSurname()) && date.equals(s.getDOB())) {
-                        SHMAid.add(s.getId());
+                        SHMAid.add(s.getShmaId());
                     }
                 } //end of for loop
                 //Log.d(TAG, "size is" + SHMAid.size());
@@ -123,11 +123,6 @@ public class CorporateArea extends AppCompatActivity {
 
                    }
 
-public void addtodatabase(String surname, String DOB){
-        User ting = new User (surname, DOB) ;
-        mDatabase.child("member_search").setValue(ting);
-}
-
 public void readfromFirebase(){
     mDatabase.addValueEventListener(new ValueEventListener() {
         @Override
@@ -141,14 +136,15 @@ public void readfromFirebase(){
                 String rs = String.valueOf(postSnapshot.exists());
                 //  Log.d(TAG, "over here"+ rs  ); //comes back as true -> there is data
                 User usersdb = postSnapshot.getValue(User.class);
-                usersdb.setId(postSnapshot.getKey());
+                usersdb.setShmaId(postSnapshot.getKey());
 //                //PostSnapshot key is the member id -> has to be added separately of creating ann user
 //                Log.d(TAG, "each key " +   );
                 users.add(usersdb);
             }
-            /*for (User s : users) {
+           /*for (User s : users) {
                 Log.d(TAG, "each element " + s.getId() );
                 Log.d(TAG, "each element " + s.getDOB() );
+                Log.d(TAG, "each element " + s.getFirstname());
                 Log.d(TAG, "each element " + s.getSurname() );
             }
             Log.d(TAG, "size of array list is  " + String.valueOf(users.size()) );*/

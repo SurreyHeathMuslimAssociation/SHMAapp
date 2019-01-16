@@ -1,20 +1,23 @@
 package com.shma.yusuf.shma;
 
 public class User {
-    private String id;
+    private String shmaId;
+    private String firstname ;
     private String surname ;
     private String DOB ;
-
+    private String membershipType;
+    private boolean APPuser;
 public User (){
 
 }
-public User ( String surname , String DOB) {
-    //String id,
-    //this.id = id ;
-    this.surname = surname;
-    this.DOB = DOB;
 
+public User(String membershipType, String firstname, String surname , String DOB){
+   this.membershipType = membershipType;
+    this.firstname = firstname ;
+        this.surname = surname;
+    this.DOB = DOB;
 }
+
     public String getSurname() {
         return surname;
     }
@@ -31,13 +34,36 @@ public User ( String surname , String DOB) {
         this.DOB = DOB;
     }
 
-
-    public String getId() {
-        return id;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getMembershipType() {
+        return membershipType;
+    }
+
+    public void setMembershipType(String membershipType) {
+        this.membershipType = membershipType;
+    }
+
+    public String getShmaId() {
+        return shmaId;
+    }
+
+    public void setShmaId(String shmaId) {
+        this.shmaId = shmaId;
+    }
+
+    public boolean isAPPuser() {
+        return APPuser;
+    }
+
+    public void setAPPuser(boolean APPuser) {
+        this.APPuser = APPuser;
     }
 }
 
