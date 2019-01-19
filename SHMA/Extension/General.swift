@@ -91,7 +91,9 @@ extension UIAlertController {
         alert.setValue(title, forKey: "attributedTitle")
         alert.setValue(text, forKey: "attributedMessage")
         alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
-        viewController.present(alert, animated: true, completion: nil)
+        DispatchQueue.main.async {
+            viewController.present(alert, animated: true, completion: nil)
+        }
     }
 }
 
@@ -101,6 +103,13 @@ extension NSAttributedString {
     static func getAttributedStringUsing(text: String, font: CGFloat, spaceFont: CGFloat?, isBold: Bool) -> NSAttributedString {
         let attributedtext = NSMutableAttributedString(string: text, attributes: [NSAttributedString.Key.font: (isBold ? UIFont.boldSystemFont(ofSize: font) : UIFont.systemFont(ofSize: font))])
         attributedtext.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: spaceFont ?? 0)]))
+        return attributedtext
+    }
+    
+    static func getAttributedString(title: String, titleFont: UIFont, linesOfSpace: String, spaceFont: CGFloat, message: String, messageFont: UIFont) -> NSAttributedString {
+        let attributedtext = NSMutableAttributedString(string: title, attributes: [NSAttributedString.Key.font: titleFont])
+        attributedtext.append(NSAttributedString(string: linesOfSpace, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: spaceFont)]))
+        attributedtext.append(NSAttributedString(string: message, attributes: [NSAttributedString.Key.font: messageFont]))
         return attributedtext
     }
 }

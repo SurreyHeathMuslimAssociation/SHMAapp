@@ -81,20 +81,10 @@ class MemberViewModelTests: XCTestCase {
     }
     
     func testGetsCorrectMemberViewHeightForLandscapeiPhonesAndNonLandscapeDevices() {
-        guard let superviewHeight = memberView.superview?.heightAnchor else { return }
-        if traitCollection.isIphoneLandscape {
-            XCTAssertEqual(sut.getMemberViewHeight().constant, memberView.heightAnchor.constraint(equalTo: superviewHeight, multiplier: 0.53).constant)
-        } else {
-            XCTAssertEqual(sut.getMemberViewHeight().constant, memberView.heightAnchor.constraint(equalTo: superviewHeight, multiplier: 0.25).constant)
-        }
-    }
-    
-    // navbar title attributes tests
-    func testGetsNavigationBarTitleTextAttributesForEachDevice() {
         if traitCollection.isIpad {
-            XCTAssertEqual(sut.getNavigationBarTitleTextAttributesForEachDevice(), [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)])
+            XCTAssertEqual(sut.getMemberViewHeightForEachDevice().constant, 250)
         } else {
-            XCTAssertEqual(sut.getNavigationBarTitleTextAttributesForEachDevice(), [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)])
+            XCTAssertEqual(sut.getMemberViewHeightForEachDevice().constant, 180)
         }
     }
 }

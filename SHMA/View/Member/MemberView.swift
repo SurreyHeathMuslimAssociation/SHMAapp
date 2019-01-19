@@ -70,16 +70,11 @@ class  MemberView: UIView {
         backgroundColor = .white
         
         memberViewModel = MemberViewModel(traitCollection, self)
-        
-        setupLabel()
-        setupButtons()
+
+        setupLabelAndButtons()
     }
     
-    private func setupLabel() {
-       
-    }
-    
-    private func setupButtons() {
+    private func setupLabelAndButtons() {
         let buttonStackView = UIStackView(arrangedSubviews: [loginButton, existingMemberRegistrationButton, newMemberRegistrationButton])
         buttonStackView.axis = .vertical
         buttonStackView.distribution = .fillEqually

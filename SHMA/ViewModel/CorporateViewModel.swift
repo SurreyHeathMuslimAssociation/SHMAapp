@@ -45,17 +45,25 @@ class CorporateViewModel {
         }
     }
     
-    func getMainLabelWidthAnchor() -> NSLayoutConstraint {
-        if traitCollection.isIphoneLandscape {
-            return mainLabel.widthAnchor.constraint(equalTo: datePicker.widthAnchor, multiplier: 0.9)
-        } else {
+    func getMainLabelWidthAnchor() -> NSLayoutConstraint? {
+        if !traitCollection.isIphoneLandscape {
             return mainLabel.widthAnchor.constraint(equalTo: datePicker.widthAnchor, multiplier: 1)
+        } else {
+            return nil
         }
     }
     
     func getMainLabelRightAnchor() -> NSLayoutConstraint? {
         if traitCollection.isIphoneLandscape {
             return mainLabel.rightAnchor.constraint(equalTo: datePicker.leftAnchor, constant: -5)
+        } else {
+            return nil
+        }
+    }
+    
+    func getMainLabelLeftAnchor() -> NSLayoutConstraint? {
+        if traitCollection.isIphoneLandscape {
+            return mainLabel.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5)
         } else {
             return nil
         }
@@ -80,15 +88,15 @@ class CorporateViewModel {
     // datePicker
     func getDatePickerWidthAnchor() -> NSLayoutConstraint {
         if traitCollection.isIphoneLandscape {
-            return datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.4)
+            return datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
         } else {
-            return datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+            return datePicker.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9)
         }
     }
     
     func getDatePickerCenterXAnchor() -> NSLayoutConstraint {
         if traitCollection.isIphoneLandscape {
-            return datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 80)
+            return datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 115)
         } else {
             return datePicker.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         }
@@ -119,7 +127,7 @@ class CorporateViewModel {
         }
     }
     
-    func getEmptyLastNameTextFeildAlertViewTitle() -> NSAttributedString {
+    func getEmptyLastNameTextFieldAlertViewTitle() -> NSAttributedString {
         let title = "Attention"
         if traitCollection.isIpad {
             return NSAttributedString.getAttributedStringUsing(text: title, font: 20, spaceFont: 4, isBold: true)
@@ -128,7 +136,7 @@ class CorporateViewModel {
         }
     }
   
-    func getEmptyLastNameTextFeildAlertViewText() -> NSAttributedString {
+    func getEmptyLastNameTextFieldAlertViewText() -> NSAttributedString {
         let text = "Please ensure 'Surname' is entered."
         if traitCollection.isIpad {
             return NSAttributedString.getAttributedStringUsing(text: text, font: 16, spaceFont: nil, isBold: false)

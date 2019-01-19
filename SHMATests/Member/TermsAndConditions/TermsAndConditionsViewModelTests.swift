@@ -54,4 +54,13 @@ class TermsAndConditionsViewModelTests: XCTestCase {
             XCTAssertEqual(sut.getDisagreeButtonFontForEachDevice(), iPhoneDisagreeButtonFont)
         }
     }
+    
+    // navbar title attributes tests
+    func testGetsNavigationBarTitleTextAttributesForEachDevice() {
+        if traitCollection.isIpad {
+            XCTAssertEqual(sut.getNavigationBarTitleTextAttributes(), [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)])
+        } else {
+            XCTAssertEqual(sut.getNavigationBarTitleTextAttributes(), [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)])
+        }
+    }
 }

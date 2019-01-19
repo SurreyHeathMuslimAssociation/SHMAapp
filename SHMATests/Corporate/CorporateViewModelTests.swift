@@ -75,9 +75,9 @@ class CorporateViewModelTests: XCTestCase {
     
     func testGetsCorrectMainLabelWidthAnchorForDifferentOrientations() {
         if traitCollection.isIphoneLandscape {
-            XCTAssertEqual(sut.getMainLabelWidthAnchor().constant, mainLabel.widthAnchor.constraint(equalTo: datePicker.widthAnchor, multiplier: 1).constant)
+            XCTAssertEqual(sut.getMainLabelWidthAnchor()?.constant, mainLabel.widthAnchor.constraint(equalTo: datePicker.widthAnchor, multiplier: 1).constant)
         } else {
-            XCTAssertEqual(sut.getMainLabelWidthAnchor().constant, mainLabel.widthAnchor.constraint(equalTo: datePicker.widthAnchor, multiplier: 0.9).constant)
+            XCTAssertEqual(sut.getMainLabelWidthAnchor()?.constant, mainLabel.widthAnchor.constraint(equalTo: datePicker.widthAnchor, multiplier: 0.9).constant)
         }
     }
     
@@ -144,10 +144,10 @@ class CorporateViewModelTests: XCTestCase {
     func testGetsCorrectEmptySurnameTextFieldAlertViewTitleForEachDevice() {
         if traitCollection.isIpad {
              attributedString = NSAttributedString.getAttributedStringUsing(text: "Attention", font: 20, spaceFont: 4, isBold: true)
-            XCTAssertEqual(sut.getEmptyLastNameTextFeildAlertViewTitle(), attributedString)
+            XCTAssertEqual(sut.getEmptyLastNameTextFieldAlertViewTitle(), attributedString)
         } else {
              attributedString = NSAttributedString.getAttributedStringUsing(text: "Attention", font: 16, spaceFont: nil, isBold: true)
-            XCTAssertEqual(sut.getEmptyLastNameTextFeildAlertViewTitle(), attributedString)
+            XCTAssertEqual(sut.getEmptyLastNameTextFieldAlertViewTitle(), attributedString)
         }
         
     }
@@ -156,10 +156,10 @@ class CorporateViewModelTests: XCTestCase {
         //XCTAssertEqual(sut.getEmptyLastNameTextFeildAlertViewText(), "Please ensure Surname is entered.")
         if traitCollection.isIpad {
             attributedString = NSAttributedString.getAttributedStringUsing(text: "Please ensure 'Surname' is entered.", font: 16, spaceFont: nil, isBold: false)
-            XCTAssertEqual(sut.getEmptyLastNameTextFeildAlertViewText(), attributedString)
+            XCTAssertEqual(sut.getEmptyLastNameTextFieldAlertViewText(), attributedString)
         } else {
             attributedString = NSAttributedString.getAttributedStringUsing(text: "Please ensure 'Surname' is entered.", font: 13, spaceFont: nil, isBold: false)
-            XCTAssertEqual(sut.getEmptyLastNameTextFeildAlertViewText(), attributedString)
+            XCTAssertEqual(sut.getEmptyLastNameTextFieldAlertViewText(), attributedString)
         }
     }
     

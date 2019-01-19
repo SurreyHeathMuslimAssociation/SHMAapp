@@ -51,7 +51,7 @@ class FirebaseDatabaseTests: XCTestCase {
     
     func testShmaIdWasReturned() {
         session.searchMemberUsing(dob, surname) { (shmaId, wasFound) in
-            XCTAssertEqual(shmaId, self.session.shmaId)
+            XCTAssertEqual(shmaId, self.session.memberShmaId)
         }
     }
     

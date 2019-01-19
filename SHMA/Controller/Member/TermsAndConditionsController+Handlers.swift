@@ -12,7 +12,8 @@ extension TermsAndConditionsController: TermsAndConditionsViewDelegate {
     
     func didPressAgree() {
         dismiss(animated: true) {
-            print("agreed, go to home")
+            let name = Notification.Name(rawValue: "register")
+            NotificationCenter.default.post(name: name, object: nil)
         }
     }
     

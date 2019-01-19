@@ -61,24 +61,12 @@ class MemberViewModel {
     }
     
     // member view
-    func getMemberViewHeight() -> NSLayoutConstraint {
-        guard let superviewHeight = memberView.superview?.heightAnchor else {
-            return NSLayoutConstraint()
-            
-        }
-        if traitCollection.isIphoneLandscape {
-            return memberView.heightAnchor.constraint(equalTo: superviewHeight, multiplier: 0.53)
+    func getMemberViewHeightForEachDevice() -> NSLayoutConstraint {
+        if traitCollection.isIpad {
+            return memberView.heightAnchor.constraint(equalToConstant: 250)
         } else {
-            return memberView.heightAnchor.constraint(equalTo: superviewHeight, multiplier: 0.25)
+            return memberView.heightAnchor.constraint(equalToConstant: 180)
         }
     }
     
-    //navBar
-    func getNavigationBarTitleTextAttributesForEachDevice() -> [NSAttributedString.Key: UIFont] {
-        if traitCollection.isIpad {
-            return [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
-        } else {
-            return [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
-        }
-    }
 }

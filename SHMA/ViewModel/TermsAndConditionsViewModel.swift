@@ -33,4 +33,13 @@ class TermsAndConditionsViewModel {
             return UIFont.systemFont(ofSize: 14)
         }
     }
+    
+    //navBar
+    func getNavigationBarTitleTextAttributes() -> [NSAttributedString.Key: UIFont] {
+        if traitCollection.isIpad {
+            return [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
+        } else {
+            return [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
+        }
+    }
 }

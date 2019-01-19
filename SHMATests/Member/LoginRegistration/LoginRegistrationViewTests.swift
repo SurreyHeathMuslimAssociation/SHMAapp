@@ -14,6 +14,7 @@ class LoginRegistrationViewTests: XCTestCase, LoginRegistrationViewDelegate {
     var sut: LoginRegistrationView!
     var traitCollection: UITraitCollection!
     var didFireLoginRegistration: Bool!
+    var didSwitchMembershipType: Bool!
     var didSelectLogin: Bool!
     var didSelectExistingMemberRegistration: Bool!
     var didSelectNewMemberRegistration: Bool!
@@ -28,6 +29,7 @@ class LoginRegistrationViewTests: XCTestCase, LoginRegistrationViewDelegate {
         didSelectLogin = true
         didSelectNewMemberRegistration = false
         didSelectExistingMemberRegistration = false
+        didSwitchMembershipType = false
         
         sut = LoginRegistrationView(traitCollection: traitCollection, didSelectLogin, didSelectExistingMemberRegistration, didSelectNewMemberRegistration)
         sut.delegate = self
@@ -40,6 +42,7 @@ class LoginRegistrationViewTests: XCTestCase, LoginRegistrationViewDelegate {
         didSelectNewMemberRegistration = nil
         didSelectExistingMemberRegistration = nil
         didFireLoginRegistration = nil
+        didSwitchMembershipType = nil
         super.tearDown()
     }
     
@@ -48,7 +51,16 @@ class LoginRegistrationViewTests: XCTestCase, LoginRegistrationViewDelegate {
         XCTAssert(didFireLoginRegistration)
     }
     
+    func testDidSwitchMembershipType() {
+        sut.membershipSwitch.sendActions(for: .valueChanged)
+        XCTAssert(didSwitchMembershipType)
+    }
+    
     func didPressLoginRegister() {
         didFireLoginRegistration = true
+    }
+    
+    func didSwitchToFamilyMembership() {
+        didSwitchMembershipType = true
     }
 }

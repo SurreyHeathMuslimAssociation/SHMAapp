@@ -14,7 +14,7 @@ extension CorporateController: CorporateViewDelegate {
     func didPressSearch() {
         if Reachability.isConnectedToNetwork() {
             guard let surname = corporateView.surnameTextField.text, surname.count > 0 else {
-                UIAlertController.showAlert(title: corporateView.corporateViewModel.getEmptyLastNameTextFeildAlertViewTitle(), text: corporateView.corporateViewModel.getEmptyLastNameTextFeildAlertViewText(), viewController: self)
+                UIAlertController.showAlert(title: corporateView.corporateViewModel.getEmptyLastNameTextFieldAlertViewTitle(), text: corporateView.corporateViewModel.getEmptyLastNameTextFieldAlertViewText(), viewController: self)
                 return
             }
             // capital surname
@@ -65,5 +65,5 @@ extension CorporateController: CorporateViewDelegate {
             self.corporateView.dimView.isHidden = true
             UIAlertController.showAlert(title: self.corporateView.corporateViewModel.getShmaIdsAlertTitle(fetchedShmaIds: self.fetchedShmaIds), text: self.corporateView.corporateViewModel.getShmaIdsAlertText(fetchedShmaIds: self.fetchedShmaIds), viewController: self)
         }
-    }    
+    }
 }

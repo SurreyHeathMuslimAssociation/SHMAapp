@@ -19,15 +19,14 @@ class TermsAndConditionsController: UIViewController {
         termsAndConditionsView = TermsAndConditionsView(traitCollection: traitCollection)
         termsAndConditionsView.delegate = self
         view.addSubview(termsAndConditionsView)
-        termsAndConditionsView.anchor(top: view.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        termsAndConditionsView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         
-        makeNavigationBarTransparent()
+        setupNavBar()
     }
     
-    private func makeNavigationBarTransparent() {
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.navigationBar.isTranslucent = true
+    private func setupNavBar() {
+        navigationItem.title = "SHMA Terms And Conditions"
+        navigationController?.navigationBar.titleTextAttributes = termsAndConditionsView.termsAndConditionsViewModel.getNavigationBarTitleTextAttributes()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

@@ -56,15 +56,13 @@ class CorporateView: UIView {
         button.addTarget(self, action: #selector(handleSearchAction), for: .touchUpInside)
         return button
     }()
-    @objc private func handleSearchAction() {
-        delegate?.didPressSearch()
-    }
     
     var mainLabelBottomAnchor: NSLayoutConstraint?
     var mainLabelWidthAnchor: NSLayoutConstraint?
     var mainLabelRightAnchor: NSLayoutConstraint?
+    var mainLabelLeftAnchor: NSLayoutConstraint?
     var mainLabelCenterXAnchor: NSLayoutConstraint?
-     var mainLabelCenterYAnchor: NSLayoutConstraint?
+    var mainLabelCenterYAnchor: NSLayoutConstraint?
     
     var datePickerWidthAnchor: NSLayoutConstraint?
     var datePickerCenterXAnchor: NSLayoutConstraint?
@@ -95,6 +93,7 @@ class CorporateView: UIView {
         mainLabelBottomAnchor?.isActive = false
         mainLabelWidthAnchor?.isActive = false
         mainLabelRightAnchor?.isActive = false
+        mainLabelLeftAnchor?.isActive = false
         datePickerCenterXAnchor?.isActive = false
         datePickerWidthAnchor?.isActive = false
     }
@@ -117,6 +116,9 @@ class CorporateView: UIView {
         mainLabelRightAnchor = corporateViewModel.getMainLabelRightAnchor()
         mainLabelRightAnchor?.isActive = true
         
+        mainLabelLeftAnchor = corporateViewModel.getMainLabelLeftAnchor()
+        mainLabelLeftAnchor?.isActive = true
+        
         mainlabel.font = corporateViewModel.getMainLabelFontForEachDevice()
         
         searchButton.anchor(top: datePicker.bottomAnchor, left: nil, bottom: nil, right: nil, paddingTop: corporateViewModel.getSearchButtonTopPadding(), paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 70, centerYAnchor: nil, centerXAnchor: datePicker.centerXAnchor)
@@ -125,6 +127,7 @@ class CorporateView: UIView {
     }
     
     private func setuplastNameTextFieldAndDatePicker() {
+        surnameTextField.delegate = self
         surnameTextField.anchor(top: nil, left: nil, bottom: datePicker.topAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: corporateViewModel.getlastNameTextFieldBottomPadding(), paddingRight: 0, width: 0, height: corporateViewModel.getlastNameTextFieldHeightForEachDevice(), centerYAnchor: nil, centerXAnchor: datePicker.centerXAnchor)
         surnameTextField.widthAnchor.constraint(equalTo: datePicker.widthAnchor).isActive = true
         surnameTextField.font = corporateViewModel.getlastNameTextFieldFontForEachDevice()

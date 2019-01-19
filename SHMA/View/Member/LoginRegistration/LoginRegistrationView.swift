@@ -10,10 +10,23 @@ import UIKit
 
 protocol LoginRegistrationViewDelegate: class {
     func didPressLoginRegister()
+    func didSwitchToFamilyMembership()
 }
 
 class LoginRegistrationView: UIView {
     
+    let mainLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.backgroundColor = .white
+        return label
+    }()
+    let membershipLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        return label
+    }()
     let shmaIdTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "SHMA ID"
@@ -43,9 +56,14 @@ class LoginRegistrationView: UIView {
         tf.placeholder = "D.O.B"
         return tf
     }()
-    let addressTextField: UITextField = {
+    let addressLineOneTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Address Line"
+        tf.placeholder = "Address Line 1"
+        return tf
+    }()
+    let addressLineTwoTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Address Line 2"
         return tf
     }()
     let townTextField: UITextField = {
@@ -89,7 +107,12 @@ class LoginRegistrationView: UIView {
         view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
         return view
     }()
-    let addressSeperatorView: UIView = {
+    let addressLineOneSeperatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
+        return view
+    }()
+    let addressLineTwoSeperatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
         return view
@@ -104,6 +127,11 @@ class LoginRegistrationView: UIView {
         view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
         return view
     }()
+    lazy var membershipSwitch: UISwitch = {
+        let s = UISwitch()
+        s.addTarget(self, action: #selector(handleMembershipSwitch), for: .valueChanged)
+        return s
+    }()
     lazy var loginRegisterButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitleColor(UIColor.rgb(red: 0, green: 0, blue: 205), for: .normal)
@@ -111,19 +139,34 @@ class LoginRegistrationView: UIView {
         button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
         return button
     }()
-    
     let activityIndicatorView: UIActivityIndicatorView = {
         let iv = UIActivityIndicatorView()
         iv.style = .gray
         return iv
     }()
-    
+    let coverView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
     lazy var scrollView: UIScrollView = {
         let sv = UIScrollView()
         sv.isScrollEnabled = true
-        //sv.contentSize = CGSize(width: frame.width, height: UIScreen.main.bounds.height+100)
+        sv.showsHorizontalScrollIndicator = false
+        sv.isUserInteractionEnabled = true
+        sv.keyboardDismissMode = .onDrag
+        sv.bounces = false
+        sv.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleKeyboard)))
         return sv
     }()
+    
+    var spouseChildTableView: UITableView!
+    let cellId = "cellId"
+    let addChildCellId = "addChildCellId"
+    let header = ["Spouse", "Child"]
+    var childRows = [Int]()
+    var didSelectSpouseChildTextField = false
+    var childCells: [SpouseChildCell]?
     
     weak var delegate: LoginRegistrationViewDelegate?
     var loginRegistrationViewModel: LoginRegistrationViewModel!
@@ -132,16 +175,20 @@ class LoginRegistrationView: UIView {
     var didSelectNewMemberRegistration: Bool?
     
     /// height anchor refrences for modifying *loginViewContainer*
+    var labelHeightAnchor: NSLayoutConstraint?
+    var shmaIdTextFieldTopAnchor: NSLayoutConstraint?
     var shmaIdTextFieldHeightAnchor: NSLayoutConstraint?
     var emailTextFieldHeightAnchor: NSLayoutConstraint?
     var passwordTextFieldHeightAnchor: NSLayoutConstraint?
     var nameTextFieldHeightAnchor: NSLayoutConstraint?
     var dobTextFieldHeightAnchor: NSLayoutConstraint?
-    var addressTextFieldHeightAnchor: NSLayoutConstraint?
+    var addressLineOneTextFieldHeightAnchor: NSLayoutConstraint?
+    var addressLineTwoTextFieldHeightAnchor: NSLayoutConstraint?
     var townTextFieldHeightAnchor: NSLayoutConstraint?
     var postcodeTextFieldHeightAnchor: NSLayoutConstraint?
     var mobileTextFieldHeightAnchor: NSLayoutConstraint?
     var loginRegisterButtonHeightAnchor: NSLayoutConstraint?
+    var loginRegisterButtonTopAnchor: NSLayoutConstraint?
     
     required init(traitCollection: UITraitCollection, _ didSelectLogin: Bool, _ didSelectExistingMemberRegistration: Bool, _ didSelectNewMemberRegistration: Bool) {
         super.init(frame: .zero)
@@ -153,15 +200,16 @@ class LoginRegistrationView: UIView {
         self.didSelectExistingMemberRegistration = didSelectExistingMemberRegistration
         self.didSelectNewMemberRegistration = didSelectNewMemberRegistration
         
-        loginRegistrationViewModel = LoginRegistrationViewModel(traitCollection, loginRegistrationView: self, didSelectLogin, didSelectExistingMemberRegistration, didSelectNewMemberRegistration, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressTextField, townTextField, postcodeTextField, mobileNoTextField, loginRegisterButton)
+        loginRegistrationViewModel = LoginRegistrationViewModel(traitCollection, loginRegistrationView: self, didSelectLogin, didSelectExistingMemberRegistration, didSelectNewMemberRegistration, mainLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, postcodeTextField, mobileNoTextField, loginRegisterButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, dobSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, postcodeSeperatorView)
         
         setupView()
     }
-    
+
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         loginRegistrationViewModel.traitCollection = traitCollection
     }
+    
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
