@@ -31,5 +31,11 @@ extension Auth: FirebaseAuthSession {
             completion(result, error)
         }
     }
+
+    func sendPasswordReset(with email: String, completion: @escaping SendPasswordResetCallback) {
+        sendPasswordReset(withEmail: email) { (error) in
+            completion(error)
+        }
+    }
     
 }

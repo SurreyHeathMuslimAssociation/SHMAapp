@@ -23,4 +23,8 @@ extension LoginRegistrationController: LoginRegistrationViewDelegate {
     func didSwitchToFamilyMembership() {
         setupLoginRegistrationViewHeightOrBottomAnchor()
     }
+    
+    func didPressPasswordReset() {
+        navigationController?.pushViewController(PasswordResetController(), animated: true)
+    }
 }

@@ -16,8 +16,20 @@ class FirebaseDatabaseSessionMock: FirebaseDatabaseSession {
     var memberDob: String!
     var memberSurname: String!
     var memberFirstname: String!
+    var memberEmail: String!
+    var memberPostcode: String!
+    var memberMobileNo: String!
+    var memberTown: String!
+    var memberAddressLineOne: String!
+    var memberAddressLineTwo: String!
     var memberShmaId = "100"
     let wasFound = true
+    var memberUid: String!
+    var memberSpouseName: String!
+    var memberSpouseDob: String!
+    var memberSpouseEmail: String!
+    var memberChildName: String!
+    var memberChildDob: String!
     
     func searchMemberUsing(_ dob: String, _ surname: String, completion: @escaping (String?, Bool) -> Void) {
         didInitiateDatabaseCall = true
@@ -36,11 +48,40 @@ class FirebaseDatabaseSessionMock: FirebaseDatabaseSession {
         memberShmaId = shmaId
     }
     
-    func saveMemberDetailsToDatabase(_ uid: String, _ shmaId: String, _ firstname: String, _ surname: String, _ email: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+    func saveExistingMemberDetailsToDatabase(_ uid: String, _ shmaId: String, _ firstname: String, _ surname: String, _ email: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
         didInitiateDatabaseCall = true
         memberShmaId = shmaId
-        memberSurname = surname
+        memberUid = uid
         memberFirstname = firstname
+        memberSurname = surname
+        memberEmail = email
+    }
+    
+    func saveNewMemberDetailsToDatabase(_ uid: String, _ firstname: String, _ surname: String, _ email: String, _ dob: String, _ addressLineOne: String, _ addressLineTwo: String, _ town: String, _ postcode: String, _ mobileNo: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+        didInitiateDatabaseCall = true
+        memberUid = uid
+        memberFirstname = firstname
+        memberSurname = surname
+        memberEmail = email
+        memberDob = dob
+        memberAddressLineOne = addressLineOne
+        memberAddressLineTwo = addressLineTwo
+        memberTown = town
+        memberPostcode = postcode
+        memberMobileNo = mobileNo
+    }
+    
+    func saveNewMembersSpouseDetailsToDatabase(_ uid: String, _ spouseName: String, _ spouseEmail: String, _ spouseDob: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+        didInitiateDatabaseCall = true
+        memberSpouseName = spouseName
+        memberSpouseEmail = spouseEmail
+        memberSpouseDob = spouseDob
+    }
+    
+    func saveNewMembersChildrenDetailsToDatabase(_ uid: String, _ childName: String, _ childDob: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+        didInitiateDatabaseCall = true
+        memberChildName = childName
+        memberChildDob = childDob
     }
     
 }

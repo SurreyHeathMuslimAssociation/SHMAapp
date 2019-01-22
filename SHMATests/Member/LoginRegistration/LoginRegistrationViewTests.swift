@@ -18,6 +18,7 @@ class LoginRegistrationViewTests: XCTestCase, LoginRegistrationViewDelegate {
     var didSelectLogin: Bool!
     var didSelectExistingMemberRegistration: Bool!
     var didSelectNewMemberRegistration: Bool!
+    var didTapPasswordReset: Bool!
     
     override func setUp() {
         super.setUp()
@@ -30,6 +31,7 @@ class LoginRegistrationViewTests: XCTestCase, LoginRegistrationViewDelegate {
         didSelectNewMemberRegistration = false
         didSelectExistingMemberRegistration = false
         didSwitchMembershipType = false
+        didTapPasswordReset = false
         
         sut = LoginRegistrationView(traitCollection: traitCollection, didSelectLogin, didSelectExistingMemberRegistration, didSelectNewMemberRegistration)
         sut.delegate = self
@@ -43,6 +45,7 @@ class LoginRegistrationViewTests: XCTestCase, LoginRegistrationViewDelegate {
         didSelectExistingMemberRegistration = nil
         didFireLoginRegistration = nil
         didSwitchMembershipType = nil
+        didTapPasswordReset = nil
         super.tearDown()
     }
     
@@ -56,11 +59,20 @@ class LoginRegistrationViewTests: XCTestCase, LoginRegistrationViewDelegate {
         XCTAssert(didSwitchMembershipType)
     }
     
+    func testDidTapPasswordResetButton() {
+        sut.passswordResetButton.sendActions(for: .touchUpInside)
+        XCTAssert(didTapPasswordReset)
+    }
+    
     func didPressLoginRegister() {
         didFireLoginRegistration = true
     }
     
     func didSwitchToFamilyMembership() {
         didSwitchMembershipType = true
+    }
+    
+    func didPressPasswordReset() {
+        didTapPasswordReset = true
     }
 }

@@ -48,5 +48,26 @@ class FirebaseAuthTests: XCTestCase {
         }
         XCTAssertEqual(password, session.userPassword)
     }
+    
+    func testDidInitiateSigningOutProcess() {
+        session.signOut { (success, error) in
+        }
+        XCTAssert(session.didInitiateSigningOut)
+    }
+    
+    func testDidInitiateUserCreation() {
+        session.createUser(with: email, password: password) { (result, error) in
+        }
+        XCTAssert(session.didInitiateUserCreation)
+        XCTAssertEqual(session.userEmail, email)
+        XCTAssertEqual(session.userPassword, password)
+    }
+    
+    func testDidInitiateUserPasswordReset() {
+        session.sendPasswordReset(with: email) { (error) in
+        }
+        XCTAssert(session.didInitiatePasswordReset)
+        XCTAssertEqual(session.userEmail, email)
+    }
 }
 

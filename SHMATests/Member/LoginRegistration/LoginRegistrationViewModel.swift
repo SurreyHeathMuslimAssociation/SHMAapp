@@ -30,6 +30,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
     var postcodeTextField: UITextField!
     var mobileNoTextField: UITextField!
     var loginRegisterButton: UIButton!
+    var passwordResetButton: UIButton!
     var attributedString: NSAttributedString!
     var membershipSwitch: UISwitch!
     var shmaIdSeperatorView: UIView!
@@ -41,6 +42,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
     var addressLineTwoSeperatorView: UIView!
     var townSeperatorView: UIView!
     var postcodeSeperatorView: UIView!
+    var coverView: UIView!
     
     let iPadLoginRegisterButtonAndTextFieldFont = UIFont.systemFont(ofSize: 22)
     let iPhoneLoginRegisterButtonAndTextFieldFont = UIFont.systemFont(ofSize: 14)
@@ -68,6 +70,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
         postcodeTextField = UITextField()
         mobileNoTextField = UITextField()
         loginRegisterButton = UIButton()
+        passwordResetButton = UIButton()
         membershipSwitch = UISwitch()
         shmaIdSeperatorView = UIView()
         emailSeperatorView = UIView()
@@ -78,8 +81,9 @@ class LoginRegistrationViewModelTests: XCTestCase {
         addressLineTwoSeperatorView = UIView()
         townSeperatorView = UIView()
         postcodeSeperatorView = UIView()
+        coverView = UIView()
         
-        sut = LoginRegistrationViewModel(traitCollection, loginRegistrationView: loginRegistrationView, didSelectLogin ?? false, didSelectExistingMemberRegistration ?? false, didSelectNewMemberRegistration ?? false, mainLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, postcodeTextField, mobileNoTextField, loginRegisterButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, dobSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, postcodeSeperatorView)
+        sut = LoginRegistrationViewModel(iPadTraits, loginRegistrationView: loginRegistrationView, didSelectLogin ?? false, didSelectExistingMemberRegistration ?? false, didSelectNewMemberRegistration ?? false, mainLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, postcodeTextField, mobileNoTextField, loginRegisterButton, passwordResetButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, dobSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, postcodeSeperatorView, coverView)
     }
     
     override func tearDown() {
@@ -110,6 +114,8 @@ class LoginRegistrationViewModelTests: XCTestCase {
         addressLineTwoSeperatorView = nil
         townSeperatorView = nil
         postcodeSeperatorView = nil
+        passwordResetButton = nil
+        coverView = nil
         super.tearDown()
     }
     
@@ -375,9 +381,9 @@ class LoginRegistrationViewModelTests: XCTestCase {
     func testGetsCorrectLoginRegistrationViewHeightConstraitForLoginType() {
         if didSelectLogin == true {
             if traitCollection.isIpad {
-                XCTAssertEqual(sut.getLoginRegistrationViewHeightOrBottomConstraitForEachTypeAndDevice()?.constant, loginRegistrationView.heightAnchor.constraint(equalToConstant: 260).constant)
+                XCTAssertEqual(sut.getLoginRegistrationViewHeightOrBottomConstraitForEachTypeAndDevice()?.constant, loginRegistrationView.heightAnchor.constraint(equalToConstant: 320).constant)
             } else {
-                XCTAssertEqual(sut.getLoginRegistrationViewHeightOrBottomConstraitForEachTypeAndDevice()?.constant, loginRegistrationView.heightAnchor.constraint(equalToConstant: 215).constant)
+                XCTAssertEqual(sut.getLoginRegistrationViewHeightOrBottomConstraitForEachTypeAndDevice()?.constant, loginRegistrationView.heightAnchor.constraint(equalToConstant: 260).constant)
             }
         }
     }

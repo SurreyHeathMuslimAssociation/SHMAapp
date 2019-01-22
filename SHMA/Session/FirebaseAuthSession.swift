@@ -13,4 +13,5 @@ protocol FirebaseAuthSession {
     func signIn(with email: String, password: String, completion: @escaping AuthDataResultCallback)
     func signOut(completion: @escaping (Bool, Error?) -> Void)
     func createUser(with email: String, password: String, completion: @escaping AuthDataResultCallback)
+    func sendPasswordReset(with email: String, completion: @escaping SendPasswordResetCallback)
 }

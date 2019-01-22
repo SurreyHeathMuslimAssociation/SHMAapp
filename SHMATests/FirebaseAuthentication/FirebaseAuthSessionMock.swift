@@ -13,8 +13,11 @@ import FirebaseAuth
 class FirebaseAuthSessionMock: FirebaseAuthSession {
     
     var didInitiateAuth = false
+    var didInitiateUserCreation = false
+    var didInitiatePasswordReset = false
     var userEmail: String?
     var userPassword: String?
+    var didInitiateSigningOut = false
     
     func signIn(with email: String, password: String, completion: @escaping AuthDataResultCallback) {
         didInitiateAuth = true
@@ -23,11 +26,18 @@ class FirebaseAuthSessionMock: FirebaseAuthSession {
     }
     
     func signOut(completion: @escaping (Bool, Error?) -> Void) {
-        didInitiateAuth = true
+        didInitiateSigningOut = true
     }
     
     func createUser(with email: String, password: String, completion: @escaping AuthDataResultCallback) {
-        
+        didInitiateUserCreation = true
+        userEmail = email
+        userPassword = password
+    }
+    
+    func sendPasswordReset(with email: String, completion: @escaping SendPasswordResetCallback) {
+        didInitiatePasswordReset = true
+        userEmail = email
     }
     
 }

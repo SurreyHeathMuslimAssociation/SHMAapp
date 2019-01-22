@@ -34,4 +34,10 @@ class FirebaseAuthManager {
             completion(result, error)
         }
     }
+    
+    func sendPasswordReset(with email: String, completion: @escaping SendPasswordResetCallback) {
+        session.sendPasswordReset(with: email) { (error) in
+            completion(error)
+        }
+    }
 }
