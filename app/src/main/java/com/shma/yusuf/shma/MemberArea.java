@@ -63,7 +63,16 @@ public class MemberArea extends AppCompatActivity {
         CorrectElements();
         users.clear();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        //Functions and methods
+        //Functions and methods and Assigning click listeners on elements
+        Forgotpwd.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(), Password.class));
+
+            }
+        });
+
     }
 public void SetUpUIelements(){
     familyswitch = findViewById(R.id.FamilySwitch);
@@ -348,40 +357,6 @@ public void LoginNow(View v) {
 
 
 }
-
-public void UpdateView(FirebaseUser user){
-
-}
-
-public boolean checkMemberTbl(boolean isregistered){
-
-        for (User secondchk : users){
-            Log.d("shma id " , secondchk.getShmaId() + "shmaidbox" + SHMAid.getText().toString());
-            if (SHMAid.getText().toString() .equals(secondchk.getShmaId())) {
-                PopupMessage("Member Already Exists!");
-                isregistered = true;
-                break;
-            }else {
-                isregistered = false ;
-
-            }
-        }
-        return isregistered;
-    }
-    public void checkMemberSearchTbl( ){
-                    for (User s : users) {
-                // Log.d(TAG, "date user " + date + "date arraylist" + s.getDOB());
-                if (SHMAid.getText().toString().equals(s.getShmaId())) {
-                      //ADD DETAILS TO FIREBASE
-                    PopupMessage("member will b added to firebase");
-
-
-                    break;
-                }else{
-
-                }
-                }
-    }
 
 }
 

@@ -32,13 +32,13 @@ public class Password extends AppCompatActivity {
                 String useremail = passwordEmail.getText().toString().trim();
 
                 if(useremail.equals("")){
-                    Toast.makeText(getApplicationContext(), "Please enter your registered email ID", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Please enter your registered email", Toast.LENGTH_SHORT).show();
                 }else{
                     firebaseAuth.sendPasswordResetEmail(useremail).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(getApplicationContext(), "Password reset email sent!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), "Password reset email has been sent!", Toast.LENGTH_SHORT).show();
                                 finish();
                                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
                             }else{
