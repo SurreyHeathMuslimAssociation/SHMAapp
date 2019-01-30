@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,21 +29,15 @@ import java.util.List;
 
 public class MemberArea extends AppCompatActivity {
     private Switch familyswitch;
+    private TextView Title , Password, Email, Info, Forgotpwd;
+    private TextView DOBTitle, DOBfield;
+    private TextView Adr1Title, Adr1Field;
+    private TextView Adr2Title , Adr2Field;
+    private TextView TownTitle, TownField;
+    private TextView PostCodeTitle,PostCodeField;
+    private TextView SHMAid, SHMAtitle;
     private Button LoginBtn;
-    private TextView DOBTitle;
-    private TextView DOBfield;
-    private TextView Adr1Title;
-    private TextView Adr1Field;
-    private TextView Adr2Title;
-    private TextView Adr2Field;
-    private TextView TownTitle;
-    private TextView TownField;
-    private TextView PostCodeTitle;
-    private TextView PostCodeField;
-    private TextView Title;
-    private TextView SHMAid;
-    private TextView Password;
-    private TextView Email;
+    private int counter = 5;
     private String currentUserID;
     private FirebaseAuth mAuth;
     String sessionId;
@@ -56,39 +51,45 @@ public class MemberArea extends AppCompatActivity {
         setContentView(R.layout.activity_member_area);
         sessionId = getIntent().getStringExtra("EXTRA_SESSION_INFO");
         mAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mAuth.getCurrentUser();
+        //is user already logged in
+       /* if (user!=null){
+            finish();
+            Intent i = new Intent(getApplicationContext(), MemberProfile.class);
+            startActivity(i);
+        }*/
         //Assigning elements to variables
-        familyswitch = findViewById(R.id.FamilySwitch);
-        Title = findViewById(R.id.Title);
-        SHMAid = findViewById(R.id.SHMAfield);
-        Password = findViewById(R.id.PasswordField);
-        Email = findViewById(R.id.EmailField);
-        DOBTitle = findViewById(R.id.DOBtitle);
-        DOBfield = findViewById(R.id.DobField);
-        Adr1Title = findViewById(R.id.Address1title);
-        Adr1Field = findViewById(R.id.Address1Field);
-        Adr2Title = findViewById(R.id.Address2title);
-        Adr2Field = findViewById(R.id.Address2Field);
-        TownTitle = findViewById(R.id.TownTitle);
-        TownField = findViewById(R.id.TownField);
-        PostCodeTitle =findViewById(R.id.PostCodeTitle);
-        PostCodeField = findViewById(R.id.PostCodeField) ;
-        LoginBtn = findViewById(R.id.LoginButton);
+        SetUpUIelements();
+        CorrectElements();
         users.clear();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-    //Functions and methods
-       CorrectElements();
-       // readfromFirebase("offline_members");
-       // readfromFirebasedb2("shmaIdsOnApp");
-
-
-
-
-
+        //Functions and methods
     }
-
+public void SetUpUIelements(){
+    familyswitch = findViewById(R.id.FamilySwitch);
+    Title = findViewById(R.id.Title);
+    SHMAtitle = findViewById(R.id.SHMAtitle);
+    SHMAid = findViewById(R.id.SHMAfield);
+    Password = findViewById(R.id.PasswordField);
+    Email = findViewById(R.id.EmailField);
+    DOBTitle = findViewById(R.id.DOBTitle);
+    DOBfield = findViewById(R.id.DobField);
+    Adr1Title = findViewById(R.id.Address1title);
+    Adr1Field = findViewById(R.id.Address1Field);
+    Adr2Title = findViewById(R.id.Address2title);
+    Adr2Field = findViewById(R.id.Address2Field);
+    Info = findViewById(R.id.LoginAttempts);
+    TownTitle = findViewById(R.id.TownTitle);
+    TownField = findViewById(R.id.TownField);
+    PostCodeTitle =findViewById(R.id.PostCodeTitle);
+    PostCodeField = findViewById(R.id.PostCodeField) ;
+    LoginBtn = findViewById(R.id.LoginButton);
+    Forgotpwd = findViewById(R.id.Forgotpwd);
+    }
     public void CorrectElements(){
         if (sessionId.equals("Login")) {
             familyswitch.setVisibility(View.INVISIBLE);
+            SHMAtitle.setVisibility(View.INVISIBLE);
             SHMAid.setVisibility(View.INVISIBLE);
             DOBTitle.setVisibility(View.INVISIBLE);
             DOBfield.setVisibility(View.INVISIBLE);
@@ -101,6 +102,8 @@ public class MemberArea extends AppCompatActivity {
             PostCodeTitle.setVisibility(View.INVISIBLE);
             PostCodeField.setVisibility(View.INVISIBLE);
         }else if (sessionId.equals("ExistMemb")){
+            Forgotpwd.setVisibility(View.INVISIBLE);
+            Info.setVisibility(View.INVISIBLE);
             familyswitch.setVisibility(View.INVISIBLE);
             LoginBtn.setText("Register");
             DOBTitle.setVisibility(View.INVISIBLE);
@@ -115,7 +118,8 @@ public class MemberArea extends AppCompatActivity {
             PostCodeField.setVisibility(View.INVISIBLE);
         }else {
             LoginBtn.setText("Register");
-
+            Forgotpwd.setVisibility(View.INVISIBLE);
+            Info.setVisibility(View.INVISIBLE);
 
         }
 
@@ -199,31 +203,68 @@ public class MemberArea extends AppCompatActivity {
         mySnackbar.show();
 
     }
-    /*public void connectionFirebase(){
 
-       mAuth = FirebaseAuth.getInstance();
-        currentUserID = mAuth.getCurrentUser().getUid();
+    private void checkEmailVerification(){
 
-        mDatabase.child(currentUserID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+        FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        Boolean emailflag = firebaseUser.isEmailVerified();
 
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+        //startActivity(new Intent(MemberArea.this, MemberProfile.class));
 
-                         String email = postSnapshot.child("email").getValue(String.class);
+      if(emailflag){
+           finish();
+           startActivity(new Intent(MemberArea.this, MemberProfile.class));
+      }else{
+           PopupMessage("Verify your email");
+            mAuth.signOut();
+                  }
+    }
 
-               Log.d("individual", email  );
-
+    private void validate(String userName, String userPassword) {
+        if (Email.getText().toString().equals("") && Password.getText().toString().equals("")) {
+            PopupMessage("Please fill in all available fields");
+        } else {
+            mAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        checkEmailVerification();
+                    } else {
+                        PopupMessage("Login Failed");
+                        counter--;
+                        Info.setText("No of attempts remaining: " + counter);
+                        if (counter == 0) {
+                            Info.setText("Number of attempts exceeded");
+                            LoginBtn.setEnabled(false);
+                        }
+                    }
                 }
+            });
 
-            }
+        }
+    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d("DB connect error","verification"  );
-            }
-        });
-    }*/
+    private void sendEmailVerification(){
+        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+        if(firebaseUser!=null){
+            firebaseUser.sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if(task.isSuccessful()){
+                      //  sendUserData();
+                        Toast.makeText(getApplicationContext(), "Successfully Registered, Verification mail sent!", Toast.LENGTH_SHORT).show();
+                        mAuth.signOut();
+                        finish();
+                        Intent intent = new Intent(getApplicationContext(), MemberArea.class);
+                        intent.putExtra("EXTRA_SESSION_INFO","Login");
+                        startActivity(intent);
+                    }else{
+                        Toast.makeText(getApplicationContext(), "Verification mail has'nt been sent!", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        }
+    }
 
 public void checks(String sessionId){
     View parentLayout = findViewById(android.R.id.content);
@@ -248,33 +289,17 @@ public void checks(String sessionId){
     Title.setText(changed);
 }
 public void LoginNow(View v) {
-
-    boolean isregistered = true ;
     if (sessionId.equals("Login")) {
-        if (Email.getText().toString().equals("") && Password.getText().toString().equals("")) {
-            PopupMessage("Please fill in all available fields");
-        } else {
-            mAuth.signInWithEmailAndPassword(Email.getText().toString(), Password.getText().toString())
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                finish();
-                                Intent i = new Intent(getApplicationContext(), MemberProfile.class);
-                                startActivity(i);
-                            } else {
-                                PopupMessage("User not found");
-                            }
-                        }
-                    });
-        }
+        String usr_email = Email.getText().toString().trim();
+        String usr_password = Password.getText().toString().trim();
+         validate(usr_email,usr_password);
 
     } else if (sessionId.equals("ExistMemb")) {
 
         if (Email.getText().toString().equals("") || Password.getText().toString().equals("") || SHMAid.getText().toString().equals("")) {
             PopupMessage("Please fill in all available fields");
         } else {          //check the shmaID then add the login details into the firebase members database table
-            Query query = mDatabase.child("shmaIdsOnApp").orderByKey().equalTo(SHMAid.getText().toString());
+            /*Query query = mDatabase.child("shmaIdsOnApp").orderByKey().equalTo(SHMAid.getText().toString());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -284,40 +309,37 @@ public void LoginNow(View v) {
                             Log.d("Are you already an app user:", String.valueOf((m.getValue())));
                     PopupMessage("You are already a member");
                         }
-                    }else {
-
-
-                        mAuth.createUserWithEmailAndPassword(Email.getText().toString(),Password.getText().toString()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                if (task.isSuccessful()){
-                                    FirebaseUser user = mAuth.getCurrentUser(); //You Firebase user
-                                    // user registered, start profile activity
-
-                                    PopupMessage("Account Created");
-                                    finish();
-
-                                    //startActivity(new Intent(getApplicationContext(), UserMainPage.class));
-                                }
-                                else{
-                                    PopupMessage("Could not create account. Please try again");
-                                }
-                            }
-                        });
-                        PopupMessage("Existing Member Created");
-
-                    }
-
-                }
-
+                    }else {*/
+            String usr_email = Email.getText().toString().trim();
+            String usr_password = Password.getText().toString().trim();
+            mAuth.createUserWithEmailAndPassword(usr_email,usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+
+                    if (task.isSuccessful()) {
+                        sendEmailVerification();
+                        /*PopupMessage("Account Created Successfully");
+                        FirebaseUser user = mAuth.getCurrentUser(); //You Firebase user
+                        // user registered, start profile activity
+                        finish();
+                        Intent intent = new Intent(getApplicationContext(), MemberArea.class);
+                        intent.putExtra("EXTRA_SESSION_INFO","Login");
+                        startActivity(intent);*/
+                    } else {
+                        PopupMessage("Could not create account. Please try again");
+                    }
+                }
+            });
+
+
+        }
+
+                /*@Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-            }) ;
+            }) ;*/
 
-           }
     } else if ((sessionId.equals("NewMember"))) {
         //Brand New Member -> Send the details to Soyab for adding to our Offline database
 

@@ -1,244 +1,282 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MemberArea">
 
-    <TextView
-        android:id="@+id/adressline1title4"
-        android:layout_width="74dp"
-        android:layout_height="27dp"
-        android:text="D.O.B"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/PasswordTitle"
-        tools:layout_editor_absoluteY="349dp" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MemberArea">
 
-    <EditText
-        android:id="@+id/DobField"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/Address1Field"
-        tools:layout_editor_absoluteY="336dp" />
+        <Button
+            android:id="@+id/LoginButton"
+            android:layout_width="172dp"
+            android:layout_height="51dp"
+            android:layout_marginStart="8dp"
 
-    <EditText
-        android:id="@+id/PostCodeField"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginTop="548dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="76dp"
+            android:onClick="LoginNow"
+            android:text="Login"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/PostCodeTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:text="Post Code"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/TownTitle"
-        tools:layout_editor_absoluteY="561dp" />
+        <Switch
+            android:id="@+id/FamilySwitch"
+            android:layout_width="193dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="116dp"
+            android:layout_marginEnd="8dp"
+            android:fontFamily="sans-serif"
+            android:text="Family Member"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.96"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/TownField"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/PostCodeField"
-        tools:layout_editor_absoluteY="492dp" />
 
-    <TextView
-        android:id="@+id/TownTitle"
-        android:layout_width="90dp"
-        android:layout_height="28dp"
-        android:text="Town"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/Address2title"
-        tools:layout_editor_absoluteY="504dp" />
+        <TextView
+            android:id="@+id/DOBTitle"
+            android:layout_width="74dp"
+            android:layout_height="27dp"
+            android:layout_marginTop="336dp"
+            android:text="D.O.B"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/PasswordTitle"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/Address2Field"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/TownField"
-        tools:layout_editor_absoluteY="440dp" />
+        <EditText
+            android:id="@+id/DobField"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="328dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/Address1Field"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Address2title"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:text="Address Line 2"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/Address1title"
-        tools:layout_editor_absoluteY="440dp" />
+        <EditText
+            android:id="@+id/PostCodeField"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginStart="160dp"
+            android:layout_marginTop="16dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TownField" />
 
-    <TextView
-        android:id="@+id/Address1title"
-        android:layout_width="wrap_content"
-        android:layout_height="27dp"
-        android:text="Address Line 1"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/adressline1title4"
-        tools:layout_editor_absoluteY="389dp" />
+        <TextView
+            android:id="@+id/PostCodeTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginTop="548dp"
+            android:text="Post Code"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/TownTitle"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/SHMAfield"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/EmailField"
-        tools:layout_editor_absoluteY="185dp" />
+        <EditText
+            android:id="@+id/TownField"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="12dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/PostCodeField"
+            app:layout_constraintTop_toBottomOf="@+id/Address2Field" />
 
-    <EditText
-        android:id="@+id/Address1Field"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="376dp"
-        android:ems="10"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="@+id/Address2Field"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/TownTitle"
+            android:layout_width="90dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="492dp"
+            android:text="Town"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/Address2title"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/SHMAtitle"
-        android:layout_width="wrap_content"
-        android:layout_height="23dp"
-        android:layout_marginTop="202dp"
-        android:text="SHMA ID"
-        android:textSize="18sp"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="11dp" />
+        <EditText
+            android:id="@+id/Address2Field"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/TownField"
+            app:layout_constraintTop_toBottomOf="@+id/Address1Field" />
 
-    <EditText
-        android:id="@+id/EmailField"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        app:layout_constraintEnd_toEndOf="@+id/PasswordField"
-        tools:layout_editor_absoluteY="244dp" />
+        <TextView
+            android:id="@+id/Address2title"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginTop="424dp"
+            android:text="Address Line 2"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/Address1title"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/EmailTitle"
-        android:layout_width="74dp"
-        android:layout_height="33dp"
-        android:text="Email"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/SHMAtitle"
-        tools:layout_editor_absoluteY="251dp" />
+        <TextView
+            android:id="@+id/Address1title"
+            android:layout_width="wrap_content"
+            android:layout_height="27dp"
+            android:layout_marginTop="376dp"
+            android:text="Address Line 1"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/DOBTitle"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/PasswordTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Password"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/EmailTitle"
-        tools:layout_editor_absoluteY="304dp" />
+        <EditText
+            android:id="@+id/SHMAfield"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="185dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/EmailField"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/Title"
-        android:layout_width="236dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="8dp"
-        android:text="Members"
-        android:textAlignment="center"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/Address1Field"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="360dp"
+            android:ems="10"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/Address2Field"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/PasswordField"
-        android:layout_width="wrap_content"
-        android:layout_height="40dp"
-        android:layout_marginTop="288dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="@+id/DobField"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/SHMAtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:layout_marginTop="64dp"
+            android:layout_marginEnd="328dp"
+            android:text="SHMA ID"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/MembersAreaTitle" />
 
-    <TextView
-        android:id="@+id/MembersAreaTitle"
-        android:layout_width="298dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Please Fill In The Fields Below"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toTopOf="@+id/LoginButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Title"
-        app:layout_constraintVertical_bias="0.0" />
+        <EditText
+            android:id="@+id/EmailField"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="224dp"
+            android:ems="10"
+            android:inputType="textEmailAddress"
+            app:layout_constraintEnd_toEndOf="@+id/PasswordField"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/LoginButton"
-        android:layout_width="220dp"
-        android:layout_height="71dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="36dp"
-        android:onClick="LoginNow"
-        android:text="Login"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.548"
-        app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/EmailTitle"
+            android:layout_width="74dp"
+            android:layout_height="33dp"
+            android:layout_marginTop="244dp"
+            android:text="Email"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/SHMAtitle"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
-        android:id="@+id/FamilySwitch"
-        android:layout_width="193dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:fontFamily="sans-serif"
-        android:text="Family Member"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.9"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/MembersAreaTitle" />
+        <TextView
+            android:id="@+id/PasswordTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="288dp"
+            android:text="Password"
+            android:textSize="18sp"
+            app:layout_constraintStart_toStartOf="@+id/EmailTitle"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="20dp" />
+        <TextView
+            android:id="@+id/Title"
+            android:layout_width="236dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="28dp"
+            android:layout_marginEnd="8dp"
+            android:text="Members"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.constraint.Barrier
-        android:id="@+id/barrier2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="left" />
+        <EditText
+            android:id="@+id/PasswordField"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginTop="272dp"
+            android:ems="10"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="@+id/DobField"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <android.support.constraint.Constraints
-        android:id="@+id/constraints"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/MembersAreaTitle"
+            android:layout_width="298dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Please Fill In The Fields Below"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toTopOf="@+id/LoginButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/Title"
+            app:layout_constraintVertical_bias="0.0" />
 
-    <android.support.constraint.Constraints
-        android:id="@+id/constraints2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-</android.support.constraint.ConstraintLayout>
+        <android.support.constraint.Guideline
+            android:id="@+id/guideline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="732dp" />
+
+        <TextView
+            android:id="@+id/LoginAttempts"
+            android:layout_width="144dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
+            android:text="attempt no"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/FamilySwitch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/FamilySwitch" />
+
+        <TextView
+            android:id="@+id/Forgotpwd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Forgot Your Password?"
+            android:textColor="@color/fui_linkColor"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LoginButton"
+            app:layout_constraintVertical_bias="0.073" />
+
+
+    </android.support.constraint.ConstraintLayout>
+    </ScrollView>

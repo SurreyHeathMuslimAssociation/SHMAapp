@@ -10,10 +10,15 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class MemberProfile extends AppCompatActivity {
-FirebaseAuth auth;
-FirebaseUser user;
+    FirebaseAuth auth;
+    FirebaseUser user;
     TextView SHMAProfile;
 
+    private void Logout(){
+        auth.signOut();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity (i);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -24,9 +29,8 @@ FirebaseUser user;
         SHMAProfile.setText(user.getEmail());
     }
 
-public void signOut(View v){
-        auth.signOut();
-        Intent i = new Intent(this, MainActivity.class);
-    startActivity (i);
+
+    public void signOut(View v){
+        Logout();
     }
 }
