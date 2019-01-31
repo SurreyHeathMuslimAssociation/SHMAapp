@@ -38,9 +38,9 @@ public class MemberArea extends AppCompatActivity {
     private TextView SHMAid, SHMAtitle;
     private Button LoginBtn;
     private int counter = 5;
-    private String currentUserID;
     private FirebaseAuth mAuth;
     String sessionId;
+    String usr_email , usr_password;
     DatabaseReference mDatabase;
     List<User> users = new ArrayList<>();
 
@@ -77,20 +77,19 @@ public class MemberArea extends AppCompatActivity {
 public void SetUpUIelements(){
     familyswitch = findViewById(R.id.FamilySwitch);
     Title = findViewById(R.id.Title);
-    SHMAtitle = findViewById(R.id.SHMAtitle);
     SHMAid = findViewById(R.id.SHMAfield);
     Password = findViewById(R.id.PasswordField);
     Email = findViewById(R.id.EmailField);
-    DOBTitle = findViewById(R.id.DOBTitle);
+
     DOBfield = findViewById(R.id.DobField);
-    Adr1Title = findViewById(R.id.Address1title);
+
     Adr1Field = findViewById(R.id.Address1Field);
-    Adr2Title = findViewById(R.id.Address2title);
+
     Adr2Field = findViewById(R.id.Address2Field);
     Info = findViewById(R.id.LoginAttempts);
-    TownTitle = findViewById(R.id.TownTitle);
+
     TownField = findViewById(R.id.TownField);
-    PostCodeTitle =findViewById(R.id.PostCodeTitle);
+
     PostCodeField = findViewById(R.id.PostCodeField) ;
     LoginBtn = findViewById(R.id.LoginButton);
     Forgotpwd = findViewById(R.id.Forgotpwd);
@@ -98,32 +97,31 @@ public void SetUpUIelements(){
     public void CorrectElements(){
         if (sessionId.equals("Login")) {
             familyswitch.setVisibility(View.INVISIBLE);
-            SHMAtitle.setVisibility(View.INVISIBLE);
             SHMAid.setVisibility(View.INVISIBLE);
-            DOBTitle.setVisibility(View.INVISIBLE);
+
             DOBfield.setVisibility(View.INVISIBLE);
-            Adr1Title.setVisibility(View.INVISIBLE);
+
             Adr1Field.setVisibility(View.INVISIBLE);
-            Adr2Title.setVisibility(View.INVISIBLE);
+
             Adr2Field.setVisibility(View.INVISIBLE);
-            TownTitle.setVisibility(View.INVISIBLE);
+
             TownField.setVisibility(View.INVISIBLE);
-            PostCodeTitle.setVisibility(View.INVISIBLE);
+
             PostCodeField.setVisibility(View.INVISIBLE);
         }else if (sessionId.equals("ExistMemb")){
             Forgotpwd.setVisibility(View.INVISIBLE);
             Info.setVisibility(View.INVISIBLE);
             familyswitch.setVisibility(View.INVISIBLE);
             LoginBtn.setText("Register");
-            DOBTitle.setVisibility(View.INVISIBLE);
+
             DOBfield.setVisibility(View.INVISIBLE);
-            Adr1Title.setVisibility(View.INVISIBLE);
+
             Adr1Field.setVisibility(View.INVISIBLE);
-            Adr2Title.setVisibility(View.INVISIBLE);
+
             Adr2Field.setVisibility(View.INVISIBLE);
-            TownTitle.setVisibility(View.INVISIBLE);
+
             TownField.setVisibility(View.INVISIBLE);
-            PostCodeTitle.setVisibility(View.INVISIBLE);
+
             PostCodeField.setVisibility(View.INVISIBLE);
         }else {
             LoginBtn.setText("Register");
@@ -229,11 +227,13 @@ public void SetUpUIelements(){
                   }
     }
 
-    private void validate(String userName, String userPassword) {
+    private void validate() {
+        usr_email = Email.getText().toString().trim();
+        usr_password = Password.getText().toString().trim();
         if (Email.getText().toString().equals("") && Password.getText().toString().equals("")) {
             PopupMessage("Please fill in all available fields");
         } else {
-            mAuth.signInWithEmailAndPassword(userName, userPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+            mAuth.signInWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
@@ -261,6 +261,7 @@ public void SetUpUIelements(){
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                       //  sendUserData();
+                        sendUserData();
                         Toast.makeText(getApplicationContext(), "Successfully Registered, Verification mail sent!", Toast.LENGTH_SHORT).show();
                         mAuth.signOut();
                         finish();
@@ -299,9 +300,7 @@ public void checks(String sessionId){
 }
 public void LoginNow(View v) {
     if (sessionId.equals("Login")) {
-        String usr_email = Email.getText().toString().trim();
-        String usr_password = Password.getText().toString().trim();
-         validate(usr_email,usr_password);
+         validate();
 
     } else if (sessionId.equals("ExistMemb")) {
 
@@ -319,8 +318,8 @@ public void LoginNow(View v) {
                     PopupMessage("You are already a member");
                         }
                     }else {*/
-            String usr_email = Email.getText().toString().trim();
-            String usr_password = Password.getText().toString().trim();
+            usr_email = Email.getText().toString().trim();
+            usr_password = Password.getText().toString().trim();
             mAuth.createUserWithEmailAndPassword(usr_email,usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -357,6 +356,12 @@ public void LoginNow(View v) {
 
 
 }
+
+    private void sendUserData(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
+        myRef.child("email").setValue(usr_email);
+    }
 
 }
 
