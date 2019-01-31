@@ -30,17 +30,17 @@ import java.util.List;
 public class MemberArea extends AppCompatActivity {
     private Switch familyswitch;
     private TextView Title , Password, Email, Info, Forgotpwd;
-    private TextView DOBTitle, DOBfield;
-    private TextView Adr1Title, Adr1Field;
-    private TextView Adr2Title , Adr2Field;
-    private TextView TownTitle, TownField;
-    private TextView PostCodeTitle,PostCodeField;
-    private TextView SHMAid, SHMAtitle;
+    private TextView  DOBfield;
+    private TextView Adr1Field;
+    private TextView  Adr2Field;
+    private TextView  TownField;
+    private TextView PostCodeField;
+    private TextView SHMAid;
     private Button LoginBtn;
     private int counter = 5;
     private FirebaseAuth mAuth;
     String sessionId;
-    String usr_email , usr_password;
+    String usr_SHMAID,usr_email , usr_password;
     DatabaseReference mDatabase;
     List<User> users = new ArrayList<>();
 
@@ -96,6 +96,7 @@ public void SetUpUIelements(){
     }
     public void CorrectElements(){
         if (sessionId.equals("Login")) {
+            Title.setText("Login");
             familyswitch.setVisibility(View.INVISIBLE);
             SHMAid.setVisibility(View.INVISIBLE);
 
@@ -109,6 +110,7 @@ public void SetUpUIelements(){
 
             PostCodeField.setVisibility(View.INVISIBLE);
         }else if (sessionId.equals("ExistMemb")){
+            Title.setText("First Time Setup");
             Forgotpwd.setVisibility(View.INVISIBLE);
             Info.setVisibility(View.INVISIBLE);
             familyswitch.setVisibility(View.INVISIBLE);
@@ -124,6 +126,7 @@ public void SetUpUIelements(){
 
             PostCodeField.setVisibility(View.INVISIBLE);
         }else {
+            Title.setText("Thinking of Joining?");
             LoginBtn.setText("Register");
             Forgotpwd.setVisibility(View.INVISIBLE);
             Info.setVisibility(View.INVISIBLE);
@@ -176,7 +179,7 @@ public void SetUpUIelements(){
 
     }
 
-       public void readfromFirebase(String tableOne){
+    public void readfromFirebase(String tableOne){
 
         mDatabase.child(tableOne).getRef().addValueEventListener(new ValueEventListener() {
             @Override
@@ -261,7 +264,7 @@ public void SetUpUIelements(){
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                       //  sendUserData();
-                        sendUserData();
+                        sendUserData(sessionId);
                         Toast.makeText(getApplicationContext(), "Successfully Registered, Verification mail sent!", Toast.LENGTH_SHORT).show();
                         mAuth.signOut();
                         finish();
@@ -276,28 +279,6 @@ public void SetUpUIelements(){
         }
     }
 
-public void checks(String sessionId){
-    View parentLayout = findViewById(android.R.id.content);
-    String changed = "" ;
-    Snackbar mySnackbar;
-
-    mySnackbar = Snackbar.make(parentLayout, "sessionID is " + sessionId, 6000);
-    mySnackbar.show();
-
-    switch(sessionId)
-    {
-        case "Login":
-            changed = "Login" ;
-            break;
-        case "ExistMemb":
-            changed = "Existing Member" ;
-            break;
-        case "Newmemb" :
-            changed = "New Member" ;
-            break;
-    }
-    Title.setText(changed);
-}
 public void LoginNow(View v) {
     if (sessionId.equals("Login")) {
          validate();
@@ -318,6 +299,7 @@ public void LoginNow(View v) {
                     PopupMessage("You are already a member");
                         }
                     }else {*/
+            usr_SHMAID = SHMAid.getText().toString().trim();
             usr_email = Email.getText().toString().trim();
             usr_password = Password.getText().toString().trim();
             mAuth.createUserWithEmailAndPassword(usr_email,usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -357,11 +339,19 @@ public void LoginNow(View v) {
 
 }
 
-    private void sendUserData(){
+    private void sendUserData(String operationtype) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
-        myRef.child("email").setValue(usr_email);
-    }
+        DatabaseReference myRef;
+        if (operationtype.equals("ExistMemb")) {
+            myRef = firebaseDatabase.getReference("shmaIdsOnApp");
+            myRef.child(usr_SHMAID);
+        } else if (operationtype.equals("Newmemb")) {
+            myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
+            myRef.child("email").setValue(usr_email);
+        } else {
 
+        }
+
+    }
 }
 
