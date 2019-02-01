@@ -9,8 +9,15 @@ public class User {
     private String membershipType;
     private String status;
 
-    public User(String shmaId, String email) {
+    public User(){
+
+    }
+
+    public User(String shmaId, String firstName, String lastName, String DOB, String email) {
         this.shmaId = shmaId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.DOB = DOB;
         this.email = email;
     }
 

@@ -316,9 +316,9 @@ public void LoginNow(View v) {
     private void sendUserData() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef;
-        User usr_profile = new User(usr_SHMAID,usr_email) ;
-            myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
-            myRef.setValue(usr_profile);
+        User usr_profile = new User(usr_SHMAID,"Yusuf","Dinah","over 90",usr_email) ;
+        myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
+        myRef.setValue(usr_profile);
 
     }
 }

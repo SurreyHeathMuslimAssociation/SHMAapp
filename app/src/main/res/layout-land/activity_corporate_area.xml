@@ -18,7 +18,7 @@
         android:inputType="number"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.87"
-        app:layout_constraintStart_toEndOf="@+id/DOB"
+        app:layout_constraintStart_toEndOf="@+id/usr_DOB"
         app:layout_constraintTop_toBottomOf="@+id/SHMAidTitle" />
 
 
@@ -34,13 +34,13 @@
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/DOB"
+        app:layout_constraintBottom_toTopOf="@+id/usr_DOB"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <CalendarView
-        android:id="@+id/DOB"
+        android:id="@+id/usr_DOB"
         android:layout_width="374dp"
         android:layout_height="273dp"
         android:layout_marginStart="8dp"
@@ -64,7 +64,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/DOB"
+        app:layout_constraintStart_toEndOf="@+id/usr_DOB"
         app:layout_constraintTop_toBottomOf="@+id/SHMAid"
         app:layout_constraintVertical_bias="0.834" />
 
@@ -80,7 +80,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/searchme"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/DOB"
+        app:layout_constraintStart_toEndOf="@+id/usr_DOB"
         app:layout_constraintTop_toBottomOf="@+id/SHMAid"
         app:layout_constraintVertical_bias="0.51" />
 </android.support.constraint.ConstraintLayout>
