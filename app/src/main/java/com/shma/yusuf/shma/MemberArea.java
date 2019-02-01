@@ -21,7 +21,6 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -51,13 +50,6 @@ public class MemberArea extends AppCompatActivity {
         setContentView(R.layout.activity_member_area);
         sessionId = getIntent().getStringExtra("EXTRA_SESSION_INFO");
         mAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = mAuth.getCurrentUser();
-        //is user already logged in
-       /* if (user!=null){
-            finish();
-            Intent i = new Intent(getApplicationContext(), MemberProfile.class);
-            startActivity(i);
-        }*/
         //Assigning elements to variables
         SetUpUIelements();
         CorrectElements();
@@ -135,25 +127,6 @@ public void SetUpUIelements(){
 
     }
 
-    public void TestArrayListResults(){
-        Log.d("size of user array", String.valueOf(users.size()));
-        for (User s : users) {
-
-            Log.d( "shmaid ", s.getShmaId());
-            if (s.getMembershipType() != null){
-                Log.d("membership type", s.getMembershipType());
-            }
-            if (s.getDOB() != null) {
-                Log.d("DOB", s.getDOB());
-            }
-            Log.d("surname", s.getSurname());
-            if (s.getFirstname() != null) {
-                Log.d("first name", s.getFirstname());
-            }
-            Log.d("APP user:", String.valueOf(s.isAPPuser()));
-        }
-    }
-
     public void readfromFirebasedb2(String tabletwo){
 
         mDatabase.child(tabletwo).getRef().addValueEventListener(new ValueEventListener() {
@@ -164,11 +137,11 @@ public void SetUpUIelements(){
 
                     for (User s : users){
                         if (postSnapshot.getKey().equals(s.getShmaId())) {
-                            s.setAPPuser(true);
+
                         }
                     }
                 }
-                TestArrayListResults();
+
 
             }
             @Override
@@ -222,8 +195,9 @@ public void SetUpUIelements(){
         //startActivity(new Intent(MemberArea.this, MemberProfile.class));
 
       if(emailflag){
-           finish();
-           startActivity(new Intent(MemberArea.this, MemberProfile.class));
+          finish();
+          //below is the sending of the shmaID once they log in for the first time
+          startActivity(new Intent(MemberArea.this, MemberProfile.class));
       }else{
            PopupMessage("Verify your email");
             mAuth.signOut();
@@ -264,7 +238,7 @@ public void SetUpUIelements(){
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
                       //  sendUserData();
-                        sendUserData(sessionId);
+                        sendUserData();
                         Toast.makeText(getApplicationContext(), "Successfully Registered, Verification mail sent!", Toast.LENGTH_SHORT).show();
                         mAuth.signOut();
                         finish();
@@ -339,18 +313,12 @@ public void LoginNow(View v) {
 
 }
 
-    private void sendUserData(String operationtype) {
+    private void sendUserData() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef;
-        if (operationtype.equals("ExistMemb")) {
-            myRef = firebaseDatabase.getReference("shmaIdsOnApp");
-            myRef.child(usr_SHMAID);
-        } else if (operationtype.equals("Newmemb")) {
+        User usr_profile = new User(usr_SHMAID,usr_email) ;
             myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
-            myRef.child("email").setValue(usr_email);
-        } else {
-
-        }
+            myRef.setValue(usr_profile);
 
     }
 }

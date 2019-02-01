@@ -2,28 +2,24 @@ package com.shma.yusuf.shma;
 
 public class User {
     private String shmaId;
-    private String firstname ;
-    private String surname ;
+    private String firstName, lastName;
     private String DOB ;
+    private String county, town, addressLineOne , addressLineTwo, postcode ;
+    private String email, mobileNo ;
     private String membershipType;
-    private boolean APPuser;
-public User (){
+    private String status;
 
-}
-
-public User(String membershipType, String firstname, String surname , String DOB){
-   this.membershipType = membershipType;
-    this.firstname = firstname ;
-        this.surname = surname;
-    this.DOB = DOB;
-}
-
-    public String getSurname() {
-        return surname;
+    public User(String shmaId, String email) {
+        this.shmaId = shmaId;
+        this.email = email;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getDOB() {
@@ -34,12 +30,12 @@ public User(String membershipType, String firstname, String surname , String DOB
         this.DOB = DOB;
     }
 
-    public String getFirstname() {
-        return firstname;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirstname(String firstname) {
-        this.firstname = firstname;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getMembershipType() {
@@ -58,13 +54,8 @@ public User(String membershipType, String firstname, String surname , String DOB
         this.shmaId = shmaId;
     }
 
-    public boolean isAPPuser() {
-        return APPuser;
-    }
 
-    public void setAPPuser(boolean APPuser) {
-        this.APPuser = APPuser;
-    }
+
 }
 
 
