@@ -18,7 +18,7 @@ extension AuthErrorCode {
         case .userNotFound:
             return "Email provided isn't registered to any user"
         case .userDisabled:
-            return "Your account is disabled, please contact SHMA support at enquiries@gmai.com."
+            return "Your account is disabled, please contact SHMA support at weareshma@gmail.com."
         case .invalidEmail, .invalidSender, .invalidRecipientEmail:
             return "Please enter a valid email"
         case .networkError:

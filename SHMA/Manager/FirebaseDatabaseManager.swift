@@ -23,9 +23,9 @@ class FirebaseDatabaseManager {
         }
     }
     
-    func checkShmaIdExistsWithInOfflineDatabaseUsing(_ shmaId: String, completion: @escaping (Bool, String?, String?) -> Void) {
-        session.checkShmaIdExistsWithInOfflineDatabaseUsing(shmaId) { (exists, firstname, surname) in
-            completion(exists, firstname, surname)
+    func fetchExistingMemberFromOfflineDatabaseUsing(_ shmaId: String, completion: @escaping (Bool, Member?) -> Void) {
+        session.fetchExistingMemberFromOfflineDatabaseUsing(shmaId) { (success, member) in
+            completion(success, member)
         }
     }
     
@@ -35,28 +35,40 @@ class FirebaseDatabaseManager {
         }
     }
     
-    func saveExistingMemberDetailsToDatabase(_ uid: String, _ shmaId: String, _ firstname: String, _ surname: String, _ email: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
-        session.saveExistingMemberDetailsToDatabase(uid, shmaId, firstname, surname, email) { (error, ref) in
+    func saveExistingMemberDetailsToDatabase(_ uid: String, _ member: Member, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+        session.saveExistingMemberDetailsToDatabase(uid, member) { (error, ref) in
             completion(error, ref)
         }
     }
     
-    func saveNewMemberDetailsToDatabase(_ uid: String, _ firstname: String, _ surname: String, _ email: String, _ dob: String, _ addressLineOne: String, _ addressLineTwo: String, _ town: String, _ postcode: String, _ mobileNo: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
-        session.saveNewMemberDetailsToDatabase(uid, firstname, surname, email, dob, addressLineOne, addressLineTwo, town, postcode, mobileNo) { (error, ref) in
+    func generateNewMemberShmaId(completion: @escaping (Int) -> Void) {
+        session.generateNewMemberShmaId { (shmaId) in
+            completion(shmaId)
+        }
+    }
+    
+    func saveNewMemberDetailsToDatabase(_ uid: String, _ member: Member, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+        session.saveNewMemberDetailsToDatabase(uid, member) { (error, ref) in
             completion(error, ref)
         }
     }
     
-    func saveNewMembersSpouseDetailsToDatabase(_ uid: String, _ spouseName: String, _ spouseEmail: String, _ spouseDob: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
-        session.saveNewMembersSpouseDetailsToDatabase(uid, spouseName, spouseEmail, spouseDob) { (error, ref) in
+    func saveNewMemberFamilyDetailsToDatabase(_ uid: String, _ family: Family, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+        session.saveNewMemberFamilyDetailsToDatabase(uid, family) { (error, ref) in
             completion(error, ref)
         }
     }
     
-    func saveNewMembersChildrenDetailsToDatabase(_ uid: String, _ childName: String, _ childDob: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
-        session.saveNewMembersChildrenDetailsToDatabase(uid, childName, childDob) { (error, ref) in
-            completion(error, ref)
+    func fetchAssociationDetails(completion: @escaping (Association) -> Void) {
+        session.fetchAssociationDetails { (association) in
+            completion(association)
         }
     }
     
+    func fetchMemberDetails(_ uid: String, completion: @escaping (Member) -> Void) {
+        session.fetchMemberDetails(uid) { (member) in
+            completion(member)
+        }
+    }
+   
 }

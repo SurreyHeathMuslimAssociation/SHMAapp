@@ -75,12 +75,12 @@ class FirebaseDatabaseTests: XCTestCase {
         }
     }
     
-    func testShmaIdOfflineTableCheckWasInitiated() {
-        session.checkShmaIdExistsWithInOfflineDatabaseUsing(shmaId) { (exists, firstname, surname) in
-        }
-        XCTAssert(session.didInitiateDatabaseCall)
-        XCTAssertEqual(session.memberShmaId, shmaId)
-    }
+//    func testShmaIdOfflineTableCheckWasInitiated() {
+//        session.checkShmaIdExistsWithInOfflineDatabaseUsing(shmaId) { (exists, firstname, surname) in
+//        }
+//        XCTAssert(session.didInitiateDatabaseCall)
+//        XCTAssertEqual(session.memberShmaId, shmaId)
+//    }
     
     func testDuplicateShmaIdCheckWasInitiated() {
         session.checkShmaIdIsntAlreadyRegisteredInFirebase(shmaId) { (exists) in

@@ -10,6 +10,14 @@ import UIKit
 
 extension LoginRegistrationView: UITableViewDelegate, UITextFieldDelegate, SpouseChildCellDelegate, AddSpouseChildCellDelegate {
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return 90
+        } else {
+            return 50
+        }
+    }
+    
     func setTextFieldDelegates() {
         shmaIdTextField.delegate = self
         emailTextField.delegate = self
@@ -45,6 +53,11 @@ extension LoginRegistrationView: UITableViewDelegate, UITextFieldDelegate, Spous
         }
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        endEditing(true)
+        return false
+    }
+    
     func didSelectTextField() {
         didSelectSpouseChildTextField = true
     }
@@ -59,4 +72,5 @@ extension LoginRegistrationView: UITableViewDelegate, UITextFieldDelegate, Spous
         spouseChildTableView?.insertRows(at: [IndexPath(row: childRows.count-1, section: 1)], with: .automatic)
         spouseChildTableView?.endUpdates()
     }
+ 
 }

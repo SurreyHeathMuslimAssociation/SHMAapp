@@ -10,7 +10,7 @@ import UIKit
 import NotificationBannerSwift
 import FirebaseAuth
 
-extension PasswordResetController: PasswordResetViewDelegate {
+extension PasswordResetController: PasswordResetViewDelegate, UITextFieldDelegate {
     
     func didTapPasswordReset(_ email: String) {
         // send reset email
@@ -34,5 +34,14 @@ extension PasswordResetController: PasswordResetViewDelegate {
             banner = NotificationBanner(title: title, subtitle: text, leftView: successIv, rightView: nil, style: bannerStyle, colors: nil)
         }
         banner.show()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+        return false
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }

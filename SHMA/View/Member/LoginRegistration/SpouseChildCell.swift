@@ -55,37 +55,51 @@ class SpouseChildCell: UITableViewCell, UITextFieldDelegate {
     
     var isChildCell: Bool? {
         didSet {
-            
-            if isChildCell == false {
-                emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalToConstant: 30)
-                emailTextFieldHeightAnchor?.isActive = true
-
-                emailTextFieldBottomAnchor = emailTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3)
-                emailTextFieldBottomAnchor?.priority = UILayoutPriority(rawValue: 999)
-                emailTextFieldBottomAnchor?.isActive = true
-
-                dobTextFieldHeightAnchor = dobTextField.heightAnchor.constraint(equalToConstant: 40)
-                dobTextFieldHeightAnchor?.isActive = true
-                
-                dobTextFieldCenterYAnchor = dobTextField.centerYAnchor.constraint(equalTo: centerYAnchor)
-                dobTextFieldCenterYAnchor?.isActive = true
+            // resetting constraints
+            emailTextFieldHeightAnchor?.isActive = false
+            emailTextFieldBottomAnchor?.isActive = false
+            dobTextFieldHeightAnchor?.isActive = false
+            dobTextFieldCenterYAnchor?.isActive = false
+            dobTextFieldTopAnchor?.isActive = false
+            dobTextFieldBottomAnchor?.isActive = false
+            if isChildCell == true {
+                childCellConstraints()
             } else {
-                emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalToConstant: 0)
-                emailTextFieldHeightAnchor?.priority = UILayoutPriority(rawValue: 999)
-                emailTextFieldHeightAnchor?.isActive = true
-
-                emailTextFieldBottomAnchor = emailTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
-                emailTextFieldBottomAnchor?.priority = UILayoutPriority(rawValue: 999)
-                emailTextFieldBottomAnchor?.isActive = true
-
-                dobTextFieldTopAnchor = dobTextField.topAnchor.constraint(equalTo: topAnchor, constant: 3)
-                dobTextFieldTopAnchor?.isActive = true
-
-                dobTextFieldBottomAnchor = dobTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3)
-                dobTextFieldBottomAnchor?.priority = UILayoutPriority(rawValue: 999)
-                dobTextFieldBottomAnchor?.isActive = true
+                spouseCellConstraints()
             }
         }
+    }
+    
+    private func spouseCellConstraints() {
+        emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalToConstant: 40)
+        emailTextFieldHeightAnchor?.isActive = true
+        
+        emailTextFieldBottomAnchor = emailTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3)
+        emailTextFieldBottomAnchor?.priority = UILayoutPriority(rawValue: 999)
+        emailTextFieldBottomAnchor?.isActive = true
+        
+        dobTextFieldHeightAnchor = dobTextField.heightAnchor.constraint(equalToConstant: 40)
+        dobTextFieldHeightAnchor?.isActive = true
+        
+        dobTextFieldCenterYAnchor = dobTextField.centerYAnchor.constraint(equalTo: centerYAnchor)
+        dobTextFieldCenterYAnchor?.isActive = true
+    }
+    
+    private func childCellConstraints() {
+        emailTextFieldHeightAnchor = emailTextField.heightAnchor.constraint(equalToConstant: 0)
+        emailTextFieldHeightAnchor?.priority = UILayoutPriority(rawValue: 999)
+        emailTextFieldHeightAnchor?.isActive = true
+        
+        emailTextFieldBottomAnchor = emailTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0)
+        emailTextFieldBottomAnchor?.priority = UILayoutPriority(rawValue: 999)
+        emailTextFieldBottomAnchor?.isActive = true
+        
+        dobTextFieldTopAnchor = dobTextField.topAnchor.constraint(equalTo: topAnchor, constant: 3)
+        dobTextFieldTopAnchor?.isActive = true
+        
+        dobTextFieldBottomAnchor = dobTextField.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -3)
+        dobTextFieldBottomAnchor?.priority = UILayoutPriority(rawValue: 999)
+        dobTextFieldBottomAnchor?.isActive = true
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -97,6 +111,7 @@ class SpouseChildCell: UITableViewCell, UITextFieldDelegate {
         
         setupTextFields()
     }
+   
     
     private func setupTextFields() {
         nameTextField.delegate = self

@@ -14,6 +14,11 @@ protocol LoginRegistrationViewDelegate: class {
     func didPressPasswordReset()
 }
 
+protocol SpouseChildTableViewDelegate: class {
+    func enableAddChildButton()
+    func disableAddChildButton()
+}
+
 class LoginRegistrationView: UIView {
     
     let mainLabel: UILabel = {
@@ -36,7 +41,7 @@ class LoginRegistrationView: UIView {
     }()
     let nameTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Name"
+        tf.placeholder = "Full Name"
         return tf
     }()
     let emailTextField: UITextField = {
@@ -70,6 +75,11 @@ class LoginRegistrationView: UIView {
     let townTextField: UITextField = {
         let tf = UITextField()
         tf.placeholder = "Town"
+        return tf
+    }()
+    let countyTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "County"
         return tf
     }()
     let postcodeTextField: UITextField = {
@@ -123,6 +133,11 @@ class LoginRegistrationView: UIView {
         view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
         return view
     }()
+    let countySeperatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
+        return view
+    }()
     let postcodeSeperatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
@@ -147,11 +162,6 @@ class LoginRegistrationView: UIView {
         button.addTarget(self, action: #selector(handlePasswordReset), for: .touchUpInside)
         return button
     }()
-    let activityIndicatorView: UIActivityIndicatorView = {
-        let iv = UIActivityIndicatorView()
-        iv.style = .gray
-        return iv
-    }()
     let coverView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -174,14 +184,14 @@ class LoginRegistrationView: UIView {
     let header = ["Spouse", "Child"]
     var childRows = [Int]()
     var didSelectSpouseChildTextField = false
-    var childCells: [SpouseChildCell]?
+    var spouseChildCells: [SpouseChildCell]?
+    weak var spouseChildTableViewDelegate: SpouseChildTableViewDelegate?
     
     weak var delegate: LoginRegistrationViewDelegate?
     var loginRegistrationViewModel: LoginRegistrationViewModel!
     var didSelectLogin: Bool?
     var didSelectExistingMemberRegistration: Bool?
     var didSelectNewMemberRegistration: Bool?
-    
     /// height anchor refrences for modifying *loginViewContainer*
     var labelHeightAnchor: NSLayoutConstraint?
     var shmaIdTextFieldTopAnchor: NSLayoutConstraint?
@@ -198,6 +208,7 @@ class LoginRegistrationView: UIView {
     var loginRegisterButtonHeightAnchor: NSLayoutConstraint?
     var loginRegisterButtonTopAnchor: NSLayoutConstraint?
     var passwordResetButtonHeightAnchor: NSLayoutConstraint?
+    var countyTextFieldHeightAnchor: NSLayoutConstraint?
     
     required init(traitCollection: UITraitCollection, _ didSelectLogin: Bool, _ didSelectExistingMemberRegistration: Bool, _ didSelectNewMemberRegistration: Bool) {
         super.init(frame: .zero)
@@ -209,7 +220,7 @@ class LoginRegistrationView: UIView {
         self.didSelectExistingMemberRegistration = didSelectExistingMemberRegistration
         self.didSelectNewMemberRegistration = didSelectNewMemberRegistration
         
-        loginRegistrationViewModel = LoginRegistrationViewModel(traitCollection, loginRegistrationView: self, didSelectLogin, didSelectExistingMemberRegistration, didSelectNewMemberRegistration, mainLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, postcodeTextField, mobileNoTextField, loginRegisterButton, passswordResetButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, dobSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, postcodeSeperatorView, coverView)
+        loginRegistrationViewModel = LoginRegistrationViewModel(traitCollection, loginRegistrationView: self, didSelectLogin, didSelectExistingMemberRegistration, didSelectNewMemberRegistration, mainLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, countyTextField, postcodeTextField, mobileNoTextField, loginRegisterButton, passswordResetButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, dobSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, countySeperatorView, postcodeSeperatorView, coverView)
         
         setupView()
     }

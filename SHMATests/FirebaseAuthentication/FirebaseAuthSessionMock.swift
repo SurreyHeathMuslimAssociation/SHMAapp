@@ -15,9 +15,11 @@ class FirebaseAuthSessionMock: FirebaseAuthSession {
     var didInitiateAuth = false
     var didInitiateUserCreation = false
     var didInitiatePasswordReset = false
+    var didInitiateEmailVerification = false
     var userEmail: String?
     var userPassword: String?
     var didInitiateSigningOut = false
+    var member: User?
     
     func signIn(with email: String, password: String, completion: @escaping AuthDataResultCallback) {
         didInitiateAuth = true
@@ -40,5 +42,9 @@ class FirebaseAuthSessionMock: FirebaseAuthSession {
         userEmail = email
     }
     
+    func sendEmailVerification(_ user: User, completion: @escaping SendEmailVerificationCallback) {
+        didInitiateEmailVerification =  true
+        member = user
+    }
 }
 

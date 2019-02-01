@@ -18,7 +18,10 @@ extension TermsAndConditionsController: TermsAndConditionsViewDelegate {
     }
     
     func didPressDisagree() {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            let name = Notification.Name(rawValue: "registerationCancelled")
+            NotificationCenter.default.post(name: name, object: nil)
+        }
     }
     
 }

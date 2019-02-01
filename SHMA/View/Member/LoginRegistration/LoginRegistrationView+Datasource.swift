@@ -22,26 +22,26 @@ extension LoginRegistrationView: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
+        if indexPath.section == 0 || indexPath.row < childRows.count {
             let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SpouseChildCell
-            cell.loginRegistrationViewModel = loginRegistrationViewModel
+            if indexPath.section == 0 {
+                cell.isChildCell = false
+            } else {
+                cell.isChildCell = true
+            }
             cell.delegate = self
-            cell.isChildCell = false
+            cell.loginRegistrationViewModel = loginRegistrationViewModel
+            spouseChildCells?.append(cell)
+            if childRows.count > 4 {
+                spouseChildTableViewDelegate?.disableAddChildButton()
+            }
             return cell
         } else {
-            if indexPath.row < childRows.count {
-                let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! SpouseChildCell
-                cell.loginRegistrationViewModel = loginRegistrationViewModel
-                cell.delegate = self
-                cell.isChildCell = true
-                childCells?.append(cell)
-                return cell
-            } else {
-                let cell = tableView.dequeueReusableCell(withIdentifier: addChildCellId, for: indexPath) as! AddSpouseChildCell
-                cell.loginRegisterViewModel = loginRegistrationViewModel
-                cell.delegate = self
-                return cell
-            }
+            let cell = tableView.dequeueReusableCell(withIdentifier: addChildCellId, for: indexPath) as! AddSpouseChildCell
+            cell.loginRegisterViewModel = loginRegistrationViewModel
+            cell.delegate = self
+            spouseChildTableViewDelegate = cell
+            return cell
         }
     }
     
@@ -52,8 +52,9 @@ extension LoginRegistrationView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             childRows.remove(at: indexPath.row)
-            childCells?.remove(at: indexPath.row)
+            spouseChildCells?.remove(at: indexPath.row + 1)
             spouseChildTableView?.deleteRows(at: [indexPath], with: .automatic)
+            spouseChildTableViewDelegate?.enableAddChildButton()
         }
     }
     

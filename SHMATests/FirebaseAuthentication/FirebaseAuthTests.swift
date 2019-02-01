@@ -8,7 +8,7 @@
 
 import Foundation
 @testable import SHMA
-import FirebaseDatabase
+import FirebaseAuth
 import XCTest
 
 class FirebaseAuthTests: XCTestCase {
@@ -17,12 +17,14 @@ class FirebaseAuthTests: XCTestCase {
     var session: FirebaseAuthSessionMock!
     let email = "test1@gmail.com"
     let password = "123456"
+    var user: User!
     
     override func setUp() {
         super.setUp()
         
         session = FirebaseAuthSessionMock()
         sut = FirebaseAuthManager(session: session)
+        user = Auth.auth().currentUser
     }
     
     override func tearDown() {
@@ -68,6 +70,13 @@ class FirebaseAuthTests: XCTestCase {
         }
         XCTAssert(session.didInitiatePasswordReset)
         XCTAssertEqual(session.userEmail, email)
+    }
+    
+    func testDidInitiateUserEmailVerification() {
+        session.sendEmailVerification(user) { (error) in
+        }
+        XCTAssert(session.didInitiateEmailVerification)
+        XCTAssertEqual(session.member, user)
     }
 }
 

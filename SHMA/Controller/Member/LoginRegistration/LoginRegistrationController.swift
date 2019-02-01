@@ -12,6 +12,12 @@ import FirebaseDatabase
 
 class LoginRegistrationController: UIViewController {
     
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let iv = UIActivityIndicatorView()
+        iv.style = .gray
+        return iv
+    }()
+    
     var loginRegistrationView: LoginRegistrationView!
     var loginRegistrationViewHeightOrBottomAnchor: NSLayoutConstraint?
     var loginRegistrationViewCenterYAnchor: NSLayoutConstraint?
@@ -28,8 +34,13 @@ class LoginRegistrationController: UIViewController {
     var memberAddressLineOne: String!
     var memberAddressLineTwo: String!
     var memberTown: String!
+    var memberCounty: String!
     var memberPostcode: String!
     var memberMobileNo: String!
+    var membershipType: String!
+    var memberStatus: String!
+    var wasCellLeftEmpty = false
+    var wasChild19 = false
     
     var didSelectLogin: Bool? {
         didSet {
@@ -64,11 +75,15 @@ class LoginRegistrationController: UIViewController {
         navigationItem.titleView = imageView
     }
     
-    private func setupView() {
+    func setupView() {
         loginRegistrationView = LoginRegistrationView(traitCollection: traitCollection, didSelectLogin ?? false, didSelectExistingMemberRegistration ?? false, didSelectNewMemberRegistration ?? false)
         loginRegistrationView.delegate = self
         
         view.addSubview(loginRegistrationView)
+        view.addSubview(activityIndicatorView)
+        
+        activityIndicatorView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: view.centerYAnchor, centerXAnchor: view.centerXAnchor)
+        
         loginRegistrationView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: view.centerXAnchor)
         loginRegistrationViewTopAnchor = loginRegistrationView.loginRegistrationViewModel.getNewMemberRegistrationViewTopAnchor()
         loginRegistrationViewTopAnchor?.isActive = true
@@ -78,8 +93,11 @@ class LoginRegistrationController: UIViewController {
     }
     
     private func setupTermsAndConditionsNotification() {
-        let name = Notification.Name(rawValue: "register")
-        NotificationCenter.default.addObserver(self, selector: #selector(termsAgreedHandleMemberRegisteration), name: name, object: nil)
+        let acceptedNotification = Notification.Name(rawValue: "register")
+        NotificationCenter.default.addObserver(self, selector: #selector(termsAgreedHandleMemberRegisteration), name: acceptedNotification, object: nil)
+        
+        let rejectedNotification = Notification.Name(rawValue: "registerationCancelled")
+        NotificationCenter.default.addObserver(self, selector: #selector(termsDisagreed), name: rejectedNotification, object: nil)
     }
     
     private func setupLoginRegistrationViewWidthAndCenterYAnchors() {

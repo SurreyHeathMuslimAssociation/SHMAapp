@@ -8,18 +8,39 @@
 
 import Foundation
 
-struct Family {
+//struct Family {
+//    let fullName: String
+//    var email: String?
+//    let dob: String
+//    let relationship: Relationship
+//
+//    init(fullName: String, dob: String, relationship: Relationship) {
+//        self.fullName = fullName
+//        self.dob = dob
+//        self.relationship = relationship
+//    }
+//}
+
+class Family: Codable {
     let fullName: String
     var email: String?
     let dob: String
-    let relationship: Relationship
+    var relationship: Relationship?
     
-    init(fullName: String, dob: String, relationship: Relationship) {
-        self.fullName = fullName
-        self.dob = dob
-        self.relationship = relationship
+    private enum CodingKeys: String, CodingKey {
+        case fullName
+        case email
+        case dob = "DOB"
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.fullName = try container.decode(String.self, forKey: .fullName)
+        self.email = try container.decodeIfPresent(String.self, forKey: .email)
+        self.dob = try container.decode(String.self, forKey: .dob)
     }
 }
+
 
 enum Relationship {
     case Spouse

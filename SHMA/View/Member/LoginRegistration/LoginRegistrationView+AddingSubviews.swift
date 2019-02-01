@@ -31,13 +31,14 @@ extension LoginRegistrationView {
         scrollView.addSubview(addressLineOneSeperatorView)
         scrollView.addSubview(addressLineTwoSeperatorView)
         scrollView.addSubview(townTextField)
+        scrollView.addSubview(countyTextField)
+        scrollView.addSubview(countySeperatorView)
         scrollView.addSubview(townSeperatorView)
         scrollView.addSubview(postcodeTextField)
         scrollView.addSubview(postcodeSeperatorView)
         scrollView.addSubview(mobileNoTextField)
         scrollView.addSubview(loginRegisterButton)
         scrollView.addSubview(passswordResetButton)
-        scrollView.addSubview(activityIndicatorView)
         
         setupKeyboardNotifications()
         setTextFieldDelegates()
@@ -45,7 +46,7 @@ extension LoginRegistrationView {
         determineLoginRegisterButtonTitleAndWhichTextFieldsAreVisible()
         setupLabelAndSwitch()
         setupTextFieldsSwitchAndLabel()
-        setupButtonsDimViewAndActivityIndicator()
+        setupButtonsAndDimView()
         setupTextFieldLabelAndButtonTextAndFonts()
         setupSpouseChildTableView()
     }
@@ -58,12 +59,12 @@ extension LoginRegistrationView {
         spouseChildTableView.register(SpouseChildCell.self, forCellReuseIdentifier: cellId)
         spouseChildTableView.register(AddSpouseChildCell.self, forCellReuseIdentifier: addChildCellId)
         scrollView.addSubview(spouseChildTableView)
-        childCells = [SpouseChildCell]()
+        spouseChildCells = [SpouseChildCell]()
         spouseChildTableView.tableFooterView = UIView()
-        spouseChildTableView.anchor(top: loginRegisterButton.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 300, centerYAnchor: nil, centerXAnchor: nil)
+        spouseChildTableView.anchor(top: loginRegisterButton.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 400, centerYAnchor: nil, centerXAnchor: nil)
         
         scrollView.addSubview(coverView)
-        coverView.anchor(top: loginRegisterButton.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 300, centerYAnchor: nil, centerXAnchor: nil)
+        coverView.anchor(top: loginRegisterButton.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 400, centerYAnchor: nil, centerXAnchor: nil)
         scrollView.sendSubviewToBack(coverView)
     }
     
@@ -128,7 +129,13 @@ extension LoginRegistrationView {
         
         townSeperatorView.anchor(top: townTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5, centerYAnchor: nil, centerXAnchor: nil)
         
-        postcodeTextField.anchor(top: townSeperatorView.bottomAnchor, left: shmaIdTextField.leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        countyTextField.anchor(top: townSeperatorView.bottomAnchor, left: shmaIdTextField.leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        countyTextFieldHeightAnchor = loginRegistrationViewModel.getCountyTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected()
+        countyTextFieldHeightAnchor?.isActive = true
+        
+        countySeperatorView.anchor(top: countyTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5, centerYAnchor: nil, centerXAnchor: nil)
+        
+        postcodeTextField.anchor(top: countySeperatorView.bottomAnchor, left: shmaIdTextField.leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         postcodeTextFieldHeightAnchor = loginRegistrationViewModel.getPostcodeTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected()
         postcodeTextFieldHeightAnchor?.isActive = true
         
@@ -140,7 +147,7 @@ extension LoginRegistrationView {
     }
     
     
-    private func setupButtonsDimViewAndActivityIndicator() {
+    private func setupButtonsAndDimView() {
         loginRegisterButton.anchor(top: nil, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         loginRegisterButtonTopAnchor = loginRegistrationViewModel.getLoginRegisterButtonTopAnchor()
         loginRegisterButtonTopAnchor?.isActive = true
@@ -151,8 +158,6 @@ extension LoginRegistrationView {
         passswordResetButton.widthAnchor.constraint(equalTo: loginRegisterButton.widthAnchor, multiplier: 0.5).isActive = true
         passwordResetButtonHeightAnchor = loginRegistrationViewModel.getPasswordResetButtonHeightConstraint()
         passwordResetButtonHeightAnchor?.isActive = true
-        
-        activityIndicatorView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: centerYAnchor, centerXAnchor: centerXAnchor)
     }
     
 }

@@ -14,17 +14,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // set window
-        window = UIWindow(frame: UIScreen.main.bounds)
-        let initialNavController = UINavigationController(rootViewController: InitialController())
-        window?.rootViewController = initialNavController
-        window?.makeKeyAndVisible()
-        
         // configure firebase
         FirebaseApp.configure()
-        
+        // set window
+        window = UIWindow(frame: UIScreen.main.bounds)
+        if let user = Auth.auth().currentUser, user.isEmailVerified {
+            window?.rootViewController = MemberTabBarController()
+        } else {
+            let initialNavController = UINavigationController(rootViewController: InitialController())
+            window?.rootViewController = initialNavController//MemberTabBarController()//WelcomeController()
+        }
+        window?.makeKeyAndVisible()
         return true
     }
 

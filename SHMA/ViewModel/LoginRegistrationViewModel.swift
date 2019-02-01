@@ -25,6 +25,7 @@ class LoginRegistrationViewModel {
     let addressLineOneTextField: UITextField
     let addressLineTwoTextField: UITextField
     let townTextField: UITextField
+    let countyTextField: UITextField
     let postcodeTextField: UITextField
     let mobileNoTextField: UITextField
     let loginRegisterButton: UIButton
@@ -38,10 +39,11 @@ class LoginRegistrationViewModel {
     let addressLineOneSeperatorView: UIView
     let addressLineTwoSeperatorView: UIView
     let townSeperatorView: UIView
+    let countySeperatorView: UIView
     let postcodeSeperatorView: UIView
     let coverView: UIView
     
-    init(_ traitCollection: UITraitCollection, loginRegistrationView: UIView, _ didSelectLogin: Bool, _ didSelectExistingMemberRegistration: Bool, _ didSelectNewMemberRegistration: Bool,_ mainLabel: UILabel, _ membershipLabel: UILabel, _ shmaIdTextField: UITextField, _ nameTextField: UITextField, _ emailTextField: UITextField, _ passwordTextField: UITextField, _ dobTextField: UITextField, _ addressLineOneTextField: UITextField, _ addressLineTwoTextField: UITextField, _ townTextField: UITextField, _ postcodeTextField: UITextField, _ mobileNoTextField: UITextField, _ loginRegisterButton: UIButton, _ passwordResetButton: UIButton, _ membershipSwitch: UISwitch, _ shmaIdSeperatorView: UIView, _ emailSeperatorView: UIView, _ nameSeperatorView: UIView, _ passwordSeperatorView: UIView, _ dobSeperatorView: UIView, _ addressLineOneSeperatorView: UIView, _ addressLineTwoSeperatorView: UIView, _ townSeperatorView: UIView, _ postcodeSeperatorView: UIView, _ coverView: UIView) {
+    init(_ traitCollection: UITraitCollection, loginRegistrationView: UIView, _ didSelectLogin: Bool, _ didSelectExistingMemberRegistration: Bool, _ didSelectNewMemberRegistration: Bool,_ mainLabel: UILabel, _ membershipLabel: UILabel, _ shmaIdTextField: UITextField, _ nameTextField: UITextField, _ emailTextField: UITextField, _ passwordTextField: UITextField, _ dobTextField: UITextField, _ addressLineOneTextField: UITextField, _ addressLineTwoTextField: UITextField, _ townTextField: UITextField, _ countyTextField: UITextField, _ postcodeTextField: UITextField, _ mobileNoTextField: UITextField, _ loginRegisterButton: UIButton, _ passwordResetButton: UIButton, _ membershipSwitch: UISwitch, _ shmaIdSeperatorView: UIView, _ emailSeperatorView: UIView, _ nameSeperatorView: UIView, _ passwordSeperatorView: UIView, _ dobSeperatorView: UIView, _ addressLineOneSeperatorView: UIView, _ addressLineTwoSeperatorView: UIView, _ townSeperatorView: UIView, _ countySeperatorView: UIView, _ postcodeSeperatorView: UIView, _ coverView: UIView) {
         self.traitCollection = traitCollection
         self.loginRegistrationView = loginRegistrationView
         self.didSelectLogin = didSelectLogin
@@ -57,6 +59,7 @@ class LoginRegistrationViewModel {
         self.addressLineOneTextField = addressLineOneTextField
         self.addressLineTwoTextField = addressLineTwoTextField
         self.townTextField = townTextField
+        self.countyTextField = countyTextField
         self.postcodeTextField = postcodeTextField
         self.mobileNoTextField = mobileNoTextField
         self.loginRegisterButton = loginRegisterButton
@@ -70,6 +73,7 @@ class LoginRegistrationViewModel {
         self.addressLineOneSeperatorView = addressLineOneSeperatorView
         self.addressLineTwoSeperatorView = addressLineTwoSeperatorView
         self.townSeperatorView = townSeperatorView
+        self.countySeperatorView = countySeperatorView
         self.postcodeSeperatorView = postcodeSeperatorView
         self.coverView = coverView
     }
@@ -142,6 +146,8 @@ class LoginRegistrationViewModel {
             addressLineTwoSeperatorView.isHidden = true
             townTextField.isHidden = true
             townSeperatorView.isHidden = true
+            countyTextField.isHidden = true
+            countySeperatorView.isHidden = true
             postcodeTextField.isHidden = true
             postcodeSeperatorView.isHidden = true
             mobileNoTextField.isHidden = true
@@ -160,6 +166,8 @@ class LoginRegistrationViewModel {
             addressLineTwoSeperatorView.isHidden = true
             townTextField.isHidden = true
             townSeperatorView.isHidden = true
+            countyTextField.isHidden = true
+            countySeperatorView.isHidden = true
             postcodeTextField.isHidden = true
             postcodeSeperatorView.isHidden = true
             mobileNoTextField.isHidden = true
@@ -229,25 +237,16 @@ class LoginRegistrationViewModel {
         if didSelectNewMemberRegistration {
             if traitCollection.isIphone {
                 if membershipSwitch.isOn {
-                    return CGSize(width: loginRegistrationView.frame.width, height: 890)
+                    return CGSize(width: loginRegistrationView.frame.width, height: 1040)
                 } else {
-                    return CGSize(width: loginRegistrationView.frame.width, height: 590)
+                    return CGSize(width: loginRegistrationView.frame.width, height: 640)
                 }
             } else {
-                // ipad portrait
-                if UIScreen.main.bounds.width < UIScreen.main.bounds.height {
-                    if membershipSwitch.isOn {
-                        return CGSize(width: loginRegistrationView.frame.width, height: 1040)
-                    } else {
-                        return CGSize(width: loginRegistrationView.frame.width, height: 740)
-                    }
+                // ipad
+                if membershipSwitch.isOn {
+                    return CGSize(width: loginRegistrationView.frame.width, height: 1205)
                 } else {
-                    // ipad landscape
-                    if membershipSwitch.isOn {
-                        return CGSize(width: loginRegistrationView.frame.width, height: 1040)
-                    } else {
-                        return CGSize(width: loginRegistrationView.frame.width, height: 740)
-                    }
+                    return CGSize(width: loginRegistrationView.frame.width, height: 800)
                 }
             }
         } else {
@@ -352,6 +351,14 @@ class LoginRegistrationViewModel {
         }
     }
     
+    func getCountyTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected() -> NSLayoutConstraint {
+        if traitCollection.isIpad {
+            return countyTextField.heightAnchor.constraint(equalToConstant: didSelectNewMemberRegistration ? 60 : 0)
+        } else {
+            return countyTextField.heightAnchor.constraint(equalToConstant: didSelectNewMemberRegistration ? 45 : 0)
+        }
+    }
+    
     func getPostcodeTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected() -> NSLayoutConstraint {
         if traitCollection.isIpad {
             return postcodeTextField.heightAnchor.constraint(equalToConstant: didSelectNewMemberRegistration ? 60 : 0)
@@ -394,24 +401,6 @@ class LoginRegistrationViewModel {
             return loginRegistrationView.heightAnchor.constraint(equalToConstant: 261)
         }
     }
-    
-//    private func getNewMemberRegistrationViewHeightConstraitForSingleMembership() -> NSLayoutConstraint? {
-//        if traitCollection.isIpad {
-//            if membershipSwitch.isOn {
-//                return getNewMemberRegistrationViewBottomAnchor()
-//            } else {
-//                return loginRegistrationView.heightAnchor.constraint(equalToConstant: 740)
-//            }
-//        } else if traitCollection.isIphonePortrait {
-//            if membershipSwitch.isOn {
-//                return getNewMemberRegistrationViewBottomAnchor()
-//            } else {
-//                return loginRegistrationView.heightAnchor.constraint(equalToConstant: 590)
-//            }
-//        } else {
-//            return getNewMemberRegistrationViewBottomAnchor()
-//        }
-//    }
     
     private func getNewMemberRegistrationViewBottomAnchor() -> NSLayoutConstraint? {
         guard let superview = loginRegistrationView.superview else {

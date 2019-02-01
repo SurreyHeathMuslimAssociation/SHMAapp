@@ -27,6 +27,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
     var addressLineOneTextField: UITextField!
     var addressLineTwoTextField: UITextField!
     var townTextField: UITextField!
+    var countyTextField: UITextField!
     var postcodeTextField: UITextField!
     var mobileNoTextField: UITextField!
     var loginRegisterButton: UIButton!
@@ -41,6 +42,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
     var addressLineOneSeperatorView: UIView!
     var addressLineTwoSeperatorView: UIView!
     var townSeperatorView: UIView!
+    var countySeperatorView: UIView!
     var postcodeSeperatorView: UIView!
     var coverView: UIView!
     
@@ -67,6 +69,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
         addressLineOneTextField = UITextField()
         addressLineTwoTextField = UITextField()
         townTextField = UITextField()
+        countyTextField = UITextField()
         postcodeTextField = UITextField()
         mobileNoTextField = UITextField()
         loginRegisterButton = UIButton()
@@ -80,10 +83,11 @@ class LoginRegistrationViewModelTests: XCTestCase {
         addressLineOneSeperatorView = UIView()
         addressLineTwoSeperatorView = UIView()
         townSeperatorView = UIView()
+        countySeperatorView = UIView()
         postcodeSeperatorView = UIView()
         coverView = UIView()
         
-        sut = LoginRegistrationViewModel(iPadTraits, loginRegistrationView: loginRegistrationView, didSelectLogin ?? false, didSelectExistingMemberRegistration ?? false, didSelectNewMemberRegistration ?? false, mainLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, postcodeTextField, mobileNoTextField, loginRegisterButton, passwordResetButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, dobSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, postcodeSeperatorView, coverView)
+        sut = LoginRegistrationViewModel(traitCollection, loginRegistrationView: loginRegistrationView, didSelectLogin ?? false, didSelectExistingMemberRegistration ?? false, didSelectNewMemberRegistration ?? false, mainLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, countyTextField, postcodeTextField, mobileNoTextField, loginRegisterButton, passwordResetButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, dobSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, countySeperatorView, postcodeSeperatorView, coverView)
     }
     
     override func tearDown() {
@@ -107,6 +111,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
         membershipSwitch = nil
         shmaIdSeperatorView = nil
         emailSeperatorView = nil
+        countyTextField = nil
         nameSeperatorView = nil
         passwordSeperatorView = nil
         dobSeperatorView = nil
@@ -115,6 +120,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
         townSeperatorView = nil
         postcodeSeperatorView = nil
         passwordResetButton = nil
+        countySeperatorView = nil
         coverView = nil
         super.tearDown()
     }

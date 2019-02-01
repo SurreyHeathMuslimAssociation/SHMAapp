@@ -26,7 +26,18 @@
 		3907928521EFC84400AD4539 /* AddSpouseChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3907928421EFC84400AD4539 /* AddSpouseChildCell.swift */; };
 		390E4D9B21F73F97009BC363 /* AuthErrorCode+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390E4D9A21F73F97009BC363 /* AuthErrorCode+Util.swift */; };
 		390E4D9D21F76362009BC363 /* FirebaseAuthErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390E4D9C21F76362009BC363 /* FirebaseAuthErrorTests.swift */; };
+		390E4DA021F772E1009BC363 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390E4D9F21F772E1009BC363 /* HomeController.swift */; };
+		390E4DA221F773B7009BC363 /* MemberTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390E4DA121F773B7009BC363 /* MemberTabBarController.swift */; };
+		390E4DA521F77706009BC363 /* ProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390E4DA421F77706009BC363 /* ProfileController.swift */; };
+		390E4DA921F78B9E009BC363 /* SHMACardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390E4DA821F78B9E009BC363 /* SHMACardView.swift */; };
 		3911952321D267E5005D481C /* InitialViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3911952221D267E5005D481C /* InitialViewTests.swift */; };
+		3912A66521F8788600357BF4 /* WelcomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3912A66421F8788600357BF4 /* WelcomeController.swift */; };
+		3912A66721F878D600357BF4 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3912A66621F878D600357BF4 /* WelcomeView.swift */; };
+		3912A66B21F8861F00357BF4 /* WelcomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3912A66A21F8861F00357BF4 /* WelcomeViewModel.swift */; };
+		3916E6222201EFB9009CC9A2 /* WelcomeViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3916E6212201EFB9009CC9A2 /* WelcomeViewTests.swift */; };
+		3916E6242201EFC2009CC9A2 /* WelcomeViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3916E6232201EFC2009CC9A2 /* WelcomeViewModelTests.swift */; };
+		3916E6262201F925009CC9A2 /* PageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3916E6252201F925009CC9A2 /* PageViewModelTests.swift */; };
+		3916E6292201FC8C009CC9A2 /* SHMACardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3916E6282201FC8C009CC9A2 /* SHMACardViewModelTests.swift */; };
 		39282A0D21CE3D43003E3AAA /* MemberController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A0C21CE3D43003E3AAA /* MemberController.swift */; };
 		39282A0F21CE3D4B003E3AAA /* CorporateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A0E21CE3D4B003E3AAA /* CorporateController.swift */; };
 		39282A1121CE4174003E3AAA /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A1021CE4174003E3AAA /* InitialViewModel.swift */; };
@@ -46,6 +57,11 @@
 		394C71DA21D3786E00BF9D0D /* CorporateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394C71D921D3786E00BF9D0D /* CorporateViewModel.swift */; };
 		394DE9CF21E8F64F0003AC46 /* FirebaseAuthSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394DE9CE21E8F64F0003AC46 /* FirebaseAuthSessionMock.swift */; };
 		394DE9D121E8F6CE0003AC46 /* FirebaseAuthTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394DE9D021E8F6CE0003AC46 /* FirebaseAuthTests.swift */; };
+		394F6CB821FF2038000AB415 /* PageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CB721FF2038000AB415 /* PageViewModel.swift */; };
+		394F6CBA21FF20A9000AB415 /* Page.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CB921FF20A9000AB415 /* Page.swift */; };
+		394F6CBC21FF2229000AB415 /* WelcomeView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CBB21FF2229000AB415 /* WelcomeView+Delegate.swift */; };
+		394F6CBE21FF223C000AB415 /* WelcomeView+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CBD21FF223C000AB415 /* WelcomeView+Datasource.swift */; };
+		394F6CC021FF2533000AB415 /* WelcomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CBF21FF2533000AB415 /* WelcomeViewCell.swift */; };
 		3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952259D21D0FA5600FD411C /* CorporateView.swift */; };
 		396C425C21F66C2C00307022 /* PasswordResetViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396C425B21F66C2C00307022 /* PasswordResetViewModelTests.swift */; };
 		396C425E21F66C3E00307022 /* PasswordResetViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396C425D21F66C3E00307022 /* PasswordResetViewTests.swift */; };
@@ -73,6 +89,9 @@
 		39F4AD4521F6260E00B17C63 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F4AD4421F6260E00B17C63 /* PasswordResetView.swift */; };
 		39F4AD4721F6291900B17C63 /* PasswordResetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F4AD4621F6291900B17C63 /* PasswordResetViewModel.swift */; };
 		39F4AD4B21F63DB100B17C63 /* PasswordResetController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F4AD4A21F63DB100B17C63 /* PasswordResetController+Handlers.swift */; };
+		39FFD97321FC702800EC4058 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFD97221FC702800EC4058 /* Member.swift */; };
+		39FFD97521FC776E00EC4058 /* SHMACardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFD97421FC776E00EC4058 /* SHMACardViewModel.swift */; };
+		39FFD97721FC7C0900EC4058 /* Association.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFD97621FC7C0900EC4058 /* Association.swift */; };
 		B267AD6D82B37C3B8804A0A8 /* Pods_SHMA.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 89C246D7473E93BE65986D8B /* Pods_SHMA.framework */; };
 		C7A3A43F0AACA6C88D59CEDF /* Pods_SHMATests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32D91D397A0595FDFFC2A45D /* Pods_SHMATests.framework */; };
 /* End PBXBuildFile section */
@@ -109,7 +128,18 @@
 		3907928421EFC84400AD4539 /* AddSpouseChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSpouseChildCell.swift; sourceTree = "<group>"; };
 		390E4D9A21F73F97009BC363 /* AuthErrorCode+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthErrorCode+Util.swift"; sourceTree = "<group>"; };
 		390E4D9C21F76362009BC363 /* FirebaseAuthErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthErrorTests.swift; sourceTree = "<group>"; };
+		390E4D9F21F772E1009BC363 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		390E4DA121F773B7009BC363 /* MemberTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberTabBarController.swift; sourceTree = "<group>"; };
+		390E4DA421F77706009BC363 /* ProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileController.swift; sourceTree = "<group>"; };
+		390E4DA821F78B9E009BC363 /* SHMACardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHMACardView.swift; sourceTree = "<group>"; };
 		3911952221D267E5005D481C /* InitialViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewTests.swift; sourceTree = "<group>"; };
+		3912A66421F8788600357BF4 /* WelcomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeController.swift; sourceTree = "<group>"; };
+		3912A66621F878D600357BF4 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		3912A66A21F8861F00357BF4 /* WelcomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModel.swift; sourceTree = "<group>"; };
+		3916E6212201EFB9009CC9A2 /* WelcomeViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewTests.swift; sourceTree = "<group>"; };
+		3916E6232201EFC2009CC9A2 /* WelcomeViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewModelTests.swift; sourceTree = "<group>"; };
+		3916E6252201F925009CC9A2 /* PageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModelTests.swift; sourceTree = "<group>"; };
+		3916E6282201FC8C009CC9A2 /* SHMACardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHMACardViewModelTests.swift; sourceTree = "<group>"; };
 		39282A0C21CE3D43003E3AAA /* MemberController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberController.swift; sourceTree = "<group>"; };
 		39282A0E21CE3D4B003E3AAA /* CorporateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateController.swift; sourceTree = "<group>"; };
 		39282A1021CE4174003E3AAA /* InitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewModel.swift; sourceTree = "<group>"; };
@@ -133,6 +163,11 @@
 		394C71D921D3786E00BF9D0D /* CorporateViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateViewModel.swift; sourceTree = "<group>"; };
 		394DE9CE21E8F64F0003AC46 /* FirebaseAuthSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthSessionMock.swift; sourceTree = "<group>"; };
 		394DE9D021E8F6CE0003AC46 /* FirebaseAuthTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthTests.swift; sourceTree = "<group>"; };
+		394F6CB721FF2038000AB415 /* PageViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewModel.swift; sourceTree = "<group>"; };
+		394F6CB921FF20A9000AB415 /* Page.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Page.swift; sourceTree = "<group>"; };
+		394F6CBB21FF2229000AB415 /* WelcomeView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WelcomeView+Delegate.swift"; sourceTree = "<group>"; };
+		394F6CBD21FF223C000AB415 /* WelcomeView+Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WelcomeView+Datasource.swift"; sourceTree = "<group>"; };
+		394F6CBF21FF2533000AB415 /* WelcomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCell.swift; sourceTree = "<group>"; };
 		3952259D21D0FA5600FD411C /* CorporateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateView.swift; sourceTree = "<group>"; };
 		396C425B21F66C2C00307022 /* PasswordResetViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewModelTests.swift; sourceTree = "<group>"; };
 		396C425D21F66C3E00307022 /* PasswordResetViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewTests.swift; sourceTree = "<group>"; };
@@ -160,6 +195,9 @@
 		39F4AD4421F6260E00B17C63 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		39F4AD4621F6291900B17C63 /* PasswordResetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewModel.swift; sourceTree = "<group>"; };
 		39F4AD4A21F63DB100B17C63 /* PasswordResetController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordResetController+Handlers.swift"; sourceTree = "<group>"; };
+		39FFD97221FC702800EC4058 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
+		39FFD97421FC776E00EC4058 /* SHMACardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHMACardViewModel.swift; sourceTree = "<group>"; };
+		39FFD97621FC7C0900EC4058 /* Association.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Association.swift; sourceTree = "<group>"; };
 		70BA31B67C1C4372261E5928 /* Pods-SHMATests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHMATests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SHMATests/Pods-SHMATests.release.xcconfig"; sourceTree = "<group>"; };
 		89C246D7473E93BE65986D8B /* Pods_SHMA.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SHMA.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D2BE74F767F502C4651E2B20 /* Pods-SHMA.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SHMA.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SHMA/Pods-SHMA.debug.xcconfig"; sourceTree = "<group>"; };
@@ -203,8 +241,8 @@
 				39063E5121E62B9000A020EE /* MemberViewModelTests.swift */,
 				39063E5321E62B9800A020EE /* MemberViewTests.swift */,
 				39DF57AE21E8A01B00387A74 /* LoginRegistration */,
-				39DF57B321E8E1A900387A74 /* TermsAndConditions */,
-				396C425A21F66C0C00307022 /* PasswordReset */,
+				3916E6202201E44A009CC9A2 /* Welcome */,
+				3916E6272201FC59009CC9A2 /* Home */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -233,6 +271,10 @@
 				39282A0C21CE3D43003E3AAA /* MemberController.swift */,
 				39063E5521E6334B00A020EE /* MemberController+Handlers.swift */,
 				39F4AD3F21F624F200B17C63 /* LoginRegistration */,
+				3912A66821F8802600357BF4 /* Welcome */,
+				390E4DA121F773B7009BC363 /* MemberTabBarController.swift */,
+				390E4D9E21F772C4009BC363 /* Home */,
+				390E4DA321F776F6009BC363 /* Profile */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -242,6 +284,9 @@
 			children = (
 				39D4324621E4FF2700F62B31 /* MemberView.swift */,
 				3907927821EF7C0B00AD4539 /* LoginRegistration */,
+				3912A66921F8803900357BF4 /* Welcome */,
+				390E4DA621F78B74009BC363 /* Home */,
+				390E4DA721F78B80009BC363 /* Profile */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -269,6 +314,74 @@
 				3905914221E793C500F297AC /* TermsAndConditionsView+Handlers.swift */,
 			);
 			path = TermsAndConditions;
+			sourceTree = "<group>";
+		};
+		390E4D9E21F772C4009BC363 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				390E4D9F21F772E1009BC363 /* HomeController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		390E4DA321F776F6009BC363 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				390E4DA421F77706009BC363 /* ProfileController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		390E4DA621F78B74009BC363 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				390E4DA821F78B9E009BC363 /* SHMACardView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		390E4DA721F78B80009BC363 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		3912A66821F8802600357BF4 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				3912A66421F8788600357BF4 /* WelcomeController.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		3912A66921F8803900357BF4 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				3912A66621F878D600357BF4 /* WelcomeView.swift */,
+				394F6CBB21FF2229000AB415 /* WelcomeView+Delegate.swift */,
+				394F6CBD21FF223C000AB415 /* WelcomeView+Datasource.swift */,
+				394F6CBF21FF2533000AB415 /* WelcomeViewCell.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		3916E6202201E44A009CC9A2 /* Welcome */ = {
+			isa = PBXGroup;
+			children = (
+				3916E6252201F925009CC9A2 /* PageViewModelTests.swift */,
+				3916E6232201EFC2009CC9A2 /* WelcomeViewModelTests.swift */,
+				3916E6212201EFB9009CC9A2 /* WelcomeViewTests.swift */,
+			);
+			path = Welcome;
+			sourceTree = "<group>";
+		};
+		3916E6272201FC59009CC9A2 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				3916E6282201FC8C009CC9A2 /* SHMACardViewModelTests.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 		393F4B6721CBCBEF009B4239 = {
@@ -346,8 +459,8 @@
 		394731DE21DFD91100DB9425 /* Session */ = {
 			isa = PBXGroup;
 			children = (
-				394731E121DFD94E00DB9425 /* FirebaseDatabaseSession.swift */,
 				39DF57B821E8ED9400387A74 /* FirebaseAuthSession.swift */,
+				394731E121DFD94E00DB9425 /* FirebaseDatabaseSession.swift */,
 			);
 			path = Session;
 			sourceTree = "<group>";
@@ -355,8 +468,8 @@
 		394731DF21DFD91800DB9425 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				394731E321DFDADD00DB9425 /* FirebaseDatabaseManager.swift */,
 				39DF57BA21E8EDA700387A74 /* FirebaseAuthManager.swift */,
+				394731E321DFDADD00DB9425 /* FirebaseDatabaseManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -365,9 +478,9 @@
 			isa = PBXGroup;
 			children = (
 				393F4B9421CBD26C009B4239 /* General.swift */,
-				394731E521DFDB9F00DB9425 /* FirebaseDatabase+Util.swift */,
 				39DF57BC21E8EDBA00387A74 /* FirebaseAuth+Util.swift */,
 				390E4D9A21F73F97009BC363 /* AuthErrorCode+Util.swift */,
+				394731E521DFDB9F00DB9425 /* FirebaseDatabase+Util.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -394,6 +507,9 @@
 			isa = PBXGroup;
 			children = (
 				3907928221EF9D4F00AD4539 /* Family.swift */,
+				39FFD97221FC702800EC4058 /* Member.swift */,
+				39FFD97621FC7C0900EC4058 /* Association.swift */,
+				394F6CB921FF20A9000AB415 /* Page.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -417,6 +533,9 @@
 				39F0DA1F21E640E80073D047 /* LoginRegistrationViewModel.swift */,
 				3905914C21E7C30000F297AC /* TermsAndConditionsViewModel.swift */,
 				39F4AD4621F6291900B17C63 /* PasswordResetViewModel.swift */,
+				3912A66A21F8861F00357BF4 /* WelcomeViewModel.swift */,
+				394F6CB721FF2038000AB415 /* PageViewModel.swift */,
+				39FFD97421FC776E00EC4058 /* SHMACardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -472,6 +591,8 @@
 			children = (
 				39DF57AF21E8A03700387A74 /* LoginRegistrationViewModel.swift */,
 				39DF57B121E8BAD800387A74 /* LoginRegistrationViewTests.swift */,
+				39DF57B321E8E1A900387A74 /* TermsAndConditions */,
+				396C425A21F66C0C00307022 /* PasswordReset */,
 			);
 			path = LoginRegistration;
 			sourceTree = "<group>";
@@ -718,13 +839,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				394F6CB821FF2038000AB415 /* PageViewModel.swift in Sources */,
 				3907927F21EF7DFC00AD4539 /* LoginRegistrationView+Delegate.swift in Sources */,
 				3907928121EF7E0600AD4539 /* LoginRegistrationView+Datasource.swift in Sources */,
 				393F4B7621CBCBEF009B4239 /* InitialController.swift in Sources */,
 				39F0DA1E21E634EA0073D047 /* LoginRegistrationView.swift in Sources */,
 				3905914121E7920D00F297AC /* TermsAndConditionsController.swift in Sources */,
+				390E4DA221F773B7009BC363 /* MemberTabBarController.swift in Sources */,
 				3905913F21E78D8E00F297AC /* TermsAndConditionsView.swift in Sources */,
 				3905914D21E7C30000F297AC /* TermsAndConditionsViewModel.swift in Sources */,
+				394F6CC021FF2533000AB415 /* WelcomeViewCell.swift in Sources */,
 				394731E621DFDB9F00DB9425 /* FirebaseDatabase+Util.swift in Sources */,
 				39282A1521CE49AD003E3AAA /* InitialView.swift in Sources */,
 				394731E421DFDADD00DB9425 /* FirebaseDatabaseManager.swift in Sources */,
@@ -732,21 +856,29 @@
 				39282A0F21CE3D4B003E3AAA /* CorporateController.swift in Sources */,
 				393F4B7421CBCBEF009B4239 /* AppDelegate.swift in Sources */,
 				39F0DA2021E640E80073D047 /* LoginRegistrationViewModel.swift in Sources */,
+				390E4DA021F772E1009BC363 /* HomeController.swift in Sources */,
 				39D4324B21E51AD700F62B31 /* MemberViewModel.swift in Sources */,
 				3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */,
 				394731E921DFDE0B00DB9425 /* Reachability.swift in Sources */,
+				394F6CBE21FF223C000AB415 /* WelcomeView+Datasource.swift in Sources */,
 				39063E5621E6334B00A020EE /* MemberController+Handlers.swift in Sources */,
+				390E4DA521F77706009BC363 /* ProfileController.swift in Sources */,
 				39F4AD3E21F624B600B17C63 /* PasswordResetController.swift in Sources */,
+				3912A66521F8788600357BF4 /* WelcomeController.swift in Sources */,
+				394F6CBC21FF2229000AB415 /* WelcomeView+Delegate.swift in Sources */,
 				394731E221DFD94E00DB9425 /* FirebaseDatabaseSession.swift in Sources */,
 				39DF57BD21E8EDBA00387A74 /* FirebaseAuth+Util.swift in Sources */,
+				3912A66B21F8861F00357BF4 /* WelcomeViewModel.swift in Sources */,
 				39282A1321CE4184003E3AAA /* InitialController+Handlers.swift in Sources */,
 				3905914921E798C800F297AC /* TermsAndConditionsController+Handlers.swift in Sources */,
 				390E4D9B21F73F97009BC363 /* AuthErrorCode+Util.swift in Sources */,
+				390E4DA921F78B9E009BC363 /* SHMACardView.swift in Sources */,
 				3905914321E793C500F297AC /* TermsAndConditionsView+Handlers.swift in Sources */,
 				39F4AD4B21F63DB100B17C63 /* PasswordResetController+Handlers.swift in Sources */,
 				39F4AD4521F6260E00B17C63 /* PasswordResetView.swift in Sources */,
 				3905913D21E780CB00F297AC /* LoginRegistrationController+Handlers.swift in Sources */,
 				39F0DA1C21E634BB0073D047 /* LoginRegistrationController.swift in Sources */,
+				39FFD97321FC702800EC4058 /* Member.swift in Sources */,
 				39DF57B921E8ED9400387A74 /* FirebaseAuthSession.swift in Sources */,
 				393F4B9521CBD26C009B4239 /* General.swift in Sources */,
 				39DF57BB21E8EDA700387A74 /* FirebaseAuthManager.swift in Sources */,
@@ -755,11 +887,15 @@
 				39F4AD3C21F6098C00B17C63 /* LoginRegistrationView+AddingSubviews.swift in Sources */,
 				3905913B21E766BE00F297AC /* LoginRegistrationView+Handlers.swift in Sources */,
 				39BD10B121F2780400A3ADD9 /* LoginRegistrationController+Delegate.swift in Sources */,
+				39FFD97521FC776E00EC4058 /* SHMACardViewModel.swift in Sources */,
 				39282A1121CE4174003E3AAA /* InitialViewModel.swift in Sources */,
 				390317E221EB5A8C00E47FA6 /* CorporateView+Handlers.swift in Sources */,
 				3907928521EFC84400AD4539 /* AddSpouseChildCell.swift in Sources */,
+				3912A66721F878D600357BF4 /* WelcomeView.swift in Sources */,
 				3907927D21EF7CE200AD4539 /* SpouseChildCell.swift in Sources */,
 				39D4324721E4FF2700F62B31 /* MemberView.swift in Sources */,
+				39FFD97721FC7C0900EC4058 /* Association.swift in Sources */,
+				394F6CBA21FF20A9000AB415 /* Page.swift in Sources */,
 				39DF0CFF21D53FB80099D631 /* CorporateController+Handlers.swift in Sources */,
 				39F4AD4721F6291900B17C63 /* PasswordResetViewModel.swift in Sources */,
 			);
@@ -770,6 +906,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				39DF57B521E8E1D400387A74 /* TermsAndConditionsViewModelTests.swift in Sources */,
+				3916E6292201FC8C009CC9A2 /* SHMACardViewModelTests.swift in Sources */,
 				39DF57B021E8A03700387A74 /* LoginRegistrationViewModel.swift in Sources */,
 				394DE9D121E8F6CE0003AC46 /* FirebaseAuthTests.swift in Sources */,
 				396C425C21F66C2C00307022 /* PasswordResetViewModelTests.swift in Sources */,
@@ -778,13 +915,16 @@
 				396C425E21F66C3E00307022 /* PasswordResetViewTests.swift in Sources */,
 				393F4B8921CBCBEF009B4239 /* InitialViewModelTests.swift in Sources */,
 				39DF0CFD21D51F300099D631 /* CorporateViewModelTests.swift in Sources */,
+				3916E6242201EFC2009CC9A2 /* WelcomeViewModelTests.swift in Sources */,
 				39DF57B721E8E3B400387A74 /* TermsAndConditionsViewTests.swift in Sources */,
 				39DE6E4821E3CE87003F8A99 /* FirebaseDatabaseTests.swift in Sources */,
 				390E4D9D21F76362009BC363 /* FirebaseAuthErrorTests.swift in Sources */,
 				39DF57B221E8BAD800387A74 /* LoginRegistrationViewTests.swift in Sources */,
+				3916E6222201EFB9009CC9A2 /* WelcomeViewTests.swift in Sources */,
 				39063E5421E62B9800A020EE /* MemberViewTests.swift in Sources */,
 				39063E5221E62B9000A020EE /* MemberViewModelTests.swift in Sources */,
 				39D4324421E4B3DF00F62B31 /* ReachabilityTests.swift in Sources */,
+				3916E6262201F925009CC9A2 /* PageViewModelTests.swift in Sources */,
 				39DE6E4621E3CC70003F8A99 /* FirebaseDatabaseSessionMock.swift in Sources */,
 				3911952321D267E5005D481C /* InitialViewTests.swift in Sources */,
 			);

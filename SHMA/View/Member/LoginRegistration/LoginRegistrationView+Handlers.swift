@@ -23,6 +23,7 @@ extension LoginRegistrationView {
         addressLineOneTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
         addressLineTwoTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
         townTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
+        countyTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
         postcodeTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
         mobileNoTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
     }
@@ -96,11 +97,6 @@ extension LoginRegistrationView {
         setScrollViewContentSizeForNewMemberLogin()
         determineIfSpouseChildTableViewIsVisible()
         delegate?.didSwitchToFamilyMembership()
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        endEditing(true)
-        return false
     }
     
     @objc func handleKeyboard() {

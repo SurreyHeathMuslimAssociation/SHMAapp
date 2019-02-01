@@ -12,7 +12,7 @@ import FirebaseDatabase
 extension Database: FirebaseDatabaseSession {
     // sorts on client side, possibly future improvement
     func searchMemberUsing(_ dob: String, _ surname: String, completion: @escaping (String?, Bool) -> Void) {
-        Database.database().reference().child("member_search").observeSingleEvent(of: .value) { (snapshot) in
+        Database.database().reference().child("offline_members").observeSingleEvent(of: .value) { (snapshot) in
             guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
             allObjects.forEach({ (snapshot) in
                 guard let member = snapshot.value as? [String: Any] else { return }
@@ -27,71 +27,144 @@ extension Database: FirebaseDatabaseSession {
             })
         }
     }
-    func checkShmaIdExistsWithInOfflineDatabaseUsing(_ shmaId: String, completion: @escaping (Bool, String?, String?) -> Void) {
-        Database.database().reference().child("member_search").queryOrderedByKey().queryEqual(toValue: shmaId).observeSingleEvent(of: .value) { (snapshot) in
+    
+    func fetchExistingMemberFromOfflineDatabaseUsing(_ shmaId: String, completion: @escaping (Bool, Member?) -> Void) {
+        Database.database().reference().child("offline_members").queryOrderedByKey().queryEqual(toValue: shmaId).observeSingleEvent(of: .value) { (snapshot) in
             if snapshot.exists() {
                 guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
                 allObjects.forEach({ (snapshot) in
                     guard let value = snapshot.value as? [String: Any] else { return }
-                    let firstname = value["firstname"] as? String
-                    let surname = value["surname"] as? String
-                    completion(true, firstname, surname)
-                })
-            } else {
-                completion(false, nil, nil)
-            }
-        }
-    }
-    
-    // sorts on client side, possibly future improvement
-    func checkShmaIdIsntAlreadyRegisteredInFirebase(_ shmaId: String, completion: @escaping (Bool) -> Void) {
-        var isRegistered = false
-        Database.database().reference().child("members").observeSingleEvent(of: .value) { (snapshot) in
-            if snapshot.exists() {
-                guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
-                allObjects.forEach({ (snapshot) in
-                    guard let member = snapshot.value as? [String: Any] else { return }
-                    let memberShmaId = member["shmaId"] as? String
-                    if shmaId == memberShmaId {
-                        isRegistered = true
+                    print(value)
+                    do {
+                        let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                        let member = try JSONDecoder().decode(Member.self, from: jsonData)
+                        completion(true, member)
+                    } catch {
+                        print(error.localizedDescription)
+                        completion(false, nil)
                     }
                 })
-                completion(isRegistered)
             } else {
-                completion(isRegistered)
+                completion(false, nil)
             }
         }
     }
     
-    func saveExistingMemberDetailsToDatabase(_ uid: String, _ shmaId: String, _ firstname: String, _ surname: String, _ email: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
-        
-        let values = ["shmaId": shmaId, "email": email, "firstname": firstname, "surname": surname]
-        Database.database().reference().child("members").child(uid).updateChildValues(values) { (error, ref) in
-            completion(error, ref)
+    func checkShmaIdIsntAlreadyRegisteredInFirebase(_ shmaId: String, completion: @escaping (Bool) -> Void) {
+        Database.database().reference().child("shmaIdsOnApp").queryOrderedByKey().queryEqual(toValue: shmaId).observeSingleEvent(of: .value) { (snapshot) in
+            if let _ = snapshot.value as? [String: Any] {
+                completion(true)
+            } else {
+                completion(false)
+            }
         }
     }
     
-    func saveNewMemberDetailsToDatabase(_ uid: String, _ firstname: String, _ surname: String, _ email: String, _ dob: String, _ addressLineOne: String, _ addressLineTwo: String, _ town: String, _ postcode: String, _ mobileNo: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
-        
-        let values = ["email": email, "firstname": firstname, "surname": surname, "dob": dob, "addressLineOne": addressLineOne, "addressLineTwo": addressLineTwo, "town": town, "postcode": postcode, "mobileNo": mobileNo, "status": "Applied"]
-        Database.database().reference().child("members").child(uid).updateChildValues(values) { (error, ref) in
-            completion(error, ref)
+    func saveExistingMemberDetailsToDatabase(_ uid: String, _ member: Member, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(member) {
+            do {
+                guard let jsonData = try JSONSerialization.jsonObject(with: encoded, options: []) as? [String: Any] else { return }
+                Database.database().reference().child("members").child(uid).updateChildValues(jsonData) { (error, ref) in
+                    completion(error, ref)
+                }
+            } catch {
+                completion(error, nil)
+            }
         }
     }
     
-    func saveNewMembersSpouseDetailsToDatabase(_ uid: String, _ spouseName: String, _ spouseEmail: String, _ spouseDob: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
-        
-        let values = ["spouseName": spouseName, "spouseEmail": spouseEmail, "spouseDob": spouseDob]
-        Database.database().reference().child("spouse").child(uid).updateChildValues(values) { (error, ref) in
-            completion(error, ref)
+    func generateNewMemberShmaId(completion: @escaping (Int) -> Void) {
+        // get the lastest key (shmaId) that exists in member_search
+        let query = Database.database().reference().child("offline_members").queryOrderedByKey().queryLimited(toLast: 1)
+        query.observeSingleEvent(of: .value) { (snapshot) in
+            let value = snapshot.value as? [String: Any]
+            guard let key = value?.keys.first else { return }
+            guard let offlineDatabaseShmaId = Int(key) else { return }
+            // get the latest shmaid that exists among the members signed up on the app
+            let query = Database.database().reference().child("members").queryOrdered(byChild: "shmaId").queryLimited(toLast: 1)
+            query.observeSingleEvent(of: .value) { (snapshot) in
+                // if members table exists
+                if snapshot.exists() {
+                    let value = snapshot.value as? [String: Any]
+                    let firstValue = value?.values.first as? [String: Any]
+                    guard let shmaId = firstValue?["shmaId"] as? Int else { return }
+                    // gets the highest value and adds 1 to create a new shmaId
+                    if shmaId > offlineDatabaseShmaId {
+                        completion(shmaId + 1)
+                    } else {
+                        completion(offlineDatabaseShmaId + 1)
+                    }
+                } else {
+                    // else just get the highest value from offline members
+                    completion(offlineDatabaseShmaId + 1)
+                }
+            }
         }
     }
     
-    func saveNewMembersChildrenDetailsToDatabase(_ uid: String, _ childName: String, _ childDob: String, completion: @escaping (Error?, DatabaseReference?) -> Void) {
-        
-        let values = ["childName": childName, "childDob": childDob]
-        Database.database().reference().child("children").child(uid).childByAutoId().updateChildValues(values) { (error, ref) in
-            completion(error, ref)
+    func saveNewMemberDetailsToDatabase(_ uid: String, _ member: Member, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(member) {
+            do {
+                guard let jsonData = try JSONSerialization.jsonObject(with: encoded, options: []) as? [String: Any] else { return }
+                Database.database().reference().child("members").child(uid).updateChildValues(jsonData) { (error, ref) in
+                    completion(error, ref)
+                }
+            } catch {
+                completion(error, nil)
+            }
         }
     }
+    
+    func saveNewMemberFamilyDetailsToDatabase(_ uid: String, _ family: Family, completion: @escaping (Error?, DatabaseReference?) -> Void) {
+        guard let relationship = family.relationship else { return }
+        let spouseRef = Database.database().reference().child("spouse").child(uid)
+        let childRef = Database.database().reference().child("children").child(uid).childByAutoId()
+        let encoder = JSONEncoder()
+        if let encoded = try? encoder.encode(family) {
+            do {
+                guard let jsonData = try JSONSerialization.jsonObject(with: encoded, options: []) as? [String: Any] else { return }
+                if relationship == .Spouse {
+                    spouseRef.updateChildValues(jsonData) { (error, ref) in
+                        completion(error, ref)
+                    }
+                } else {
+                    childRef.updateChildValues(jsonData) { (error, ref) in
+                        completion(error, ref)
+                    }
+                }
+            } catch {
+                completion(error, nil)
+            }
+        }
+    }
+    
+    func fetchAssociationDetails(completion: @escaping (Association) -> Void) {
+        Database.database().reference().child("association").observeSingleEvent(of: .value) { (snapshot) in
+            guard let value = snapshot.value as? [String: Any] else { return }
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                let association = try JSONDecoder().decode(Association.self, from: jsonData)
+                completion(association)
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+        }
+    }
+    
+    func fetchMemberDetails(_ uid: String, completion: @escaping (Member) -> Void) {
+        Database.database().reference().child("members").child(uid).observeSingleEvent(of: .value) { (snapshot) in
+            guard let value = snapshot.value as? [String: Any] else { return }
+            do {
+                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+                let member = try JSONDecoder().decode(Member.self, from: jsonData)
+                completion(member)
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
+   
 }
