@@ -31,7 +31,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="116dp"
-        android:onClick="signOut"
+        android:onClick="LogoutNow"
         android:text="Log out"
         android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -43,8 +43,8 @@
 
     <TextView
         android:id="@+id/usr_firstname"
-        android:layout_width="122dp"
-        android:layout_height="36dp"
+        android:layout_width="209dp"
+        android:layout_height="32dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -60,7 +60,7 @@
 
     <TextView
         android:id="@+id/usr_surname"
-        android:layout_width="118dp"
+        android:layout_width="191dp"
         android:layout_height="33dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -77,7 +77,7 @@
 
     <TextView
         android:id="@+id/usr_DOB"
-        android:layout_width="159dp"
+        android:layout_width="219dp"
         android:layout_height="41dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"

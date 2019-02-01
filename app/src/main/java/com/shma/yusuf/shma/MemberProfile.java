@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,28 +19,26 @@ import com.google.firebase.database.ValueEventListener;
 
 public class MemberProfile extends AppCompatActivity {
    private TextView SHMAID,firstname , surname , DOB;
-    private FirebaseAuth auth;
+   private Button logout;
+   private FirebaseAuth auth = FirebaseAuth.getInstance();
    private FirebaseUser user;
-   private TextView SHMAProfile;
-    private FirebaseDatabase firebaseDatabase;
+   private FirebaseDatabase firebaseDatabase;
 
     private void SetUpUIelements(){
+        logout = findViewById(R.id.Logout);
         SHMAID = findViewById(R.id.usr_shmaid);
         firstname =  findViewById(R.id.usr_firstname);
         surname =  findViewById(R.id.usr_surname);
         DOB =  findViewById(R.id.usr_DOB);
     }
-    private void Logout(){
+    public void Logout(){
         auth.signOut();
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity (i);
-    }
+        finish();
+         }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_profile);
-        auth = FirebaseAuth.getInstance();
-        user = auth.getCurrentUser();
         firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("members").child(auth.getUid());
         SetUpUIelements();
@@ -53,17 +52,20 @@ public class MemberProfile extends AppCompatActivity {
                 firstname.setText("Name: " + userProfile.getFirstName());
                 surname.setText("Age: " + userProfile.getLastName());
                 DOB.setText("Email: " + userProfile.getDOB());
+
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), databaseError.getCode(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
             }
+
         });
+
     }
 
-
-    public void signOut(View v){
+    public void LogoutNow(View v){
         Logout();
     }
+
 }
