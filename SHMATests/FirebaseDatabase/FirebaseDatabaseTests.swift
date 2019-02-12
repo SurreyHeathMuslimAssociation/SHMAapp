@@ -15,16 +15,21 @@ class FirebaseDatabaseTests: XCTestCase {
     
     var sut: FirebaseDatabaseManager!
     var session: FirebaseDatabaseSessionMock!
+    var member: Member!
+    var family: Family!
+    
     let dob = "04/04/2018"
     let firstname = "John"
+    let middlename = "Middle"
     let surname = "Doe"
     let email = "test@gmail.com"
     let adLineOne = "4 Park"
     let adLineTwo = "Lane"
     let town = "Town"
     let postcode = "GU11 1PL"
+    let county = "County"
     let mobileNo = "123455667"
-    let shmaId = "123"
+    let shmaId = 123
     let uid = "1234566"
     let spouseName = "Spouse"
     let spouseEmail = "test@gmail.com"
@@ -37,6 +42,31 @@ class FirebaseDatabaseTests: XCTestCase {
         
         session = FirebaseDatabaseSessionMock()
         sut = FirebaseDatabaseManager(session: session)
+        setupMember()
+        setupFamily()
+    }
+    
+    private func setupMember() {
+        do {
+            let value = ["firstName": firstname, "middleName": middlename, "lastName": surname, "membershipType": "Single", "status": "Applied", "shmaId": shmaId, "email": email, "addressLineOne": adLineOne, "addressLineTwo": adLineTwo, "town": town, "postcode": postcode, "county": county, "mobileNo": mobileNo, "DOB": dob] as [String : Any]
+            let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+            let member = try JSONDecoder().decode(Member.self, from: jsonData)
+            self.member = member
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func setupFamily() {
+        do {
+            let value = ["fullName": spouseName, "email": spouseEmail, "DOB": spouseDob] as [String : Any]
+            let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+            let family = try JSONDecoder().decode(Family.self, from: jsonData)
+            self.family = family
+            self.family.relationship = .Spouse
+        } catch {
+            print(error)
+        }
     }
     
     override func tearDown() {
@@ -60,12 +90,12 @@ class FirebaseDatabaseTests: XCTestCase {
     func testCorrectSurnameWasUsed() {
         session.searchMemberUsing(dob, surname) { (shmaId, wasFound) in
         }
-        XCTAssertEqual(surname, session.memberSurname)
+        XCTAssertEqual(surname, session.memberLastName)
     }
     
     func testShmaIdWasReturned() {
         session.searchMemberUsing(dob, surname) { (shmaId, wasFound) in
-            XCTAssertEqual(shmaId, self.session.memberShmaId)
+            XCTAssertEqual(shmaId, String(self.session.memberShmaId))
         }
     }
     
@@ -74,62 +104,51 @@ class FirebaseDatabaseTests: XCTestCase {
             XCTAssert(wasFound)
         }
     }
-    
-//    func testShmaIdOfflineTableCheckWasInitiated() {
-//        session.checkShmaIdExistsWithInOfflineDatabaseUsing(shmaId) { (exists, firstname, surname) in
-//        }
-//        XCTAssert(session.didInitiateDatabaseCall)
-//        XCTAssertEqual(session.memberShmaId, shmaId)
-//    }
-    
+
     func testDuplicateShmaIdCheckWasInitiated() {
-        session.checkShmaIdIsntAlreadyRegisteredInFirebase(shmaId) { (exists) in
+        session.checkShmaIdIsntAlreadyRegisteredInFirebase(String(shmaId)) { (exists) in
         }
         XCTAssert(session.didInitiateDatabaseCall)
-        XCTAssertEqual(session.memberShmaId, shmaId)
+        XCTAssertEqual(session.memberShmaId, Int(shmaId))
     }
     
     func testExistingMemberDetailsCaptureWasInitiated() {
-        session.saveExistingMemberDetailsToDatabase(uid, shmaId, firstname, surname, email) { (error, ref) in
+        session.saveExistingMemberDetailsToDatabase(uid, member) { (_, _) in
         }
         XCTAssert(session.didInitiateDatabaseCall)
         XCTAssertEqual(session.memberUid, uid)
         XCTAssertEqual(session.memberShmaId, shmaId)
-        XCTAssertEqual(session.memberFirstname, firstname)
-        XCTAssertEqual(session.memberSurname, surname)
-        XCTAssertEqual(session.memberEmail, email)
+        XCTAssertEqual(session.memberFirstName, firstname)
+        XCTAssertEqual(session.memberMiddleName, middlename)
+        XCTAssertEqual(session.memberLastName, surname)
+        XCTAssertEqual(session.memberDob, dob)
     }
     
     func testNewMemberDetailsCaptureWasInitiated() {
-        session.saveNewMemberDetailsToDatabase(uid, firstname, surname, email, dob, adLineOne, adLineTwo, town, postcode, mobileNo) { (error, ref) in
+        session.saveNewMemberDetailsToDatabase(uid, member) { (_, _) in
         }
         XCTAssert(session.didInitiateDatabaseCall)
         XCTAssertEqual(session.memberUid, uid)
-        XCTAssertEqual(session.memberDob, dob)
-        XCTAssertEqual(session.memberFirstname, firstname)
-        XCTAssertEqual(session.memberSurname, surname)
+        XCTAssertEqual(session.memberShmaId, shmaId)
+        XCTAssertEqual(session.memberFirstName, firstname)
+        XCTAssertEqual(session.memberMiddleName, middlename)
+        XCTAssertEqual(session.memberLastName, surname)
         XCTAssertEqual(session.memberEmail, email)
-         XCTAssertEqual(session.memberMobileNo, mobileNo)
-         XCTAssertEqual(session.memberAddressLineOne, adLineOne)
-         XCTAssertEqual(session.memberAddressLineTwo, adLineTwo)
-         XCTAssertEqual(session.memberTown, town)
-         XCTAssertEqual(session.memberPostcode, postcode)
+        XCTAssertEqual(session.memberPostcode, postcode)
+        XCTAssertEqual(session.memberTown, town)
+        XCTAssertEqual(session.memberAddressLineOne, adLineOne)
+        XCTAssertEqual(session.memberAddressLineTwo, adLineTwo)
+        XCTAssertEqual(session.memberMobileNo, mobileNo)
+        XCTAssertEqual(session.memberDob, dob)
     }
     
-    func testnewMemberSpouseDetailsCaptureWasInitiated() {
-        session.saveNewMembersSpouseDetailsToDatabase(uid, spouseName, spouseEmail, spouseDob) { (error, ref) in
+    func testnewMemberFamilyDetailsCaptureWasInitiated() {
+        session.saveNewMemberFamilyDetailsToDatabase(uid, family) { (_, _) in
         }
         XCTAssert(session.didInitiateDatabaseCall)
         XCTAssertEqual(session.memberSpouseName, spouseName)
         XCTAssertEqual(session.memberSpouseEmail, spouseEmail)
         XCTAssertEqual(session.memberSpouseDob, spouseDob)
     }
-    
-    func testnewMemberChildDetailsCaptureWasInitiated() {
-        session.saveNewMembersChildrenDetailsToDatabase(uid, childName, childDob) { (error, ref) in
-        }
-        XCTAssert(session.didInitiateDatabaseCall)
-        XCTAssertEqual(session.memberChildName, childName)
-        XCTAssertEqual(session.memberChildDob, childDob)
-    }
+
 }

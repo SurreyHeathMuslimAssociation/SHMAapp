@@ -15,6 +15,7 @@ class MemberTabBarController: UITabBarController {
     var firebaseDatabaseManager: FirebaseDatabaseManager!
     var homeNavController: UINavigationController!
     var profileNavController: UINavigationController!
+    var businessNavController: UINavigationController!
     var isNavAndTabBarHidden: Bool?
     var activityIndicatorView: UIActivityIndicatorView!
     
@@ -40,19 +41,30 @@ class MemberTabBarController: UITabBarController {
                 let homeController = HomeController()
                 homeController.member = member
                 self.homeNavController = UINavigationController(rootViewController: homeController)
-                self.homeNavController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "Home"), selectedImage: #imageLiteral(resourceName: "Home"))
             } else {
                 let welcomeController = WelcomeController()
                 welcomeController.member = member
                 self.homeNavController = UINavigationController(rootViewController: welcomeController)
                 self.tabBar.isHidden = self.isNavAndTabBarHidden ?? false
                 self.homeNavController.navigationBar.isHidden = self.isNavAndTabBarHidden ?? false
-                self.homeNavController.tabBarItem = UITabBarItem(title: "Welcome", image: #imageLiteral(resourceName: "Home"), selectedImage: #imageLiteral(resourceName: "Home"))
             }
-            self.profileNavController = UINavigationController(rootViewController: ProfileController())
-            self.profileNavController.tabBarItem = UITabBarItem(title: "Profile", image: #imageLiteral(resourceName: "Profile"), selectedImage: #imageLiteral(resourceName: "Profile"))
-            self.viewControllers = [self.homeNavController, self.profileNavController]
-            self.activityIndicatorView.stopAnimating()
+            self.homeNavController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "Home"), selectedImage: #imageLiteral(resourceName: "Home"))
+            
+            self.setupTabBar(member)
         }
+    }
+    
+    private func setupTabBar(_ member: Member) {
+        let profileController = ProfileController(style: .grouped)
+        profileController.member = member
+        self.profileNavController = UINavigationController(rootViewController: profileController)
+        self.profileNavController.tabBarItem = UITabBarItem(title: "Profile", image: #imageLiteral(resourceName: "Profile"), selectedImage: #imageLiteral(resourceName: "Profile"))
+        
+        let businessController = BusinessController()
+        self.businessNavController = UINavigationController(rootViewController: businessController)
+        self.businessNavController.tabBarItem = UITabBarItem(title: "Business", image: #imageLiteral(resourceName: "Business"), selectedImage: #imageLiteral(resourceName: "Business"))
+        
+        self.viewControllers = [self.homeNavController, self.businessNavController, self.profileNavController]
+        self.activityIndicatorView.stopAnimating()
     }
 }

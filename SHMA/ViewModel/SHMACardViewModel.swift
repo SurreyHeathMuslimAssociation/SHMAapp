@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import CoreGraphics
 
 class SHMACardViewModel {
     
@@ -131,6 +130,15 @@ class SHMACardViewModel {
         }
     }
     
+    //navBar
+    func getNavigationBarTitleTextAttributes() -> [NSAttributedString.Key: UIFont] {
+        if traitCollection.isIpad {
+            return [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)]
+        } else {
+            return [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
+        }
+    }
+    
     func getMembershipNumberLabelHeight() -> CGFloat {
         return 30
     }
@@ -144,6 +152,6 @@ class SHMACardViewModel {
     }
     
     func getDateAndTimeLabelWidth() -> CGFloat {
-        return 100
+        return 120
     }
 }

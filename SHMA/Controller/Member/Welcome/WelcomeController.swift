@@ -27,6 +27,8 @@ class WelcomeController: UIViewController, WelcomeViewDelegate {
         welcomeView.delegate = self
         view.addSubview(welcomeView)
         welcomeView.anchor(top: view.safeAreaLayoutGuide.topAnchor, left: view.leftAnchor, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        
+        navigationController?.navigationBar.titleTextAttributes = welcomeView.welcomeViewModel.getNavigationBarTitleTextAttributes()
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -54,5 +56,12 @@ class WelcomeController: UIViewController, WelcomeViewDelegate {
     
     func sendUserToLogin() {
         dismiss(animated: true, completion: nil)
+        if let presentingVC = presentingViewController as? UINavigationController {
+            presentingVC.popViewController(animated: true)
+            let loginController = LoginRegistrationController()
+            loginController.didSelectLogin = true
+            presentingVC.pushViewController(loginController, animated: true)
+            
+        }
     }
 }

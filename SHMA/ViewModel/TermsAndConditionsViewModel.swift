@@ -42,4 +42,8 @@ class TermsAndConditionsViewModel {
             return [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)]
         }
     }
+    
+    func getNavBarText() -> String {
+        return "SHMA Terms And Conditions"
+    }
 }

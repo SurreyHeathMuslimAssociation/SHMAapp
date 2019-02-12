@@ -82,13 +82,13 @@ extension Database: FirebaseDatabaseSession {
             guard let key = value?.keys.first else { return }
             guard let offlineDatabaseShmaId = Int(key) else { return }
             // get the latest shmaid that exists among the members signed up on the app
-            let query = Database.database().reference().child("members").queryOrdered(byChild: "shmaId").queryLimited(toLast: 1)
+            let query = Database.database().reference().child("shmaIdsOnApp").queryOrderedByKey().queryLimited(toLast: 1)
             query.observeSingleEvent(of: .value) { (snapshot) in
                 // if members table exists
                 if snapshot.exists() {
                     let value = snapshot.value as? [String: Any]
-                    let firstValue = value?.values.first as? [String: Any]
-                    guard let shmaId = firstValue?["shmaId"] as? Int else { return }
+                    let shmaId = Int(value?.keys.first ?? "") ?? 0
+                    print(shmaId)
                     // gets the highest value and adds 1 to create a new shmaId
                     if shmaId > offlineDatabaseShmaId {
                         completion(shmaId + 1)
@@ -164,6 +164,18 @@ extension Database: FirebaseDatabaseSession {
             } catch {
                 print(error.localizedDescription)
             }
+        }
+    }
+    
+    func fetchBusinessesPlaceIdAndIconUrl(completion: @escaping (String, String) -> Void) {
+        Database.database().reference().child("businesses").observeSingleEvent(of: .value) { (snapshot) in
+            guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            allObjects.forEach({ (snapshot) in
+                let placeId = snapshot.key
+                guard let iconUrl = snapshot.value as? String else { return }
+                completion(placeId, iconUrl)
+            })
+           
         }
     }
    

@@ -63,4 +63,8 @@ class TermsAndConditionsViewModelTests: XCTestCase {
             XCTAssertEqual(sut.getNavigationBarTitleTextAttributes(), [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)])
         }
     }
+    
+    func testGetsNavBarText() {
+        XCTAssertEqual(sut.getNavBarText(), "SHMA Terms And Conditions")
+    }
 }

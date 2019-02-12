@@ -38,7 +38,6 @@ class FirebaseDatabaseSessionMock: FirebaseDatabaseSession {
         didInitiateDatabaseCall = true
         memberDob = dob
         memberLastName = surname
-        completion(String(memberShmaId), wasFound)
     }
     
     func checkShmaIdIsntAlreadyRegisteredInFirebase(_ shmaId: String, completion: @escaping (Bool) -> Void) {
@@ -108,6 +107,10 @@ class FirebaseDatabaseSessionMock: FirebaseDatabaseSession {
     func fetchMemberDetails(_ uid: String, completion: @escaping (Member) -> Void) {
         didInitiateDatabaseCall = true
         memberUid = uid
+    }
+    
+    func fetchBusinessesPlaceIdAndIconUrl(completion: @escaping (String, String) -> Void) {
+        
     }
     
 }

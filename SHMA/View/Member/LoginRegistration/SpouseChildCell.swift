@@ -19,7 +19,7 @@ class SpouseChildCell: UITableViewCell, UITextFieldDelegate {
     
     let nameTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Full Name"
+        tf.placeholder = "Full Name*"
         tf.borderStyle = .roundedRect
         return tf
     }()
@@ -32,7 +32,7 @@ class SpouseChildCell: UITableViewCell, UITextFieldDelegate {
     }()
     let dobTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "D.O.B"
+        tf.placeholder = "D.O.B*"
         tf.keyboardType = .numberPad
         tf.borderStyle = .roundedRect
         return tf

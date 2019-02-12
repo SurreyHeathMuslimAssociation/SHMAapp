@@ -157,5 +157,13 @@ class SHMACardViewModelTests: XCTestCase {
             XCTAssertEqual(sut.getShmaMemberMembershipNumberText(), attributedText)
         }
     }
+    
+    func testGetsNavigationBarTitleTextAttributes() {
+        if traitCollection.isIpad {
+            XCTAssertEqual(sut.getNavigationBarTitleTextAttributes(), [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)])
+        } else {
+            XCTAssertEqual(sut.getNavigationBarTitleTextAttributes(), [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)])
+        }
+    }
 }
 

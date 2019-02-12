@@ -25,7 +25,7 @@ class TermsAndConditionsController: UIViewController {
     }
     
     private func setupNavBar() {
-        navigationItem.title = "SHMA Terms And Conditions"
+        navigationItem.title = termsAndConditionsView.termsAndConditionsViewModel.getNavBarText()
         navigationController?.navigationBar.titleTextAttributes = termsAndConditionsView.termsAndConditionsViewModel.getNavigationBarTitleTextAttributes()
     }
     

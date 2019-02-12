@@ -35,36 +35,36 @@ class LoginRegistrationView: UIView {
     }()
     let shmaIdTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "SHMA ID"
+        tf.placeholder = "SHMA ID*"
         tf.keyboardType = .numberPad
         return tf
     }()
     let nameTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Full Name"
+        tf.placeholder = "Full Name*"
         return tf
     }()
     let emailTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Email"
+        tf.placeholder = "Email*"
         tf.autocapitalizationType = .none
         tf.keyboardType = .emailAddress
         return tf
     }()
     let passwordTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Password"
+        tf.placeholder = "Password*"
         tf.isSecureTextEntry = true
         return tf
     }()
     let dobTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "D.O.B"
+        tf.placeholder = "D.O.B*"
         return tf
     }()
     let addressLineOneTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Address Line 1"
+        tf.placeholder = "Address Line 1*"
         return tf
     }()
     let addressLineTwoTextField: UITextField = {
@@ -74,7 +74,7 @@ class LoginRegistrationView: UIView {
     }()
     let townTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Town"
+        tf.placeholder = "Town*"
         return tf
     }()
     let countyTextField: UITextField = {
@@ -84,12 +84,12 @@ class LoginRegistrationView: UIView {
     }()
     let postcodeTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Postcode"
+        tf.placeholder = "Postcode*"
         return tf
     }()
     let mobileNoTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Mobile No."
+        tf.placeholder = "Mobile No.*"
         tf.keyboardType = .numberPad
         return tf
     }()

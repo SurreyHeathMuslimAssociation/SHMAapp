@@ -35,6 +35,7 @@ class HomeController: UIViewController {
         shmaCardView.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         
         navigationItem.title = member.fullName
+        navigationController?.navigationBar.titleTextAttributes = shmaCardView.shmaCardViewModel.getNavigationBarTitleTextAttributes()
         setupShmaCardView()
         fetchAssociationDetails()
         fetchMemberDetails()

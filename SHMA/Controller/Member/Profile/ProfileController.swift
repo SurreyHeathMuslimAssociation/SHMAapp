@@ -8,62 +8,68 @@
 
 import UIKit
 import FirebaseAuth
-import NotificationBannerSwift
 
-class ProfileController: UIViewController {
+class ProfileController: UITableViewController {
     
     var firebaseAuthManager: FirebaseAuthManager!
+    var firebaseDatabaseManager: FirebaseDatabaseManager!
+    let cellId = "cellId"
+    let footerId = "footerId"
+    var member: Member!
+    var profileViewModel: ProfileViewModel!
+    var memberDetails = [String]()
+    var memberLabels = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
-        
+        // removes tableview header space
+        var frame = CGRect.zero
+        frame.size.height = .leastNormalMagnitude
+        tableView.tableHeaderView = UIView(frame: frame)
+       
+        // initialise auth manager
         firebaseAuthManager = FirebaseAuthManager(session: Auth.auth())
-        setupLogOutButton()
+        // initialise view model
+        profileViewModel = ProfileViewModel(traitCollection, member)
+        
+        registerCellAndFooter()
+        setupNavBar()
+        setupMemberLabels()
+        setupMemberDetails()
     }
     
-    private func setupLogOutButton() {
+    private func registerCellAndFooter() {
+        tableView.register(ProfileCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(ProfileFooter.self, forHeaderFooterViewReuseIdentifier: footerId)
+    }
+    
+    private func setupNavBar() {
+        navigationItem.title = profileViewModel.getNavigationBarTitle()
+        navigationController?.navigationBar.titleTextAttributes = profileViewModel.getNavigationBarTitleTextAttributes()
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(handleLogOut(sender:)))
     }
-    @objc func handleLogOut(sender: UIBarButtonItem) {
-        let actionSheet = UIAlertController(title: "LogOut", message: "Are you sure?", preferredStyle: .actionSheet)
-        actionSheet.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
-            self.firebaseAuthManager.signOut(completion: { (success, err) in
-                if let err = err {
-                    let code = AuthErrorCode(rawValue: err._code)
-                    self.showNotification(with: "Error", text: code?.errorMessage ?? "", .danger)
-                    return
-                }
-                self.dismissTabBar()
-            })
-        }))
-        actionSheet.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-        // for ipad
-        if let popoverController = actionSheet.popoverPresentationController {
-            popoverController.barButtonItem = sender
-        }
-        present(actionSheet, animated: true, completion: nil)
+    
+    private func setupMemberLabels() {
+        memberLabels.append("Membership Status")
+        memberLabels.append("First Name")
+        memberLabels.append("Middle Name")
+        memberLabels.append("Last Name")
+        memberLabels.append("D.O.B")
+        memberLabels.append("Email")
+        memberLabels.append("Membership Type")
     }
     
-    private func dismissTabBar() {
-        dismiss(animated: true, completion: nil)
-        tabBarController?.view.removeFromSuperview()
-        // send to first vc
-        UIApplication.shared.keyWindow?.rootViewController = UINavigationController(rootViewController: InitialController())
-        UIApplication.shared.keyWindow?.makeKeyAndVisible()
-        
-    }
-    
-    private func showNotification(with title: String, text: String, _ bannerStyle: BannerStyle) {
-        let errorIv = UIImageView(image: UIImage(named: "Error"))
-        let successIv = UIImageView(image: UIImage(named: "Success"))
-        var banner: NotificationBanner!
-        if bannerStyle == .danger {
-            banner = NotificationBanner(title: title, subtitle: text, leftView: nil, rightView: errorIv, style: bannerStyle, colors: nil)
-        } else {
-            banner = NotificationBanner(title: title, subtitle: text, leftView: successIv, rightView: nil, style: bannerStyle, colors: nil)
+    private func setupMemberDetails() {
+        memberDetails.append(member.status ?? "")
+        memberDetails.append(member.firstName)
+        memberDetails.append(member.middleName ?? "")
+        memberDetails.append(member.lastName)
+        memberDetails.append(member.dob ?? "")
+        memberDetails.append(member.email ?? "")
+        memberDetails.append(member.membershipType)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
         }
-        banner.show()
     }
 }

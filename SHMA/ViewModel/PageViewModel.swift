@@ -47,7 +47,11 @@ class PageViewModel {
         messageAT.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize)], range: message.range(of: "£4"))
         messageAT.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize)], range: message.range(of: "30-00-83"))
         messageAT.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize)], range: message.range(of: "01222601"))
-        messageAT.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: fontSize)], range: message.range(of: "SHMA-\(member.shmaId ?? 0)"))
+        if traitCollection.isIpad {
+            messageAT.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 32)], range: message.range(of: "SHMA-\(member.shmaId ?? 0)"))
+        } else {
+            messageAT.addAttributes([NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)], range: message.range(of: "SHMA-\(member.shmaId ?? 0)"))
+        }
         return messageAT
     }
     

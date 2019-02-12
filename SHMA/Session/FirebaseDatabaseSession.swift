@@ -19,4 +19,5 @@ protocol FirebaseDatabaseSession {
     func saveNewMemberFamilyDetailsToDatabase(_ uid: String, _ family: Family, completion: @escaping (Error?, DatabaseReference?) -> Void)
     func fetchAssociationDetails(completion: @escaping (Association) -> Void)
     func fetchMemberDetails(_ uid: String, completion: @escaping (Member) -> Void)
+    func fetchBusinessesPlaceIdAndIconUrl(completion: @escaping (String, String) -> Void)
 }

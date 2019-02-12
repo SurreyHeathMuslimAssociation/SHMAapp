@@ -42,7 +42,7 @@ class SHMACardView: UIView {
     }()
     let dateAndTimeLabel: UILabel = {
         let label = UILabel()
-        label.adjustsFontSizeToFitWidth = true
+        //label.adjustsFontSizeToFitWidth = true
         label.textColor = .white
         return label
     }()

@@ -76,5 +76,13 @@ class WelcomeViewModelTests: XCTestCase {
         let message = "Just few more steps to go:\n\n✔ Verfiy your account via the link in your email\n✔ Setup your monthly standing order to the following account:\n\nSurrey Heath Muslim Association\n(Registered Charity Number 1126441)\nAl Rayan Bank, 77-79 Edgware Road, London. W2 2HZ\nSort Code: 30-00-83\nAccount Number: 01222601\n\nThe payment reference must be: SHMA-\(member.shmaId ?? 0)"
         XCTAssertEqual(sut.getPaymentPageMessage(), message)
     }
+    
+    func testGetsNavigationBarTitleTextAttributes() {
+        if traitCollection.isIpad {
+            XCTAssertEqual(sut.getNavigationBarTitleTextAttributes(), [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 20)])
+        } else {
+            XCTAssertEqual(sut.getNavigationBarTitleTextAttributes(), [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 16)])
+        }
+    }
 }
 

@@ -8,19 +8,6 @@
 
 import Foundation
 
-//struct Family {
-//    let fullName: String
-//    var email: String?
-//    let dob: String
-//    let relationship: Relationship
-//
-//    init(fullName: String, dob: String, relationship: Relationship) {
-//        self.fullName = fullName
-//        self.dob = dob
-//        self.relationship = relationship
-//    }
-//}
-
 class Family: Codable {
     let fullName: String
     var email: String?
