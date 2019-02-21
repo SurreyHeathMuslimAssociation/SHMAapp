@@ -150,7 +150,6 @@ extension Database: FirebaseDatabaseSession {
             } catch {
                 print(error.localizedDescription)
             }
-            
         }
     }
     
@@ -176,6 +175,17 @@ extension Database: FirebaseDatabaseSession {
                 completion(placeId, iconUrl)
             })
            
+        }
+    }
+    
+    func fetchFuneralContacts(completion: @escaping (FuneralContact) -> Void) {
+        Database.database().reference().child("funeral").observeSingleEvent(of: .value) { (snapshot) in
+            guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
+            allObjects.forEach({ (snapshot) in
+                let funeralContact = FuneralContact(name: snapshot.key, phoneNo: snapshot.value as! String)
+                completion(funeralContact)
+            })
+            
         }
     }
    

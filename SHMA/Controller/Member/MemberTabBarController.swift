@@ -16,6 +16,7 @@ class MemberTabBarController: UITabBarController {
     var homeNavController: UINavigationController!
     var profileNavController: UINavigationController!
     var businessNavController: UINavigationController!
+    var funeralContactsNavController: UINavigationController!
     var isNavAndTabBarHidden: Bool?
     var activityIndicatorView: UIActivityIndicatorView!
     
@@ -49,7 +50,6 @@ class MemberTabBarController: UITabBarController {
                 self.homeNavController.navigationBar.isHidden = self.isNavAndTabBarHidden ?? false
             }
             self.homeNavController.tabBarItem = UITabBarItem(title: "Home", image: #imageLiteral(resourceName: "Home"), selectedImage: #imageLiteral(resourceName: "Home"))
-            
             self.setupTabBar(member)
         }
     }
@@ -64,7 +64,11 @@ class MemberTabBarController: UITabBarController {
         self.businessNavController = UINavigationController(rootViewController: businessController)
         self.businessNavController.tabBarItem = UITabBarItem(title: "Business", image: #imageLiteral(resourceName: "Business"), selectedImage: #imageLiteral(resourceName: "Business"))
         
-        self.viewControllers = [self.homeNavController, self.businessNavController, self.profileNavController]
+        let funeralController = FuneralContactsController()
+        self.funeralContactsNavController = UINavigationController(rootViewController: funeralController)
+        self.funeralContactsNavController.tabBarItem = UITabBarItem(title: "Funeral", image: #imageLiteral(resourceName: "Funeral"), selectedImage: #imageLiteral(resourceName: "Funeral"))
+        
+        self.viewControllers = [self.homeNavController, self.businessNavController, self.profileNavController, self.funeralContactsNavController]
         self.activityIndicatorView.stopAnimating()
     }
 }

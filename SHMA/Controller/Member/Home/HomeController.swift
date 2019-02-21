@@ -9,23 +9,33 @@
 import UIKit
 import FirebaseAuth
 import FirebaseDatabase
+import CoreLocation
 
 class HomeController: UIViewController {
     
     var shmaCardView: SHMACardView!
+    var prayerTimesView: PrayerTimesView!
+    
     var shmaCardViewTopAnchor: NSLayoutConstraint?
     var shmaCardViewWidthAnchor: NSLayoutConstraint?
     var shmaCardViewHeightAnchor: NSLayoutConstraint?
     var shmaCardViewCenterYAnchor: NSLayoutConstraint?
     var shmaCardViewRightAnchor: NSLayoutConstraint?
+    
+    var prayerTimesViewTopAnchor: NSLayoutConstraint?
+    var prayerTimesViewLeftAnchor: NSLayoutConstraint?
+    
     var firebaseDatabaseManager: FirebaseDatabaseManager!
     var member: Member!
+    var networkManager: NetworkManager!
+    var locationManager: CLLocationManager!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .white
+        
         firebaseDatabaseManager = FirebaseDatabaseManager(session: Database.database())
+        networkManager = NetworkManager(session: URLSession.shared)
         
         guard let navBarHeight = navigationController?.navigationBar.frame.height else { return }
         guard let tabBarHeight = tabBarController?.tabBar.frame.height else { return }
@@ -34,11 +44,17 @@ class HomeController: UIViewController {
         view.addSubview(shmaCardView)
         shmaCardView.anchor(top: nil, left: view.leftAnchor, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 10, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         
-        navigationItem.title = member.fullName
-        navigationController?.navigationBar.titleTextAttributes = shmaCardView.shmaCardViewModel.getNavigationBarTitleTextAttributes()
+        prayerTimesView = PrayerTimesView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+        view.addSubview(prayerTimesView)
+        prayerTimesView.anchor(top: nil, left: nil, bottom: view.safeAreaLayoutGuide.bottomAnchor, right: view.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        prayerTimesView.prayerTimesViewModel.traitCollection = traitCollection
+        
+        saveCurrentLocation()
         setupShmaCardView()
-        fetchAssociationDetails()
-        fetchMemberDetails()
+        setupPrayerTimesView()
+        setupNavBar()
+        fetchAssociationDetailsAndSetupMember()
+        setupPrayerTitles()
     }
     
     private func setupShmaCardView() {
@@ -64,22 +80,35 @@ class HomeController: UIViewController {
         shmaCardViewCenterYAnchor?.isActive = true
     }
     
-    private func fetchAssociationDetails() {
-        firebaseDatabaseManager.fetchAssociationDetails { (association) in
-            self.shmaCardView.association = association
+    private func setupPrayerTimesView() {
+        prayerTimesViewTopAnchor?.isActive = false
+        prayerTimesViewLeftAnchor?.isActive = false
+        
+        if !traitCollection.isIphonePortrait {
+            prayerTimesViewTopAnchor = prayerTimesView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0)
+            prayerTimesViewTopAnchor?.isActive = true
+            
+            prayerTimesViewLeftAnchor = prayerTimesView.leftAnchor.constraint(equalTo: shmaCardView.rightAnchor, constant: 5)
+            prayerTimesViewLeftAnchor?.isActive = true
+        } else {
+            prayerTimesViewTopAnchor = prayerTimesView.topAnchor.constraint(equalTo: shmaCardView.bottomAnchor, constant: 5)
+            prayerTimesViewTopAnchor?.isActive = true
+            
+            prayerTimesViewLeftAnchor = prayerTimesView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 5)
+            prayerTimesViewLeftAnchor?.isActive = true
         }
     }
     
-    private func fetchMemberDetails() {
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-        firebaseDatabaseManager.fetchMemberDetails(uid) { (member) in
-            self.shmaCardView.member = member
-        }
+    private func setupNavBar() {
+        navigationItem.title = member.fullName
+        navigationController?.navigationBar.titleTextAttributes = shmaCardView.shmaCardViewModel.getNavigationBarTitleTextAttributes()
     }
-
+    
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         shmaCardView.traitCollectionDidChange(previousTraitCollection)
+        prayerTimesView.prayerTimesViewModel.traitCollection = traitCollection
         setupShmaCardView()
+        setupPrayerTimesView()
     }
 }

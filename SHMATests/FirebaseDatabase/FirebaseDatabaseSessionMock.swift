@@ -110,7 +110,11 @@ class FirebaseDatabaseSessionMock: FirebaseDatabaseSession {
     }
     
     func fetchBusinessesPlaceIdAndIconUrl(completion: @escaping (String, String) -> Void) {
-        
+         didInitiateDatabaseCall = true
+    }
+    
+    func fetchFuneralContacts(completion: @escaping (FuneralContact) -> Void) {
+         didInitiateDatabaseCall = true
     }
     
 }

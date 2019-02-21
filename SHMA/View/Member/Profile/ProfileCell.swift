@@ -23,7 +23,7 @@ class ProfileCell: UITableViewCell {
         tv.isScrollEnabled = false
         return tv
     }()
-    
+
     var businessViewModel: BusinessViewModel? {
         didSet {
             guard let businessViewModel = businessViewModel else { return }
@@ -64,7 +64,11 @@ class ProfileCell: UITableViewCell {
         didSet {
             let updatedString = detail?.replacingOccurrences(of: "[\\[\\]\"]", with: "", options: .regularExpression, range: nil)
             let removedUnderscores = updatedString?.replacingOccurrences(of: "_", with: " ")
-            detailTextView.text = removedUnderscores
+            if businessViewModel != nil {
+                detailTextView.text = removedUnderscores
+            } else {
+                detailTextView.text = updatedString
+            }
         }
     }
     

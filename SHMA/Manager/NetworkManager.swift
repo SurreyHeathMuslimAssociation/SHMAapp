@@ -22,6 +22,12 @@ class NetworkManager {
         }
     }
     
+    func fetchPrayerTimes(using date: String, _ lat: String, _ lon: String, completion: @escaping PrayerTimesAPICallback) {
+        session.fetchPrayerTimes(using: date, lat, lon) { (response) in
+            completion(response)
+        }
+    }
+    
     func loadData(from url: URL, completionHandler: @escaping NetworkCallback) {
         session.loadData(from: url) { (data, response, error) in
             completionHandler(data, response, error)

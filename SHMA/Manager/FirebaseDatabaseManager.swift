@@ -77,4 +77,9 @@ class FirebaseDatabaseManager {
         }
     }
    
+    func fetchFuneralContacts(completion: @escaping (FuneralContact) -> Void) {
+        session.fetchFuneralContacts { (funeralContact) in
+            completion(funeralContact)
+        }
+    }
 }

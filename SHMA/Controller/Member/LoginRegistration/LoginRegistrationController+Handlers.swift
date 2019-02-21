@@ -79,7 +79,8 @@ extension LoginRegistrationController {
     
     private func registerExistingMemberToFirebase(_ member: Member, _ password: String) {
         // create user
-        firebaseAuthManager.createUser(with: member.email ?? "", password: password) { (result, err) in
+        guard let email = member.email else { return }
+        firebaseAuthManager.createUser(with: email, password: password) { (result, err) in
             if let err = err {
                 let code = AuthErrorCode(rawValue: err._code)
                 self.showErrorAlert(with: code?.errorMessage ?? "", .danger)
@@ -138,6 +139,11 @@ extension LoginRegistrationController {
         guard let name = loginRegistrationView.nameTextField.text, name.count > 0, let email = loginRegistrationView.emailTextField.text, email.count > 0, let password = loginRegistrationView.passwordTextField.text, password.count > 0, let dob = loginRegistrationView.dobTextField.text, dob.count > 0, let addressLineOne = loginRegistrationView.addressLineOneTextField.text, addressLineOne.count > 0, let town = loginRegistrationView.townTextField.text, town.count > 0, let postcode = loginRegistrationView.postcodeTextField.text, postcode.count > 0, let mobileNo = loginRegistrationView.mobileNoTextField.text, mobileNo.count > 0 else {
             // display alert if any fields are empty
             showErrorAlert(with: "Please ensure all fields are filled in", .danger)
+            viewLoading(false)
+            return
+        }
+        if name.components(separatedBy: " ").count < 2 {
+            showErrorAlert(with: "Please provide a surname", .danger)
             viewLoading(false)
             return
         }
@@ -251,30 +257,28 @@ extension LoginRegistrationController {
     
     private func saveNewMemberDetailsToDatabase(_ uid: String, _ shmaId: Int) {
         let components = memberName.components(separatedBy: " ")
-        if components.count > 0 {
-            // extract first, middle and last names
-            guard let firstName = components.first?.capitalized else { return }
-            let middleNameComponents = components.dropFirst().dropLast()
-            let middleName = middleNameComponents.joined(separator: " ").capitalized
-            guard let lastName = components.last?.capitalized else { return }
-            // defines json value
-            let value = ["firstName": firstName, "middleName": middleName, "lastName": lastName, "email": memberEmail, "DOB": memberDob, "addressLineOne": memberAddressLineOne, "addressLineTwo": memberAddressLineTwo, "town": memberTown, "county": memberCounty, "postcode": memberPostcode, "mobileNo": memberMobileNo, "status": memberStatus, "membershipType": membershipType, "shmaId": shmaId] as [String : Any]
-            do {
-                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
-                let member = try JSONDecoder().decode(Member.self, from: jsonData)
-                firebaseDatabaseManager.saveNewMemberDetailsToDatabase(uid, member) { (err, _) in
-                    if let err = err {
-                        let code = AuthErrorCode(rawValue: err._code)
-                        self.showErrorAlert(with: code?.errorMessage ?? "", .danger)
-                        self.viewLoading(false)
-                        return
-                    }
-                    print("user saved, save fam details")
-                    self.saveNewMemberFamilyDetailsToDatabase(uid, shmaId)
+        // extract first, middle and last names
+        guard let firstName = components.first?.capitalized else { return }
+        let middleNameComponents = components.dropFirst().dropLast()
+        let middleName = middleNameComponents.joined(separator: " ").capitalized
+        guard let lastName = components.last?.capitalized else { return }
+        // defines json value
+        let value = ["firstName": firstName, "middleName": middleName, "lastName": lastName, "email": memberEmail, "DOB": memberDob, "addressLineOne": memberAddressLineOne, "addressLineTwo": memberAddressLineTwo, "town": memberTown, "county": memberCounty, "postcode": memberPostcode, "mobileNo": memberMobileNo, "status": memberStatus, "membershipType": membershipType, "shmaId": shmaId] as [String : Any]
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+            let member = try JSONDecoder().decode(Member.self, from: jsonData)
+            firebaseDatabaseManager.saveNewMemberDetailsToDatabase(uid, member) { (err, _) in
+                if let err = err {
+                    let code = AuthErrorCode(rawValue: err._code)
+                    self.showErrorAlert(with: code?.errorMessage ?? "", .danger)
+                    self.viewLoading(false)
+                    return
                 }
-            } catch {
-                print(error.localizedDescription)
+                print("user saved, save fam details")
+                self.saveNewMemberFamilyDetailsToDatabase(uid, shmaId)
             }
+        } catch {
+            print(error.localizedDescription)
         }
     }
     

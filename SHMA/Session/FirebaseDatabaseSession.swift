@@ -20,4 +20,5 @@ protocol FirebaseDatabaseSession {
     func fetchAssociationDetails(completion: @escaping (Association) -> Void)
     func fetchMemberDetails(_ uid: String, completion: @escaping (Member) -> Void)
     func fetchBusinessesPlaceIdAndIconUrl(completion: @escaping (String, String) -> Void)
+    func fetchFuneralContacts(completion: @escaping (FuneralContact) -> Void)
 }

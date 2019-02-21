@@ -37,6 +37,7 @@ class WelcomeView: UIView {
         pc.pageIndicatorTintColor = .lightGray
         pc.currentPageIndicatorTintColor = .yellow
         pc.isHidden = true
+        pc.isUserInteractionEnabled = false
         return pc
     }()
     

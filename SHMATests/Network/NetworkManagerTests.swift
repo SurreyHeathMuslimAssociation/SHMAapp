@@ -55,5 +55,25 @@ class NetowrkManagerTests: XCTestCase {
         }
         XCTAssert(session.googlePlaceId == placeId)
     }
+    
+    func testResumeWasCalledOnPrayerTimesAPI() {
+        let date = "12/12/2008"
+        let lat = "51.1212331"
+        let lon = "-0.1234444"
+        session.fetchPrayerTimes(using: date, lat, lon) { (response) in
+        }
+        XCTAssert(session.wasResumeCalled)
+    }
+    
+    func testGetsPrayerTimesUsingDateLatAndLon() {
+        let date = "12/12/2008"
+        let lat = "51.1212331"
+        let lon = "-0.1234444"
+        session.fetchPrayerTimes(using: date, lat, lon) { (response) in
+        }
+        XCTAssert(session.prayerDate == date)
+        XCTAssert(session.userLat == lat)
+        XCTAssert(session.userLon == lon)
+    }
 }
 

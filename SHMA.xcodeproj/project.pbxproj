@@ -87,6 +87,18 @@
 		394F6CBE21FF223C000AB415 /* WelcomeView+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CBD21FF223C000AB415 /* WelcomeView+Datasource.swift */; };
 		394F6CC021FF2533000AB415 /* WelcomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CBF21FF2533000AB415 /* WelcomeViewCell.swift */; };
 		3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952259D21D0FA5600FD411C /* CorporateView.swift */; };
+		396B1CE8221AFD1A00E4FB44 /* PrayerTimesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CE7221AFD1A00E4FB44 /* PrayerTimesResponse.swift */; };
+		396B1CEA221AFD8400E4FB44 /* PrayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CE9221AFD8400E4FB44 /* PrayerData.swift */; };
+		396B1CEC221AFE3200E4FB44 /* Timings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CEB221AFE3200E4FB44 /* Timings.swift */; };
+		396B1CF0221B05C500E4FB44 /* HomeController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CEF221B05C500E4FB44 /* HomeController+Delegate.swift */; };
+		396B1CF2221B0EC800E4FB44 /* PrayerDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CF1221B0EC800E4FB44 /* PrayerDate.swift */; };
+		396B1CF4221B0F3C00E4FB44 /* Hijri.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CF3221B0F3C00E4FB44 /* Hijri.swift */; };
+		396B1CF6221B0FDB00E4FB44 /* PrayerTimesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CF5221B0FDB00E4FB44 /* PrayerTimesView.swift */; };
+		396B1CF8221B112500E4FB44 /* PrayerTimesView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CF7221B112500E4FB44 /* PrayerTimesView+Delegate.swift */; };
+		396B1CFA221B112C00E4FB44 /* PrayerTimesView+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CF9221B112C00E4FB44 /* PrayerTimesView+Datasource.swift */; };
+		396B1CFC221B117800E4FB44 /* PrayerTimesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CFB221B117800E4FB44 /* PrayerTimesCell.swift */; };
+		396B1CFE221B2F2E00E4FB44 /* HomeController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CFD221B2F2E00E4FB44 /* HomeController+Handlers.swift */; };
+		396B1D00221B302700E4FB44 /* PrayerTimesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CFF221B302700E4FB44 /* PrayerTimesViewModel.swift */; };
 		396C425C21F66C2C00307022 /* PasswordResetViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396C425B21F66C2C00307022 /* PasswordResetViewModelTests.swift */; };
 		396C425E21F66C3E00307022 /* PasswordResetViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396C425D21F66C3E00307022 /* PasswordResetViewTests.swift */; };
 		397110BC220CAFEE004B9906 /* BusinessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 397110BB220CAFEE004B9906 /* BusinessView.swift */; };
@@ -94,6 +106,10 @@
 		39803D78220882B9005458E1 /* ProfileFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39803D77220882B9005458E1 /* ProfileFooter.swift */; };
 		39803D7B22088E53005458E1 /* ProfileViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39803D7A22088E53005458E1 /* ProfileViewModelTests.swift */; };
 		39803D7E2208B1AB005458E1 /* BusinessController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39803D7D2208B1AB005458E1 /* BusinessController.swift */; };
+		399549692218AD6F0053F9F3 /* FuneralContactsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 399549682218AD6F0053F9F3 /* FuneralContactsController.swift */; };
+		3995496C2218B1D70053F9F3 /* FuneralContactsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995496B2218B1D70053F9F3 /* FuneralContactsView.swift */; };
+		3995496E2218B22F0053F9F3 /* FuneralContactsView+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995496D2218B22F0053F9F3 /* FuneralContactsView+Datasource.swift */; };
+		399549702218B47B0053F9F3 /* FuneralContact.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3995496F2218B47B0053F9F3 /* FuneralContact.swift */; };
 		39BD10B121F2780400A3ADD9 /* LoginRegistrationController+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BD10B021F2780400A3ADD9 /* LoginRegistrationController+Delegate.swift */; };
 		39D03CD02212E6FC002375B6 /* BusinessViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D03CCF2212E6FC002375B6 /* BusinessViewModelTests.swift */; };
 		39D03CD42212F884002375B6 /* BusinessViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D03CD32212F884002375B6 /* BusinessViewTests.swift */; };
@@ -115,6 +131,9 @@
 		39DF57B921E8ED9400387A74 /* FirebaseAuthSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57B821E8ED9400387A74 /* FirebaseAuthSession.swift */; };
 		39DF57BB21E8EDA700387A74 /* FirebaseAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57BA21E8EDA700387A74 /* FirebaseAuthManager.swift */; };
 		39DF57BD21E8EDBA00387A74 /* FirebaseAuth+Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57BC21E8EDBA00387A74 /* FirebaseAuth+Util.swift */; };
+		39EF83962219BBF700320075 /* FuneralContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EF83952219BBF700320075 /* FuneralContactViewModel.swift */; };
+		39EF83982219C64D00320075 /* FuneralContactsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EF83972219C64D00320075 /* FuneralContactsCell.swift */; };
+		39EF839A2219C8A200320075 /* FuneralContactsView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39EF83992219C8A200320075 /* FuneralContactsView+Delegate.swift */; };
 		39F0DA1C21E634BB0073D047 /* LoginRegistrationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0DA1B21E634BB0073D047 /* LoginRegistrationController.swift */; };
 		39F0DA1E21E634EA0073D047 /* LoginRegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0DA1D21E634EA0073D047 /* LoginRegistrationView.swift */; };
 		39F0DA2021E640E80073D047 /* LoginRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F0DA1F21E640E80073D047 /* LoginRegistrationViewModel.swift */; };
@@ -123,6 +142,8 @@
 		39F4AD4521F6260E00B17C63 /* PasswordResetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F4AD4421F6260E00B17C63 /* PasswordResetView.swift */; };
 		39F4AD4721F6291900B17C63 /* PasswordResetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F4AD4621F6291900B17C63 /* PasswordResetViewModel.swift */; };
 		39F4AD4B21F63DB100B17C63 /* PasswordResetController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F4AD4A21F63DB100B17C63 /* PasswordResetController+Handlers.swift */; };
+		39F58234221C38D800D8C16A /* PrayerTimesViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F58233221C38D800D8C16A /* PrayerTimesViewModelTests.swift */; };
+		39F58237221C3A3600D8C16A /* FuneralContactsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39F58236221C3A3600D8C16A /* FuneralContactsViewModelTests.swift */; };
 		39FFD97321FC702800EC4058 /* Member.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFD97221FC702800EC4058 /* Member.swift */; };
 		39FFD97521FC776E00EC4058 /* SHMACardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFD97421FC776E00EC4058 /* SHMACardViewModel.swift */; };
 		39FFD97721FC7C0900EC4058 /* Association.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39FFD97621FC7C0900EC4058 /* Association.swift */; };
@@ -227,6 +248,18 @@
 		394F6CBD21FF223C000AB415 /* WelcomeView+Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WelcomeView+Datasource.swift"; sourceTree = "<group>"; };
 		394F6CBF21FF2533000AB415 /* WelcomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCell.swift; sourceTree = "<group>"; };
 		3952259D21D0FA5600FD411C /* CorporateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateView.swift; sourceTree = "<group>"; };
+		396B1CE7221AFD1A00E4FB44 /* PrayerTimesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesResponse.swift; sourceTree = "<group>"; };
+		396B1CE9221AFD8400E4FB44 /* PrayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerData.swift; sourceTree = "<group>"; };
+		396B1CEB221AFE3200E4FB44 /* Timings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timings.swift; sourceTree = "<group>"; };
+		396B1CEF221B05C500E4FB44 /* HomeController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeController+Delegate.swift"; sourceTree = "<group>"; };
+		396B1CF1221B0EC800E4FB44 /* PrayerDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerDate.swift; sourceTree = "<group>"; };
+		396B1CF3221B0F3C00E4FB44 /* Hijri.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hijri.swift; sourceTree = "<group>"; };
+		396B1CF5221B0FDB00E4FB44 /* PrayerTimesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesView.swift; sourceTree = "<group>"; };
+		396B1CF7221B112500E4FB44 /* PrayerTimesView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerTimesView+Delegate.swift"; sourceTree = "<group>"; };
+		396B1CF9221B112C00E4FB44 /* PrayerTimesView+Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrayerTimesView+Datasource.swift"; sourceTree = "<group>"; };
+		396B1CFB221B117800E4FB44 /* PrayerTimesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesCell.swift; sourceTree = "<group>"; };
+		396B1CFD221B2F2E00E4FB44 /* HomeController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeController+Handlers.swift"; sourceTree = "<group>"; };
+		396B1CFF221B302700E4FB44 /* PrayerTimesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesViewModel.swift; sourceTree = "<group>"; };
 		396C425B21F66C2C00307022 /* PasswordResetViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewModelTests.swift; sourceTree = "<group>"; };
 		396C425D21F66C3E00307022 /* PasswordResetViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewTests.swift; sourceTree = "<group>"; };
 		397110BB220CAFEE004B9906 /* BusinessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessView.swift; sourceTree = "<group>"; };
@@ -234,6 +267,10 @@
 		39803D77220882B9005458E1 /* ProfileFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileFooter.swift; sourceTree = "<group>"; };
 		39803D7A22088E53005458E1 /* ProfileViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModelTests.swift; sourceTree = "<group>"; };
 		39803D7D2208B1AB005458E1 /* BusinessController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessController.swift; sourceTree = "<group>"; };
+		399549682218AD6F0053F9F3 /* FuneralContactsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuneralContactsController.swift; sourceTree = "<group>"; };
+		3995496B2218B1D70053F9F3 /* FuneralContactsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuneralContactsView.swift; sourceTree = "<group>"; };
+		3995496D2218B22F0053F9F3 /* FuneralContactsView+Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FuneralContactsView+Datasource.swift"; sourceTree = "<group>"; };
+		3995496F2218B47B0053F9F3 /* FuneralContact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuneralContact.swift; sourceTree = "<group>"; };
 		39BD10B021F2780400A3ADD9 /* LoginRegistrationController+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginRegistrationController+Delegate.swift"; sourceTree = "<group>"; };
 		39D03CCF2212E6FC002375B6 /* BusinessViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewModelTests.swift; sourceTree = "<group>"; };
 		39D03CD32212F884002375B6 /* BusinessViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewTests.swift; sourceTree = "<group>"; };
@@ -255,6 +292,9 @@
 		39DF57B821E8ED9400387A74 /* FirebaseAuthSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthSession.swift; sourceTree = "<group>"; };
 		39DF57BA21E8EDA700387A74 /* FirebaseAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseAuthManager.swift; sourceTree = "<group>"; };
 		39DF57BC21E8EDBA00387A74 /* FirebaseAuth+Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FirebaseAuth+Util.swift"; sourceTree = "<group>"; };
+		39EF83952219BBF700320075 /* FuneralContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuneralContactViewModel.swift; sourceTree = "<group>"; };
+		39EF83972219C64D00320075 /* FuneralContactsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuneralContactsCell.swift; sourceTree = "<group>"; };
+		39EF83992219C8A200320075 /* FuneralContactsView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FuneralContactsView+Delegate.swift"; sourceTree = "<group>"; };
 		39F0DA1B21E634BB0073D047 /* LoginRegistrationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationController.swift; sourceTree = "<group>"; };
 		39F0DA1D21E634EA0073D047 /* LoginRegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationView.swift; sourceTree = "<group>"; };
 		39F0DA1F21E640E80073D047 /* LoginRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationViewModel.swift; sourceTree = "<group>"; };
@@ -263,6 +303,8 @@
 		39F4AD4421F6260E00B17C63 /* PasswordResetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetView.swift; sourceTree = "<group>"; };
 		39F4AD4621F6291900B17C63 /* PasswordResetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordResetViewModel.swift; sourceTree = "<group>"; };
 		39F4AD4A21F63DB100B17C63 /* PasswordResetController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PasswordResetController+Handlers.swift"; sourceTree = "<group>"; };
+		39F58233221C38D800D8C16A /* PrayerTimesViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesViewModelTests.swift; sourceTree = "<group>"; };
+		39F58236221C3A3600D8C16A /* FuneralContactsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FuneralContactsViewModelTests.swift; sourceTree = "<group>"; };
 		39FFD97221FC702800EC4058 /* Member.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Member.swift; sourceTree = "<group>"; };
 		39FFD97421FC776E00EC4058 /* SHMACardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHMACardViewModel.swift; sourceTree = "<group>"; };
 		39FFD97621FC7C0900EC4058 /* Association.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Association.swift; sourceTree = "<group>"; };
@@ -324,6 +366,7 @@
 				3916E6272201FC59009CC9A2 /* Home */,
 				39803D7922088E1D005458E1 /* Profile */,
 				3908AEC52211EF1D0045E137 /* Business */,
+				39F58235221C3A1F00D8C16A /* FuneralContacts */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -357,6 +400,7 @@
 				390E4D9E21F772C4009BC363 /* Home */,
 				39803D7C2208B17C005458E1 /* Business */,
 				390E4DA321F776F6009BC363 /* Profile */,
+				399549672218AD430053F9F3 /* FuneralContacts */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -370,6 +414,7 @@
 				390E4DA621F78B74009BC363 /* Home */,
 				397110BA220CAFCF004B9906 /* Business */,
 				390E4DA721F78B80009BC363 /* Profile */,
+				3995496A2218B1790053F9F3 /* FuneralContacts */,
 			);
 			path = Member;
 			sourceTree = "<group>";
@@ -412,6 +457,8 @@
 			isa = PBXGroup;
 			children = (
 				390E4D9F21F772E1009BC363 /* HomeController.swift */,
+				396B1CFD221B2F2E00E4FB44 /* HomeController+Handlers.swift */,
+				396B1CEF221B05C500E4FB44 /* HomeController+Delegate.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -431,6 +478,10 @@
 			isa = PBXGroup;
 			children = (
 				390E4DA821F78B9E009BC363 /* SHMACardView.swift */,
+				396B1CF5221B0FDB00E4FB44 /* PrayerTimesView.swift */,
+				396B1CF7221B112500E4FB44 /* PrayerTimesView+Delegate.swift */,
+				396B1CF9221B112C00E4FB44 /* PrayerTimesView+Datasource.swift */,
+				396B1CFB221B117800E4FB44 /* PrayerTimesCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -477,6 +528,7 @@
 			isa = PBXGroup;
 			children = (
 				3916E6282201FC8C009CC9A2 /* SHMACardViewModelTests.swift */,
+				39F58233221C38D800D8C16A /* PrayerTimesViewModelTests.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -611,9 +663,11 @@
 				3907928221EF9D4F00AD4539 /* Family.swift */,
 				39FFD97221FC702800EC4058 /* Member.swift */,
 				39FFD97621FC7C0900EC4058 /* Association.swift */,
+				3995496F2218B47B0053F9F3 /* FuneralContact.swift */,
 				394F6CB921FF20A9000AB415 /* Page.swift */,
 				390232872210224200E205B8 /* Business.swift */,
 				3904DF292210976E0096BBFD /* GooglePlaces */,
+				396B1CE6221AFCD800E4FB44 /* PrayerTimes */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -640,8 +694,10 @@
 				3912A66A21F8861F00357BF4 /* WelcomeViewModel.swift */,
 				394F6CB721FF2038000AB415 /* PageViewModel.swift */,
 				39FFD97421FC776E00EC4058 /* SHMACardViewModel.swift */,
+				396B1CFF221B302700E4FB44 /* PrayerTimesViewModel.swift */,
 				39803D7522087DC4005458E1 /* ProfileViewModel.swift */,
 				390CDB52220F7FDC00920041 /* BusinessViewModel.swift */,
+				39EF83952219BBF700320075 /* FuneralContactViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -654,6 +710,18 @@
 				39063E5921E6342E00A020EE /* Member */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		396B1CE6221AFCD800E4FB44 /* PrayerTimes */ = {
+			isa = PBXGroup;
+			children = (
+				396B1CE7221AFD1A00E4FB44 /* PrayerTimesResponse.swift */,
+				396B1CE9221AFD8400E4FB44 /* PrayerData.swift */,
+				396B1CEB221AFE3200E4FB44 /* Timings.swift */,
+				396B1CF1221B0EC800E4FB44 /* PrayerDate.swift */,
+				396B1CF3221B0F3C00E4FB44 /* Hijri.swift */,
+			);
+			path = PrayerTimes;
 			sourceTree = "<group>";
 		};
 		396C425A21F66C0C00307022 /* PasswordReset */ = {
@@ -698,6 +766,25 @@
 				3908AED422121D930045E137 /* BusinessDetailController+Delegate.swift */,
 			);
 			path = Business;
+			sourceTree = "<group>";
+		};
+		399549672218AD430053F9F3 /* FuneralContacts */ = {
+			isa = PBXGroup;
+			children = (
+				399549682218AD6F0053F9F3 /* FuneralContactsController.swift */,
+			);
+			path = FuneralContacts;
+			sourceTree = "<group>";
+		};
+		3995496A2218B1790053F9F3 /* FuneralContacts */ = {
+			isa = PBXGroup;
+			children = (
+				3995496B2218B1D70053F9F3 /* FuneralContactsView.swift */,
+				39EF83992219C8A200320075 /* FuneralContactsView+Delegate.swift */,
+				3995496D2218B22F0053F9F3 /* FuneralContactsView+Datasource.swift */,
+				39EF83972219C64D00320075 /* FuneralContactsCell.swift */,
+			);
+			path = FuneralContacts;
 			sourceTree = "<group>";
 		};
 		39D03CD722130E35002375B6 /* Network */ = {
@@ -792,6 +879,14 @@
 				39F4AD4421F6260E00B17C63 /* PasswordResetView.swift */,
 			);
 			path = PasswordReset;
+			sourceTree = "<group>";
+		};
+		39F58235221C3A1F00D8C16A /* FuneralContacts */ = {
+			isa = PBXGroup;
+			children = (
+				39F58236221C3A3600D8C16A /* FuneralContactsViewModelTests.swift */,
+			);
+			path = FuneralContacts;
 			sourceTree = "<group>";
 		};
 		CD4EA83B1E20D75D76B1E9CE /* Frameworks */ = {
@@ -993,6 +1088,7 @@
 				390232822210211600E205B8 /* BusinessView+Delegate.swift in Sources */,
 				3907927F21EF7DFC00AD4539 /* LoginRegistrationView+Delegate.swift in Sources */,
 				3904DF2D2210985A0096BBFD /* Place.swift in Sources */,
+				396B1D00221B302700E4FB44 /* PrayerTimesViewModel.swift in Sources */,
 				3907928121EF7E0600AD4539 /* LoginRegistrationView+Datasource.swift in Sources */,
 				393F4B7621CBCBEF009B4239 /* InitialController.swift in Sources */,
 				39F0DA1E21E634EA0073D047 /* LoginRegistrationView.swift in Sources */,
@@ -1000,6 +1096,7 @@
 				3905914121E7920D00F297AC /* TermsAndConditionsController.swift in Sources */,
 				393C8C202206161700FA7EB7 /* ProfileCell.swift in Sources */,
 				390E4DA221F773B7009BC363 /* MemberTabBarController.swift in Sources */,
+				399549702218B47B0053F9F3 /* FuneralContact.swift in Sources */,
 				3908AEC92211F1930045E137 /* BusinessDetailView.swift in Sources */,
 				3905913F21E78D8E00F297AC /* TermsAndConditionsView.swift in Sources */,
 				3904DF3722109E840096BBFD /* URLSession+Util.swift in Sources */,
@@ -1009,6 +1106,7 @@
 				394731E621DFDB9F00DB9425 /* FirebaseDatabase+Util.swift in Sources */,
 				3908AECD2211F1D30045E137 /* BusinessDetailView+Datasource.swift in Sources */,
 				3908AED32212177B0045E137 /* BusinessDetailHeader.swift in Sources */,
+				3995496E2218B22F0053F9F3 /* FuneralContactsView+Datasource.swift in Sources */,
 				39282A1521CE49AD003E3AAA /* InitialView.swift in Sources */,
 				394731E421DFDADD00DB9425 /* FirebaseDatabaseManager.swift in Sources */,
 				39803D7622087DC4005458E1 /* ProfileViewModel.swift in Sources */,
@@ -1016,14 +1114,18 @@
 				39282A0D21CE3D43003E3AAA /* MemberController.swift in Sources */,
 				39803D78220882B9005458E1 /* ProfileFooter.swift in Sources */,
 				39282A0F21CE3D4B003E3AAA /* CorporateController.swift in Sources */,
+				396B1CF0221B05C500E4FB44 /* HomeController+Delegate.swift in Sources */,
 				393F4B7421CBCBEF009B4239 /* AppDelegate.swift in Sources */,
 				39F0DA2021E640E80073D047 /* LoginRegistrationViewModel.swift in Sources */,
 				390E4DA021F772E1009BC363 /* HomeController.swift in Sources */,
 				39D4324B21E51AD700F62B31 /* MemberViewModel.swift in Sources */,
 				3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */,
 				394731E921DFDE0B00DB9425 /* Reachability.swift in Sources */,
+				396B1CFA221B112C00E4FB44 /* PrayerTimesView+Datasource.swift in Sources */,
+				396B1CFC221B117800E4FB44 /* PrayerTimesCell.swift in Sources */,
 				394F6CBE21FF223C000AB415 /* WelcomeView+Datasource.swift in Sources */,
 				39803D7E2208B1AB005458E1 /* BusinessController.swift in Sources */,
+				399549692218AD6F0053F9F3 /* FuneralContactsController.swift in Sources */,
 				39063E5621E6334B00A020EE /* MemberController+Handlers.swift in Sources */,
 				390E4DA521F77706009BC363 /* ProfileController.swift in Sources */,
 				3908AEC72211F0E80045E137 /* BusinessDetailController.swift in Sources */,
@@ -1036,12 +1138,15 @@
 				390232842210212100E205B8 /* BusinessView+Datasource.swift in Sources */,
 				3912A66B21F8861F00357BF4 /* WelcomeViewModel.swift in Sources */,
 				39282A1321CE4184003E3AAA /* InitialController+Handlers.swift in Sources */,
+				396B1CE8221AFD1A00E4FB44 /* PrayerTimesResponse.swift in Sources */,
 				3904DF3522109E100096BBFD /* NetworkManager.swift in Sources */,
 				3905914921E798C800F297AC /* TermsAndConditionsController+Handlers.swift in Sources */,
 				390E4D9B21F73F97009BC363 /* AuthErrorCode+Util.swift in Sources */,
 				390E4DA921F78B9E009BC363 /* SHMACardView.swift in Sources */,
+				396B1CF4221B0F3C00E4FB44 /* Hijri.swift in Sources */,
 				3905914321E793C500F297AC /* TermsAndConditionsView+Handlers.swift in Sources */,
 				39F4AD4B21F63DB100B17C63 /* PasswordResetController+Handlers.swift in Sources */,
+				396B1CF6221B0FDB00E4FB44 /* PrayerTimesView.swift in Sources */,
 				393C8C1A2206130F00FA7EB7 /* ProfileController+Handlers.swift in Sources */,
 				39F4AD4521F6260E00B17C63 /* PasswordResetView.swift in Sources */,
 				3905913D21E780CB00F297AC /* LoginRegistrationController+Handlers.swift in Sources */,
@@ -1054,15 +1159,20 @@
 				39DF57BB21E8EDA700387A74 /* FirebaseAuthManager.swift in Sources */,
 				394C71DA21D3786E00BF9D0D /* CorporateViewModel.swift in Sources */,
 				3907928321EF9D4F00AD4539 /* Family.swift in Sources */,
+				3995496C2218B1D70053F9F3 /* FuneralContactsView.swift in Sources */,
 				39F4AD3C21F6098C00B17C63 /* LoginRegistrationView+AddingSubviews.swift in Sources */,
 				3905913B21E766BE00F297AC /* LoginRegistrationView+Handlers.swift in Sources */,
+				396B1CFE221B2F2E00E4FB44 /* HomeController+Handlers.swift in Sources */,
 				390CDB53220F7FDC00920041 /* BusinessViewModel.swift in Sources */,
 				39BD10B121F2780400A3ADD9 /* LoginRegistrationController+Delegate.swift in Sources */,
+				39EF83962219BBF700320075 /* FuneralContactViewModel.swift in Sources */,
 				39FFD97521FC776E00EC4058 /* SHMACardViewModel.swift in Sources */,
 				3904DF2B221097850096BBFD /* GooglePlacesResponse.swift in Sources */,
 				3908AECF2211F3370045E137 /* BusinessController+Delegate.swift in Sources */,
+				396B1CF2221B0EC800E4FB44 /* PrayerDate.swift in Sources */,
 				390232862210219B00E205B8 /* BusinessCell.swift in Sources */,
 				39282A1121CE4174003E3AAA /* InitialViewModel.swift in Sources */,
+				396B1CEC221AFE3200E4FB44 /* Timings.swift in Sources */,
 				390317E221EB5A8C00E47FA6 /* CorporateView+Handlers.swift in Sources */,
 				3907928521EFC84400AD4539 /* AddSpouseChildCell.swift in Sources */,
 				393C8C1E2206152100FA7EB7 /* ProfileController+Datasource.swift in Sources */,
@@ -1071,9 +1181,13 @@
 				39D4324721E4FF2700F62B31 /* MemberView.swift in Sources */,
 				39FFD97721FC7C0900EC4058 /* Association.swift in Sources */,
 				394F6CBA21FF20A9000AB415 /* Page.swift in Sources */,
+				396B1CEA221AFD8400E4FB44 /* PrayerData.swift in Sources */,
 				390232882210224200E205B8 /* Business.swift in Sources */,
+				39EF839A2219C8A200320075 /* FuneralContactsView+Delegate.swift in Sources */,
+				39EF83982219C64D00320075 /* FuneralContactsCell.swift in Sources */,
 				39DF0CFF21D53FB80099D631 /* CorporateController+Handlers.swift in Sources */,
 				3908AEC42211DE1C0045E137 /* ImageClient.swift in Sources */,
+				396B1CF8221B112500E4FB44 /* PrayerTimesView+Delegate.swift in Sources */,
 				39F4AD4721F6291900B17C63 /* PasswordResetViewModel.swift in Sources */,
 				3908AECB2211F1C90045E137 /* BusinessDetailView+Delegate.swift in Sources */,
 			);
@@ -1088,6 +1202,7 @@
 				39D03CD42212F884002375B6 /* BusinessViewTests.swift in Sources */,
 				3916E6292201FC8C009CC9A2 /* SHMACardViewModelTests.swift in Sources */,
 				39D03CDB22130EAD002375B6 /* NetworkManagerTests.swift in Sources */,
+				39F58237221C3A3600D8C16A /* FuneralContactsViewModelTests.swift in Sources */,
 				39DF57B021E8A03700387A74 /* LoginRegistrationViewModel.swift in Sources */,
 				394DE9D121E8F6CE0003AC46 /* FirebaseAuthTests.swift in Sources */,
 				396C425C21F66C2C00307022 /* PasswordResetViewModelTests.swift in Sources */,
@@ -1109,6 +1224,7 @@
 				39D03CD922130E43002375B6 /* NetworkSessionMock.swift in Sources */,
 				39D4324421E4B3DF00F62B31 /* ReachabilityTests.swift in Sources */,
 				3916E6262201F925009CC9A2 /* PageViewModelTests.swift in Sources */,
+				39F58234221C38D800D8C16A /* PrayerTimesViewModelTests.swift in Sources */,
 				39DE6E4621E3CC70003F8A99 /* FirebaseDatabaseSessionMock.swift in Sources */,
 				3911952321D267E5005D481C /* InitialViewTests.swift in Sources */,
 			);

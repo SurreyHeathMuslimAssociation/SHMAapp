@@ -9,8 +9,11 @@
 import Foundation
 
 typealias GooglePlacesAPICallback = (GooglePlacesResponse) -> Void
+typealias PrayerTimesAPICallback = (PrayerTimesResponse) -> Void
 typealias NetworkCallback = (Data?, URLResponse?, Error?) -> Void
+
 protocol NetworkSession {
     func fetchGooglePlaceData(using placeId: String, completion: @escaping GooglePlacesAPICallback)
+    func fetchPrayerTimes(using date: String, _ lat: String, _ lon: String, completion: @escaping PrayerTimesAPICallback)
     func loadData(from url: URL, completionHandler: @escaping NetworkCallback)
 }

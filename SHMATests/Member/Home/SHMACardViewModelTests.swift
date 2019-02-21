@@ -27,8 +27,8 @@ class SHMACardViewModelTests: XCTestCase {
         
         // setting traits
         let iPadTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .regular), UITraitCollection(verticalSizeClass: .regular)])
-        let iPhonePortraitTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .compact), UITraitCollection(verticalSizeClass: .regular)])
-        let iPhoneLandscapeTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .compact), UITraitCollection(verticalSizeClass: .compact)])
+        //let iPhonePortraitTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .compact), UITraitCollection(verticalSizeClass: .regular)])
+        //let iPhoneLandscapeTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .compact), UITraitCollection(verticalSizeClass: .compact)])
         traitCollection = iPadTraits
         shmaCardView = UIView()
         
@@ -107,7 +107,7 @@ class SHMACardViewModelTests: XCTestCase {
     }
     
     func testGetsDateAndTimeLabelWidth() {
-        XCTAssertEqual(sut.getDateAndTimeLabelWidth(), 100)
+        XCTAssertEqual(sut.getDateAndTimeLabelWidth(), 140)
     }
     
     func testGetsShmaLogoTextLabelText() {

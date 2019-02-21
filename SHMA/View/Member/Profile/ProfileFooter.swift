@@ -49,7 +49,6 @@ class ProfileFooter: UITableViewHeaderFooterView {
     
     var businessViewModel: BusinessViewModel? {
         didSet {
-            guard let businessViewModel = businessViewModel else { return }
             getDirectionsButton.isHidden = false
         }
     }

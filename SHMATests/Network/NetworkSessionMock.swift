@@ -16,6 +16,9 @@ class NetworkSessionMock: NetworkSession {
     var error: Error?
     var lastUrl: URL?
     var googlePlaceId: String?
+    var prayerDate: String?
+    var userLat: String?
+    var userLon: String?
     var wasResumeCalled = false
     
     func loadData(from url: URL, completionHandler: @escaping NetworkCallback) {
@@ -29,4 +32,10 @@ class NetworkSessionMock: NetworkSession {
         googlePlaceId = placeId
     }
     
+    func fetchPrayerTimes(using date: String, _ lat: String, _ lon: String, completion: @escaping PrayerTimesAPICallback) {
+        wasResumeCalled = true
+        prayerDate = date
+        userLat = lat
+        userLon = lon
+    }
 }

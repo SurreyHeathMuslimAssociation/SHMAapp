@@ -36,6 +36,27 @@ extension URLSession: NetworkSession {
         }
     }
     
+    func fetchPrayerTimes(using date: String, _ lat: String, _ lon: String, completion: @escaping PrayerTimesAPICallback) {
+        //let urlString = "https://api.aladhan.com/v1/calendarByCity?city=Camberley&country=United Kingdom&method=2&month=02&year=2019&school=1"
+        let urlString = "https://api.aladhan.com/v1/timings/\(date)?latitude=\(lat)&longitude=\(lon)&method=2"
+        let modifiedUrlString = urlString.replacingOccurrences(of: " ", with: "+")
+        guard let url = URL(string: modifiedUrlString) else { return }
+        var request = URLRequest(url: url)
+        request.httpMethod = "GET"
+        makeAPICall(using: request) { (data, response, error) in
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let prayerTimesResponse = try decoder.decode(PrayerTimesResponse.self, from: data)
+                    completion(prayerTimesResponse)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    
     private func makeAPICall(using request: URLRequest, completion: @escaping NetworkCallback) {
         dataTask(with: request) { (data, response, error) in
             if let error = error {

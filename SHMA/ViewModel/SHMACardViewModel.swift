@@ -152,6 +152,6 @@ class SHMACardViewModel {
     }
     
     func getDateAndTimeLabelWidth() -> CGFloat {
-        return 120
+        return 140
     }
 }
