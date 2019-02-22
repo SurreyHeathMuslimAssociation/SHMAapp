@@ -1,6 +1,7 @@
 package com.shma.yusuf.shma;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -21,6 +22,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -42,6 +44,14 @@ public class MemberArea extends AppCompatActivity {
     String usr_SHMAID,usr_email , usr_password;
     DatabaseReference mDatabase;
     List<User> users = new ArrayList<>();
+
+    public void FamilyMember () {
+        String test ;
+        Integer test2;
+
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +130,7 @@ public void SetUpUIelements(){
         }else {
             Title.setText("Thinking of Joining?");
             LoginBtn.setText("Register");
+            SHMAid.setVisibility(View.INVISIBLE);
             Forgotpwd.setVisibility(View.INVISIBLE);
             Info.setVisibility(View.INVISIBLE);
 
@@ -181,8 +192,11 @@ public void SetUpUIelements(){
         String changed = "" ;
         Snackbar mySnackbar;
         mySnackbar = Snackbar.make(parentLayout, Message, 6000);
+        mySnackbar.getView().setBackgroundColor(Color.RED);
         TextView mainTextView = (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
         mainTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        mainTextView.setTextColor(Color.BLACK);
+        mainTextView.setTextSize(24);
         mySnackbar.show();
 
     }
@@ -258,11 +272,14 @@ public void LoginNow(View v) {
          validate();
 
     } else if (sessionId.equals("ExistMemb")) {
+        usr_SHMAID = SHMAid.getText().toString().trim();
+        usr_email = Email.getText().toString().trim();
+        usr_password = Password.getText().toString().trim();
 
         if (Email.getText().toString().equals("") || Password.getText().toString().equals("") || SHMAid.getText().toString().equals("")) {
             PopupMessage("Please fill in all available fields");
         } else {          //check the shmaID then add the login details into the firebase members database table
-            /*Query query = mDatabase.child("shmaIdsOnApp").orderByKey().equalTo(SHMAid.getText().toString());
+            Query query = mDatabase.child("shmaIdsOnApp").orderByKey().equalTo(SHMAid.getText().toString());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -270,18 +287,16 @@ public void LoginNow(View v) {
 
                         for (DataSnapshot m : dataSnapshot.getChildren()) {
                             Log.d("Are you already an app user:", String.valueOf((m.getValue())));
-                    PopupMessage("You are already a member");
+                            PopupMessage("You are already a member");
                         }
-                    }else {*/
-            usr_SHMAID = SHMAid.getText().toString().trim();
-            usr_email = Email.getText().toString().trim();
-            usr_password = Password.getText().toString().trim();
-            mAuth.createUserWithEmailAndPassword(usr_email,usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+                    } else {
 
-                    if (task.isSuccessful()) {
-                        sendEmailVerification();
+                        mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+
+                                if (task.isSuccessful()) {
+                                    sendEmailVerification();
                         /*PopupMessage("Account Created Successfully");
                         FirebaseUser user = mAuth.getCurrentUser(); //You Firebase user
                         // user registered, start profile activity
@@ -289,22 +304,25 @@ public void LoginNow(View v) {
                         Intent intent = new Intent(getApplicationContext(), MemberArea.class);
                         intent.putExtra("EXTRA_SESSION_INFO","Login");
                         startActivity(intent);*/
-                    } else {
-                        PopupMessage("Could not create account. Please try again");
+                                } else {
+                                    PopupMessage("Could not create account. Please try again");
+                                }
+                            }
+                        });
+
+
                     }
+
                 }
-            });
-
-
-        }
-
-                /*@Override
+                @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
-            }) ;*/
+            });
 
-    } else if ((sessionId.equals("NewMember"))) {
+            }
+
+    }else if ((sessionId.equals("NewMember"))) {
         //Brand New Member -> Send the details to Soyab for adding to our Offline database
 
     }
