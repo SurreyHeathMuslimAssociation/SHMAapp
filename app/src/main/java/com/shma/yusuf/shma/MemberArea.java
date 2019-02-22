@@ -41,7 +41,7 @@ public class MemberArea extends AppCompatActivity {
     private int counter = 5;
     private FirebaseAuth mAuth;
     String sessionId;
-    String usr_SHMAID,usr_email , usr_password;
+    String usr_SHMAID,firstname,lastname,DOB,usr_email , usr_password;
     DatabaseReference mDatabase;
     List<User> users = new ArrayList<>();
 
@@ -138,54 +138,6 @@ public void SetUpUIelements(){
 
     }
 
-    public void readfromFirebasedb2(String tabletwo){
-
-        mDatabase.child(tabletwo).getRef().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-
-                    for (User s : users){
-                        if (postSnapshot.getKey().equals(s.getShmaId())) {
-
-                        }
-                    }
-                }
-
-
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-
-    public void readfromFirebase(String tableOne){
-
-        mDatabase.child(tableOne).getRef().addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
-                    User usersdb = postSnapshot.getValue(User.class);
-                    usersdb.setShmaId(postSnapshot.getKey());
-                    users.add(usersdb);
-                }
-
-            }
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.d( "Connection Error with member_offline ",databaseError.toString());
-
-            }
-
-        });
-
-    }
-
 
     public void PopupMessage(String Message){
         View parentLayout = findViewById(android.R.id.content);
@@ -253,11 +205,10 @@ public void SetUpUIelements(){
                     if(task.isSuccessful()){
                       //  sendUserData();
                         sendUserData();
-                        Toast.makeText(getApplicationContext(), "Successfully Registered, Verification mail sent!", Toast.LENGTH_SHORT).show();
-                        mAuth.signOut();
+                        // mAuth.signOut();
                         finish();
-                        Intent intent = new Intent(getApplicationContext(), MemberArea.class);
-                        intent.putExtra("EXTRA_SESSION_INFO","Login");
+                        Intent intent = new Intent(getApplicationContext(), WelcomeMessage.class);
+                        //intent.putExtra("EXTRA_SESSION_INFO","Login");
                         startActivity(intent);
                     }else{
                         Toast.makeText(getApplicationContext(), "Verification mail has'nt been sent!", Toast.LENGTH_SHORT).show();
@@ -332,11 +283,34 @@ public void LoginNow(View v) {
 }
 
     private void sendUserData() {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef;
-        User usr_profile = new User(usr_SHMAID,"Yusuf","Dinah","over 90",usr_email) ;
-        myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
-        myRef.setValue(usr_profile);
+        Query query = mDatabase.child("offline_members").child(SHMAid.getText().toString());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
+                if (dataSnapshot.exists()) {
+
+                        firstname = dataSnapshot.child("firstName").getValue(String.class);
+                        lastname = dataSnapshot.child("lastName").getValue(String.class);
+                        DOB = dataSnapshot.child("DOB").getValue(String.class);
+                        User usr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email);
+                        myRef.setValue(usr_profile);
+                }else{
+                    Toast.makeText(getApplicationContext(), "Empty snapshot", Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
+
 
     }
 }

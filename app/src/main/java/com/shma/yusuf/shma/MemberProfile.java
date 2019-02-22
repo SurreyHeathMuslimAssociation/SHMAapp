@@ -48,6 +48,7 @@ public class MemberProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User userProfile = dataSnapshot.getValue(User.class);
+
                 SHMAID.setText("Welcome Member: " + userProfile.getShmaId());
                 firstname.setText("Name: " + userProfile.getFirstName());
                 surname.setText("Age: " + userProfile.getLastName());
