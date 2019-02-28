@@ -20,7 +20,7 @@ extension URLSession: NetworkSession {
     
     func fetchGooglePlaceData(using placeId: String, completion: @escaping GooglePlacesAPICallback) {
         let googleAPIKey = "AIzaSyDT5-YFEEvBvTuxqByV1fLEjscYWhcUMJw"
-        guard let url = URL(string: "https://maps.googleapis.com/maps/api/place/details/json?fields=opening_hours,types,place_id,formatted_address,name,rating,opening_hours,geometry&placeid=\(placeId)&key=\(googleAPIKey)") else { return }
+        guard let url = URL(string: "https://maps.googleapis.com/maps/api/place/details/json?fields=opening_hours,types,place_id,formatted_address,formatted_phone_number,name,rating,opening_hours,geometry&placeid=\(placeId)&key=\(googleAPIKey)") else { return }
         var request = URLRequest(url: url)
         request.httpMethod = "GET"
         makeAPICall(using: request) { (data, response, error) in

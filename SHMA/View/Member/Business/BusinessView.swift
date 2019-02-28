@@ -13,6 +13,11 @@ protocol BusinessViewDelegate: class {
 }
 class BusinessView: UICollectionView {
     
+    let activityIndicatorView: UIActivityIndicatorView = {
+        let iv = UIActivityIndicatorView(style: .gray)
+        return iv
+    }()
+    
     var businessViewModel: BusinessViewModel!
     var businessViewModels: [BusinessViewModel]!
     let cellId = "cellId"
@@ -28,11 +33,13 @@ class BusinessView: UICollectionView {
         
         businessViewModels = [BusinessViewModel]()
         register(BusinessCell.self, forCellWithReuseIdentifier: cellId)
+        
+        setupActivityIndicatorView()
     }
     
-    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        super.traitCollectionDidChange(previousTraitCollection)
-        
+    private func setupActivityIndicatorView() {
+        addSubview(activityIndicatorView)
+        activityIndicatorView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: centerYAnchor, centerXAnchor: centerXAnchor)
     }
     
     required init?(coder aDecoder: NSCoder) {

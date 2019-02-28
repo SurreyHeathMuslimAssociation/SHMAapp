@@ -19,11 +19,21 @@ class BusinessDetailHeader: UITableViewHeaderFooterView {
         let iv = UIActivityIndicatorView(style: .gray)
         return iv
     }()
+    let discountLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 1
+        label.textAlignment = .center
+        label.isHidden = true
+        label.backgroundColor = .red
+        label.textColor = .white
+        return label
+    }()
     
     var businessViewModel: BusinessViewModel? {
         didSet {
             guard let iconUrl = businessViewModel?.business?.iconUrl else { return }
             businessImageView.getImageFromFirebase(using: iconUrl, indicator: activityIndicatorView)
+            discountLabel.attributedText = businessViewModel?.getDiscountLabelAttributedString()
         }
     }
     
@@ -32,9 +42,13 @@ class BusinessDetailHeader: UITableViewHeaderFooterView {
         
         addSubview(businessImageView)
         addSubview(activityIndicatorView)
+        addSubview(discountLabel)
         
         businessImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 10, paddingLeft: 10, paddingBottom: 10, paddingRight: 10, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        
         activityIndicatorView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: centerYAnchor, centerXAnchor: centerXAnchor)
+        
+        discountLabel.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -10,7 +10,8 @@ import UIKit
 
 extension InitialController: InitialViewDelegate {
     func didPressCorporate() {
-        navigationController?.pushViewController(CorporateController(), animated: true)
+        let businessController = BusinessController()
+        navigationController?.pushViewController(businessController, animated: true)
     }
     
     func didPressMember() {

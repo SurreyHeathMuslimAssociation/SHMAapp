@@ -20,6 +20,7 @@ class BusinessDetailView: UITableView {
     var businessLabels: [String]!
     var businessViewModel: BusinessViewModel?
     weak var businessDetailViewDelegate: BusinessDetailViewDelegate?
+    var businessDetailHeader: BusinessDetailHeader!
     
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)

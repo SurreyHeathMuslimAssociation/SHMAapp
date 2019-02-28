@@ -20,8 +20,8 @@ class WelcomeViewModelTests: XCTestCase {
         
         // setting traits
         let iPadTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .regular), UITraitCollection(verticalSizeClass: .regular)])
-        let iPhonePortraitTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .compact), UITraitCollection(verticalSizeClass: .regular)])
-        let iPhoneLandscapeTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .compact), UITraitCollection(verticalSizeClass: .compact)])
+        //let iPhonePortraitTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .compact), UITraitCollection(verticalSizeClass: .regular)])
+        //let iPhoneLandscapeTraits = UITraitCollection(traitsFrom: [UITraitCollection(horizontalSizeClass: .compact), UITraitCollection(verticalSizeClass: .compact)])
         traitCollection = iPadTraits
         
         do {
@@ -73,7 +73,7 @@ class WelcomeViewModelTests: XCTestCase {
     }
     
     func testGetsPaymentPageMessage() {
-        let message = "Just few more steps to go:\n\n✔ Verfiy your account via the link in your email\n✔ Setup your monthly standing order to the following account:\n\nSurrey Heath Muslim Association\n(Registered Charity Number 1126441)\nAl Rayan Bank, 77-79 Edgware Road, London. W2 2HZ\nSort Code: 30-00-83\nAccount Number: 01222601\n\nThe payment reference must be: SHMA-\(member.shmaId ?? 0)"
+        let message = "Just few more steps to go:\n\n😊 Verfiy your account via the link in your email\n😊 Setup your monthly standing order to the following account:\n\nSurrey Heath Muslim Association\nSort Code: 30-00-83\nAccount Number: 01222601\n\nThe payment reference must be: SHMA-\(member.shmaId ?? 0)"
         XCTAssertEqual(sut.getPaymentPageMessage(), message)
     }
     

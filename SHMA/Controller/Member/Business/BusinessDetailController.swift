@@ -23,34 +23,54 @@ class BusinessDetailController: UIViewController {
         businessDetailView.businessViewModel = businessViewModel
         businessDetailView.businessDetailViewDelegate = self
         
+        setupNavBar()
         setupBusinessLabels()
         setupBusinessDetails()
+        switchDiscountImageAndLabel()
+    }
+    
+    private func setupNavBar() {
+        guard let businessInfo = businessViewModel?.business?.information.result else { return }
+        navigationItem.title = businessInfo.name
+        navigationController?.navigationBar.titleTextAttributes = businessDetailView.businessViewModel?.getNavigationBarTitleTextAttributes()
     }
     
     private func setupBusinessLabels() {
-        businessDetailView.businessLabels.append("Name")
         businessDetailView.businessLabels.append("Address")
         businessDetailView.businessLabels.append("Rating")
         businessDetailView.businessLabels.append("Type")
         businessDetailView.businessLabels.append("Open Now")
         businessDetailView.businessLabels.append("Opening Times")
+        businessDetailView.businessLabels.append("Phone Number")
     }
     
     private func setupBusinessDetails() {
         guard let businessInfo = businessViewModel?.business?.information.result else { return }
-        businessDetailView.businessDetails.append(businessInfo.name)
         businessDetailView.businessDetails.append(businessInfo.address)
         businessDetailView.businessDetails.append("\(businessInfo.rating)")
-        businessDetailView.businessDetails.append("\(businessInfo.types)")
+        businessDetailView.businessDetails.append(businessInfo.types[0].capitalized)
         if businessInfo.openingHours?.isOpen == true {
             businessDetailView.businessDetails.append("Yes")
         } else {
             businessDetailView.businessDetails.append("No")
         }
         businessDetailView.businessDetails.append("\(businessInfo.openingHours?.timings ?? ["N/A"])")
+        businessDetailView.businessDetails.append(businessInfo.phoneNo)
 
         DispatchQueue.main.async {
             self.businessDetailView.reloadData()
         }
+    }
+    
+    var isImageBeingDisplayed = false
+    
+    func switchDiscountImageAndLabel() {
+        Timer.scheduledTimer(withTimeInterval: 4, repeats: true, block: { (timer) in
+            UIView.animate(withDuration: 0.5, delay: 0, options: .curveEaseIn, animations: {
+                self.businessDetailView.businessDetailHeader.discountLabel.isHidden = self.isImageBeingDisplayed ? true : false
+                self.businessDetailView.businessDetailHeader.businessImageView.isHidden = self.isImageBeingDisplayed ? false : true
+            })
+            self.isImageBeingDisplayed = !self.isImageBeingDisplayed
+        })
     }
 }

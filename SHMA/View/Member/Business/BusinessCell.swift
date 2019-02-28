@@ -15,10 +15,11 @@ class BusinessCell: UICollectionViewCell {
         iv.contentMode = .scaleAspectFit
         return iv
     }()
-    let businessNameLabel: UILabel = {
+    let businessNameAndDiscountLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.textAlignment = .center
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     let activityIndicatorView: UIActivityIndicatorView = {
@@ -28,7 +29,7 @@ class BusinessCell: UICollectionViewCell {
     
     var businessViewModel: BusinessViewModel? {
         didSet {
-            businessNameLabel.attributedText = businessViewModel?.getBusinessNameAttributedText()
+            businessNameAndDiscountLabel.attributedText = businessViewModel?.getBusinessNameAttributedText()
             guard let urlString = businessViewModel?.business?.iconUrl else { return }
             businessImageView.getImageFromFirebase(using: urlString, indicator: activityIndicatorView)
         }
@@ -39,14 +40,14 @@ class BusinessCell: UICollectionViewCell {
         backgroundColor = .white
         
         addSubview(businessImageView)
-        addSubview(businessNameLabel)
+        addSubview(businessNameAndDiscountLabel)
         addSubview(activityIndicatorView)
         
         businessImageView.anchor(top: topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: centerXAnchor)
-        businessImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.7).isActive = true
+        businessImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
         businessImageView.heightAnchor.constraint(equalTo: businessImageView.widthAnchor, multiplier: 1).isActive = true
         
-        businessNameLabel.anchor(top: businessImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        businessNameAndDiscountLabel.anchor(top: businessImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 3, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         
         activityIndicatorView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: businessImageView.centerYAnchor, centerXAnchor: businessImageView.centerXAnchor)
     }

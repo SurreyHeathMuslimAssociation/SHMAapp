@@ -151,8 +151,8 @@ class FirebaseDatabaseTests: XCTestCase {
         XCTAssertEqual(session.memberSpouseDob, spouseDob)
     }
 
-    func testBusinessesPlaceIdAndIconUrlFetchWasInitiated() {
-        session.fetchBusinessesPlaceIdAndIconUrl { (placeId, IconUrl) in
+    func testBusinessesPlaceFetchWasInitiated() {
+        session.fetchBusinessesDetailsFromFirebase { (placeId, iconurl, discount) in
         }
         XCTAssert(session.didInitiateDatabaseCall)
     }

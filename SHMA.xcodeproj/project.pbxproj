@@ -11,7 +11,6 @@
 		390232842210212100E205B8 /* BusinessView+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390232832210212100E205B8 /* BusinessView+Datasource.swift */; };
 		390232862210219B00E205B8 /* BusinessCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390232852210219B00E205B8 /* BusinessCell.swift */; };
 		390232882210224200E205B8 /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390232872210224200E205B8 /* Business.swift */; };
-		390317E221EB5A8C00E47FA6 /* CorporateView+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 390317E121EB5A8C00E47FA6 /* CorporateView+Handlers.swift */; };
 		3904DF2B221097850096BBFD /* GooglePlacesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3904DF2A221097850096BBFD /* GooglePlacesResponse.swift */; };
 		3904DF2D2210985A0096BBFD /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3904DF2C2210985A0096BBFD /* Place.swift */; };
 		3904DF2F221099BE0096BBFD /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3904DF2E221099BE0096BBFD /* Location.swift */; };
@@ -59,7 +58,6 @@
 		3916E6262201F925009CC9A2 /* PageViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3916E6252201F925009CC9A2 /* PageViewModelTests.swift */; };
 		3916E6292201FC8C009CC9A2 /* SHMACardViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3916E6282201FC8C009CC9A2 /* SHMACardViewModelTests.swift */; };
 		39282A0D21CE3D43003E3AAA /* MemberController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A0C21CE3D43003E3AAA /* MemberController.swift */; };
-		39282A0F21CE3D4B003E3AAA /* CorporateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A0E21CE3D4B003E3AAA /* CorporateController.swift */; };
 		39282A1121CE4174003E3AAA /* InitialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A1021CE4174003E3AAA /* InitialViewModel.swift */; };
 		39282A1321CE4184003E3AAA /* InitialController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A1221CE4184003E3AAA /* InitialController+Handlers.swift */; };
 		39282A1521CE49AD003E3AAA /* InitialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39282A1421CE49AD003E3AAA /* InitialView.swift */; };
@@ -86,7 +84,6 @@
 		394F6CBC21FF2229000AB415 /* WelcomeView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CBB21FF2229000AB415 /* WelcomeView+Delegate.swift */; };
 		394F6CBE21FF223C000AB415 /* WelcomeView+Datasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CBD21FF223C000AB415 /* WelcomeView+Datasource.swift */; };
 		394F6CC021FF2533000AB415 /* WelcomeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 394F6CBF21FF2533000AB415 /* WelcomeViewCell.swift */; };
-		3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3952259D21D0FA5600FD411C /* CorporateView.swift */; };
 		396B1CE8221AFD1A00E4FB44 /* PrayerTimesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CE7221AFD1A00E4FB44 /* PrayerTimesResponse.swift */; };
 		396B1CEA221AFD8400E4FB44 /* PrayerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CE9221AFD8400E4FB44 /* PrayerData.swift */; };
 		396B1CEC221AFE3200E4FB44 /* Timings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 396B1CEB221AFE3200E4FB44 /* Timings.swift */; };
@@ -121,9 +118,6 @@
 		39D4324B21E51AD700F62B31 /* MemberViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D4324A21E51AD700F62B31 /* MemberViewModel.swift */; };
 		39DE6E4621E3CC70003F8A99 /* FirebaseDatabaseSessionMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE6E4521E3CC70003F8A99 /* FirebaseDatabaseSessionMock.swift */; };
 		39DE6E4821E3CE87003F8A99 /* FirebaseDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DE6E4721E3CE87003F8A99 /* FirebaseDatabaseTests.swift */; };
-		39DF0CFD21D51F300099D631 /* CorporateViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF0CFC21D51F300099D631 /* CorporateViewModelTests.swift */; };
-		39DF0CFF21D53FB80099D631 /* CorporateController+Handlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF0CFE21D53FB80099D631 /* CorporateController+Handlers.swift */; };
-		39DF0D0121D5405F0099D631 /* CorporateViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF0D0021D5405F0099D631 /* CorporateViewTests.swift */; };
 		39DF57B021E8A03700387A74 /* LoginRegistrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57AF21E8A03700387A74 /* LoginRegistrationViewModel.swift */; };
 		39DF57B221E8BAD800387A74 /* LoginRegistrationViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57B121E8BAD800387A74 /* LoginRegistrationViewTests.swift */; };
 		39DF57B521E8E1D400387A74 /* TermsAndConditionsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39DF57B421E8E1D400387A74 /* TermsAndConditionsViewModelTests.swift */; };
@@ -168,7 +162,6 @@
 		390232832210212100E205B8 /* BusinessView+Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BusinessView+Datasource.swift"; sourceTree = "<group>"; };
 		390232852210219B00E205B8 /* BusinessCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessCell.swift; sourceTree = "<group>"; };
 		390232872210224200E205B8 /* Business.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
-		390317E121EB5A8C00E47FA6 /* CorporateView+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CorporateView+Handlers.swift"; sourceTree = "<group>"; };
 		3904DF2A221097850096BBFD /* GooglePlacesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GooglePlacesResponse.swift; sourceTree = "<group>"; };
 		3904DF2C2210985A0096BBFD /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		3904DF2E221099BE0096BBFD /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
@@ -216,7 +209,6 @@
 		3916E6252201F925009CC9A2 /* PageViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewModelTests.swift; sourceTree = "<group>"; };
 		3916E6282201FC8C009CC9A2 /* SHMACardViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SHMACardViewModelTests.swift; sourceTree = "<group>"; };
 		39282A0C21CE3D43003E3AAA /* MemberController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberController.swift; sourceTree = "<group>"; };
-		39282A0E21CE3D4B003E3AAA /* CorporateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateController.swift; sourceTree = "<group>"; };
 		39282A1021CE4174003E3AAA /* InitialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialViewModel.swift; sourceTree = "<group>"; };
 		39282A1221CE4184003E3AAA /* InitialController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InitialController+Handlers.swift"; sourceTree = "<group>"; };
 		39282A1421CE49AD003E3AAA /* InitialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialView.swift; sourceTree = "<group>"; };
@@ -247,7 +239,6 @@
 		394F6CBB21FF2229000AB415 /* WelcomeView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WelcomeView+Delegate.swift"; sourceTree = "<group>"; };
 		394F6CBD21FF223C000AB415 /* WelcomeView+Datasource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WelcomeView+Datasource.swift"; sourceTree = "<group>"; };
 		394F6CBF21FF2533000AB415 /* WelcomeViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewCell.swift; sourceTree = "<group>"; };
-		3952259D21D0FA5600FD411C /* CorporateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateView.swift; sourceTree = "<group>"; };
 		396B1CE7221AFD1A00E4FB44 /* PrayerTimesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerTimesResponse.swift; sourceTree = "<group>"; };
 		396B1CE9221AFD8400E4FB44 /* PrayerData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayerData.swift; sourceTree = "<group>"; };
 		396B1CEB221AFE3200E4FB44 /* Timings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Timings.swift; sourceTree = "<group>"; };
@@ -282,9 +273,6 @@
 		39D4324A21E51AD700F62B31 /* MemberViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberViewModel.swift; sourceTree = "<group>"; };
 		39DE6E4521E3CC70003F8A99 /* FirebaseDatabaseSessionMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseSessionMock.swift; sourceTree = "<group>"; };
 		39DE6E4721E3CE87003F8A99 /* FirebaseDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseTests.swift; sourceTree = "<group>"; };
-		39DF0CFC21D51F300099D631 /* CorporateViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateViewModelTests.swift; sourceTree = "<group>"; };
-		39DF0CFE21D53FB80099D631 /* CorporateController+Handlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CorporateController+Handlers.swift"; sourceTree = "<group>"; };
-		39DF0D0021D5405F0099D631 /* CorporateViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CorporateViewTests.swift; sourceTree = "<group>"; };
 		39DF57AF21E8A03700387A74 /* LoginRegistrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationViewModel.swift; sourceTree = "<group>"; };
 		39DF57B121E8BAD800387A74 /* LoginRegistrationViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRegistrationViewTests.swift; sourceTree = "<group>"; };
 		39DF57B421E8E1D400387A74 /* TermsAndConditionsViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAndConditionsViewModelTests.swift; sourceTree = "<group>"; };
@@ -378,15 +366,6 @@
 				39282A1221CE4184003E3AAA /* InitialController+Handlers.swift */,
 			);
 			path = Initial;
-			sourceTree = "<group>";
-		};
-		39063E5821E6342400A020EE /* Corporate */ = {
-			isa = PBXGroup;
-			children = (
-				39282A0E21CE3D4B003E3AAA /* CorporateController.swift */,
-				39DF0CFE21D53FB80099D631 /* CorporateController+Handlers.swift */,
-			);
-			path = Corporate;
 			sourceTree = "<group>";
 		};
 		39063E5921E6342E00A020EE /* Member */ = {
@@ -581,7 +560,6 @@
 				394DE9CD21E8F6290003AC46 /* FirebaseAuthentication */,
 				39DE6E4321E3CC5E003F8A99 /* FirebaseDatabase */,
 				39DF0CFA21D51EEE0099D631 /* Initial */,
-				39DF0CFB21D51F0A0099D631 /* Corporate */,
 				39063E5021E62B7000A020EE /* Member */,
 				393F4B8A21CBCBEF009B4239 /* Info.plist */,
 				39D4324321E4B3DF00F62B31 /* ReachabilityTests.swift */,
@@ -595,15 +573,6 @@
 				39282A1421CE49AD003E3AAA /* InitialView.swift */,
 			);
 			path = Initial;
-			sourceTree = "<group>";
-		};
-		39444B7021F1D49C00BF6FA9 /* Corporate */ = {
-			isa = PBXGroup;
-			children = (
-				3952259D21D0FA5600FD411C /* CorporateView.swift */,
-				390317E121EB5A8C00E47FA6 /* CorporateView+Handlers.swift */,
-			);
-			path = Corporate;
 			sourceTree = "<group>";
 		};
 		394731DE21DFD91100DB9425 /* Session */ = {
@@ -676,7 +645,6 @@
 			isa = PBXGroup;
 			children = (
 				39444B6B21F1D41200BF6FA9 /* Initial */,
-				39444B7021F1D49C00BF6FA9 /* Corporate */,
 				3907927721EF7BDF00AD4539 /* Member */,
 			);
 			path = View;
@@ -706,7 +674,6 @@
 			isa = PBXGroup;
 			children = (
 				39063E5721E6341E00A020EE /* Initial */,
-				39063E5821E6342400A020EE /* Corporate */,
 				39063E5921E6342E00A020EE /* Member */,
 			);
 			path = Controller;
@@ -812,15 +779,6 @@
 				3911952221D267E5005D481C /* InitialViewTests.swift */,
 			);
 			path = Initial;
-			sourceTree = "<group>";
-		};
-		39DF0CFB21D51F0A0099D631 /* Corporate */ = {
-			isa = PBXGroup;
-			children = (
-				39DF0CFC21D51F300099D631 /* CorporateViewModelTests.swift */,
-				39DF0D0021D5405F0099D631 /* CorporateViewTests.swift */,
-			);
-			path = Corporate;
 			sourceTree = "<group>";
 		};
 		39DF57AE21E8A01B00387A74 /* LoginRegistration */ = {
@@ -1034,6 +992,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/MarqueeLabel/MarqueeLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NotificationBannerSwift/NotificationBannerSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
@@ -1046,6 +1005,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MarqueeLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NotificationBannerSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
@@ -1113,13 +1073,11 @@
 				397110BC220CAFEE004B9906 /* BusinessView.swift in Sources */,
 				39282A0D21CE3D43003E3AAA /* MemberController.swift in Sources */,
 				39803D78220882B9005458E1 /* ProfileFooter.swift in Sources */,
-				39282A0F21CE3D4B003E3AAA /* CorporateController.swift in Sources */,
 				396B1CF0221B05C500E4FB44 /* HomeController+Delegate.swift in Sources */,
 				393F4B7421CBCBEF009B4239 /* AppDelegate.swift in Sources */,
 				39F0DA2021E640E80073D047 /* LoginRegistrationViewModel.swift in Sources */,
 				390E4DA021F772E1009BC363 /* HomeController.swift in Sources */,
 				39D4324B21E51AD700F62B31 /* MemberViewModel.swift in Sources */,
-				3952259E21D0FA5600FD411C /* CorporateView.swift in Sources */,
 				394731E921DFDE0B00DB9425 /* Reachability.swift in Sources */,
 				396B1CFA221B112C00E4FB44 /* PrayerTimesView+Datasource.swift in Sources */,
 				396B1CFC221B117800E4FB44 /* PrayerTimesCell.swift in Sources */,
@@ -1173,7 +1131,6 @@
 				390232862210219B00E205B8 /* BusinessCell.swift in Sources */,
 				39282A1121CE4174003E3AAA /* InitialViewModel.swift in Sources */,
 				396B1CEC221AFE3200E4FB44 /* Timings.swift in Sources */,
-				390317E221EB5A8C00E47FA6 /* CorporateView+Handlers.swift in Sources */,
 				3907928521EFC84400AD4539 /* AddSpouseChildCell.swift in Sources */,
 				393C8C1E2206152100FA7EB7 /* ProfileController+Datasource.swift in Sources */,
 				3912A66721F878D600357BF4 /* WelcomeView.swift in Sources */,
@@ -1185,7 +1142,6 @@
 				390232882210224200E205B8 /* Business.swift in Sources */,
 				39EF839A2219C8A200320075 /* FuneralContactsView+Delegate.swift in Sources */,
 				39EF83982219C64D00320075 /* FuneralContactsCell.swift in Sources */,
-				39DF0CFF21D53FB80099D631 /* CorporateController+Handlers.swift in Sources */,
 				3908AEC42211DE1C0045E137 /* ImageClient.swift in Sources */,
 				396B1CF8221B112500E4FB44 /* PrayerTimesView+Delegate.swift in Sources */,
 				39F4AD4721F6291900B17C63 /* PasswordResetViewModel.swift in Sources */,
@@ -1206,11 +1162,9 @@
 				39DF57B021E8A03700387A74 /* LoginRegistrationViewModel.swift in Sources */,
 				394DE9D121E8F6CE0003AC46 /* FirebaseAuthTests.swift in Sources */,
 				396C425C21F66C2C00307022 /* PasswordResetViewModelTests.swift in Sources */,
-				39DF0D0121D5405F0099D631 /* CorporateViewTests.swift in Sources */,
 				394DE9CF21E8F64F0003AC46 /* FirebaseAuthSessionMock.swift in Sources */,
 				396C425E21F66C3E00307022 /* PasswordResetViewTests.swift in Sources */,
 				393F4B8921CBCBEF009B4239 /* InitialViewModelTests.swift in Sources */,
-				39DF0CFD21D51F300099D631 /* CorporateViewModelTests.swift in Sources */,
 				39D03CD02212E6FC002375B6 /* BusinessViewModelTests.swift in Sources */,
 				3916E6242201EFC2009CC9A2 /* WelcomeViewModelTests.swift in Sources */,
 				39DF57B721E8E3B400387A74 /* TermsAndConditionsViewTests.swift in Sources */,

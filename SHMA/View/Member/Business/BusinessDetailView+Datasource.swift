@@ -13,6 +13,7 @@ extension BusinessDetailView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: headerId) as! BusinessDetailHeader
         header.businessViewModel = businessViewModel
+        businessDetailHeader = header
         return header
     }
     

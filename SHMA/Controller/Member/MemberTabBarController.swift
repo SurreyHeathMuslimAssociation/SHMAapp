@@ -61,6 +61,7 @@ class MemberTabBarController: UITabBarController {
         self.profileNavController.tabBarItem = UITabBarItem(title: "Profile", image: #imageLiteral(resourceName: "Profile"), selectedImage: #imageLiteral(resourceName: "Profile"))
         
         let businessController = BusinessController()
+        businessController.isBusinessDetailAvailable = true
         self.businessNavController = UINavigationController(rootViewController: businessController)
         self.businessNavController.tabBarItem = UITabBarItem(title: "Business", image: #imageLiteral(resourceName: "Business"), selectedImage: #imageLiteral(resourceName: "Business"))
         

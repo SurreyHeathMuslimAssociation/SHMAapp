@@ -52,7 +52,7 @@ class ProfileViewModel {
             let attributedText = NSAttributedString(string: "If you have any queries please contact us on\nenquiries@shma-uk.org", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 26)])
             return attributedText
         } else {
-            let attributedText = NSAttributedString(string: "If you have any queries please contact us on enquiries@shma-uk.org", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
+            let attributedText = NSAttributedString(string: "If you have any queries please contact us on \nenquiries@shma-uk.org", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
             return attributedText
         }
     }

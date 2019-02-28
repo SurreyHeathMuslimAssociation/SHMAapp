@@ -20,10 +20,17 @@ class BusinessViewModel {
     
     func getBusinessNameAttributedText() -> NSAttributedString {
         guard let name = business?.information.result.name else { return NSAttributedString() }
+        let discount = business?.discount ?? ""
         if traitCollection.isIpad {
-            return NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+            let attributedText = NSMutableAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 18)])
+            attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 6)]))
+            attributedText.append(NSAttributedString(string: "\(discount) off", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
+            return attributedText
         } else {
-            return NSAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            let attributedText = NSMutableAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 6)]))
+            attributedText.append(NSAttributedString(string: "\(discount) off", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
+            return attributedText
         }
     }
     
@@ -95,6 +102,19 @@ class BusinessViewModel {
             return 150
         } else {
             return 100
+        }
+    }
+    
+    func getDiscountLabelAttributedString() -> NSAttributedString {
+        let discount = business?.discount ?? ""
+        if traitCollection.isIpad {
+            let attributedText = NSMutableAttributedString(string: discount, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 50)])
+            attributedText.append(NSAttributedString(string: " off!", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 34)]))
+            return attributedText
+        } else {
+            let attributedText = NSMutableAttributedString(string: discount, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 40)])
+            attributedText.append(NSAttributedString(string: "  off!", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 24)]))
+            return attributedText
         }
     }
     

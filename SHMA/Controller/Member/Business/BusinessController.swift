@@ -13,7 +13,7 @@ class BusinessController: UIViewController {
     
     var firebaseDatabaseManager: FirebaseDatabaseManager!
     var networkManager: NetworkManager!
-    
+    var isBusinessDetailAvailable: Bool?
     var businessView: BusinessView!
     var timer: Timer?
     
@@ -42,9 +42,12 @@ class BusinessController: UIViewController {
     }
     
     private func fetchBusinesses() {
-        firebaseDatabaseManager.fetchBusinessesPlaceIdAndIconUrl { (placeId, iconUrl) in
+        DispatchQueue.main.async {
+            self.businessView.activityIndicatorView.startAnimating()
+        }
+        firebaseDatabaseManager.fetchBusinessesDetailsFromFirebase { (placeId, iconUrl, discount) in
             self.networkManager.fetchGooglePlaceData(using: placeId, completion: { (response) in
-                let business = Business(iconUrl: iconUrl, information: response)
+                let business = Business(iconUrl: iconUrl, discount: discount, information: response)
                 let businessViewModel = BusinessViewModel(self.traitCollection)
                 businessViewModel.business = business
                 self.businessView.businessViewModels.append(businessViewModel)
@@ -60,6 +63,7 @@ class BusinessController: UIViewController {
     
     @objc func handleReload() {
         DispatchQueue.main.async {
+            self.businessView.activityIndicatorView.stopAnimating()
             self.businessView.reloadData()
         }
     }

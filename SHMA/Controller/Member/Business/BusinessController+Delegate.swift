@@ -11,9 +11,11 @@ import UIKit
 extension BusinessController: BusinessViewDelegate {
     
     func didTapCell(businessViewModel: BusinessViewModel) {
-        let businessDetailController = BusinessDetailController()
-        businessDetailController.businessViewModel = businessViewModel
-        navigationController?.pushViewController(businessDetailController, animated: true)
+        if isBusinessDetailAvailable == true {
+            let businessDetailController = BusinessDetailController()
+            businessDetailController.businessViewModel = businessViewModel
+            navigationController?.pushViewController(businessDetailController, animated: true)
+        }
     }
     
     
