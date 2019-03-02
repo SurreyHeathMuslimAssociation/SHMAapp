@@ -4,21 +4,24 @@ public class User {
     private String shmaId;
     private String firstName, lastName;
     private String DOB ;
-    private String county, town, addressLineOne , addressLineTwo, postcode ;
+    private String town, addressLineOne , addressLineTwo, postcode;
     private String email, mobileNo ;
     private String membershipType;
-    private String status;
 
-    public User(){
+   public User(){
 
     }
 
-    public User(String shmaId, String firstName, String lastName, String DOB, String email) {
+    public User(String shmaId,String firstName, String lastName, String DOB, String email,String addressLineOne, String addressLineTwo,String town,  String postcode ) {
         this.shmaId = shmaId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.DOB = DOB;
         this.email = email;
+        this.addressLineOne = addressLineOne;
+        this.addressLineTwo = addressLineTwo;
+        this.town = town;
+        this.postcode = postcode;
     }
 
     public String getEmail() {
@@ -69,7 +72,37 @@ public class User {
         this.shmaId = shmaId;
     }
 
+    public String getTown() {
+        return town;
+    }
 
+    public void setTown(String town) {
+        this.town = town;
+    }
+
+    public String getAddressLineOne() {
+        return addressLineOne;
+    }
+
+    public void setAddressLineOne(String addressLineOne) {
+        this.addressLineOne = addressLineOne;
+    }
+
+    public String getAddressLineTwo() {
+        return addressLineTwo;
+    }
+
+    public void setAddressLineTwo(String addressLineTwo) {
+        this.addressLineTwo = addressLineTwo;
+    }
+
+    public String getPostcode() {
+        return postcode;
+    }
+
+    public void setPostcode(String postcode) {
+        this.postcode = postcode;
+    }
 
 }
 

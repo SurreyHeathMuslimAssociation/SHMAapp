@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -41,7 +42,7 @@ public class MemberArea extends AppCompatActivity {
     private int counter = 5;
     private FirebaseAuth mAuth;
     String sessionId;
-    String usr_SHMAID,firstname,lastname,DOB,usr_email , usr_password;
+    String usr_SHMAID,firstname,lastname,DOB,usr_email , usr_password, addr1,addr2,townfield,postcode;
     DatabaseReference mDatabase;
     List<User> users = new ArrayList<>();
 
@@ -58,6 +59,7 @@ public class MemberArea extends AppCompatActivity {
     //Declarations
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_area);
+        ScrollView sv = new ScrollView(this);
         sessionId = getIntent().getStringExtra("EXTRA_SESSION_INFO");
         mAuth = FirebaseAuth.getInstance();
         //Assigning elements to variables
@@ -74,6 +76,14 @@ public class MemberArea extends AppCompatActivity {
 
             }
         });
+
+if (familyswitch.isChecked() ) {
+    for (int i = 1; i <= 2; i++) {
+        TextView textView = new TextView(this);
+        textView.setText("TextView " + String.valueOf(i));
+        sv.addView(textView);
+    }
+}
 
     }
 public void SetUpUIelements(){
@@ -129,6 +139,7 @@ public void SetUpUIelements(){
             PostCodeField.setVisibility(View.INVISIBLE);
         }else {
             Title.setText("Thinking of Joining?");
+            Title.setTextSize(28);
             LoginBtn.setText("Register");
             SHMAid.setVisibility(View.INVISIBLE);
             Forgotpwd.setVisibility(View.INVISIBLE);
@@ -275,8 +286,38 @@ public void LoginNow(View v) {
 
     }else if ((sessionId.equals("NewMember"))) {
         //Brand New Member -> Send the details to Soyab for adding to our Offline database
+        usr_SHMAID = SHMAid.getText().toString().trim();
+        usr_email = Email.getText().toString().trim();
+        usr_password = Password.getText().toString().trim();
+        DOB = DOBfield.getText().toString().trim();
+        addr1 = Adr1Field.getText().toString().trim();
+        addr2 = Adr2Field.getText().toString().trim();
+        townfield = TownField.getText().toString().trim();
+        postcode =  PostCodeField.getText().toString().trim();
+        if (Email.getText().toString().equals("") || Password.getText().toString().equals("") || SHMAid.getText().toString().equals("")) {
+            PopupMessage("Please fill in all available fields");
+        } else {
+            mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-    }
+                    if (task.isSuccessful()) {
+                        sendEmailVerification();
+                        /*PopupMessage("Account Created Successfully");
+                        FirebaseUser user = mAuth.getCurrentUser(); //You Firebase user
+                        // user registered, start profile activity
+                        finish();
+                        Intent intent = new Intent(getApplicationContext(), MemberArea.class);
+                        intent.putExtra("EXTRA_SESSION_INFO","Login");
+                        startActivity(intent);*/
+                    } else {
+                        PopupMessage("Could not create account. Please try again");
+                    }
+                }
+            });
+        }
+
+        }
 
 
 
@@ -294,7 +335,7 @@ public void LoginNow(View v) {
                         firstname = dataSnapshot.child("firstName").getValue(String.class);
                         lastname = dataSnapshot.child("lastName").getValue(String.class);
                         DOB = dataSnapshot.child("DOB").getValue(String.class);
-                        User usr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email);
+                        User usr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email, addr1,addr2,townfield,postcode);
                         myRef.setValue(usr_profile);
                 }else{
                     Toast.makeText(getApplicationContext(), "Empty snapshot", Toast.LENGTH_SHORT).show();

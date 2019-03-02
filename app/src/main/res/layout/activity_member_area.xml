@@ -141,8 +141,8 @@
 
         <TextView
             android:id="@+id/Title"
-            android:layout_width="236dp"
-            android:layout_height="48dp"
+            android:layout_width="347dp"
+            android:layout_height="39dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="28dp"
             android:layout_marginEnd="8dp"
@@ -171,7 +171,7 @@
         <TextView
             android:id="@+id/MembersAreaTitle"
             android:layout_width="298dp"
-            android:layout_height="35dp"
+            android:layout_height="31dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"

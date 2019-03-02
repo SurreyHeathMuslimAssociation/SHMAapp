@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +34,9 @@ public class WelcomeMessage extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User userProfile = dataSnapshot.getValue(User.class);
-                Name.setText("Welcome," + userProfile.getFirstName() + " " + userProfile.getLastName());
+                String sourceString = "Welcome, " + "<b>" +userProfile.getFirstName() + " " + userProfile.getLastName() +"</b> "  ;
+                Name.setText(Html.fromHtml(sourceString));
+                //Name.setText("Welcome," + userProfile.getFirstName() + " " + userProfile.getLastName());
 
             }
 
@@ -44,7 +47,7 @@ public class WelcomeMessage extends AppCompatActivity {
 
         });
 
-    }
+           }
     public void SetUpUIelements(){
         Name = findViewById(R.id.Nametxt);
 
