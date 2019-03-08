@@ -2,6 +2,7 @@ package com.shma.yusuf.shma;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -20,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Member;
+
 public class MemberProfile extends AppCompatActivity {
    private TextView SHMAID,firstname , surname , DOB;
    private Button logout;
@@ -28,7 +31,7 @@ public class MemberProfile extends AppCompatActivity {
    private FirebaseDatabase firebaseDatabase;
 
     private void SetUpUIelements(){
-            SHMAID = findViewById(R.id.usr_shmaid);
+        SHMAID = findViewById(R.id.usr_shmaid);
         firstname =  findViewById(R.id.usr_firstname);
         surname =  findViewById(R.id.usr_surname);
         DOB =  findViewById(R.id.usr_DOB);
@@ -41,6 +44,11 @@ public class MemberProfile extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_profile);
+        BottomNavigationView BottomNav = findViewById(R.id.bottom_nav);
+        BottomNav.setOnNavigationItemSelectedListener(navlistener);
+        Menu menu = BottomNav.getMenu();
+        MenuItem menuItem = menu.getItem(2);
+        menuItem.setChecked(true);
         Toolbar myToolbar = findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
         getSupportActionBar().setTitle("Profile");
@@ -57,22 +65,52 @@ public class MemberProfile extends AppCompatActivity {
                 SHMAID.setText("Welcome Member: " + userProfile.getShmaId());
                 firstname.setText("Name: " + userProfile.getFirstName());
                 surname.setText("Age: " + userProfile.getLastName());
-                DOB.setText("Email: " + userProfile.getDOB());
+                DOB.setText("DOB: " + userProfile.getDOB());
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Signed out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Connection lost", Toast.LENGTH_SHORT).show();
             }
 
         });
 
+
+
     }
 
-    public void LogoutNow(View v){
-        Logout();
-    }
+    private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            //Fragment selectedFragment = null;
+            switch(menuItem.getItemId()){
+                case R.id.nav_home:
+                    finish();
+                    Intent sendhome =  new Intent(MemberProfile.this, MemberSpace.class);
+                    startActivity(sendhome);
+                    overridePendingTransition(0, 0);
+                    // selectedFragment = new HomeFragment();
+                    break;
+                case R.id.nav_funeral:
+                    finish();
+                    // selectedFragment = new FuneralFragment();
+                    break;
+                case R.id.nav_profile:
+                    finish();
+                    Intent sendme =  new Intent(MemberProfile.this, MemberProfile.class);
+                    startActivity(sendme);
+                    overridePendingTransition(0, 0);
+                    // selectedFragment = new ProfileFragment();
+                    break;
+
+            }
+            //getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,selectedFragment).commit();
+
+            return true;
+        }
+    };
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

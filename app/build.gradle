@@ -31,6 +31,8 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:16.1.0'
     implementation 'com.firebaseui:firebase-ui-auth:4.1.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
+    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.google.android.gms:play-services-location:16.0.0'
     //old compile 'androidx.constraintlayout:constraintlayout:1.1.3'
 
 }

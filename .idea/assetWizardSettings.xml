@@ -18,12 +18,38 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+                                      <entry key="clipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
                                       <entry key="image">
                                         <value>
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="paddingPercent" value="-10" />
+                                                <entry key="color" value="000000" />
+                                                <entry key="paddingPercent" value="5" />
+                                                <entry key="trimmed" value="true" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                      <entry key="text">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                                <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -34,7 +60,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Yusuf\Downloads\android\android\playstore-icon.png" />
+                                      <entry key="imageAsset" value="C:\Users\Yusuf\Desktop\Funeral icon\duaHands@3x.png" />
+                                      <entry key="outputName" value="funeralhands" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -61,7 +88,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="116" />
+                                                <entry key="scalingPercent" value="120" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -73,12 +100,99 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundColor" value="fdfffd" />
-                                      <entry key="foregroundImage" value="C:\Users\Yusuf\AndroidStudioProjects\SHMA\app\src\main\res\importimage.png" />
+                                      <entry key="backgroundLayerName" value="card_background" />
+                                      <entry key="foregroundImage" value="C:\Users\Yusuf\Downloads\shmaCardText.png" />
+                                      <entry key="foregroundLayerName" value="card_front" />
+                                      <entry key="outputName" value="cardtest" />
                                     </map>
                                   </option>
                                 </PersistentState>
                               </value>
                             </entry>
+                            <entry key="launcherLegacy">
+                              <value>
+                                <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="clipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                            <entry key="notification">
+                              <value>
+                                <PersistentState>
+                                  <option name="children">
+                                    <map>
+                                      <entry key="clipArt">
+                                        <value>
+                                          <PersistentState>
+                                            <option name="values">
+                                              <map>
+                                                <entry key="color" value="000000" />
+                                              </map>
+                                            </option>
+                                          </PersistentState>
+                                        </value>
+                                      </entry>
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
+                          </map>
+                        </option>
+                      </PersistentState>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </PersistentState>
+          </value>
+        </entry>
+        <entry key="vectorWizard">
+          <value>
+            <PersistentState>
+              <option name="children">
+                <map>
+                  <entry key="vectorAssetStep">
+                    <value>
+                      <PersistentState>
+                        <option name="children">
+                          <map>
+                            <entry key="clipartAsset">
+                              <value>
+                                <PersistentState>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material_design_icons/social/ic_person_black_24dp.xml" />
+                                    </map>
+                                  </option>
+                                </PersistentState>
+                              </value>
+                            </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputName" value="test_profile" />
+                            <entry key="sourceFile" value="C:\Users\Yusuf" />
                           </map>
                         </option>
                       </PersistentState>

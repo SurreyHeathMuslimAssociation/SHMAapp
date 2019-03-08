@@ -174,7 +174,7 @@ public void SetUpUIelements(){
       if(emailflag){
           finish();
           //below is the sending of the shmaID once they log in for the first time
-          startActivity(new Intent(MemberArea.this, MemberProfile.class));
+          startActivity(new Intent(MemberArea.this, MemberSpace.class));
       }else{
            PopupMessage("Verify your email");
             mAuth.signOut();

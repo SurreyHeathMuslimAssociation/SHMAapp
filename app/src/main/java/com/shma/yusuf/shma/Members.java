@@ -7,14 +7,6 @@ import android.view.View;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Members extends AppCompatActivity {
 
@@ -28,7 +20,7 @@ public class Members extends AppCompatActivity {
         //is user already logged in
         if (user!=null){
             finish();
-            Intent i = new Intent(getApplicationContext(), MemberProfile.class);
+            Intent i = new Intent(getApplicationContext(), MemberSpace.class);
             startActivity(i);
         }
     }

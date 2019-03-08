@@ -4,7 +4,21 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".MemberProfile">
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/common_google_signin_btn_text_dark_focused"
+        app:itemTextColor="@color/common_google_signin_btn_text_dark_focused"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottomnavigation"
+        tools:layout_editor_absoluteX="0dp"
+
+        />
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/my_toolbar"
