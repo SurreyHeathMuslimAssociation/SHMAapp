@@ -27,6 +27,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -45,6 +46,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONArray;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -154,38 +157,38 @@ public class MemberSpace extends AppCompatActivity {
 
 
     private void PrayerTimes(String location) {
-
+        String TAG_NAME = "name";
+        String url ="http://api.aladhan.com/v1/timings/" + formattedDate + "?" + location + "&method=2";
+//Request Queue Setup
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
-
 // Set up the network to use HttpURLConnection as the HTTP client.
         Network network = new BasicNetwork(new HurlStack());
-
 // Instantiate the RequestQueue with the cache and network.
         requestQueue = new RequestQueue(cache, network);
-
 // Start the queue
         requestQueue.start();
-        String url ="http://api.aladhan.com/v1/timings/" + formattedDate + "?" + location + "&method=2";
 
-// Formulate the request and handle the response.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
+
+// Formulate the prayertimes request and handle the response.
+
+        JsonArrayRequest jsonRequest = new JsonArrayRequest(url,
+                new Response.Listener<JSONArray>() {
+
                     @Override
-                    public void onResponse(String response) {
-                        // Do something with the response
-                        PrayerTimes.setText("Response is: " + response.substring(44, 500));
+                    public void onResponse(JSONArray response) {
+                     //  PrayerTimes.setText("Response is: " + response.substring(44, 500));
                         requestQueue.stop();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle error
-                    }
+                new Response.ErrorListener(){
+            @Override
+                    public void onErrorResponse(VolleyError error){
+
+            }
                 });
 
 // Add the request to the RequestQueue.
-        requestQueue.add(stringRequest);
+        requestQueue.add(jsonRequest);
 
      }
 
