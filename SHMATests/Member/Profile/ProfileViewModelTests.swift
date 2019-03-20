@@ -14,6 +14,7 @@ class ProfileViewModelTests: XCTestCase {
     var sut: ProfileViewModel!
     var traitCollection: UITraitCollection!
     var member: Member!
+    var association: Association!
 
     
     override func setUp() {
@@ -26,8 +27,10 @@ class ProfileViewModelTests: XCTestCase {
         traitCollection = iPadTraits
         
         setupMember()
+        setupAssociation()
 
         sut = ProfileViewModel(traitCollection, member)
+        sut.association = association
         
     }
     
@@ -37,6 +40,17 @@ class ProfileViewModelTests: XCTestCase {
             let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
             let member = try JSONDecoder().decode(Member.self, from: jsonData)
             self.member = member
+        } catch {
+            print(error)
+        }
+    }
+    
+    private func setupAssociation() {
+        do {
+            let value = ["name": "Surrey Heath Muslim Association", "alias": "SHMA", "generalEmail": "test@gmail.com", "committeeEmail": "test@gmail.com", "web": "www.shma.org", "postalAddress": "1 New Lane"]
+            let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
+            let association = try JSONDecoder().decode(Association.self, from: jsonData)
+            self.association = association
         } catch {
             print(error)
         }
@@ -78,11 +92,20 @@ class ProfileViewModelTests: XCTestCase {
     }
     
     func testGetsFooterTextViewText() {
+        let lineOne = "If you have any queries please contact us on\n \(association?.committeeEmail ?? "")"
+        let lineTwo = "\n\nAlternatively you can post to us on the following address:"
+        let address = association?.postalAddress.replacingOccurrences(of: ", ", with: "\n") ?? ""
         if traitCollection.isIpad {
-            let attributedText = NSAttributedString(string: "If you have any queries please contact us on\nenquiries@shma-uk.org", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 26)])
+            let attributedText = NSMutableAttributedString(string: lineOne, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 26)])
+            attributedText.append(NSAttributedString(string: lineTwo, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 26)]))
+            attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]))
+            attributedText.append(NSAttributedString(string: "\(address)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 26)]))
             XCTAssertEqual(sut.getFooterTextViewText(), attributedText)
         } else {
-            let attributedText = NSAttributedString(string: "If you have any queries please contact us on enquiries@shma-uk.org", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
+            let attributedText = NSMutableAttributedString(string: lineOne, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
+            attributedText.append(NSAttributedString(string: lineTwo, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
+            attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 6)]))
+            attributedText.append(NSAttributedString(string: "\(address)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
             XCTAssertEqual(sut.getFooterTextViewText(), attributedText)
         }
     }
@@ -97,9 +120,9 @@ class ProfileViewModelTests: XCTestCase {
     
     func testGetsTableViewFooterHeightForEachDevice() {
         if traitCollection.isIpad {
-            XCTAssertEqual(sut.getTableViewFooterHeightForEachDevice(), 150)
+            XCTAssertEqual(sut.getTableViewFooterHeightForEachDevice(), 250)
         } else {
-            XCTAssertEqual(sut.getTableViewFooterHeightForEachDevice(), 100)
+            XCTAssertEqual(sut.getTableViewFooterHeightForEachDevice(), 200)
         }
     }
     
@@ -131,7 +154,7 @@ class ProfileViewModelTests: XCTestCase {
         if traitCollection.isIpad {
             XCTAssertEqual(sut.getInfoTextViewTopPadding(), 30)
         } else {
-            XCTAssertEqual(sut.getInfoTextViewTopPadding(), 20)
+            XCTAssertEqual(sut.getInfoTextViewTopPadding(), 0)
         }
     }
 }

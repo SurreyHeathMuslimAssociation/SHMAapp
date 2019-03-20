@@ -25,6 +25,7 @@ class Member: Codable {
     let county: String?
     let postcode: String?
     let mobileNumber: String?
+    let alternatePhoneNo: String?
     
     private enum CodingKeys: String, CodingKey {
         case firstName
@@ -41,6 +42,7 @@ class Member: Codable {
         case county
         case postcode
         case mobileNumber = "mobileNo"
+        case alternatePhoneNo
     }
     
     public required init(from decoder: Decoder) throws {
@@ -64,5 +66,6 @@ class Member: Codable {
         self.county = try container.decodeIfPresent(String.self, forKey: .county)
         self.postcode = try container.decodeIfPresent(String.self, forKey: .postcode)
         self.mobileNumber = try container.decodeIfPresent(String.self, forKey: .mobileNumber)
+        self.alternatePhoneNo = try container.decodeIfPresent(String.self, forKey: .alternatePhoneNo)
     }
 }

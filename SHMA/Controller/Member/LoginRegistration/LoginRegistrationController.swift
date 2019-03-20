@@ -37,6 +37,7 @@ class LoginRegistrationController: UIViewController {
     var memberCounty: String!
     var memberPostcode: String!
     var memberMobileNo: String!
+    var memberAlternatePhoneNo: String!
     var membershipType: String!
     var memberStatus: String!
     var wasCellLeftEmpty = false

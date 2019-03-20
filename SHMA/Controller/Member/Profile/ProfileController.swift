@@ -8,6 +8,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseDatabase
 
 class ProfileController: UITableViewController {
     
@@ -28,13 +29,16 @@ class ProfileController: UITableViewController {
         frame.size.height = .leastNormalMagnitude
         tableView.tableHeaderView = UIView(frame: frame)
        
-        // initialise auth manager
+        // initialise firebase managers
         firebaseAuthManager = FirebaseAuthManager(session: Auth.auth())
+        firebaseDatabaseManager = FirebaseDatabaseManager(session: Database.database())
+        
         // initialise view model
         profileViewModel = ProfileViewModel(traitCollection, member)
         
         registerCellAndFooter()
         setupNavBar()
+        fetchAssociationDetailsAndSetupMember()
         setupMemberLabels()
         setupMemberDetails()
     }
@@ -68,8 +72,5 @@ class ProfileController: UITableViewController {
         memberDetails.append(member.dob ?? "")
         memberDetails.append(member.email ?? "")
         memberDetails.append(member.membershipType)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
     }
 }

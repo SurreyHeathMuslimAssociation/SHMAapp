@@ -12,7 +12,9 @@ struct Association: Decodable {
 
     let name: String
     let alias: String
-    let email: String
+    let generalEmail: String
+    let committeeEmail: String
     let web: String
+    let postalAddress: String
     
 }

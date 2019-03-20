@@ -35,36 +35,36 @@ class LoginRegistrationView: UIView {
     }()
     let shmaIdTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "SHMA ID*"
+        tf.placeholder = "SHMA ID *"
         tf.keyboardType = .numberPad
         return tf
     }()
     let nameTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Full Name*"
+        tf.placeholder = "Full Name *"
         return tf
     }()
     let emailTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Email*"
+        tf.placeholder = "Email *"
         tf.autocapitalizationType = .none
         tf.keyboardType = .emailAddress
         return tf
     }()
     let passwordTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Password*"
+        tf.placeholder = "Password *"
         tf.isSecureTextEntry = true
         return tf
     }()
     let dobTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "D.O.B*"
+        tf.placeholder = "D.O.B *"
         return tf
     }()
     let addressLineOneTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Address Line 1*"
+        tf.placeholder = "Address Line 1 *"
         return tf
     }()
     let addressLineTwoTextField: UITextField = {
@@ -74,7 +74,7 @@ class LoginRegistrationView: UIView {
     }()
     let townTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Town*"
+        tf.placeholder = "Town *"
         return tf
     }()
     let countyTextField: UITextField = {
@@ -84,12 +84,18 @@ class LoginRegistrationView: UIView {
     }()
     let postcodeTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Postcode*"
+        tf.placeholder = "Postcode *"
         return tf
     }()
     let mobileNoTextField: UITextField = {
         let tf = UITextField()
-        tf.placeholder = "Mobile No.*"
+        tf.placeholder = "Mobile No. *"
+        tf.keyboardType = .numberPad
+        return tf
+    }()
+    let alternatePhoneNoTextField: UITextField = {
+        let tf = UITextField()
+        tf.placeholder = "Alternate Phone No."
         tf.keyboardType = .numberPad
         return tf
     }()
@@ -109,11 +115,6 @@ class LoginRegistrationView: UIView {
         return view
     }()
     let passwordSeperatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
-        return view
-    }()
-    let dobSeperatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
         return view
@@ -138,10 +139,31 @@ class LoginRegistrationView: UIView {
         view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
         return view
     }()
-    let postcodeSeperatorView: UIView = {
+    let mobileNoSeperatorView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
         return view
+    }()
+    let nextOfKinNameSeperatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.rgb(red: 220, green: 220, blue: 220)
+        return view
+    }()
+    let addressInfoLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = " Address Information"
+        label.backgroundColor = UIColor(white: 0.9, alpha: 0.5)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
+    }()
+    let contactInfoLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.text = " Contact Information"
+        label.backgroundColor = UIColor(white: 0.9, alpha: 0.5)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        return label
     }()
     lazy var membershipSwitch: UISwitch = {
         let s = UISwitch()
@@ -205,6 +227,7 @@ class LoginRegistrationView: UIView {
     var townTextFieldHeightAnchor: NSLayoutConstraint?
     var postcodeTextFieldHeightAnchor: NSLayoutConstraint?
     var mobileTextFieldHeightAnchor: NSLayoutConstraint?
+    var alternatePhoneNoTextFieldHeightAnchor: NSLayoutConstraint?
     var loginRegisterButtonHeightAnchor: NSLayoutConstraint?
     var loginRegisterButtonTopAnchor: NSLayoutConstraint?
     var passwordResetButtonHeightAnchor: NSLayoutConstraint?
@@ -220,7 +243,7 @@ class LoginRegistrationView: UIView {
         self.didSelectExistingMemberRegistration = didSelectExistingMemberRegistration
         self.didSelectNewMemberRegistration = didSelectNewMemberRegistration
         
-        loginRegistrationViewModel = LoginRegistrationViewModel(traitCollection, loginRegistrationView: self, didSelectLogin, didSelectExistingMemberRegistration, didSelectNewMemberRegistration, mainLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, countyTextField, postcodeTextField, mobileNoTextField, loginRegisterButton, passswordResetButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, dobSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, countySeperatorView, postcodeSeperatorView, coverView)
+        loginRegistrationViewModel = LoginRegistrationViewModel(traitCollection, loginRegistrationView: self, didSelectLogin, didSelectExistingMemberRegistration, didSelectNewMemberRegistration, mainLabel, addressInfoLabel, contactInfoLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, countyTextField, postcodeTextField, mobileNoTextField, alternatePhoneNoTextField, loginRegisterButton, passswordResetButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, countySeperatorView, mobileNoSeperatorView, coverView)
         
         setupView()
     }

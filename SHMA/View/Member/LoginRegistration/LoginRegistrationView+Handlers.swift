@@ -26,6 +26,9 @@ extension LoginRegistrationView {
         countyTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
         postcodeTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
         mobileNoTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
+        alternatePhoneNoTextField.font = loginRegistrationViewModel.getTextFieldFontForEachDevice()
+        addressInfoLabel.font = loginRegistrationViewModel.getContactAddressAndNextOfKinInfoLabelFont()
+        contactInfoLabel.font = loginRegistrationViewModel.getContactAddressAndNextOfKinInfoLabelFont()
     }
     
     func setupKeyboardNotifications() {

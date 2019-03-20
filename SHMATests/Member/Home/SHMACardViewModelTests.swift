@@ -63,7 +63,7 @@ class SHMACardViewModelTests: XCTestCase {
     
     private func setupAssociation() {
         do {
-            let value = ["name": "Surrey Heath Muslim Association", "alias": "SHMA", "email": "test@gmail.com", "web": "www.shma.org"]
+            let value = ["name": "Surrey Heath Muslim Association", "alias": "SHMA", "generalEmail": "test@gmail.com", "committeeEmail": "test@gmail.com", "web": "www.shma.org", "postalAddress": "1 New Lane"]
             let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
             let association = try JSONDecoder().decode(Association.self, from: jsonData)
             self.association = association
@@ -120,7 +120,7 @@ class SHMACardViewModelTests: XCTestCase {
     }
     
     func testGetsShmaContactInfoLabelText() {
-        let email = association.email
+        let email = association.generalEmail
         let web = association.web
         if traitCollection.isIpad {
             let attributedText = NSMutableAttributedString(string: "Web: \(web)\n", attributes: [NSAttributedString.Key.font: UIFont(name: "TimesNewRomanPSMT", size: 18) ?? UIFont.systemFont(ofSize: 18)])

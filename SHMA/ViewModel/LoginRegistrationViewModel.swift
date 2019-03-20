@@ -16,6 +16,8 @@ class LoginRegistrationViewModel {
     let didSelectExistingMemberRegistration: Bool
     let didSelectNewMemberRegistration: Bool
     let mainLabel: UILabel
+    let addressInfoLabel: UILabel
+    let contactInfoLabel: UILabel
     let membershipLabel: UILabel
     let shmaIdTextField: UITextField
     let nameTextField: UITextField
@@ -28,6 +30,7 @@ class LoginRegistrationViewModel {
     let countyTextField: UITextField
     let postcodeTextField: UITextField
     let mobileNoTextField: UITextField
+    let alternatePhoneNoTextField: UITextField
     let loginRegisterButton: UIButton
     let passwordResetButton: UIButton
     let membershipSwitch: UISwitch
@@ -35,21 +38,22 @@ class LoginRegistrationViewModel {
     let emailSeperatorView: UIView
     let nameSeperatorView: UIView
     let passwordSeperatorView: UIView
-    let dobSeperatorView: UIView
     let addressLineOneSeperatorView: UIView
     let addressLineTwoSeperatorView: UIView
     let townSeperatorView: UIView
     let countySeperatorView: UIView
-    let postcodeSeperatorView: UIView
+    let phoneNoSeperatorView: UIView
     let coverView: UIView
     
-    init(_ traitCollection: UITraitCollection, loginRegistrationView: UIView, _ didSelectLogin: Bool, _ didSelectExistingMemberRegistration: Bool, _ didSelectNewMemberRegistration: Bool,_ mainLabel: UILabel, _ membershipLabel: UILabel, _ shmaIdTextField: UITextField, _ nameTextField: UITextField, _ emailTextField: UITextField, _ passwordTextField: UITextField, _ dobTextField: UITextField, _ addressLineOneTextField: UITextField, _ addressLineTwoTextField: UITextField, _ townTextField: UITextField, _ countyTextField: UITextField, _ postcodeTextField: UITextField, _ mobileNoTextField: UITextField, _ loginRegisterButton: UIButton, _ passwordResetButton: UIButton, _ membershipSwitch: UISwitch, _ shmaIdSeperatorView: UIView, _ emailSeperatorView: UIView, _ nameSeperatorView: UIView, _ passwordSeperatorView: UIView, _ dobSeperatorView: UIView, _ addressLineOneSeperatorView: UIView, _ addressLineTwoSeperatorView: UIView, _ townSeperatorView: UIView, _ countySeperatorView: UIView, _ postcodeSeperatorView: UIView, _ coverView: UIView) {
+    init(_ traitCollection: UITraitCollection, loginRegistrationView: UIView, _ didSelectLogin: Bool, _ didSelectExistingMemberRegistration: Bool, _ didSelectNewMemberRegistration: Bool,_ mainLabel: UILabel, _ addressInfoLabel: UILabel, _ contactInfoLabel: UILabel, _ membershipLabel: UILabel, _ shmaIdTextField: UITextField, _ nameTextField: UITextField, _ emailTextField: UITextField, _ passwordTextField: UITextField, _ dobTextField: UITextField, _ addressLineOneTextField: UITextField, _ addressLineTwoTextField: UITextField, _ townTextField: UITextField, _ countyTextField: UITextField, _ postcodeTextField: UITextField, _ mobileNoTextField: UITextField, _ alternatePhoneNoTextField: UITextField, _ loginRegisterButton: UIButton, _ passwordResetButton: UIButton, _ membershipSwitch: UISwitch, _ shmaIdSeperatorView: UIView, _ emailSeperatorView: UIView, _ nameSeperatorView: UIView, _ passwordSeperatorView: UIView, _ addressLineOneSeperatorView: UIView, _ addressLineTwoSeperatorView: UIView, _ townSeperatorView: UIView, _ countySeperatorView: UIView, _ phoneNoSeperatorView: UIView, _ coverView: UIView) {
         self.traitCollection = traitCollection
         self.loginRegistrationView = loginRegistrationView
         self.didSelectLogin = didSelectLogin
         self.didSelectExistingMemberRegistration = didSelectExistingMemberRegistration
         self.didSelectNewMemberRegistration = didSelectNewMemberRegistration
         self.mainLabel = mainLabel
+        self.addressInfoLabel = addressInfoLabel
+        self.contactInfoLabel = contactInfoLabel
         self.membershipLabel = membershipLabel
         self.shmaIdTextField = shmaIdTextField
         self.nameTextField = nameTextField
@@ -62,6 +66,7 @@ class LoginRegistrationViewModel {
         self.countyTextField = countyTextField
         self.postcodeTextField = postcodeTextField
         self.mobileNoTextField = mobileNoTextField
+        self.alternatePhoneNoTextField = alternatePhoneNoTextField
         self.loginRegisterButton = loginRegisterButton
         self.passwordResetButton = passwordResetButton
         self.membershipSwitch = membershipSwitch
@@ -69,12 +74,11 @@ class LoginRegistrationViewModel {
         self.emailSeperatorView = emailSeperatorView
         self.nameSeperatorView = nameSeperatorView
         self.passwordSeperatorView = passwordSeperatorView
-        self.dobSeperatorView = dobSeperatorView
         self.addressLineOneSeperatorView = addressLineOneSeperatorView
         self.addressLineTwoSeperatorView = addressLineTwoSeperatorView
         self.townSeperatorView = townSeperatorView
         self.countySeperatorView = countySeperatorView
-        self.postcodeSeperatorView = postcodeSeperatorView
+        self.phoneNoSeperatorView = phoneNoSeperatorView
         self.coverView = coverView
     }
 
@@ -97,7 +101,7 @@ class LoginRegistrationViewModel {
     
     func getLoginRegisterButtonTopAnchor() -> NSLayoutConstraint {
         if didSelectNewMemberRegistration {
-            return loginRegisterButton.topAnchor.constraint(equalTo: mobileNoTextField.bottomAnchor)
+            return loginRegisterButton.topAnchor.constraint(equalTo: alternatePhoneNoTextField.bottomAnchor)
         } else {
             return loginRegisterButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor)
         }
@@ -139,7 +143,6 @@ class LoginRegistrationViewModel {
             nameTextField.isHidden = true
             nameSeperatorView.isHidden = true
             dobTextField.isHidden = true
-            dobSeperatorView.isHidden = true
             addressLineOneTextField.isHidden = true
             addressLineOneSeperatorView.isHidden = true
             addressLineTwoTextField.isHidden = true
@@ -149,8 +152,9 @@ class LoginRegistrationViewModel {
             countyTextField.isHidden = true
             countySeperatorView.isHidden = true
             postcodeTextField.isHidden = true
-            postcodeSeperatorView.isHidden = true
+            phoneNoSeperatorView.isHidden = true
             mobileNoTextField.isHidden = true
+            addressInfoLabel.isHidden = true
         } else if didSelectExistingMemberRegistration == true {
             passwordResetButton.isHidden = true
             membershipLabel.isHidden = true
@@ -159,7 +163,6 @@ class LoginRegistrationViewModel {
             passwordSeperatorView.isHidden = true
             nameSeperatorView.isHidden = true
             dobTextField.isHidden = true
-            dobSeperatorView.isHidden = true
             addressLineOneTextField.isHidden = true
             addressLineOneSeperatorView.isHidden = true
             addressLineTwoTextField.isHidden = true
@@ -169,9 +172,10 @@ class LoginRegistrationViewModel {
             countyTextField.isHidden = true
             countySeperatorView.isHidden = true
             postcodeTextField.isHidden = true
-            postcodeSeperatorView.isHidden = true
+            phoneNoSeperatorView.isHidden = true
             mobileNoTextField.isHidden = true
             coverView.isHidden = true
+            addressInfoLabel.isHidden = true
         } else if didSelectNewMemberRegistration == true {
             passwordResetButton.isHidden = true
             shmaIdTextField.isHidden = true
@@ -182,6 +186,22 @@ class LoginRegistrationViewModel {
     // label
     func getLabelHeightAnchor() -> NSLayoutConstraint {
         return mainLabel.heightAnchor.constraint(equalToConstant: 80)
+    }
+    
+    func getContactAddressAndNextOfKinInfoLabelHeight() -> CGFloat {
+        if traitCollection.isIpad {
+            return 40
+        } else {
+            return 30
+        }
+    }
+    
+    func getContactAddressAndNextOfKinInfoLabelFont() -> UIFont {
+        if traitCollection.isIpad {
+            return UIFont.boldSystemFont(ofSize: 20)
+        } else {
+            return UIFont.boldSystemFont(ofSize: 14)
+        }
     }
     
     func getLabelFontForEachDevice() -> UIFont {
@@ -228,7 +248,7 @@ class LoginRegistrationViewModel {
         if traitCollection.isIpad {
             return NSAttributedString.getAttributedStringUsing(text: text, font: 22, spaceFont: nil, isBold: true)
         } else {
-            return NSAttributedString.getAttributedStringUsing(text: text, font: 14, spaceFont: nil, isBold: true)
+            return NSAttributedString.getAttributedStringUsing(text: text, font: 16, spaceFont: nil, isBold: true)
         }
     }
     
@@ -237,16 +257,16 @@ class LoginRegistrationViewModel {
         if didSelectNewMemberRegistration {
             if traitCollection.isIphone {
                 if membershipSwitch.isOn {
-                    return CGSize(width: loginRegistrationView.frame.width, height: 1040)
+                    return CGSize(width: loginRegistrationView.frame.width, height: 1140)
                 } else {
-                    return CGSize(width: loginRegistrationView.frame.width, height: 640)
+                    return CGSize(width: loginRegistrationView.frame.width, height: 750)
                 }
             } else {
                 // ipad
                 if membershipSwitch.isOn {
-                    return CGSize(width: loginRegistrationView.frame.width, height: 1205)
+                    return CGSize(width: loginRegistrationView.frame.width, height: 1345)
                 } else {
-                    return CGSize(width: loginRegistrationView.frame.width, height: 800)
+                    return CGSize(width: loginRegistrationView.frame.width, height: 945)
                 }
             }
         } else {
@@ -273,7 +293,7 @@ class LoginRegistrationViewModel {
     // textfields
     func getTextFieldFontForEachDevice() -> UIFont {
         if traitCollection.isIpad {
-            return UIFont.systemFont(ofSize: 22)
+            return UIFont.systemFont(ofSize: 20)
         } else {
             return UIFont.systemFont(ofSize: 14)
         }
@@ -375,6 +395,14 @@ class LoginRegistrationViewModel {
         }
     }
     
+    func getAlternatePhoneNoTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected() -> NSLayoutConstraint {
+        if traitCollection.isIpad {
+            return alternatePhoneNoTextField.heightAnchor.constraint(equalToConstant: didSelectNewMemberRegistration ? 60 : 0)
+        } else {
+            return alternatePhoneNoTextField.heightAnchor.constraint(equalToConstant: didSelectNewMemberRegistration ? 45 : 0)
+        }
+    }
+    
     // login registration view
     func getLoginRegistrationViewHeightOrBottomConstraitForEachTypeAndDevice() -> NSLayoutConstraint? {
         if didSelectLogin {
@@ -462,5 +490,17 @@ class LoginRegistrationViewModel {
         } else {
             return NSAttributedString.getAttributedStringUsing(text: error, font: 13, spaceFont: nil, isBold: false)
         }
+    }
+    
+    func getAddChildButtonWidthForDisableState() -> CGFloat {
+        if traitCollection.isIpad {
+            return 280
+        } else {
+            return 200
+        }
+    }
+    
+    func getAddChildButtonWidthForEnableState() -> CGFloat {
+        return 170
     }
 }

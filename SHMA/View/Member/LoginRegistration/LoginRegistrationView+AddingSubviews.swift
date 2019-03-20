@@ -25,7 +25,6 @@ extension LoginRegistrationView {
         scrollView.addSubview(nameTextField)
         scrollView.addSubview(nameSeperatorView)
         scrollView.addSubview(dobTextField)
-        scrollView.addSubview(dobSeperatorView)
         scrollView.addSubview(addressLineOneTextField)
         scrollView.addSubview(addressLineTwoTextField)
         scrollView.addSubview(addressLineOneSeperatorView)
@@ -35,10 +34,14 @@ extension LoginRegistrationView {
         scrollView.addSubview(countySeperatorView)
         scrollView.addSubview(townSeperatorView)
         scrollView.addSubview(postcodeTextField)
-        scrollView.addSubview(postcodeSeperatorView)
         scrollView.addSubview(mobileNoTextField)
+        scrollView.addSubview(mobileNoSeperatorView)
+        scrollView.addSubview(alternatePhoneNoTextField)
+        scrollView.addSubview(nextOfKinNameSeperatorView)
         scrollView.addSubview(loginRegisterButton)
         scrollView.addSubview(passswordResetButton)
+        scrollView.addSubview(addressInfoLabel)
+        scrollView.addSubview(contactInfoLabel)
         
         setupKeyboardNotifications()
         setTextFieldDelegates()
@@ -109,9 +112,10 @@ extension LoginRegistrationView {
         dobTextFieldHeightAnchor = loginRegistrationViewModel.getDobTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected()
         dobTextFieldHeightAnchor?.isActive = true
         
-        dobSeperatorView.anchor(top: dobTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5, centerYAnchor: nil, centerXAnchor: nil)
+        addressInfoLabel.anchor(top: dobTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        addressInfoLabel.heightAnchor.constraint(equalToConstant: loginRegistrationViewModel.getContactAddressAndNextOfKinInfoLabelHeight()).isActive = true
         
-        addressLineOneTextField.anchor(top: dobSeperatorView.bottomAnchor, left: shmaIdTextField.leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        addressLineOneTextField.anchor(top: addressInfoLabel.bottomAnchor, left: shmaIdTextField.leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         addressLineOneTextFieldHeightAnchor = loginRegistrationViewModel.getAddressLineOneTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected()
         addressLineOneTextFieldHeightAnchor?.isActive = true
         
@@ -139,11 +143,20 @@ extension LoginRegistrationView {
         postcodeTextFieldHeightAnchor = loginRegistrationViewModel.getPostcodeTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected()
         postcodeTextFieldHeightAnchor?.isActive = true
         
-        postcodeSeperatorView.anchor(top: postcodeTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5, centerYAnchor: nil, centerXAnchor: nil)
+//        postcodeSeperatorView.anchor(top: postcodeTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5, centerYAnchor: nil, centerXAnchor: nil)
         
-        mobileNoTextField.anchor(top: postcodeSeperatorView.bottomAnchor, left: shmaIdTextField.leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        contactInfoLabel.anchor(top: postcodeTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        contactInfoLabel.heightAnchor.constraint(equalToConstant: loginRegistrationViewModel.getContactAddressAndNextOfKinInfoLabelHeight()).isActive = true
+        
+        mobileNoTextField.anchor(top: contactInfoLabel.bottomAnchor, left: shmaIdTextField.leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         mobileTextFieldHeightAnchor = loginRegistrationViewModel.getMobileNoTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected()
         mobileTextFieldHeightAnchor?.isActive = true
+        
+        mobileNoSeperatorView.anchor(top: mobileNoTextField.bottomAnchor, left: leftAnchor, bottom: nil, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0.5, centerYAnchor: nil, centerXAnchor: nil)
+        
+        alternatePhoneNoTextField.anchor(top: mobileNoSeperatorView.bottomAnchor, left: shmaIdTextField.leftAnchor, bottom: nil, right: shmaIdTextField.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        alternatePhoneNoTextFieldHeightAnchor = loginRegistrationViewModel.getAlternatePhoneNoTextFieldHeightConstraintForEachDeviceBasedOnLoginTypeSelected()
+        alternatePhoneNoTextFieldHeightAnchor?.isActive = true
     }
     
     

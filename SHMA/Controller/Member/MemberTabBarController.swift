@@ -69,7 +69,7 @@ class MemberTabBarController: UITabBarController {
         self.funeralContactsNavController = UINavigationController(rootViewController: funeralController)
         self.funeralContactsNavController.tabBarItem = UITabBarItem(title: "Funeral", image: #imageLiteral(resourceName: "Funeral"), selectedImage: #imageLiteral(resourceName: "Funeral"))
         
-        self.viewControllers = [self.homeNavController, self.businessNavController, self.profileNavController, self.funeralContactsNavController]
+        self.viewControllers = [self.homeNavController, self.businessNavController, self.funeralContactsNavController, self.profileNavController]
         self.activityIndicatorView.stopAnimating()
     }
 }

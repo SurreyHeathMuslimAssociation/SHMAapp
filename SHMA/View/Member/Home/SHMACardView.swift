@@ -44,6 +44,7 @@ class SHMACardView: UIView {
         let label = UILabel()
         label.textColor = .white
         label.textAlignment = .right
+        label.adjustsFontSizeToFitWidth = true
         return label
     }()
     let activityIndicatorView: UIActivityIndicatorView = {

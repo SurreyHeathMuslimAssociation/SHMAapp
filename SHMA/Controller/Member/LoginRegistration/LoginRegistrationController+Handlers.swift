@@ -138,7 +138,7 @@ extension LoginRegistrationController {
         viewLoading(true)
         guard let name = loginRegistrationView.nameTextField.text, name.count > 0, let email = loginRegistrationView.emailTextField.text, email.count > 0, let password = loginRegistrationView.passwordTextField.text, password.count > 0, let dob = loginRegistrationView.dobTextField.text, dob.count > 0, let addressLineOne = loginRegistrationView.addressLineOneTextField.text, addressLineOne.count > 0, let town = loginRegistrationView.townTextField.text, town.count > 0, let postcode = loginRegistrationView.postcodeTextField.text, postcode.count > 0, let mobileNo = loginRegistrationView.mobileNoTextField.text, mobileNo.count > 0 else {
             // display alert if any fields are empty
-            showErrorAlert(with: "Please ensure all fields are filled in", .danger)
+            showErrorAlert(with: "Please ensure all madatory(*) fields are filled in", .danger)
             viewLoading(false)
             return
         }
@@ -150,6 +150,7 @@ extension LoginRegistrationController {
         // optional details
         let addressLineTwo = loginRegistrationView.addressLineTwoTextField.text ?? ""
         let county = loginRegistrationView.countyTextField.text ?? ""
+        let alternatePhoneNo = loginRegistrationView.alternatePhoneNoTextField.text ?? ""
         // verify age over 19
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
@@ -161,7 +162,7 @@ extension LoginRegistrationController {
             return
         }
         // assigning member detail variables
-        memberName = name; memberEmail = email; memberPassword = password; memberDob = dob; memberAddressLineOne = addressLineOne; memberAddressLineTwo = addressLineTwo; memberTown = town; memberCounty = county; memberPostcode = postcode; memberMobileNo = mobileNo; memberStatus = "Applied"
+        memberName = name; memberEmail = email; memberPassword = password; memberDob = dob; memberAddressLineOne = addressLineOne; memberAddressLineTwo = addressLineTwo; memberTown = town; memberCounty = county; memberPostcode = postcode; memberMobileNo = mobileNo; memberAlternatePhoneNo = alternatePhoneNo; memberStatus = "Applied"
 
         getNewMemberFamilyDetails()
     }
@@ -263,7 +264,7 @@ extension LoginRegistrationController {
         let middleName = middleNameComponents.joined(separator: " ").capitalized
         guard let lastName = components.last?.capitalized else { return }
         // defines json value
-        let value = ["firstName": firstName, "middleName": middleName, "lastName": lastName, "email": memberEmail, "DOB": memberDob, "addressLineOne": memberAddressLineOne, "addressLineTwo": memberAddressLineTwo, "town": memberTown, "county": memberCounty, "postcode": memberPostcode, "mobileNo": memberMobileNo, "status": memberStatus, "membershipType": membershipType, "shmaId": shmaId] as [String : Any]
+        let value = ["firstName": firstName, "middleName": middleName, "lastName": lastName, "email": memberEmail, "DOB": memberDob, "addressLineOne": memberAddressLineOne, "addressLineTwo": memberAddressLineTwo, "town": memberTown, "county": memberCounty, "postcode": memberPostcode, "mobileNo": memberMobileNo, "alternatePhoneNo": memberAlternatePhoneNo, "status": memberStatus, "membershipType": membershipType, "shmaId": shmaId] as [String : Any]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
             let member = try JSONDecoder().decode(Member.self, from: jsonData)

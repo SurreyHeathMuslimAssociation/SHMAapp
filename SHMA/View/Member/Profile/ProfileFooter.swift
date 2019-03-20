@@ -42,18 +42,23 @@ class ProfileFooter: UITableViewHeaderFooterView {
             guard let profileViewModel = profileViewModel else { return }
             infoTextView.attributedText = profileViewModel.getFooterTextViewText()
             infoTextView.textAlignment = .center
-            infoTextViewTopAnchor = infoTextView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: profileViewModel.getInfoTextViewTopPadding())
-            infoTextViewTopAnchor?.isActive = true
+            infoTextViewBottomAnchor = infoTextView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5)
+            infoTextViewBottomAnchor?.isActive = true
+            getDirectionsButtonTopAnchor?.isActive = false
         }
     }
     
     var businessViewModel: BusinessViewModel? {
         didSet {
             getDirectionsButton.isHidden = false
+            infoTextViewBottomAnchor?.isActive = false
+            getDirectionsButtonTopAnchor = getDirectionsButton.topAnchor.constraint(equalTo: topAnchor, constant: 5)
+            getDirectionsButtonTopAnchor?.isActive = true
         }
     }
     
-    var infoTextViewTopAnchor: NSLayoutConstraint?
+    var infoTextViewBottomAnchor: NSLayoutConstraint?
+    var getDirectionsButtonTopAnchor: NSLayoutConstraint?
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -64,9 +69,9 @@ class ProfileFooter: UITableViewHeaderFooterView {
         
         containerView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         
-        infoTextView.anchor(top: nil, left: containerView.leftAnchor, bottom: containerView.bottomAnchor, right: containerView.rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        infoTextView.anchor(top: containerView.topAnchor, left: containerView.leftAnchor, bottom: nil, right: containerView.rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
         
-        getDirectionsButton.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 120, height: 40, centerYAnchor: containerView.centerYAnchor, centerXAnchor: containerView.centerXAnchor)
+        getDirectionsButton.anchor(top: nil, left: nil, bottom: containerView.bottomAnchor, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 120, height: 0, centerYAnchor: nil, centerXAnchor: containerView.centerXAnchor)
     }
     
     required init?(coder aDecoder: NSCoder) {

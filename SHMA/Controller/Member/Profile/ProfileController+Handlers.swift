@@ -12,6 +12,15 @@ import FirebaseAuth
 
 extension ProfileController {
     
+    func fetchAssociationDetailsAndSetupMember() {
+        firebaseDatabaseManager.fetchAssociationDetails { (association) in
+            self.profileViewModel.association = association
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
     @objc func handleLogOut(sender: UIBarButtonItem) {
         let actionSheet = UIAlertController(title: "LogOut", message: "Are you sure?", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in

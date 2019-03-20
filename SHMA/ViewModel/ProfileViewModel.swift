@@ -12,6 +12,7 @@ class ProfileViewModel {
     
     let traitCollection: UITraitCollection
     let member: Member
+    var association: Association?
     
     init(_ traitCollection: UITraitCollection, _ member: Member) {
         self.traitCollection = traitCollection
@@ -48,11 +49,20 @@ class ProfileViewModel {
     }
     
     func getFooterTextViewText() -> NSAttributedString {
+        let lineOne = "If you have any queries please contact us on\n \(association?.committeeEmail ?? "")"
+        let lineTwo = "\n\nAlternatively you can post to us on the following address:"
+        let address = association?.postalAddress.replacingOccurrences(of: ", ", with: "\n") ?? ""
         if traitCollection.isIpad {
-            let attributedText = NSAttributedString(string: "If you have any queries please contact us on\nenquiries@shma-uk.org", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 26)])
+            let attributedText = NSMutableAttributedString(string: lineOne, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 26)])
+            attributedText.append(NSAttributedString(string: lineTwo, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 26)]))
+            attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]))
+            attributedText.append(NSAttributedString(string: "\(address)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 26)]))
             return attributedText
         } else {
-            let attributedText = NSAttributedString(string: "If you have any queries please contact us on \nenquiries@shma-uk.org", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
+            let attributedText = NSMutableAttributedString(string: lineOne, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
+            attributedText.append(NSAttributedString(string: lineTwo, attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
+            attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 6)]))
+            attributedText.append(NSAttributedString(string: "\(address)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
             return attributedText
         }
     }
@@ -67,9 +77,9 @@ class ProfileViewModel {
     
     func getTableViewFooterHeightForEachDevice() -> CGFloat {
         if traitCollection.isIpad {
-            return 150
+            return 250
         } else {
-            return 100
+            return 200
         }
     }
     
@@ -101,7 +111,7 @@ class ProfileViewModel {
         if traitCollection.isIpad {
             return 30
         } else {
-            return 20
+            return 0
         }
     }
 }

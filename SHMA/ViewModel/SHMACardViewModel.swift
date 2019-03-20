@@ -92,7 +92,7 @@ class SHMACardViewModel {
     }
     
     func getShmaContactInfoLabelText() -> NSAttributedString {
-        let email = association.email
+        let email = association.generalEmail
         let web = association.web
         if traitCollection.isIpad {
             let attributedText = NSMutableAttributedString(string: "Web: \(web)\n", attributes: [NSAttributedString.Key.font: UIFont(name: "TimesNewRomanPSMT", size: 18) ?? UIFont.systemFont(ofSize: 18)])
