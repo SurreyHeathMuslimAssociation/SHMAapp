@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -46,8 +48,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.gson.JsonObject;
 
 import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -55,7 +60,8 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class MemberSpace extends AppCompatActivity {
-    private TextView membershipNumber, liveDatenTime, PrayerTimes;
+    private TextView membershipNumber, liveDatenTime;
+    private GridView PrayerView;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user;
     private FirebaseDatabase firebaseDatabase;
@@ -80,8 +86,7 @@ public class MemberSpace extends AppCompatActivity {
                     .addOnSuccessListener(this, new OnSuccessListener<Location>() {
                         @Override
                         public void onSuccess(Location location) {
-                            String Long,Lat;
-                            // Got last known location. In some rare situations this can be null.
+                           // Got last known location. In some rare situations this can be null.
                             if (location != null) {
                                 // Logic to handle location object
                                // currentLocation = location.toString();
@@ -157,8 +162,8 @@ public class MemberSpace extends AppCompatActivity {
 
 
     private void PrayerTimes(String location) {
-        String TAG_NAME = "name";
-        String url ="http://api.aladhan.com/v1/timings/" + formattedDate + "?" + location + "&method=2";
+        String shortdate = formattedDate.substring(0,10);
+        String url ="http://api.aladhan.com/v1/timings/" + shortdate + "?" + location + "&method=2";
 //Request Queue Setup
         Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
 // Set up the network to use HttpURLConnection as the HTTP client.
@@ -171,14 +176,30 @@ public class MemberSpace extends AppCompatActivity {
 
 // Formulate the prayertimes request and handle the response.
 
-        JsonArrayRequest jsonRequest = new JsonArrayRequest(url,
-                new Response.Listener<JSONArray>() {
+        JsonObjectRequest jsonRequest = new JsonObjectRequest(Request.Method.GET,url,null,
+                new Response.Listener<JSONObject>() {
 
                     @Override
-                    public void onResponse(JSONArray response) {
-                     //  PrayerTimes.setText("Response is: " + response.substring(44, 500));
+                    public void onResponse(JSONObject response) {
+                        try {
+                            JSONObject jsonArray = response.getJSONObject("data");
+                            JSONObject timings = jsonArray.getJSONObject("timings");
+                                String fajr = timings.optString("Fajr");
+                                String zohur = timings.optString("Dhuhr");
+                                String asr = timings.optString("Asr");
+                                String magrib = timings.optString("Maghrib");
+                                String esha = timings.optString("Isha");
+                                Toast.makeText(getApplicationContext(), "fajr:" + fajr + "zohur:" + zohur, Toast.LENGTH_SHORT).show();
+
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                      //  showGrid(response);
                         requestQueue.stop();
                     }
+
                 },
                 new Response.ErrorListener(){
             @Override
@@ -230,7 +251,7 @@ public class MemberSpace extends AppCompatActivity {
     private void SetUpUIelements(){
         membershipNumber  = findViewById(R.id.mbno);
         liveDatenTime =  findViewById(R.id.livedatentime);
-        PrayerTimes =  findViewById(R.id.PrayerTimes);
+        PrayerView = findViewById(R.id.prayerView);
     }
 
 }
