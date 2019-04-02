@@ -15,6 +15,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ArrayAdapter;
 import android.widget.GridView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -56,6 +57,7 @@ import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -71,7 +73,7 @@ public class MemberSpace extends AppCompatActivity {
     RequestQueue requestQueue;
     String currentLocation;
     FusedLocationProviderClient fusedLocationClient;
-
+    ArrayList<String> PrayerTimings = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -160,6 +162,12 @@ public class MemberSpace extends AppCompatActivity {
         }
     };
 
+    private void addToGridView(){
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1, PrayerTimings);
+
+        PrayerView.setAdapter(adapter);
+    }
 
     private void PrayerTimes(String location) {
         String shortdate = formattedDate.substring(0,10);
@@ -184,19 +192,19 @@ public class MemberSpace extends AppCompatActivity {
                         try {
                             JSONObject jsonArray = response.getJSONObject("data");
                             JSONObject timings = jsonArray.getJSONObject("timings");
-                                String fajr = timings.optString("Fajr");
-                                String zohur = timings.optString("Dhuhr");
-                                String asr = timings.optString("Asr");
-                                String magrib = timings.optString("Maghrib");
-                                String esha = timings.optString("Isha");
-                                Toast.makeText(getApplicationContext(), "fajr:" + fajr + "zohur:" + zohur, Toast.LENGTH_SHORT).show();
+                            PrayerTimings.add(timings.optString("Fajr"));
+                            PrayerTimings.add(timings.optString("Dhuhr"));
+                            PrayerTimings.add(timings.optString("Asr"));
+                            PrayerTimings.add(timings.optString("Maghrib"));
+                            PrayerTimings.add(timings.optString("Isha"));
+                                Toast.makeText(getApplicationContext(), "Prayer times Loaded", Toast.LENGTH_SHORT).show();
 
 
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-                      //  showGrid(response);
+                        addToGridView();
+                      //  The above code showGridview
                         requestQueue.stop();
                     }
 
