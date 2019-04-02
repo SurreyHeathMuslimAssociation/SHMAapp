@@ -1,24 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <TextView
-        android:layout_width="60sp"
-        android:textSize="15sp"
-        android:layout_height="wrap_content"
         android:id="@+id/grid_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="0.8"
         android:gravity="center_horizontal"
-        android:text="Label" />
+        android:text="Label"
+        android:textSize="30sp"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        />
 
     <TextView
-        android:layout_width="60sp"
-        android:textSize="30sp"
-        android:layout_height="60sp"
         android:id="@+id/grid_prayertime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center_horizontal"
-        android:text="prayertime" />
+        android:text="prayertime"
+        android:textSize="15sp"
+        android:layout_below="@id/grid_label"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        />
 
-</LinearLayout>
+</RelativeLayout>

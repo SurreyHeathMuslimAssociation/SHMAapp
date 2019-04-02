@@ -162,13 +162,12 @@ public class MemberSpace extends AppCompatActivity {
         }
     };
 
-    private void addToGridView(){
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, PrayerTimings);
 
-        PrayerView.setAdapter(adapter);
-    }
-
+private void setToCustomGrid(){
+     GridViewAdapter adapterViewAndroid = new GridViewAdapter(MemberSpace.this, PrayerTimings);
+    PrayerView.setAdapter(adapterViewAndroid);
+}
+   
     private void PrayerTimes(String location) {
         String shortdate = formattedDate.substring(0,10);
         String url ="http://api.aladhan.com/v1/timings/" + shortdate + "?" + location + "&method=2";
@@ -203,7 +202,7 @@ public class MemberSpace extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-                        addToGridView();
+                        setToCustomGrid();
                       //  The above code showGridview
                         requestQueue.stop();
                     }
