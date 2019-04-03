@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shma.yusuf.shma">
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -11,7 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MemberSpace"></activity>
+        <activity android:name=".member_business"></activity>
+        <activity android:name=".member_funeral" />
+        <activity android:name=".MemberSpace" />
         <activity android:name=".WelcomeMessage" />
         <activity android:name=".Password" />
         <activity android:name=".MemberProfile" />

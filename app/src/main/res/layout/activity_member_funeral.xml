@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MemberSpace">
-
+    tools:context=".member_funeral">
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/bottom_nav"
         android:layout_width="match_parent"
@@ -19,15 +17,15 @@
         tools:layout_editor_absoluteX="0dp"
         />
 
-     <TextView
-        android:id="@+id/HomeTitle"
+    <TextView
+        android:id="@+id/FuneralTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:text="Home"
+        android:text="Funeral"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
@@ -36,48 +34,10 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.012" />
 
-    <ImageView
-        android:id="@+id/imageView14"
-        android:layout_width="wrap_content"
-        android:layout_height="244dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-        app:layout_constraintTop_toBottomOf="@+id/HomeTitle"
-        app:layout_constraintVertical_bias="0.067"
-        app:srcCompat="@drawable/shmacardsmall"
-        tools:layout_editor_absoluteX="0dp" />
-
-    <TextView
-        android:id="@+id/mbno"
-        android:layout_width="292dp"
-        android:layout_height="46dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="124dp"
-        android:text="Membership Number"
-        android:textColor="@color/cardYellow"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/imageView14"
-        app:layout_constraintHorizontal_bias="0.774"
-        app:layout_constraintStart_toStartOf="@+id/imageView14"
-        app:layout_constraintTop_toTopOf="@+id/imageView14" />
-
-    <TextView
-        android:id="@+id/livedatentime"
-        android:layout_width="139dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="168dp"
-        android:layout_marginTop="84dp"
-        android:text=" "
-        android:textColor="@color/backWhite"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="@+id/mbno"
-        app:layout_constraintTop_toTopOf="@+id/mbno" />
-
     <GridView
-        android:id="@+id/prayerView"
-        android:layout_width="320dp"
-        android:layout_height="260dp"
+        android:id="@+id/funeralcontacts"
+        android:layout_width="345dp"
+        android:layout_height="548dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -87,7 +47,6 @@
         app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView14"
-        app:layout_constraintVertical_bias="0.496" />
+        app:layout_constraintTop_toBottomOf="@+id/FuneralTitle" />
 
 </android.support.constraint.ConstraintLayout>

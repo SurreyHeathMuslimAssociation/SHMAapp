@@ -36,7 +36,7 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="paddingPercent" value="5" />
+                                                <entry key="paddingPercent" value="10" />
                                                 <entry key="trimmed" value="true" />
                                               </map>
                                             </option>
@@ -60,8 +60,8 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Yusuf\Desktop\Funeral icon\duaHands@3x.png" />
-                                      <entry key="outputName" value="funeralhands" />
+                                      <entry key="imageAsset" value="C:\Users\Yusuf\Desktop\business\shop@3x.png" />
+                                      <entry key="outputName" value="businessicon" />
                                     </map>
                                   </option>
                                 </PersistentState>

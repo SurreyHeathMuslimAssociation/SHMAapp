@@ -73,7 +73,7 @@ public class MemberSpace extends AppCompatActivity {
     RequestQueue requestQueue;
     String currentLocation;
     FusedLocationProviderClient fusedLocationClient;
-    ArrayList<String> PrayerTimings = new ArrayList<String>();
+    private ArrayList<String> PrayerTimings = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,22 +136,32 @@ public class MemberSpace extends AppCompatActivity {
 
             switch (menuItem.getItemId()) {
                 case R.id.nav_home:
+                    Intent sendTo;
                     finish();
-                    Intent sendhome = new Intent(MemberSpace.this, MemberSpace.class);
-                    startActivity(sendhome);
+                    sendTo = new Intent(MemberSpace.this, MemberSpace.class);
+                    startActivity(sendTo);
                     overridePendingTransition(0, 0);
 
                     break;
+                case R.id.nav_business:
+                    finish();
+                    sendTo = new Intent(MemberSpace.this, member_business.class);
+                    startActivity(sendTo);
+                    overridePendingTransition(0, 0);
+                    break;
+
                 case R.id.nav_funeral:
                     finish();
-
+                    sendTo = new Intent(MemberSpace.this, member_funeral.class);
+                    startActivity(sendTo);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_profile:
                     finish();
-                    Intent sendme = new Intent(MemberSpace.this, MemberProfile.class);
-                    startActivity(sendme);
 
+                    sendTo = new Intent(MemberSpace.this, MemberProfile.class);
+                    startActivity(sendTo);
+                    overridePendingTransition(0, 0);
 
                     break;
 
@@ -165,9 +175,9 @@ public class MemberSpace extends AppCompatActivity {
 
 private void setToCustomGrid(){
      GridViewAdapter adapterViewAndroid = new GridViewAdapter(MemberSpace.this, PrayerTimings);
-    PrayerView.setAdapter(adapterViewAndroid);
+     PrayerView.setAdapter(adapterViewAndroid);
 }
-   
+
     private void PrayerTimes(String location) {
         String shortdate = formattedDate.substring(0,10);
         String url ="http://api.aladhan.com/v1/timings/" + shortdate + "?" + location + "&method=2";
@@ -192,11 +202,14 @@ private void setToCustomGrid(){
                             JSONObject jsonArray = response.getJSONObject("data");
                             JSONObject timings = jsonArray.getJSONObject("timings");
                             PrayerTimings.add(timings.optString("Fajr"));
+                            PrayerTimings.add(timings.optString("Sunrise"));
                             PrayerTimings.add(timings.optString("Dhuhr"));
                             PrayerTimings.add(timings.optString("Asr"));
                             PrayerTimings.add(timings.optString("Maghrib"));
                             PrayerTimings.add(timings.optString("Isha"));
-                                Toast.makeText(getApplicationContext(), "Prayer times Loaded", Toast.LENGTH_SHORT).show();
+                            PrayerTimings.add(timings.optString("Imsak"));
+                            PrayerTimings.add(timings.optString("Midnight"));
+                            //    Toast.makeText(getApplicationContext(), "Prayer times Loaded", Toast.LENGTH_SHORT).show();
 
 
                         } catch (JSONException e) {
@@ -211,7 +224,7 @@ private void setToCustomGrid(){
                 new Response.ErrorListener(){
             @Override
                     public void onErrorResponse(VolleyError error){
-
+                Toast.makeText(getApplicationContext(), "No response from Prayer times api", Toast.LENGTH_SHORT).show();
             }
                 });
 
@@ -220,40 +233,6 @@ private void setToCustomGrid(){
 
      }
 
-/*private void CheckLocationServices(){
-    LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder();
-
-    SettingsClient client = LocationServices.getSettingsClient(this);
-    Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-    task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
-        @Override
-        public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-            // All location settings are satisfied. The client can initialize
-            // location requests here.
-            // ...
-        }
-    });
-
-    task.addOnFailureListener(this, new OnFailureListener() {
-        @Override
-        public void onFailure(@NonNull Exception e) {
-            if (e instanceof ResolvableApiException) {
-                // Location settings are not satisfied, but this can be fixed
-                // by showing the user a dialog.
-                try {
-                    // Show the dialog by calling startResolutionForResult(),
-                    // and check the result in onActivityResult().
-                    ResolvableApiException resolvable = (ResolvableApiException) e;
-                    resolvable.startResolutionForResult(MainActivity.this,
-                            REQUEST_CHECK_SETTINGS);
-                } catch (IntentSender.SendIntentException sendEx) {
-                    // Ignore the error.
-                }
-            }
-        }
-    });
-
-}*/
 
     private void SetUpUIelements(){
         membershipNumber  = findViewById(R.id.mbno);

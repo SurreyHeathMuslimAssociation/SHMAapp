@@ -5,111 +5,103 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.GridView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Member;
+import java.util.ArrayList;
 
-public class MemberProfile extends AppCompatActivity {
-   private TextView SHMAID,firstname , surname , DOB;
-   private Button logout;
-   private FirebaseAuth auth = FirebaseAuth.getInstance();
-   private FirebaseUser user;
-   private FirebaseDatabase firebaseDatabase;
-
-    private void SetUpUIelements(){
-        SHMAID = findViewById(R.id.usr_shmaid);
-        firstname =  findViewById(R.id.usr_firstname);
-        surname =  findViewById(R.id.usr_surname);
-        DOB =  findViewById(R.id.usr_DOB);
-    }
-    public void Logout(){
-        auth.signOut();
-        finish();
-         }
+public class member_funeral extends AppCompatActivity {
+    private GridView funeralContacts;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private FirebaseDatabase firebaseDatabase;
+    private  ArrayList<String> names = new ArrayList<String>();
+    private  ArrayList<String> numbers = new ArrayList<String>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_member_profile);
+        setContentView(R.layout.activity_member_funeral);
         BottomNavigationView BottomNav = findViewById(R.id.bottom_nav);
         BottomNav.setOnNavigationItemSelectedListener(navlistener);
         Menu menu = BottomNav.getMenu();
-        MenuItem menuItem = menu.getItem(3);
+        MenuItem menuItem = menu.getItem(2);
         menuItem.setChecked(true);
-        Toolbar myToolbar = findViewById(R.id.my_toolbar);
-        setSupportActionBar(myToolbar);
-        getSupportActionBar().setTitle("Profile");
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference = firebaseDatabase.getReference("members").child(auth.getUid());
         SetUpUIelements();
-        //Database listeners
+        //database reads
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference("funeral");
+       //Database listeners
         databaseReference .addValueEventListener(new ValueEventListener(){
-
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User userProfile = dataSnapshot.getValue(User.class);
+               // User userProfile = dataSnapshot.getValue(User.class);
+                for (DataSnapshot m : dataSnapshot.getChildren()) {
+                    numbers.add(String.valueOf(m.getValue()));
+                    names.add(String.valueOf(m.getKey()));
 
-                SHMAID.setText("Welcome Member: " + userProfile.getShmaId());
-                firstname.setText("Name: " + userProfile.getFirstName());
-                surname.setText("Age: " + userProfile.getLastName());
-                DOB.setText("DOB: " + userProfile.getDOB());
+                }
+
+setToCustomGrid();
+
+
 
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Signed Out", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
             }
 
         });
 
+    }
 
-
+    private void SetUpUIelements(){
+        funeralContacts=  findViewById(R.id.funeralcontacts);
+    }
+    private void setToCustomGrid(){
+        FuneralGridAdapter adapterViewAndroid = new FuneralGridAdapter(member_funeral.this, numbers,names);
+        funeralContacts.setAdapter(adapterViewAndroid);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            //Fragment selectedFragment = null;
-            switch(menuItem.getItemId()){
+
+            switch (menuItem.getItemId()) {
                 case R.id.nav_home:
                     Intent sendTo;
                     finish();
-                    sendTo = new Intent(MemberProfile.this, MemberSpace.class);
+                    sendTo = new Intent(member_funeral.this, MemberSpace.class);
                     startActivity(sendTo);
                     overridePendingTransition(0, 0);
 
                     break;
                 case R.id.nav_business:
                     finish();
-                    sendTo = new Intent(MemberProfile.this, member_business.class);
+                    sendTo = new Intent(member_funeral.this, member_business.class);
                     startActivity(sendTo);
                     overridePendingTransition(0, 0);
                     break;
 
                 case R.id.nav_funeral:
                     finish();
-                    sendTo = new Intent(MemberProfile.this, member_funeral.class);
+                    sendTo = new Intent(member_funeral.this, member_funeral.class);
                     startActivity(sendTo);
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_profile:
                     finish();
 
-                    sendTo = new Intent(MemberProfile.this, MemberProfile.class);
+                    sendTo = new Intent(member_funeral.this, MemberProfile.class);
                     startActivity(sendTo);
                     overridePendingTransition(0, 0);
 
@@ -121,21 +113,4 @@ public class MemberProfile extends AppCompatActivity {
             return true;
         }
     };
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch(item.getItemId()){
-            case R.id.logoutMenu: {
-        Logout();
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
 }

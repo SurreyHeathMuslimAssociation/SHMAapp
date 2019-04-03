@@ -7,32 +7,29 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-
 import java.util.ArrayList;
 
-
-
-public class GridViewAdapter extends BaseAdapter {
-
+public class FuneralGridAdapter extends BaseAdapter {
     private Context mContext;
-    private String[] PrayerLabels =  { "Fajr","Sunrise",  "Dhuhr", "Asr", "Magrib", "Isha","Imsak","Midnight" } ;
-    private ArrayList<String> PrayerTimes;
+    private ArrayList<String> ContactNames;
+    private ArrayList<String> Numbers;
 
 
-    public GridViewAdapter (Context context, ArrayList<String> PrayerTimes){
+    public FuneralGridAdapter (Context context, ArrayList<String> numbers, ArrayList<String> ContactNames){
         this.mContext = context;
-        this.PrayerTimes = PrayerTimes;
+        this.Numbers = numbers;
+        this.ContactNames = ContactNames;
 
     }
 
     @Override
     public int getCount() {
-        return PrayerTimes.size();
+        return Numbers.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return PrayerTimes.get(position);
+        return Numbers.get(position);
     }
 
     @Override
@@ -49,15 +46,14 @@ public class GridViewAdapter extends BaseAdapter {
         if(convertView==null)
         {
             gridViewAndroid = inflater.inflate(R.layout.prayernfuneralgrid, null);
-            TextView Labels = gridViewAndroid.findViewById(R.id.grid_label);
-            TextView PrayerTimesOnScreen = gridViewAndroid.findViewById(R.id.grid_content);
-                Labels.setText(PrayerLabels[position]);
-
-            PrayerTimesOnScreen.setText(PrayerTimes.get(position));
+            TextView Names = gridViewAndroid.findViewById(R.id.grid_label);
+            TextView lNumbers = gridViewAndroid.findViewById(R.id.grid_content);
+            Names.setText(ContactNames.get(position));
+            lNumbers.setText(Numbers.get(position));
         }
         else{
 
         }
-          return gridViewAndroid;
+        return gridViewAndroid;
     }
 }

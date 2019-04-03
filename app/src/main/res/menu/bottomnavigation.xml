@@ -5,11 +5,16 @@
         android:title="Home"
         android:icon="@drawable/test_home"
     />
-   <item
-       android:id="@+id/nav_funeral"
-       android:title="Funeral"
-       android:icon="@drawable/funeralhands"
-   />
+    <item
+        android:id="@+id/nav_business"
+        android:title="Business"
+        android:icon="@drawable/businessicon"
+        />
+    <item
+    android:id="@+id/nav_funeral"
+    android:title="Funeral"
+    android:icon="@drawable/funeralhands"
+    />
     <item
         android:id="@+id/nav_profile"
         android:title="Profile"
