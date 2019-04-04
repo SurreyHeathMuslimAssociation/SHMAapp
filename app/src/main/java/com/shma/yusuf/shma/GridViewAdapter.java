@@ -48,9 +48,9 @@ public class GridViewAdapter extends BaseAdapter {
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         if(convertView==null)
         {
-            gridViewAndroid = inflater.inflate(R.layout.prayernfuneralgrid, null);
+            gridViewAndroid = inflater.inflate(R.layout.prayertimesgrid, null);
             TextView Labels = gridViewAndroid.findViewById(R.id.grid_label);
-            TextView PrayerTimesOnScreen = gridViewAndroid.findViewById(R.id.grid_content);
+            TextView PrayerTimesOnScreen = gridViewAndroid.findViewById(R.id.grid_prayertime);
                 Labels.setText(PrayerLabels[position]);
 
             PrayerTimesOnScreen.setText(PrayerTimes.get(position));

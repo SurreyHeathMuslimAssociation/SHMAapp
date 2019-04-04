@@ -71,7 +71,7 @@ public class MemberProfile extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Signed Out", Toast.LENGTH_SHORT).show();
+
             }
 
         });

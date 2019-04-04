@@ -57,7 +57,7 @@ setToCustomGrid();
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
             }
 
         });

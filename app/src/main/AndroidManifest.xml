@@ -12,7 +12,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".member_business"></activity>
+        <activity android:name=".BusinessInfo"></activity>
+        <activity android:name=".member_business" />
         <activity android:name=".member_funeral" />
         <activity android:name=".MemberSpace" />
         <activity android:name=".WelcomeMessage" />

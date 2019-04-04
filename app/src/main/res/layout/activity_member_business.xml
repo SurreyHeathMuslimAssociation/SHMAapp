@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.012" />
 
     <GridView
-        android:id="@+id/prayerView"
+        android:id="@+id/BusinessGridView"
         android:layout_width="345dp"
         android:layout_height="564dp"
         android:layout_marginStart="8dp"

@@ -248,8 +248,7 @@ public void LoginNow(View v) {
                     if (dataSnapshot.exists()) {
 
                         for (DataSnapshot m : dataSnapshot.getChildren()) {
-                            Log.d("Are you already an app user:", String.valueOf((m.getValue())));
-                            PopupMessage("You are already a member");
+                          PopupMessage("You are already a member");
                         }
                     } else {
 

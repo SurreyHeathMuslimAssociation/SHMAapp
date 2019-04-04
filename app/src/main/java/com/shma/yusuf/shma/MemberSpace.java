@@ -123,7 +123,7 @@ public class MemberSpace extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Connection lost", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Signed Out", Toast.LENGTH_SHORT).show();
             }
         });
 

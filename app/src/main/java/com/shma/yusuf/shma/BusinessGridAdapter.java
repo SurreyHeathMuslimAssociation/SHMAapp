@@ -5,31 +5,32 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class FuneralGridAdapter extends BaseAdapter {
+public class BusinessGridAdapter extends BaseAdapter  {
+
     private Context mContext;
-    private ArrayList<String> ContactNames;
-    private ArrayList<String> Numbers;
+    private ArrayList<String> ShopImage;
+    private ArrayList<String> Titles;
 
 
-    public FuneralGridAdapter (Context context, ArrayList<String> numbers, ArrayList<String> ContactNames){
+    public BusinessGridAdapter(Context context, ArrayList<String> Discounts, ArrayList<String> ShopImage) {
         this.mContext = context;
-        this.Numbers = numbers;
-        this.ContactNames = ContactNames;
-
+        this.Titles = Discounts;
+        this.ShopImage = ShopImage;
     }
 
     @Override
     public int getCount() {
-        return Numbers.size();
+        return Titles.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return Numbers.get(position);
+        return Titles.get(position);
     }
 
     @Override
@@ -43,17 +44,20 @@ public class FuneralGridAdapter extends BaseAdapter {
 
         LayoutInflater inflater = (LayoutInflater) mContext
                 .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        if(convertView==null)
-        {
-            gridViewAndroid = inflater.inflate(R.layout.funeralgrid, null);
-            TextView Names = gridViewAndroid.findViewById(R.id.grid_label);
-            TextView lNumbers = gridViewAndroid.findViewById(R.id.grid_content);
-            Names.setText(ContactNames.get(position));
-            lNumbers.setText(Numbers.get(position));
-        }
-        else{
+        if (convertView == null) {
+            gridViewAndroid = inflater.inflate(R.layout.businessgrid, null);
+            TextView Labels = gridViewAndroid.findViewById(R.id.grid_label);
+           ImageView pic = gridViewAndroid.findViewById(R.id.ShopLogo);
 
+
+            new DownloadImageFromInternet(pic)
+                    .execute(ShopImage.get(position));
+
+
+            Labels.setText(Titles.get(position));
         }
+
         return gridViewAndroid;
     }
+
 }
