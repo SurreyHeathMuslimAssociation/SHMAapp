@@ -1,9 +1,10 @@
 package com.shma.yusuf.shma;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,23 +18,17 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.model.Place;
-import com.google.android.libraries.places.api.net.FetchPlaceRequest;
 import com.google.android.libraries.places.api.net.PlacesClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.Arrays;
-import java.util.List;
-
 public class BusinessInfo extends AppCompatActivity {
     RequestQueue requestQueue;
 private String apiKey = "AIzaSyBChiGmhrrLkXDTX4Oxo5nsB4uG3WgGidM";
 private String placeid ;
-private String URL ;
+private String URL,GlobalAdress ;
 TextView phonenum, ShopTitle, Address, Rating, Type, OpenNow, Opentimes ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +45,12 @@ TextView phonenum, ShopTitle, Address, Rating, Type, OpenNow, Opentimes ;
         PlaceRequest(URL);
 
 
+    }
+    public void Routeme(View view){
+        Uri gmmIntentUri = Uri.parse("geo:0,0?q="+GlobalAdress);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        startActivity(mapIntent);
     }
 
 private void PlaceRequest(String url){
@@ -72,13 +73,30 @@ private void PlaceRequest(String url){
                     try {
 
                         JSONObject number = response.getJSONObject("result");
+                        JSONObject openinfo = number.getJSONObject("opening_hours");
                         ShopTitle.setText(number.optString("name"));
                         phonenum.setText(number.optString("formatted_phone_number"));
-                        Address.setText(number.optString("formatted_address"));
+                        GlobalAdress = number.optString("formatted_address");
+                        Address.setText(GlobalAdress);
                         Rating.setText(number.optString("rating"));
-                        Type.setText(number.optString("types"));
-                        OpenNow.setText(number.optString("open_now"));
-                        Opentimes.setText(number.optString("opening_hours"));
+                        //Type fix
+                        String typeofBus = number.optString("types");
+                        String[] MyStrings =  typeofBus.split("\"");
+                        typeofBus = MyStrings[1];
+
+                        Type.setText(typeofBus);
+                       //open now check
+                       if (openinfo.optString("open_now").equalsIgnoreCase("true")){
+                           OpenNow.setText("Yes");
+                       }else{
+                           OpenNow.setText("No");
+                       }
+                       //opening times fix
+                        String opentimes = openinfo.optString("weekday_text").replace("\"", "");
+                        opentimes = opentimes.replace("[", "");
+                        opentimes = opentimes.replace("]", "");
+
+                        Opentimes.setText(opentimes);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

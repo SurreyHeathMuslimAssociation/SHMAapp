@@ -34,7 +34,7 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="372dp"
+        android:layout_height="366dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
@@ -54,14 +54,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Address"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/Address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Addressinfo"
+                android:layout_gravity="center"
                 android:textSize="18sp" />
 
             <View
@@ -70,6 +70,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -82,7 +83,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="ratinginfo"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="198dp"
                 tools:layout_editor_absoluteY="257dp" />
@@ -93,6 +93,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -105,7 +106,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="TypeInfo"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="198dp"
                 tools:layout_editor_absoluteY="257dp" />
@@ -116,6 +116,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -128,7 +129,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="OpenNowInfo"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="198dp"
                 tools:layout_editor_absoluteY="257dp" />
@@ -140,6 +140,7 @@
 
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -152,7 +153,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Opening times"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="198dp"
                 tools:layout_editor_absoluteY="257dp" />
@@ -163,6 +163,7 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -175,10 +176,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Phone Number"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="198dp"
                 tools:layout_editor_absoluteY="257dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
         </LinearLayout>
 
     </android.support.v4.widget.NestedScrollView>
@@ -194,4 +199,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottomnavigation"
         tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/Route"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:onClick="Routeme"
+        android:text="Route"
+        app:layout_constraintBottom_toBottomOf="@+id/ShopImage"
+        app:layout_constraintEnd_toEndOf="@+id/ShopImage"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintStart_toStartOf="@+id/ShopImage"
+        app:layout_constraintTop_toTopOf="@+id/ShopImage"
+        app:layout_constraintVertical_bias="0.942" />
 </android.support.constraint.ConstraintLayout>
