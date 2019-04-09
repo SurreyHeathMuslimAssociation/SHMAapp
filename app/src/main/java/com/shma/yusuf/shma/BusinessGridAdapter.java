@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 public class BusinessGridAdapter extends BaseAdapter  {
@@ -48,13 +50,9 @@ public class BusinessGridAdapter extends BaseAdapter  {
             gridViewAndroid = inflater.inflate(R.layout.businessgrid, null);
             TextView Labels = gridViewAndroid.findViewById(R.id.grid_label);
            ImageView pic = gridViewAndroid.findViewById(R.id.ShopLogo);
+            Picasso.get().load(ShopImage.get(position)).into(pic);
 
-
-            new DownloadImageFromInternet(pic)
-                    .execute(ShopImage.get(position));
-
-
-            Labels.setText(Titles.get(position));
+            Labels.setText(Titles.get(position) +" Off");
         }
 
         return gridViewAndroid;

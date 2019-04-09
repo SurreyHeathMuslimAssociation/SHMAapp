@@ -3,8 +3,13 @@ package com.shma.yusuf.shma;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,8 +23,7 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.android.libraries.places.api.Places;
-import com.google.android.libraries.places.api.net.PlacesClient;
+import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,8 +31,8 @@ import org.json.JSONObject;
 public class BusinessInfo extends AppCompatActivity {
     RequestQueue requestQueue;
 private String apiKey = "AIzaSyBChiGmhrrLkXDTX4Oxo5nsB4uG3WgGidM";
-private String placeid ;
-private String URL,GlobalAdress ;
+private String placeid ,URL,GlobalAdress, GlobalTitle ;
+private ImageView strimage;
 TextView phonenum, ShopTitle, Address, Rating, Type, OpenNow, Opentimes ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,16 +40,25 @@ TextView phonenum, ShopTitle, Address, Rating, Type, OpenNow, Opentimes ;
         setContentView(R.layout.activity_business_info);
         Intent intent = getIntent();
         SetUpUIelements();
-        // Initialize Places.
-        Places.initialize(getApplicationContext(), apiKey);
-        // Create a new Places client instance.
-        PlacesClient placesClient = Places.createClient(this);
+        BottomNavigationView BottomNav = findViewById(R.id.bottom_nav);
+        BottomNav.setOnNavigationItemSelectedListener(navlistener);
+        Menu menu = BottomNav.getMenu();
+        MenuItem menuItem = menu.getItem(1);
+        menuItem.setChecked(true);
         placeid = intent.getExtras().getString("PlaceID");
         URL =  "https://maps.googleapis.com/maps/api/place/details/json?placeid="+ placeid + "&fields=name,formatted_address,opening_hours,types,rating,formatted_phone_number&key="+apiKey;
         PlaceRequest(URL);
-
+         }
+    public void getStreetViewImage(){
+        if (!GlobalAdress.equalsIgnoreCase("")){
+            String splitadd[] = GlobalAdress.split(",");
+            String modLoc = GlobalTitle +","+splitadd[0];
+            String URL = "https://maps.googleapis.com/maps/api/streetview?size=400x400&location="+modLoc+"&fov=90&pitch=10&key="+ apiKey;
+            Picasso.get().load(URL).into(strimage);
+        }
 
     }
+
     public void Routeme(View view){
         Uri gmmIntentUri = Uri.parse("geo:0,0?q="+GlobalAdress);
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
@@ -73,22 +86,30 @@ private void PlaceRequest(String url){
                     try {
 
                         JSONObject number = response.getJSONObject("result");
-                        JSONObject openinfo = number.getJSONObject("opening_hours");
-                        ShopTitle.setText(number.optString("name"));
+                        JSONObject openinfo = number.optJSONObject("opening_hours");
+                       GlobalTitle= number.optString("name");
+                        ShopTitle.setText(GlobalTitle);
                         phonenum.setText(number.optString("formatted_phone_number"));
                         GlobalAdress = number.optString("formatted_address");
                         Address.setText(GlobalAdress);
                         Rating.setText(number.optString("rating"));
                         //Type fix
                         String typeofBus = number.optString("types");
-                        String[] MyStrings =  typeofBus.split("\"");
-                        typeofBus = MyStrings[1];
+                        if (!typeofBus.equalsIgnoreCase("")){
+                            String[] MyStrings =  typeofBus.split("\"");
+                            typeofBus = MyStrings[1];
 
-                        Type.setText(typeofBus);
+                            Type.setText(typeofBus);
+                        }
+
                        //open now check
+                        if(openinfo == null){
+
+                        }else{
+
                        if (openinfo.optString("open_now").equalsIgnoreCase("true")){
                            OpenNow.setText("Yes");
-                       }else{
+                       }else if ((openinfo.optString("open_now").equalsIgnoreCase("false"))){
                            OpenNow.setText("No");
                        }
                        //opening times fix
@@ -97,10 +118,11 @@ private void PlaceRequest(String url){
                         opentimes = opentimes.replace("]", "");
 
                         Opentimes.setText(opentimes);
+                        }
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
+                    getStreetViewImage();
                     requestQueue.stop();
                 }
             }, new Response.ErrorListener() {
@@ -120,6 +142,48 @@ private void PlaceRequest(String url){
         Type = findViewById(R.id.Type);
         OpenNow = findViewById(R.id.OpenNow);
         Opentimes = findViewById(R.id.OpeningTimes);
+        strimage = findViewById(R.id.ShopImage);
     }
+
+    private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+
+            switch (menuItem.getItemId()) {
+
+                case R.id.nav_home:
+                    Intent sendTo;
+                    finish();
+                    sendTo = new Intent(getApplicationContext(), MemberSpace.class);
+                    startActivity(sendTo);
+                    overridePendingTransition(0, 0);
+
+                    break;
+                case R.id.nav_business:
+                    finish();
+                    sendTo = new Intent(getApplicationContext(), member_business.class);
+                    startActivity(sendTo);
+                    overridePendingTransition(0, 0);
+                    break;
+
+                case R.id.nav_funeral:
+                    finish();
+                    sendTo = new Intent(getApplicationContext(), member_funeral.class);
+                    startActivity(sendTo);
+                    overridePendingTransition(0, 0);
+                    break;
+                case R.id.nav_profile:
+                    finish();
+                    sendTo = new Intent(getApplicationContext(), MemberProfile.class);
+                    startActivity(sendTo);
+                    overridePendingTransition(0, 0);
+
+                    break;
+
+            }
+
+            return true;
+        }
+    };
 
 }
