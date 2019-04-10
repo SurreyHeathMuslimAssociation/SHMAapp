@@ -2,17 +2,26 @@ package com.shma.yusuf.shma;
 
 public class User {
     private String shmaId;
-    private String firstName, lastName;
-    private String DOB ;
+    private String firstName, lastName, DOB ;
     private String town, addressLineOne , addressLineTwo, postcode;
     private String email, mobileNo ;
     private String membershipType;
+    private String status;
 
    public User(){
 
     }
 
-    public User(String shmaId,String firstName, String lastName, String DOB, String email,String addressLineOne, String addressLineTwo,String town,  String postcode ) {
+    public User(String shmaId,String firstName, String lastName,String DOB, String email, String membershipType ){
+        this.shmaId = shmaId;
+        this.membershipType = membershipType;
+        this.DOB = DOB;
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
+    public User(String shmaId,String firstName, String lastName, String DOB, String email,String addressLineOne, String addressLineTwo,String town,  String postcode, String mobileNo, String membershipType,String status ) {
         this.shmaId = shmaId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -22,12 +31,21 @@ public class User {
         this.addressLineTwo = addressLineTwo;
         this.town = town;
         this.postcode = postcode;
+        this.mobileNo = mobileNo;
+        this.membershipType = membershipType;
+        this.status = status;
     }
 
     public String getEmail() {
         return email;
     }
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;
+    }
     public void setEmail(String email) {
         this.email = email;
     }

@@ -2,13 +2,17 @@ package com.shma.yusuf.shma;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
+import android.support.design.widget.Snackbar;
+import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -27,32 +31,27 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class MemberArea extends AppCompatActivity {
     private Switch familyswitch;
     private TextView Title , Password, Email, Info, Forgotpwd;
-    private TextView  DOBfield;
-    private TextView Adr1Field;
-    private TextView  Adr2Field;
-    private TextView  TownField;
-    private TextView PostCodeField;
-    private TextView SHMAid;
+    private TextView  SHMAid,FirstName,LastName,DOBfield,Adr1Field, Adr2Field,TownField, PostCodeField,PhoneNum;
+    private NestedScrollView scrollview;
+    private LinearLayout commentsLayout;
     private Button LoginBtn;
     private int counter = 5;
     private FirebaseAuth mAuth;
     String sessionId;
-    String usr_SHMAID,firstname,lastname,DOB,usr_email , usr_password, addr1,addr2,townfield,postcode;
+    String usr_SHMAID,firstname,lastname,DOB,usr_email ,Phoneno, usr_password, addr1,addr2,townfield,postcode,MembershipType, Status;
     DatabaseReference mDatabase;
     List<User> users = new ArrayList<>();
-
-    public void FamilyMember () {
-        String test ;
-        Integer test2;
-
-
-
-    }
+    //checkall fields on entry
+    private List<TextView> lstTexts = new ArrayList<TextView>();
+   //number of children that can be added
+    final Integer N = 2;
+    final EditText[] ExtraEditTexts = new EditText[N]; // create an empty array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +64,7 @@ public class MemberArea extends AppCompatActivity {
         //Assigning elements to variables
         SetUpUIelements();
         CorrectElements();
+        AddFieldsToList();
         users.clear();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         //Functions and methods and Assigning click listeners on elements
@@ -76,79 +76,171 @@ public class MemberArea extends AppCompatActivity {
 
             }
         });
+        familyswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked == true){
+                    CreateChildrenBoxes();
+                }else{
+                    RemoveChildrenBoxes();
+                }
+            }
+        });
 
-if (familyswitch.isChecked() ) {
-    for (int i = 1; i <= 2; i++) {
-        TextView textView = new TextView(this);
-        textView.setText("TextView " + String.valueOf(i));
-        sv.addView(textView);
+
     }
-}
+
+    private void RemoveChildrenBoxes(){
+        for (int i = 0; i < N; i++) {
+           EditText NewEditText = new EditText(this);
+            NewEditText = ExtraEditTexts[i] ;
+            commentsLayout.removeView(NewEditText);
+        }
+
+
+    }
+
+    private void CreateChildrenBoxes(){
+   for (int i = 0; i < N; i++) {
+            // create a new textview
+            final EditText rowTextView = new EditText(this);
+
+            // set some properties of rowTextView or something
+            rowTextView.setHint("Child Number" + i);
+
+            // add the textview to the linearlayout
+            commentsLayout.addView(rowTextView);
+
+            // save a reference to the textview for later
+            ExtraEditTexts[i] = rowTextView;
+        }
+    }
+
+    public void Getuserdata(){
+        if (sessionId.equals("Login")) {
+            usr_email =Email.getText().toString().trim();
+            usr_password = Password.getText().toString().trim();
+        } else if (sessionId.equals("ExistMemb"))    {
+            usr_SHMAID = SHMAid.getText().toString().trim();
+            usr_email =Email.getText().toString().trim();
+            usr_password = Password.getText().toString().trim();
+    }else{
+            DOB =DOBfield.getText().toString().trim();
+            usr_email =Email.getText().toString().trim();
+            usr_password = Password.getText().toString().trim();
+            addr1  =Adr1Field.getText().toString().trim();
+            addr2 = Adr2Field.getText().toString().trim();
+            townfield = TownField.getText().toString().trim();
+            postcode =PostCodeField.getText().toString().trim();
+            firstname = FirstName.getText().toString().trim();
+            lastname =LastName.getText().toString().trim();
+            Phoneno = PhoneNum.getText().toString().trim();
+            if(familyswitch.isChecked()){
+                MembershipType =  "Family";
+            }else
+                MembershipType =  "Single";  }
+                Status = "Applied";
+
 
     }
 public void SetUpUIelements(){
+    commentsLayout= findViewById(R.id.LinearLayoutscr);
     familyswitch = findViewById(R.id.FamilySwitch);
     Title = findViewById(R.id.Title);
     SHMAid = findViewById(R.id.SHMAfield);
     Password = findViewById(R.id.PasswordField);
     Email = findViewById(R.id.EmailField);
-
     DOBfield = findViewById(R.id.DobField);
-
     Adr1Field = findViewById(R.id.Address1Field);
-
     Adr2Field = findViewById(R.id.Address2Field);
     Info = findViewById(R.id.LoginAttempts);
-
     TownField = findViewById(R.id.TownField);
-
     PostCodeField = findViewById(R.id.PostCodeField) ;
     LoginBtn = findViewById(R.id.LoginButton);
     Forgotpwd = findViewById(R.id.Forgotpwd);
+    scrollview = findViewById(R.id.nestedScrollView);
+    FirstName = findViewById(R.id.firstName);
+    LastName = findViewById(R.id.lastName);
+    PhoneNum = findViewById(R.id.Phonenum);
     }
+    private void resizeElements(){
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) scrollview.getLayoutParams();
+        ConstraintLayout.LayoutParams newParams =new ConstraintLayout.LayoutParams(ConstraintLayout.LayoutParams.WRAP_CONTENT, ConstraintLayout.LayoutParams.WRAP_CONTENT);
+            newParams.bottomToBottom = params.bottomToBottom ;
+            newParams.endToEnd = params.endToEnd ;
+            newParams.horizontalBias = params.horizontalBias ;
+            newParams.startToStart = params.startToStart ;
+            newParams.topToTop = params.topToTop ;
+            //newParams.verticalBias = params.verticalBias;
+            // newParams.topMargin = params.topMargin;
+            newParams.setMargins(0, 0, 0, 600);
+            scrollview.setLayoutParams(newParams);
+
+        }
+
+
+    public boolean checkAllTV(List<TextView> allTV){
+
+        for(TextView tv : allTV){
+            if(tv.getText().toString().equals("")||tv.getText().toString()==null)
+                return false;
+        }
+        return true;
+    }
+
     public void CorrectElements(){
         if (sessionId.equals("Login")) {
+           resizeElements();
             Title.setText("Login");
-            familyswitch.setVisibility(View.INVISIBLE);
-            SHMAid.setVisibility(View.INVISIBLE);
+            familyswitch.setVisibility(View.GONE);
+            SHMAid.setVisibility(View.GONE);
+            FirstName.setVisibility(View.GONE);
+            DOBfield.setVisibility(View.GONE);
+            LastName.setVisibility(View.GONE);
+            Adr1Field.setVisibility(View.GONE);
+            PhoneNum.setVisibility(View.GONE);
+            Adr2Field.setVisibility(View.GONE);
+            TownField.setVisibility(View.GONE);
+            PostCodeField.setVisibility(View.GONE);
 
-            DOBfield.setVisibility(View.INVISIBLE);
-
-            Adr1Field.setVisibility(View.INVISIBLE);
-
-            Adr2Field.setVisibility(View.INVISIBLE);
-
-            TownField.setVisibility(View.INVISIBLE);
-
-            PostCodeField.setVisibility(View.INVISIBLE);
         }else if (sessionId.equals("ExistMemb")){
+            resizeElements();
             Title.setText("First Time Setup");
-            Forgotpwd.setVisibility(View.INVISIBLE);
-            Info.setVisibility(View.INVISIBLE);
-            familyswitch.setVisibility(View.INVISIBLE);
+            Forgotpwd.setVisibility(View.GONE);
+            Info.setVisibility(View.GONE);
+            familyswitch.setVisibility(View.GONE);
             LoginBtn.setText("Register");
-
-            DOBfield.setVisibility(View.INVISIBLE);
-
-            Adr1Field.setVisibility(View.INVISIBLE);
-
-            Adr2Field.setVisibility(View.INVISIBLE);
-
-            TownField.setVisibility(View.INVISIBLE);
-
-            PostCodeField.setVisibility(View.INVISIBLE);
+            FirstName.setVisibility(View.GONE);
+            DOBfield.setVisibility(View.GONE);
+            LastName.setVisibility(View.GONE);
+            Adr1Field.setVisibility(View.GONE);
+            PhoneNum.setVisibility(View.GONE);
+            Adr2Field.setVisibility(View.GONE);
+            TownField.setVisibility(View.GONE);
+            PostCodeField.setVisibility(View.GONE);
         }else {
             Title.setText("Thinking of Joining?");
             Title.setTextSize(28);
             LoginBtn.setText("Register");
-            SHMAid.setVisibility(View.INVISIBLE);
-            Forgotpwd.setVisibility(View.INVISIBLE);
-            Info.setVisibility(View.INVISIBLE);
+            SHMAid.setVisibility(View.GONE);
+            Forgotpwd.setVisibility(View.GONE);
+            Info.setVisibility(View.GONE);
 
         }
 
     }
 
+private void AddFieldsToList(){
+    List<TextView> namesList;
+    if (sessionId.equals("Login")) {
+        namesList = Arrays.asList(Password,Email);
+    }else if (sessionId.equals("ExistMemb")){
+        namesList = Arrays.asList(Password,Email,SHMAid);
+    }else {
+       namesList = Arrays.asList(Password,Email,FirstName,LastName,DOBfield,Adr1Field, Adr2Field,TownField, PostCodeField,PhoneNum);
+    }
+    lstTexts.addAll(namesList);
+}
 
     public void PopupMessage(String Message){
         View parentLayout = findViewById(android.R.id.content);
@@ -182,11 +274,6 @@ public void SetUpUIelements(){
     }
 
     private void validate() {
-        usr_email = Email.getText().toString().trim();
-        usr_password = Password.getText().toString().trim();
-        if (Email.getText().toString().equals("") && Password.getText().toString().equals("")) {
-            PopupMessage("Please fill in all available fields");
-        } else {
             mAuth.signInWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -204,7 +291,7 @@ public void SetUpUIelements(){
                 }
             });
 
-        }
+
     }
 
     private void sendEmailVerification(){
@@ -214,8 +301,12 @@ public void SetUpUIelements(){
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if(task.isSuccessful()){
-                      //  sendUserData();
-                        sendUserData();
+                  if (sessionId.equals("ExistMemb")){
+                            sendUserDataExistMem();
+                            }else{
+                      sendUserDataNewMem();
+                  }
+
                         // mAuth.signOut();
                         finish();
                         Intent intent = new Intent(getApplicationContext(), WelcomeMessage.class);
@@ -229,16 +320,25 @@ public void SetUpUIelements(){
         }
     }
 
+
+
 public void LoginNow(View v) {
+    Getuserdata();
+    boolean empty = checkAllTV(lstTexts);
     if (sessionId.equals("Login")) {
-         validate();
+        if(empty == true){
+            validate();
+        }else{
+            PopupMessage("Please fill in all available fields");
+        }
+
 
     } else if (sessionId.equals("ExistMemb")) {
-        usr_SHMAID = SHMAid.getText().toString().trim();
-        usr_email = Email.getText().toString().trim();
-        usr_password = Password.getText().toString().trim();
+       // usr_SHMAID = SHMAid.getText().toString().trim();
+        //usr_email = Email.getText().toString().trim();
+       // usr_password = Password.getText().toString().trim();
 
-        if (Email.getText().toString().equals("") || Password.getText().toString().equals("") || SHMAid.getText().toString().equals("")) {
+        if (empty == false) {
             PopupMessage("Please fill in all available fields");
         } else {          //check the shmaID then add the login details into the firebase members database table
             Query query = mDatabase.child("shmaIdsOnApp").orderByKey().equalTo(SHMAid.getText().toString());
@@ -283,17 +383,17 @@ public void LoginNow(View v) {
 
             }
 
-    }else if ((sessionId.equals("NewMember"))) {
+    }else if ((sessionId.equals("Newmemb"))) {
         //Brand New Member -> Send the details to Soyab for adding to our Offline database
-        usr_SHMAID = SHMAid.getText().toString().trim();
-        usr_email = Email.getText().toString().trim();
+       /* usr_email = Email.getText().toString().trim();
         usr_password = Password.getText().toString().trim();
         DOB = DOBfield.getText().toString().trim();
         addr1 = Adr1Field.getText().toString().trim();
         addr2 = Adr2Field.getText().toString().trim();
         townfield = TownField.getText().toString().trim();
-        postcode =  PostCodeField.getText().toString().trim();
-        if (Email.getText().toString().equals("") || Password.getText().toString().equals("") || SHMAid.getText().toString().equals("")) {
+        postcode =  PostCodeField.getText().toString().trim();*/
+
+        if (empty == false) {
             PopupMessage("Please fill in all available fields");
         } else {
             mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -301,7 +401,8 @@ public void LoginNow(View v) {
                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                     if (task.isSuccessful()) {
-                        sendEmailVerification();
+                      //  sendUserDataNewMem();
+                       sendEmailVerification();
                         /*PopupMessage("Account Created Successfully");
                         FirebaseUser user = mAuth.getCurrentUser(); //You Firebase user
                         // user registered, start profile activity
@@ -322,7 +423,7 @@ public void LoginNow(View v) {
 
 }
 
-    private void sendUserData() {
+    private void sendUserDataExistMem() {
         Query query = mDatabase.child("offline_members").child(SHMAid.getText().toString());
         query.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -334,7 +435,8 @@ public void LoginNow(View v) {
                         firstname = dataSnapshot.child("firstName").getValue(String.class);
                         lastname = dataSnapshot.child("lastName").getValue(String.class);
                         DOB = dataSnapshot.child("DOB").getValue(String.class);
-                        User usr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email, addr1,addr2,townfield,postcode);
+                        MembershipType = dataSnapshot.child("membershipType").getValue(String.class);
+                        User usr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email,MembershipType);
                         myRef.setValue(usr_profile);
                 }else{
                     Toast.makeText(getApplicationContext(), "Empty snapshot", Toast.LENGTH_SHORT).show();
@@ -347,11 +449,13 @@ public void LoginNow(View v) {
 
             }
         });
+    }
+    private void sendUserDataNewMem() {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
 
-
-
-
-
+       User NEWusr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email, addr1,addr2,townfield,postcode,Phoneno, MembershipType,Status);
+        myRef.setValue(NEWusr_profile);
     }
 }
 

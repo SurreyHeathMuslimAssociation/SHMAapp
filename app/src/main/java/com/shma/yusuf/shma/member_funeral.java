@@ -1,13 +1,19 @@
 package com.shma.yusuf.shma;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -48,11 +54,7 @@ public class member_funeral extends AppCompatActivity {
                     names.add(String.valueOf(m.getKey()));
 
                 }
-
-setToCustomGrid();
-
-
-
+                setToCustomGrid();
             }
 
             @Override
@@ -64,12 +66,47 @@ setToCustomGrid();
 
     }
 
+
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+        new AlertDialog.Builder(member_funeral.this)
+                .setTitle("Logout")
+                .setMessage("Are you sure you want to logout?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // The user wants to leave - so dismiss the dialog and exit
+                        finish();
+                        auth.signOut();
+                        dialog.dismiss();
+                    }
+                }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // The user is not sure, so you can exit or just stay
+                dialog.dismiss();
+            }
+        }).show();
+
+    }
+
     private void SetUpUIelements(){
         funeralContacts=  findViewById(R.id.funeralcontacts);
     }
     private void setToCustomGrid(){
         FuneralGridAdapter adapterViewAndroid = new FuneralGridAdapter(member_funeral.this, numbers,names);
         funeralContacts.setAdapter(adapterViewAndroid);
+        funeralContacts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String phoneNoFromGrid;
+                phoneNoFromGrid = ((TextView)(view.findViewById(R.id.grid_content))).getText().toString();
+                dialContactPhone(phoneNoFromGrid);
+            }
+        });
+    }
+
+    private void dialContactPhone(final String phoneNumber) {
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null)));
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {

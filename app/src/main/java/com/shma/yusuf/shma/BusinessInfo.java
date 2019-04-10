@@ -29,7 +29,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class BusinessInfo extends AppCompatActivity {
-    RequestQueue requestQueue;
+RequestQueue requestQueue;
 private String apiKey = "AIzaSyBChiGmhrrLkXDTX4Oxo5nsB4uG3WgGidM";
 private String placeid ,URL,GlobalAdress, GlobalTitle ;
 private ImageView strimage;
@@ -48,7 +48,19 @@ TextView phonenum, ShopTitle, Address, Rating, Type, OpenNow, Opentimes ;
         placeid = intent.getExtras().getString("PlaceID");
         URL =  "https://maps.googleapis.com/maps/api/place/details/json?placeid="+ placeid + "&fields=name,formatted_address,opening_hours,types,rating,formatted_phone_number&key="+apiKey;
         PlaceRequest(URL);
+        phonenum.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialContactPhone(phonenum.getText().toString());
+            }
+        });
+
          }
+
+    private void dialContactPhone(final String phoneNumber) {
+        startActivity(new Intent(Intent.ACTION_DIAL, Uri.fromParts("tel", phoneNumber, null)));
+    }
+
     public void getStreetViewImage(){
         if (!GlobalAdress.equalsIgnoreCase("")){
             String splitadd[] = GlobalAdress.split(",");

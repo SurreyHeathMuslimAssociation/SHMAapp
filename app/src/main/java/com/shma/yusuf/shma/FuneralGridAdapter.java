@@ -47,13 +47,15 @@ public class FuneralGridAdapter extends BaseAdapter {
         {
             gridViewAndroid = inflater.inflate(R.layout.funeralgrid, null);
             TextView Names = gridViewAndroid.findViewById(R.id.grid_label);
-            TextView lNumbers = gridViewAndroid.findViewById(R.id.grid_content);
+            final TextView lNumbers = gridViewAndroid.findViewById(R.id.grid_content);
             Names.setText(ContactNames.get(position));
             lNumbers.setText(Numbers.get(position));
+
         }
         else{
 
         }
         return gridViewAndroid;
     }
+
 }
