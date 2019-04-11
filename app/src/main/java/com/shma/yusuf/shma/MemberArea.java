@@ -40,7 +40,7 @@ public class MemberArea extends AppCompatActivity {
     private TextView  SHMAid,FirstName,LastName,DOBfield,Adr1Field, Adr2Field,TownField, PostCodeField,PhoneNum;
     private NestedScrollView scrollview;
     private LinearLayout commentsLayout;
-    private Button LoginBtn;
+    private Button LoginBtn, addChild, RemoveChild;
     private int counter = 5;
     private FirebaseAuth mAuth;
     String sessionId;
@@ -50,8 +50,12 @@ public class MemberArea extends AppCompatActivity {
     //checkall fields on entry
     private List<TextView> lstTexts = new ArrayList<TextView>();
    //number of children that can be added
+    private List<EditText> Children = new ArrayList<EditText>();
+    private List<EditText> Spouse = new ArrayList<EditText>();
+    private int i ;
+    //can delete below
     final Integer N = 2;
-    final EditText[] ExtraEditTexts = new EditText[N]; // create an empty array;
+    final EditText[] TheKids = new EditText[N]; // create an empty array;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,13 +80,16 @@ public class MemberArea extends AppCompatActivity {
 
             }
         });
+
         familyswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked == true){
-                    CreateChildrenBoxes();
+                    addTings("Spouse First Name");
+                    addTings("Spouse Last Name");
+                    addChildButtons();
                 }else{
-                    RemoveChildrenBoxes();
+                    RemoveWifenChildrenDetails();
                 }
             }
         });
@@ -90,15 +97,47 @@ public class MemberArea extends AppCompatActivity {
 
     }
 
-    private void RemoveChildrenBoxes(){
-        for (int i = 0; i < N; i++) {
-           EditText NewEditText = new EditText(this);
-            NewEditText = ExtraEditTexts[i] ;
-            commentsLayout.removeView(NewEditText);
+    private void addChildButtons(){
+        addChild.setVisibility(View.VISIBLE);
+        RemoveChild.setVisibility(View.VISIBLE);
+    }
+    private void RemoveWifenChildrenDetails(){
+        for (EditText wifeDetails : Spouse) {
+            commentsLayout.removeView(wifeDetails);
+        }
+        for (EditText childrenDetails : Children) {
+            commentsLayout.removeView(childrenDetails);
+        }
+    }
+
+private void AddChild(View v){
+        addTings("Child" + i);
+        i++;
+}
+
+
+    private void RemoveChild(View v){
+        EditText Childrendetails  = Children.get(Children.size()-1);
+            commentsLayout.removeView(Childrendetails);
         }
 
 
-    }
+
+private void addTings(String HintText){
+    final EditText rowTextView = new EditText(this);
+    // set some properties of rowTextView or something
+    rowTextView.setHint(HintText);
+    // add the textview to the linearlayout
+    commentsLayout.addView(rowTextView);
+
+    //record of the edittextboxes
+    if (HintText.contains("Spouse")){
+    Spouse.add(rowTextView);
+}else{
+    Children.add(rowTextView);
+}
+
+}
 
     private void CreateChildrenBoxes(){
    for (int i = 0; i < N; i++) {
@@ -112,7 +151,7 @@ public class MemberArea extends AppCompatActivity {
             commentsLayout.addView(rowTextView);
 
             // save a reference to the textview for later
-            ExtraEditTexts[i] = rowTextView;
+            TheKids[i] = rowTextView;
         }
     }
 
@@ -144,6 +183,8 @@ public class MemberArea extends AppCompatActivity {
 
     }
 public void SetUpUIelements(){
+    addChild = findViewById(R.id.AddChild);
+    RemoveChild = findViewById(R.id.RemoveChild);
     commentsLayout= findViewById(R.id.LinearLayoutscr);
     familyswitch = findViewById(R.id.FamilySwitch);
     Title = findViewById(R.id.Title);
@@ -189,6 +230,8 @@ public void SetUpUIelements(){
     }
 
     public void CorrectElements(){
+        addChild.setVisibility(View.GONE);
+        RemoveChild.setVisibility(View.GONE);
         if (sessionId.equals("Login")) {
            resizeElements();
             Title.setText("Login");

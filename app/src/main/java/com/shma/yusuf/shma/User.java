@@ -4,7 +4,7 @@ public class User {
     private String shmaId;
     private String firstName, lastName, DOB ;
     private String town, addressLineOne , addressLineTwo, postcode;
-    private String email, mobileNo ;
+    private String email, MobileNumber;
     private String membershipType;
     private String status;
 
@@ -21,7 +21,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public User(String shmaId,String firstName, String lastName, String DOB, String email,String addressLineOne, String addressLineTwo,String town,  String postcode, String mobileNo, String membershipType,String status ) {
+    public User(String shmaId, String firstName, String lastName, String DOB, String email, String addressLineOne, String addressLineTwo, String town, String postcode, String MobileNumber, String membershipType, String status ) {
         this.shmaId = shmaId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,7 +31,7 @@ public class User {
         this.addressLineTwo = addressLineTwo;
         this.town = town;
         this.postcode = postcode;
-        this.mobileNo = mobileNo;
+        this.MobileNumber = MobileNumber;
         this.membershipType = membershipType;
         this.status = status;
     }
