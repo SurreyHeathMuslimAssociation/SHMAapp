@@ -264,7 +264,7 @@ extension LoginRegistrationController {
         let middleName = middleNameComponents.joined(separator: " ").capitalized
         guard let lastName = components.last?.capitalized else { return }
         // defines json value
-        let value = ["firstName": firstName, "middleName": middleName, "lastName": lastName, "email": memberEmail, "DOB": memberDob, "addressLineOne": memberAddressLineOne, "addressLineTwo": memberAddressLineTwo, "town": memberTown, "county": memberCounty, "postcode": memberPostcode, "mobileNo": memberMobileNo, "alternatePhoneNo": memberAlternatePhoneNo, "status": memberStatus, "membershipType": membershipType, "shmaId": shmaId] as [String : Any]
+        let value = ["firstName": firstName, "middleName": middleName, "lastName": lastName, "email": memberEmail as Any, "DOB": memberDob as Any, "addressLineOne": memberAddressLineOne as Any, "addressLineTwo": memberAddressLineTwo as Any, "town": memberTown as Any, "county": memberCounty as Any, "postcode": memberPostcode as Any, "mobileNo": memberMobileNo as Any, "alternatePhoneNo": memberAlternatePhoneNo as Any, "status": memberStatus as Any, "membershipType": membershipType as Any, "shmaId": shmaId] as [String : Any]
         do {
             let jsonData = try JSONSerialization.data(withJSONObject: value, options: [])
             let member = try JSONDecoder().decode(Member.self, from: jsonData)

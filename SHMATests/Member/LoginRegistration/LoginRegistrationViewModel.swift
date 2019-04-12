@@ -30,6 +30,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
     var countyTextField: UITextField!
     var postcodeTextField: UITextField!
     var mobileNoTextField: UITextField!
+    var alternatePhoneNoTextField: UITextField!
     var loginRegisterButton: UIButton!
     var passwordResetButton: UIButton!
     var attributedString: NSAttributedString!
@@ -45,6 +46,10 @@ class LoginRegistrationViewModelTests: XCTestCase {
     var countySeperatorView: UIView!
     var postcodeSeperatorView: UIView!
     var coverView: UIView!
+    var addressInfoLabel: UILabel!
+    var contactInfoLabel: UILabel!
+    var passswordResetButton: UIButton!
+    var mobileNoSeperatorView: UIView!
     
     let iPadLoginRegisterButtonAndTextFieldFont = UIFont.systemFont(ofSize: 22)
     let iPhoneLoginRegisterButtonAndTextFieldFont = UIFont.systemFont(ofSize: 14)
@@ -87,7 +92,7 @@ class LoginRegistrationViewModelTests: XCTestCase {
         postcodeSeperatorView = UIView()
         coverView = UIView()
         
-        sut = LoginRegistrationViewModel(traitCollection, loginRegistrationView: loginRegistrationView, didSelectLogin ?? false, didSelectExistingMemberRegistration ?? false, didSelectNewMemberRegistration ?? false, mainLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, countyTextField, postcodeTextField, mobileNoTextField, loginRegisterButton, passwordResetButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, dobSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, countySeperatorView, postcodeSeperatorView, coverView)
+        sut = LoginRegistrationViewModel(traitCollection, loginRegistrationView: loginRegistrationView, didSelectLogin ?? false, didSelectExistingMemberRegistration ?? false, didSelectNewMemberRegistration ?? false, mainLabel, addressInfoLabel, contactInfoLabel, membershipLabel, shmaIdTextField, nameTextField, emailTextField, passwordTextField, dobTextField, addressLineOneTextField, addressLineTwoTextField, townTextField, countyTextField, postcodeTextField, mobileNoTextField, alternatePhoneNoTextField, loginRegisterButton, passswordResetButton, membershipSwitch, shmaIdSeperatorView, emailSeperatorView, nameSeperatorView, passwordSeperatorView, addressLineOneSeperatorView, addressLineTwoSeperatorView, townSeperatorView, countySeperatorView, mobileNoSeperatorView, coverView)
     }
     
     override func tearDown() {

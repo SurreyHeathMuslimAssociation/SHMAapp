@@ -27,9 +27,9 @@ class BusinessViewModel {
             attributedText.append(NSAttributedString(string: "\(discount) off", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
             return attributedText
         } else {
-            let attributedText = NSMutableAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            let attributedText = NSMutableAttributedString(string: name, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)])
             attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 6)]))
-            attributedText.append(NSAttributedString(string: "\(discount) off", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)]))
+            attributedText.append(NSAttributedString(string: "\(discount) off", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 10)]))
             return attributedText
         }
     }

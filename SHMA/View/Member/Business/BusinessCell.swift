@@ -43,11 +43,9 @@ class BusinessCell: UICollectionViewCell {
         addSubview(businessNameAndDiscountLabel)
         addSubview(activityIndicatorView)
         
-        businessImageView.anchor(top: topAnchor, left: nil, bottom: nil, right: nil, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: centerXAnchor)
-        businessImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.6).isActive = true
-        businessImageView.heightAnchor.constraint(equalTo: businessImageView.widthAnchor, multiplier: 1).isActive = true
+        businessImageView.anchor(top: topAnchor, left: leftAnchor, bottom: businessNameAndDiscountLabel.topAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: centerXAnchor)
         
-        businessNameAndDiscountLabel.anchor(top: businessImageView.bottomAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 3, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        businessNameAndDiscountLabel.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 3, paddingBottom: 3, paddingRight: 3, width: 0, height: 45, centerYAnchor: nil, centerXAnchor: nil)
         
         activityIndicatorView.anchor(top: nil, left: nil, bottom: nil, right: nil, paddingTop: 0, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: businessImageView.centerYAnchor, centerXAnchor: businessImageView.centerXAnchor)
     }

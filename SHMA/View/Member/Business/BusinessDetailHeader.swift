@@ -24,6 +24,7 @@ class BusinessDetailHeader: UITableViewHeaderFooterView {
         label.numberOfLines = 1
         label.textAlignment = .center
         label.isHidden = true
+        label.adjustsFontSizeToFitWidth = true
         label.backgroundColor = .red
         label.textColor = .white
         return label

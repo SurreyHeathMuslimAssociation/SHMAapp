@@ -155,6 +155,7 @@ class LoginRegistrationViewModel {
             phoneNoSeperatorView.isHidden = true
             mobileNoTextField.isHidden = true
             addressInfoLabel.isHidden = true
+            contactInfoLabel.isHidden = true
         } else if didSelectExistingMemberRegistration == true {
             passwordResetButton.isHidden = true
             membershipLabel.isHidden = true
@@ -176,6 +177,7 @@ class LoginRegistrationViewModel {
             mobileNoTextField.isHidden = true
             coverView.isHidden = true
             addressInfoLabel.isHidden = true
+            contactInfoLabel.isHidden = true
         } else if didSelectNewMemberRegistration == true {
             passwordResetButton.isHidden = true
             shmaIdTextField.isHidden = true
