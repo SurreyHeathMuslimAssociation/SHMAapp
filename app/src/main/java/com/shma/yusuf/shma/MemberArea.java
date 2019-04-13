@@ -8,6 +8,7 @@ import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -35,8 +36,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MemberArea extends AppCompatActivity {
+    private View parentLayout;
     private Switch familyswitch;
-    private TextView Title , Password, Email, Info, Forgotpwd;
+    private TextView Title , Password, Email, Info, Forgotpwd,lblAddchild, lblRemovechild;
     private TextView  SHMAid,FirstName,LastName,DOBfield,Adr1Field, Adr2Field,TownField, PostCodeField,PhoneNum;
     private NestedScrollView scrollview;
     private LinearLayout commentsLayout;
@@ -52,10 +54,7 @@ public class MemberArea extends AppCompatActivity {
    //number of children that can be added
     private List<EditText> Children = new ArrayList<EditText>();
     private List<EditText> Spouse = new ArrayList<EditText>();
-    private int i ;
-    //can delete below
-    final Integer N = 2;
-    final EditText[] TheKids = new EditText[N]; // create an empty array;
+    private int i =1 ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,73 +86,88 @@ public class MemberArea extends AppCompatActivity {
                 if (isChecked == true){
                     addTings("Spouse First Name");
                     addTings("Spouse Last Name");
+                    addTings("Spouse D.O.B");
+                    addTings("Spouse Email");
                     addChildButtons();
+
                 }else{
                     RemoveWifenChildrenDetails();
-                }
+             }
             }
         });
 
 
     }
 
+
+
+
     private void addChildButtons(){
         addChild.setVisibility(View.VISIBLE);
         RemoveChild.setVisibility(View.VISIBLE);
+        lblAddchild.setVisibility(View.VISIBLE);
+        lblRemovechild.setVisibility(View.VISIBLE);
     }
     private void RemoveWifenChildrenDetails(){
+        i = 1;
         for (EditText wifeDetails : Spouse) {
             commentsLayout.removeView(wifeDetails);
         }
         for (EditText childrenDetails : Children) {
             commentsLayout.removeView(childrenDetails);
         }
+        addChild.setVisibility(View.GONE);
+        RemoveChild.setVisibility(View.GONE);
+        lblAddchild.setVisibility(View.GONE);
+        lblRemovechild.setVisibility(View.GONE);
+
     }
 
-private void AddChild(View v){
-        addTings("Child" + i);
-        i++;
+public void AddChild(View v){
+        addTings("Child no. " + i);
+        addTings("Child D.O.B");
+            i++;
 }
 
 
-    private void RemoveChild(View v){
-        EditText Childrendetails  = Children.get(Children.size()-1);
-            commentsLayout.removeView(Childrendetails);
+    public void RemoveChild(View v){
+     if (i>1){
+         int latestname = Children.size()-1;
+         int latestdob = Children.size()-2;
+         EditText ChildrenName  = Children.get(latestname);
+         EditText ChildrenDOB  = Children.get(latestdob);
+         commentsLayout.removeView(ChildrenName);
+         commentsLayout.removeView(ChildrenDOB);
+         Children.remove(latestname);
+         Children.remove(latestdob);
+         i--;
+     }else{
+         PopupMessage("No Children Added");
+     }
+
         }
 
 
 
 private void addTings(String HintText){
-    final EditText rowTextView = new EditText(this);
+
+     EditText rowTextView = new EditText(this);
+     rowTextView.setInputType(InputType.TYPE_CLASS_TEXT);
     // set some properties of rowTextView or something
     rowTextView.setHint(HintText);
     // add the textview to the linearlayout
     commentsLayout.addView(rowTextView);
-
+  //  commentsLayout.addView(rowTextView);
     //record of the edittextboxes
-    if (HintText.contains("Spouse")){
-    Spouse.add(rowTextView);
+  if (HintText.contains("Spouse")){
+            Spouse.add(rowTextView);
 }else{
-    Children.add(rowTextView);
+        Children.add(rowTextView);
 }
 
 }
 
-    private void CreateChildrenBoxes(){
-   for (int i = 0; i < N; i++) {
-            // create a new textview
-            final EditText rowTextView = new EditText(this);
 
-            // set some properties of rowTextView or something
-            rowTextView.setHint("Child Number" + i);
-
-            // add the textview to the linearlayout
-            commentsLayout.addView(rowTextView);
-
-            // save a reference to the textview for later
-            TheKids[i] = rowTextView;
-        }
-    }
 
     public void Getuserdata(){
         if (sessionId.equals("Login")) {
@@ -182,9 +196,12 @@ private void addTings(String HintText){
 
 
     }
-public void SetUpUIelements(){
+public void SetUpUIelements() {
+    lblAddchild = findViewById(R.id.addchildlbl);
+    lblRemovechild = findViewById(R.id.removechildlbl);
     addChild = findViewById(R.id.AddChild);
     RemoveChild = findViewById(R.id.RemoveChild);
+    parentLayout = findViewById(R.id.TheConstraintLayout);
     commentsLayout= findViewById(R.id.LinearLayoutscr);
     familyswitch = findViewById(R.id.FamilySwitch);
     Title = findViewById(R.id.Title);
@@ -230,6 +247,8 @@ public void SetUpUIelements(){
     }
 
     public void CorrectElements(){
+        lblAddchild.setVisibility(View.GONE);
+        lblRemovechild.setVisibility(View.GONE);
         addChild.setVisibility(View.GONE);
         RemoveChild.setVisibility(View.GONE);
         if (sessionId.equals("Login")) {
@@ -286,10 +305,8 @@ private void AddFieldsToList(){
 }
 
     public void PopupMessage(String Message){
-        View parentLayout = findViewById(android.R.id.content);
-        String changed = "" ;
         Snackbar mySnackbar;
-        mySnackbar = Snackbar.make(parentLayout, Message, 6000);
+        mySnackbar = Snackbar.make(parentLayout, Message, 2000);
         mySnackbar.getView().setBackgroundColor(Color.RED);
         TextView mainTextView = (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
         mainTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
@@ -363,8 +380,6 @@ private void AddFieldsToList(){
         }
     }
 
-
-
 public void LoginNow(View v) {
     Getuserdata();
     boolean empty = checkAllTV(lstTexts);
@@ -380,62 +395,54 @@ public void LoginNow(View v) {
        // usr_SHMAID = SHMAid.getText().toString().trim();
         //usr_email = Email.getText().toString().trim();
        // usr_password = Password.getText().toString().trim();
-
         if (empty == false) {
             PopupMessage("Please fill in all available fields");
-        } else {          //check the shmaID then add the login details into the firebase members database table
-            Query query = mDatabase.child("shmaIdsOnApp").orderByKey().equalTo(SHMAid.getText().toString());
+        } else {
+            Query query = mDatabase.child("offline_members").orderByKey().equalTo(SHMAid.getText().toString());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-
-                        for (DataSnapshot m : dataSnapshot.getChildren()) {
-                          PopupMessage("You are already a member");
-                        }
-                    } else {
-
-                        mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        //check the shmaID then add the login details into the firebase members database table
+                        Query  query = mDatabase.child("shmaIdsOnApp").orderByKey().equalTo(SHMAid.getText().toString());
+                        query.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-
-                                if (task.isSuccessful()) {
-                                    sendEmailVerification();
-                        /*PopupMessage("Account Created Successfully");
-                        FirebaseUser user = mAuth.getCurrentUser(); //You Firebase user
-                        // user registered, start profile activity
-                        finish();
-                        Intent intent = new Intent(getApplicationContext(), MemberArea.class);
-                        intent.putExtra("EXTRA_SESSION_INFO","Login");
-                        startActivity(intent);*/
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    PopupMessage("You are already a member");
                                 } else {
-                                    PopupMessage("Could not create account. Please try again");
+                                    mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<AuthResult> task) {
+                                            if (task.isSuccessful()) {
+                                                sendEmailVerification();
+                                            } else {
+                                                PopupMessage("Could not create account. Please try again");
+                                            }
+                                        }
+                                    });
                                 }
                             }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                            }
                         });
-
-
+                    }else{
+                        PopupMessage("SHMAid Does Not Exist");
                     }
-
                 }
+
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
                 }
             });
 
+
             }
 
     }else if ((sessionId.equals("Newmemb"))) {
-        //Brand New Member -> Send the details to Soyab for adding to our Offline database
-       /* usr_email = Email.getText().toString().trim();
-        usr_password = Password.getText().toString().trim();
-        DOB = DOBfield.getText().toString().trim();
-        addr1 = Adr1Field.getText().toString().trim();
-        addr2 = Adr2Field.getText().toString().trim();
-        townfield = TownField.getText().toString().trim();
-        postcode =  PostCodeField.getText().toString().trim();*/
-
+        //Brand New Member -> Send the details to our Offline database
         if (empty == false) {
             PopupMessage("Please fill in all available fields");
         } else {
@@ -493,10 +500,41 @@ public void LoginNow(View v) {
             }
         });
     }
+
+    private void sendChildrendata(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference("children").child(mAuth.getUid());
+
+        for (i=0;i<Children.size();i=i+2){
+            String NameofChild = Children.get(i).getText().toString();
+            String ChildDOB = Children.get(i+1).getText().toString();
+            Child younglings = new Child(NameofChild,ChildDOB);
+            myRef.setValue(younglings);
+        }
+
+
+    }
+
+    private void sendSpousedata(){
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = firebaseDatabase.getReference("spouse").child(mAuth.getUid());
+
+            String NameofSpouse = Spouse.get(0).getText().toString().trim();
+            String SpDob = Spouse.get(1).getText().toString().trim();
+            String spEmail = Spouse.get(2).getText().toString().trim();
+
+        Spouse honey = new Spouse(NameofSpouse,SpDob, spEmail);
+        myRef.setValue(honey);
+    }
     private void sendUserDataNewMem() {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
-
+if (!Children.isEmpty()){
+    sendChildrendata();
+}
+if(!Spouse.isEmpty()){
+    sendSpousedata();
+}
        User NEWusr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email, addr1,addr2,townfield,postcode,Phoneno, MembershipType,Status);
         myRef.setValue(NEWusr_profile);
     }

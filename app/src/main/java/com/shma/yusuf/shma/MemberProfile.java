@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -22,12 +23,15 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class MemberProfile extends AppCompatActivity {
-   private TextView SHMAID,firstname , surname , DOB, Contactinfo, ContactAdd;
+   private TextView SHMAID,firstname , surname , DOB, Contactinfo, ContactAdd,Email,MemType;
    private Button logout;
    private FirebaseAuth auth = FirebaseAuth.getInstance();
    private FirebaseUser user;
    private FirebaseDatabase firebaseDatabase;
+   private ArrayList<TextView>MissingElements = new ArrayList<TextView>();
     RequestQueue requestQueue;
 
     private void SetUpUIelements(){
@@ -35,6 +39,8 @@ public class MemberProfile extends AppCompatActivity {
         firstname =  findViewById(R.id.usr_firstname);
         surname =  findViewById(R.id.usr_surname);
         DOB =  findViewById(R.id.usr_DOB);
+        Email = findViewById(R.id.usr_Email);
+        MemType = findViewById(R.id.membershipType);
         Contactinfo =findViewById(R.id.ContactInfo);
         ContactAdd = findViewById(R.id.ContactAdd);
     }
@@ -63,11 +69,39 @@ public class MemberProfile extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User userProfile = dataSnapshot.getValue(User.class);
-
+                if (userProfile.getShmaId() != null){
                 SHMAID.setText( userProfile.getShmaId());
-                firstname.setText(userProfile.getFirstName());
-                surname.setText( userProfile.getLastName());
-                DOB.setText(userProfile.getDOB());
+                }else{
+                    MissingElements.add(SHMAID);
+                }
+                if (userProfile.getFirstName()!= null){
+                    firstname.setText(userProfile.getFirstName());
+                }else{
+                    MissingElements.add(firstname);
+                }
+                if (userProfile.getLastName()!= null){
+                    surname.setText( userProfile.getLastName());
+                }else{
+                    MissingElements.add(surname);
+                }
+                if (userProfile.getDOB()!= null){
+                    DOB.setText(userProfile.getDOB());
+                }else{
+                    MissingElements.add(DOB);
+                }
+                if (userProfile.getEmail()!= null){
+                    Email.setText(userProfile.getEmail());
+                }else{
+                    MissingElements.add(Email);
+                }
+                if (userProfile.getMembershipType()!= null){
+                    MemType.setText(userProfile.getMembershipType());
+                }else{
+                    MissingElements.add(MemType);
+                }
+              for (TextView elements : MissingElements){
+                  elements.setVisibility(View.GONE);
+              }
                 SHMADetailsRequest();
             }
 

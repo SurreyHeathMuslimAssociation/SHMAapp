@@ -31,7 +31,7 @@ import org.json.JSONObject;
 public class BusinessInfo extends AppCompatActivity {
 RequestQueue requestQueue;
 private String apiKey = "AIzaSyBChiGmhrrLkXDTX4Oxo5nsB4uG3WgGidM";
-private String placeid ,URL,GlobalAdress, GlobalTitle ;
+private String placeid ,URL,GlobalAdress, GlobalTitle ,sessionId;
 private ImageView strimage;
 TextView phonenum, ShopTitle, Address, Rating, Type, OpenNow, Opentimes ;
     @Override
@@ -39,12 +39,18 @@ TextView phonenum, ShopTitle, Address, Rating, Type, OpenNow, Opentimes ;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_business_info);
         Intent intent = getIntent();
-        SetUpUIelements();
+        sessionId = getIntent().getStringExtra("FromTheMain");
         BottomNavigationView BottomNav = findViewById(R.id.bottom_nav);
-        BottomNav.setOnNavigationItemSelectedListener(navlistener);
-        Menu menu = BottomNav.getMenu();
-        MenuItem menuItem = menu.getItem(1);
-        menuItem.setChecked(true);
+        SetUpUIelements();
+        if(sessionId != null && sessionId.equals("Main")){
+            BottomNav.setVisibility(View.GONE);
+        }else{
+            BottomNav.setOnNavigationItemSelectedListener(navlistener);
+            Menu menu = BottomNav.getMenu();
+            MenuItem menuItem = menu.getItem(1);
+            menuItem.setChecked(true);
+        }
+
         placeid = intent.getExtras().getString("PlaceID");
         URL =  "https://maps.googleapis.com/maps/api/place/details/json?placeid="+ placeid + "&fields=name,formatted_address,opening_hours,types,rating,formatted_phone_number&key="+apiKey;
         PlaceRequest(URL);

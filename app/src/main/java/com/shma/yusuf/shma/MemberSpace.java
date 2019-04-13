@@ -3,12 +3,14 @@ package com.shma.yusuf.shma;
 import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -27,9 +29,18 @@ import com.android.volley.toolbox.BasicNetwork;
 import com.android.volley.toolbox.DiskBasedCache;
 import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.LocationSettingsRequest;
+import com.google.android.gms.location.LocationSettingsResponse;
+import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -47,15 +58,20 @@ import java.util.Calendar;
 
 public class MemberSpace extends AppCompatActivity {
     private TextView membershipNumber, liveDatenTime;
+    private LocationCallback locationCallback;
+    final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION =2;
+    final int REQUEST_CHECK_SETTINGS = 3;
     private GridView PrayerView;
     private FirebaseAuth auth = FirebaseAuth.getInstance();
     private FirebaseUser user;
     private FirebaseDatabase firebaseDatabase;
+    //for locationcheck
     Calendar c = Calendar.getInstance();
     SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     String formattedDate = df.format(c.getTime());
     RequestQueue requestQueue;
     String currentLocation;
+    LocationRequest locationRequest;
     FusedLocationProviderClient fusedLocationClient;
     private ArrayList<String> PrayerTimings = new ArrayList<String>();
     @Override
@@ -63,35 +79,28 @@ public class MemberSpace extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_space);
         SetUpUIelements();
+        bottomNav();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            currentLocation = "No Permission granted";
-        }else{
+        locationRequest = LocationRequest.create();
+        CheckLocationServices();
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(LocationResult locationResult) {
+                if (locationResult == null) {
+                    return;
+                }
 
-            fusedLocationClient.getLastLocation()
-                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
-                        @Override
-                        public void onSuccess(Location location) {
-                           // Got last known location. In some rare situations this can be null.
-                            if (location != null) {
-                                // Logic to handle location object
-                               // currentLocation = location.toString();
-                                currentLocation = "latitude="+ String.valueOf(location.getLatitude()) + "& longitude=" + String.valueOf( location.getLongitude()) ;
-                                PrayerTimes(currentLocation);
-                            }
-                        }
-                    });
+            Location location = locationResult.getLastLocation();
 
-
-        }
+                    // Update UI with location data
+                      currentLocation = "latitude=" + String.valueOf(location.getLatitude()) + "& longitude=" + String.valueOf(location.getLongitude());
+                                        PrayerTimes(currentLocation);
+                                      stopLocationUpdates();
 
 
 
-        BottomNavigationView BottomNav = findViewById(R.id.bottom_nav);
-        BottomNav.setOnNavigationItemSelectedListener(navlistener);
-        Menu menu = BottomNav.getMenu();
-        MenuItem menuItem = menu.getItem(0);
-        menuItem.setChecked(true);
+            }
+        };
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference("members").child(auth.getUid());
@@ -113,6 +122,123 @@ public class MemberSpace extends AppCompatActivity {
 
 
     }
+
+    private void oldlocationMethod(){
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+        }else {
+            fusedLocationClient.getLastLocation()
+                    .addOnSuccessListener(this, new OnSuccessListener<Location>() {
+                        @Override
+                        public void onSuccess(Location location) {
+                            // Got last known location. In some rare situations this can be null.
+                            if (location != null) {
+                                // Logic to handle location object
+                                // currentLocation = location.toString();
+                                currentLocation = "latitude=" + String.valueOf(location.getLatitude()) + "& longitude=" + String.valueOf(location.getLongitude());
+                                PrayerTimes(currentLocation);
+                            }
+                        }
+                    });
+        }
+    }
+
+    private void CheckLocationServices(){
+        locationRequest.setInterval(5000);
+        locationRequest.setFastestInterval(4000);
+        locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+
+        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+                .addLocationRequest(locationRequest);
+// make the location setting request
+        SettingsClient client = LocationServices.getSettingsClient(this);
+        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+            @Override
+            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+                oldlocationMethod();
+                stopLocationUpdates();
+
+            }
+        });
+
+        task.addOnFailureListener(this, new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                if (e instanceof ResolvableApiException) {
+                    // Location settings are not satisfied, but this can be fixed
+                    // by showing the user a dialog.
+                    try {
+                        // Show the dialog by calling startResolutionForResult(),
+                        // and check the result in onActivityResult().
+                        ResolvableApiException resolvable = (ResolvableApiException) e;
+                        resolvable.startResolutionForResult(MemberSpace.this,
+                                REQUEST_CHECK_SETTINGS);
+                          startLocationUpdates();
+                    } catch (IntentSender.SendIntentException sendEx) {
+                        // Ignore the error.
+                    }
+                }
+            }
+        });
+    }
+
+
+     private void stopLocationUpdates() {
+        fusedLocationClient.removeLocationUpdates(locationCallback);
+            }
+
+        private void startLocationUpdates() {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+            }else {
+                fusedLocationClient.requestLocationUpdates(locationRequest,locationCallback,null);
+                return;
+
+            }
+    }
+
+
+
+    private void bottomNav(){
+        BottomNavigationView BottomNav = findViewById(R.id.bottom_nav);
+        BottomNav.setOnNavigationItemSelectedListener(navlistener);
+        Menu menu = BottomNav.getMenu();
+        MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    CheckLocationServices();
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
+
 
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
