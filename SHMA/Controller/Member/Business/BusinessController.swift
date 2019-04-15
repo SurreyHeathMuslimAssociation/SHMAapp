@@ -45,26 +45,31 @@ class BusinessController: UIViewController {
         DispatchQueue.main.async {
             self.businessView.activityIndicatorView.startAnimating()
         }
-        firebaseDatabaseManager.fetchBusinessesDetailsFromFirebase { (placeId, iconUrl, discount) in
+        // create dispatch group and placeIdCount tracker
+        var tracker = 0
+        let dispatchGroup = DispatchGroup()
+        firebaseDatabaseManager.fetchBusinessesDetailsFromFirebase { (placeId, iconUrl, discount, placeIdCount) in
+            // enter dispatch group and increment tracker
+            dispatchGroup.enter()
+            tracker += 1
             self.networkManager.fetchGooglePlaceData(using: placeId, completion: { (response) in
                 let business = Business(iconUrl: iconUrl, discount: discount, information: response)
                 let businessViewModel = BusinessViewModel(self.traitCollection)
                 businessViewModel.business = business
                 self.businessView.businessViewModels.append(businessViewModel)
+                // if tracker is equal to number of placeId's
+                // leave the group as all api's calls have finished
+                if tracker == placeIdCount {
+                    dispatchGroup.leave()
+                }
             })
-            self.attempReloadOfCollectionView()
-        }
-    }
-    
-    private func attempReloadOfCollectionView() {
-        self.timer?.invalidate()
-        self.timer = Timer.scheduledTimer(timeInterval: 0.7, target: self, selector: #selector(handleReload), userInfo: nil, repeats: false)
-    }
-    
-    @objc func handleReload() {
-        DispatchQueue.main.async {
-            self.businessView.activityIndicatorView.stopAnimating()
-            self.businessView.reloadData()
+            // update the collectionview on the main thread
+            dispatchGroup.notify(queue: .main, execute: {
+                DispatchQueue.main.async {
+                    self.businessView.activityIndicatorView.stopAnimating()
+                    self.businessView.reloadData()
+                }
+            })
         }
     }
 }

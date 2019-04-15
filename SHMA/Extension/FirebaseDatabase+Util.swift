@@ -166,7 +166,7 @@ extension Database: FirebaseDatabaseSession {
         }
     }
     
-    func fetchBusinessesDetailsFromFirebase(completion: @escaping (String, String, String) -> Void) {
+    func fetchBusinessesDetailsFromFirebase(completion: @escaping (String, String, String, Int) -> Void) {
         Database.database().reference().child("businesses").observeSingleEvent(of: .value) { (snapshot) in
             guard let allObjects = snapshot.children.allObjects as? [DataSnapshot] else { return }
             allObjects.forEach({ (snapshot) in
@@ -174,7 +174,7 @@ extension Database: FirebaseDatabaseSession {
                 guard let value = snapshot.value as? [String: Any] else { return }
                 guard let iconUrl = value["iconUrl"] as? String else { return }
                 guard let discount = value["discount"] as? String else { return }
-                completion(placeId, iconUrl, discount)
+                completion(placeId, iconUrl, discount, allObjects.count)
             })
         }
     }

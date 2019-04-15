@@ -31,7 +31,7 @@ class FuneralContactViewModel {
         if traitCollection.isIpad {
             return NSAttributedString(string: funeralContact?.name ?? "", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22)])
         } else {
-            return NSAttributedString(string: funeralContact?.name ?? "", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+            return NSAttributedString(string: funeralContact?.name ?? "", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 12)])
         }
     }
     
@@ -39,7 +39,7 @@ class FuneralContactViewModel {
         if traitCollection.isIpad {
             return NSAttributedString(string: funeralContact?.phoneNo ?? "", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 22)])
         } else {
-            return NSAttributedString(string: funeralContact?.phoneNo ?? "", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)])
+            return NSAttributedString(string: funeralContact?.phoneNo ?? "", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 12)])
         }
     }
     

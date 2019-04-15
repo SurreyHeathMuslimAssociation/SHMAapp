@@ -71,9 +71,9 @@ class FirebaseDatabaseManager {
         }
     }
     
-    func fetchBusinessesDetailsFromFirebase(completion: @escaping (String, String, String) -> Void) {
-        session.fetchBusinessesDetailsFromFirebase { (placeId, iconUrl, discount) in
-            completion(placeId, iconUrl, discount)
+    func fetchBusinessesDetailsFromFirebase(completion: @escaping (String, String, String, Int) -> Void) {
+        session.fetchBusinessesDetailsFromFirebase { (placeId, iconUrl, discount, placeIdCount) in
+            completion(placeId, iconUrl, discount, placeIdCount)
         }
     }
    

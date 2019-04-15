@@ -22,6 +22,7 @@ class FuneralContactsCell: UICollectionViewCell {
         tv.dataDetectorTypes = [.link, .phoneNumber]
         tv.isEditable = false
         tv.isScrollEnabled = false
+        tv.backgroundColor = .clear
         return tv
     }()
     let funeralContactImageView: UIImageView = {
@@ -43,13 +44,13 @@ class FuneralContactsCell: UICollectionViewCell {
         super.init(frame: frame)
         backgroundColor = .white
         
-        addSubview(nameLabel)
-        addSubview(phoneNoTextView)
         addSubview(funeralContactImageView)
+        funeralContactImageView.addSubview(nameLabel)
+         funeralContactImageView.addSubview(phoneNoTextView)
         
-        nameLabel.anchor(top: topAnchor, left: leftAnchor, bottom: phoneNoTextView.topAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 10, paddingBottom: 0, paddingRight: 10, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
-        funeralContactImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
-        phoneNoTextView.anchor(top: nil, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 0, paddingLeft: 0, paddingBottom: 5, paddingRight: 0, width: 0, height: 50, centerYAnchor: nil, centerXAnchor: nil)
+        nameLabel.anchor(top: topAnchor, left: funeralContactImageView.leftAnchor, bottom: phoneNoTextView.topAnchor, right: funeralContactImageView.rightAnchor, paddingTop: 10, paddingLeft: 20, paddingBottom: 0, paddingRight: 20, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        funeralContactImageView.anchor(top: topAnchor, left: leftAnchor, bottom: bottomAnchor, right: rightAnchor, paddingTop: 5, paddingLeft: 0, paddingBottom: 0, paddingRight: 0, width: 0, height: 0, centerYAnchor: nil, centerXAnchor: nil)
+        phoneNoTextView.anchor(top: nil, left: funeralContactImageView.leftAnchor, bottom: bottomAnchor, right: funeralContactImageView.rightAnchor, paddingTop: 0, paddingLeft: 5, paddingBottom: 0, paddingRight: 5, width: 0, height: 50, centerYAnchor: nil, centerXAnchor: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
