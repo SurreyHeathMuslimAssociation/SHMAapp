@@ -1,5 +1,6 @@
 package com.shma.yusuf.shma;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -34,13 +35,14 @@ public class member_business extends AppCompatActivity {
     private GridView BusinessGridView;
     private DatabaseReference mDatabase ;
     private String sessionId;
-
+    public static Activity memberBusiness;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_member_business);
         sessionId= getIntent().getStringExtra("FromTheMain");
         BottomNavigationView BottomNav = findViewById(R.id.bottom_nav);
+        memberBusiness = this;
         if(sessionId != null && sessionId.equals("Main")){
             BottomNav.setVisibility(View.GONE);
         }else {
@@ -168,10 +170,7 @@ setToCustomGrid();
 
                     break;
                 case R.id.nav_business:
-                    finish();
-                    sendTo = new Intent(member_business.this, member_business.class);
-                    startActivity(sendTo);
-                    overridePendingTransition(0, 0);
+
                     break;
 
                 case R.id.nav_funeral:

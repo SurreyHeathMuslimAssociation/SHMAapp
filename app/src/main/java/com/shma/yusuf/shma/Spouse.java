@@ -1,40 +1,41 @@
 package com.shma.yusuf.shma;
 
 public class Spouse {
-    private String SpouseDOB;
-    private String SpouseEmail;
-    private String SpouseName;
+    private String FullName;
+    private String DOB;
+    private String Email;
+
 
     public Spouse(){
 
     }
-    public Spouse(String SpouseName,String SpouseDOB,String SpouseEmail){
-        this.SpouseName = SpouseName;
-        this.SpouseDOB = SpouseDOB;
-        this.SpouseEmail = SpouseEmail;
+    public Spouse(String FullName,String DOB,String Email){
+        this.FullName = FullName;
+        this.DOB = DOB;
+        this.Email = Email;
     }
-    public String getSpouseName() {
-        return SpouseName;
-    }
-
-    public void setSpouseName(String spouseName) {
-        SpouseName = spouseName;
+    public String getName() {
+        return this.FullName;
     }
 
-    public String getSpouseDOB() {
-        return SpouseDOB;
+    public void setName(String name) {
+        this.FullName = name;
     }
 
-    public void setSpouseDOB(String spouseDOB) {
-        SpouseDOB = spouseDOB;
+    public String getDOB() {
+        return DOB;
     }
 
-    public String getSpouseEmail() {
-        return SpouseEmail;
+    public void setDOB(String DOB) {
+        this.DOB = DOB;
     }
 
-    public void setSpouseEmail(String spouseEmail) {
-        SpouseEmail = spouseEmail;
+    public String getEmail() {
+        return Email;
+    }
+
+    public void setEmail(String email) {
+        Email = email;
     }
 
 

@@ -15,6 +15,7 @@
         app:itemTextColor="@color/common_google_signin_btn_text_dark_focused"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottomnavigation"
+
         tools:layout_editor_absoluteX="0dp"
         />
     <TextView

@@ -1,25 +1,25 @@
 package com.shma.yusuf.shma;
 
 public class Child {
-    private String Name;
+    private String FullName;
     private String DOB;
 
     public Child(){
 
     }
 
-    public Child(String Name,String DOB){
-        this.Name = Name;
+    public Child(String FullName,String DOB){
+        this.FullName = FullName;
         this.DOB = DOB;
 
     }
 
-    public String getName() {
-        return Name;
+    public String getFullName() {
+        return FullName;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setFullName(String fullName) {
+        FullName = fullName;
     }
 
     public String getDOB() {

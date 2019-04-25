@@ -243,14 +243,10 @@ public class MemberSpace extends AppCompatActivity {
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
+            Intent sendTo;
             switch (menuItem.getItemId()) {
                 case R.id.nav_home:
-                    Intent sendTo;
-                    finish();
-                    sendTo = new Intent(MemberSpace.this, MemberSpace.class);
-                    startActivity(sendTo);
-                    overridePendingTransition(0, 0);
+
 
                     break;
                 case R.id.nav_business:

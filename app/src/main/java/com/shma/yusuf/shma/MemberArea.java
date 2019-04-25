@@ -31,15 +31,22 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 public class MemberArea extends AppCompatActivity {
     private View parentLayout;
     private Switch familyswitch;
-    private TextView Title , Password, Email, Info, Forgotpwd,lblAddchild, lblRemovechild;
-    private TextView  SHMAid,FirstName,LastName,DOBfield,Adr1Field, Adr2Field,TownField, PostCodeField,PhoneNum;
+    private TextView Title, Info, Forgotpwd,lblAddchild, lblRemovechild;
+    private EditText  SHMAid,FirstName,LastName,DOBfield,Adr1Field, Adr2Field,TownField, Password, Email, PostCodeField,PhoneNum;
     private NestedScrollView scrollview;
     private LinearLayout commentsLayout;
     private Button LoginBtn, addChild, RemoveChild;
@@ -50,7 +57,7 @@ public class MemberArea extends AppCompatActivity {
     DatabaseReference mDatabase;
     List<User> users = new ArrayList<>();
     //checkall fields on entry
-    private List<TextView> lstTexts = new ArrayList<TextView>();
+    private List<EditText> lstTexts = new ArrayList<EditText>();
    //number of children that can be added
     private List<EditText> Children = new ArrayList<EditText>();
     private List<EditText> Spouse = new ArrayList<EditText>();
@@ -164,7 +171,7 @@ private void addTings(String HintText){
 }else{
         Children.add(rowTextView);
 }
-
+    rowTextView.requestFocus();
 }
 
 
@@ -196,6 +203,83 @@ private void addTings(String HintText){
 
 
     }
+
+    private boolean CheckDate(){
+boolean fcheck, scheck = false;
+boolean bothcheck;
+        //check if date is in dd/MM/yyyy format
+       fcheck = isValidFormat("dd/MM/yyyy",DOB);
+       if (fcheck){
+         scheck =  Over19();
+       }else{
+           PopupMessage("Date must be in dd/MM/yyyy Format");
+       }
+
+        bothcheck = (fcheck || scheck) != false;
+       return bothcheck;
+    }
+
+    private boolean Over19(){
+        boolean check = false;
+        String dateparts[] = DOB.split("/");
+        int year = Integer.valueOf(dateparts[2]);
+         int month =Integer.valueOf(dateparts[1]) ;
+         int day = Integer.valueOf(dateparts[0]);
+        int age = getAge(year,month,day);
+if (age < 19){
+    PopupMessage("You Must Be Over 19 To Register");
+}else{
+    check = true;
+}
+return check;
+    }
+
+    private Integer getAge(int year, int month, int day){
+        Calendar dob = Calendar.getInstance();
+        Calendar today = Calendar.getInstance();
+
+        dob.set(year, month, day);
+
+        int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
+
+        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+            age--;
+        }
+
+        Integer ageInt = new Integer(age);
+      //  String ageS = ageInt.toString();
+
+        return ageInt;
+    }
+
+    public static boolean isValidFormat(String format, String value ) {
+        LocalDateTime ldt = null;
+        DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, Locale.ENGLISH);
+
+        try {
+            ldt = LocalDateTime.parse(value, fomatter);
+            String result = ldt.format(fomatter);
+            return result.equals(value);
+        } catch (DateTimeParseException e) {
+            try {
+                LocalDate ld = LocalDate.parse(value, fomatter);
+                String result = ld.format(fomatter);
+                return result.equals(value);
+            } catch (DateTimeParseException exp) {
+                try {
+                    LocalTime lt = LocalTime.parse(value, fomatter);
+                    String result = lt.format(fomatter);
+                    return result.equals(value);
+                } catch (DateTimeParseException e2) {
+                    // Debugging purposes
+                    //e2.printStackTrace();
+                }
+            }
+        }
+
+        return false;
+    }
+
 public void SetUpUIelements() {
     lblAddchild = findViewById(R.id.addchildlbl);
     lblRemovechild = findViewById(R.id.removechildlbl);
@@ -237,11 +321,11 @@ public void SetUpUIelements() {
         }
 
 
-    public boolean checkAllTV(List<TextView> allTV){
+    public boolean checkAllTV(List<EditText> allTV){
 
-        for(TextView tv : allTV){
-            if(tv.getText().toString().equals("")||tv.getText().toString()==null)
-                return false;
+        for(EditText tv : allTV){
+            if(tv.getText().toString().equals("")||tv.getText().toString()==null )
+             return false;
         }
         return true;
     }
@@ -293,7 +377,7 @@ public void SetUpUIelements() {
     }
 
 private void AddFieldsToList(){
-    List<TextView> namesList;
+    List<EditText> namesList;
     if (sessionId.equals("Login")) {
         namesList = Arrays.asList(Password,Email);
     }else if (sessionId.equals("ExistMemb")){
@@ -398,6 +482,7 @@ public void LoginNow(View v) {
         if (empty == false) {
             PopupMessage("Please fill in all available fields");
         } else {
+
             Query query = mDatabase.child("offline_members").orderByKey().equalTo(SHMAid.getText().toString());
             query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -445,7 +530,7 @@ public void LoginNow(View v) {
         //Brand New Member -> Send the details to our Offline database
         if (empty == false) {
             PopupMessage("Please fill in all available fields");
-        } else {
+        }else if (CheckDate()){
             mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -506,9 +591,9 @@ public void LoginNow(View v) {
         DatabaseReference myRef = firebaseDatabase.getReference("children").child(mAuth.getUid());
 
         for (i=0;i<Children.size();i=i+2){
-            String NameofChild = Children.get(i).getText().toString();
-            String ChildDOB = Children.get(i+1).getText().toString();
-            Child younglings = new Child(NameofChild,ChildDOB);
+            String FullName = Children.get(i).getText().toString();
+            String chDOB = Children.get(i+1).getText().toString();
+            Child younglings = new Child(FullName,chDOB);
             myRef.setValue(younglings);
         }
 

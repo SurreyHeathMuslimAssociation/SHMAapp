@@ -166,16 +166,15 @@ private void PlaceRequest(String url){
     private BottomNavigationView.OnNavigationItemSelectedListener navlistener = new BottomNavigationView.OnNavigationItemSelectedListener() {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-
+            member_business.memberBusiness.finish();
             switch (menuItem.getItemId()) {
 
                 case R.id.nav_home:
-                    Intent sendTo;
                     finish();
+                    Intent sendTo;
                     sendTo = new Intent(getApplicationContext(), MemberSpace.class);
                     startActivity(sendTo);
                     overridePendingTransition(0, 0);
-
                     break;
                 case R.id.nav_business:
                     finish();

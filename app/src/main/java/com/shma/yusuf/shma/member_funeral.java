@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -59,7 +58,7 @@ public class member_funeral extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-                Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
+           //     Toast.makeText(getApplicationContext(), "Database Error", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -130,10 +129,6 @@ public class member_funeral extends AppCompatActivity {
                     break;
 
                 case R.id.nav_funeral:
-                    finish();
-                    sendTo = new Intent(member_funeral.this, member_funeral.class);
-                    startActivity(sendTo);
-                    overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_profile:
                     finish();

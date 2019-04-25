@@ -36,11 +36,11 @@
 
     <GridView
         android:id="@+id/funeralcontacts"
-        android:layout_width="345dp"
-        android:layout_height="548dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="540dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="8dp"
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"

@@ -185,11 +185,7 @@ public class MemberProfile extends AppCompatActivity {
                     overridePendingTransition(0, 0);
                     break;
                 case R.id.nav_profile:
-                    finish();
 
-                    sendTo = new Intent(MemberProfile.this, MemberProfile.class);
-                    startActivity(sendTo);
-                    overridePendingTransition(0, 0);
 
                     break;
 
