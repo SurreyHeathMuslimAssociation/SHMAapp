@@ -20,13 +20,16 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class WelcomeMessage extends AppCompatActivity {
-    private TextView Name ;
+    private TextView Name ,scndGreeting;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     private FirebaseDatabase mDatabase = FirebaseDatabase.getInstance();
+    private String type;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_message);
+        Intent intent = getIntent();
+        type = intent.getStringExtra("TYPE");
         DatabaseReference databaseReference = mDatabase.getReference("members").child(mAuth.getUid());
         SetUpUIelements();
         databaseReference .addValueEventListener(new ValueEventListener(){
@@ -37,6 +40,10 @@ public class WelcomeMessage extends AppCompatActivity {
                 String sourceString = "Welcome, " + "<b>" +userProfile.getFirstName() + " " + userProfile.getLastName() +"</b> "  ;
                 Name.setText(Html.fromHtml(sourceString));
                 //Name.setText("Welcome," + userProfile.getFirstName() + " " + userProfile.getLastName());
+                if (type.equals("NewMem")){
+                    String message = "Just few more steps to go:\n\n Verfiy your account via the link in your email\nSetup your monthly standing order to the following account:\n\nSurrey Heath Muslim Association\nSort Code: 30-00-83\nAccount Number: 01222601\n\nThe payment reference must be: SHMA-" +userProfile.getShmaId();
+                    scndGreeting.setText(message);
+                }
 
             }
 
@@ -50,7 +57,7 @@ public class WelcomeMessage extends AppCompatActivity {
            }
     public void SetUpUIelements(){
         Name = findViewById(R.id.Nametxt);
-
+        scndGreeting = findViewById(R.id.scndgreetingMsg);
     }
 
     public void PopupMessage(String Message){

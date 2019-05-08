@@ -2,9 +2,12 @@ package com.shma.yusuf.shma;
 
 public class User {
     private String shmaId;
-    private String firstName, lastName, DOB ;
+    private String firstName;
+    private String lastName;
+    private String DOB;
     private String town, addressLineOne , addressLineTwo, postcode;
-    private String email, MobileNumber;
+    private String email;
+    private String mobileNo;
     private String membershipType;
     private String status;
 
@@ -12,6 +15,13 @@ public class User {
 
     }
 
+    public String getDOB() {
+        return DOB;
+    }
+
+    public void setDOB(String DOB) {
+        this.DOB = DOB;
+    }
     public User(String shmaId,String firstName, String lastName,String DOB, String email, String membershipType ){
         this.shmaId = shmaId;
         this.membershipType = membershipType;
@@ -20,8 +30,10 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
     }
-
-    public User(String shmaId, String firstName, String lastName, String DOB, String email, String addressLineOne, String addressLineTwo, String town, String postcode, String MobileNumber, String membershipType, String status ) {
+    public String getMobileNo() {
+        return mobileNo;
+    }
+    public User(String shmaId, String firstName, String lastName, String DOB, String email, String addressLineOne, String addressLineTwo, String town, String postcode, String mobileNo, String membershipType, String status ) {
         this.shmaId = shmaId;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,7 +43,7 @@ public class User {
         this.addressLineTwo = addressLineTwo;
         this.town = town;
         this.postcode = postcode;
-        this.MobileNumber = MobileNumber;
+        this.mobileNo = mobileNo;
         this.membershipType = membershipType;
         this.status = status;
     }
@@ -58,15 +70,7 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getDOB() {
-        return DOB;
-    }
-
-    public void setDOB(String DOB) {
-        this.DOB = DOB;
-    }
-
-    public String getFirstName() {
+          public String getFirstName() {
         return firstName;
     }
 

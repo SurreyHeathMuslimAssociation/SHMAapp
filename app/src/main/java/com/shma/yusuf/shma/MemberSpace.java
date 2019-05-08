@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -15,7 +16,10 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -58,6 +62,8 @@ import java.util.Calendar;
 
 public class MemberSpace extends AppCompatActivity {
     private TextView membershipNumber, liveDatenTime;
+    private ImageView memCard;
+    private ProgressBar progressbar ;
     private LocationCallback locationCallback;
     final int MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION =2;
     final int REQUEST_CHECK_SETTINGS = 3;
@@ -82,23 +88,18 @@ public class MemberSpace extends AppCompatActivity {
         bottomNav();
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
         locationRequest = LocationRequest.create();
+        progressbar.setVisibility(View.VISIBLE);
         CheckLocationServices();
         locationCallback = new LocationCallback() {
             @Override
             public void onLocationResult(LocationResult locationResult) {
-                if (locationResult == null) {
-                    return;
-                }
-
+                if (locationResult == null) {   return;     }
             Location location = locationResult.getLastLocation();
-
                     // Update UI with location data
+
                       currentLocation = "latitude=" + String.valueOf(location.getLatitude()) + "& longitude=" + String.valueOf(location.getLongitude());
                                         PrayerTimes(currentLocation);
                                       stopLocationUpdates();
-
-
-
             }
         };
 
@@ -108,9 +109,8 @@ public class MemberSpace extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 User userProfile = dataSnapshot.getValue(User.class);
-
-                membershipNumber.setText("Membership Number: " + userProfile.getShmaId());
-                liveDatenTime.setText(formattedDate);
+                    membershipNumber.setText("Membership Number: " + userProfile.getShmaId());
+                    liveDatenTime.setText(formattedDate);
 
             }
 
@@ -121,6 +121,14 @@ public class MemberSpace extends AppCompatActivity {
         });
 
 
+    }
+
+    private void NotApproved(){
+        memCard.setVisibility(View.INVISIBLE);
+        liveDatenTime.setVisibility(View.GONE);
+        membershipNumber.setTextColor(Color.BLACK);
+        membershipNumber.setTextSize(16);
+        membershipNumber.setText("After Your First Payment is Received, Your Card Will be Activated");
     }
 
     private void oldlocationMethod(){
@@ -302,6 +310,7 @@ public class MemberSpace extends AppCompatActivity {
 private void setToCustomGrid(){
      GridViewAdapter adapterViewAndroid = new GridViewAdapter(MemberSpace.this, PrayerTimings);
      PrayerView.setAdapter(adapterViewAndroid);
+    progressbar.setVisibility(View.GONE);
 }
 
     private void PrayerTimes(String location) {
@@ -350,7 +359,7 @@ private void setToCustomGrid(){
                 new Response.ErrorListener(){
             @Override
                     public void onErrorResponse(VolleyError error){
-                Toast.makeText(getApplicationContext(), "No response from Prayer times api", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Prayer times api is busy" , Toast.LENGTH_SHORT).show();
             }
                 });
 
@@ -364,6 +373,9 @@ private void setToCustomGrid(){
         membershipNumber  = findViewById(R.id.mbno);
         liveDatenTime =  findViewById(R.id.livedatentime);
         PrayerView = findViewById(R.id.prayerView);
+        progressbar = findViewById(R.id.progressBar);
+        memCard = findViewById(R.id.MemCard);
+
     }
 
 }

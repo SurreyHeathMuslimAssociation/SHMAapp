@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ProgressBar;
 
 import com.android.volley.RequestQueue;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +34,7 @@ public class member_business extends AppCompatActivity {
     private ArrayList<String>PlaceIDs = new ArrayList<>();
     private List<BusinessDetails> CurrentBusinesses = new ArrayList<>();
     private GridView BusinessGridView;
+    private ProgressBar ProgressBar;
     private DatabaseReference mDatabase ;
     private String sessionId;
     public static Activity memberBusiness;
@@ -60,7 +62,7 @@ public class member_business extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot postSnapshot : dataSnapshot.getChildren()){
-
+                    ProgressBar.setVisibility(View.VISIBLE);
                     BusinessDetails deet = postSnapshot.getValue(BusinessDetails.class);
                     deet.setPlaceID(postSnapshot.getKey());
                     CurrentBusinesses.add(deet);
@@ -123,6 +125,7 @@ setToCustomGrid();
 
       private void SetUpUIelements(){
         BusinessGridView=  findViewById(R.id.BusinessGridView);
+        ProgressBar = findViewById(R.id.progressBar);
     }
 
     @Override
@@ -135,6 +138,7 @@ setToCustomGrid();
     private void setToCustomGrid(){
         BusinessGridAdapter adapterViewAndroid = new BusinessGridAdapter(member_business.this, discounts,shopImage,PlaceIDs, this);
         BusinessGridView.setAdapter(adapterViewAndroid);
+        ProgressBar.setVisibility(View.GONE);
         BusinessGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {

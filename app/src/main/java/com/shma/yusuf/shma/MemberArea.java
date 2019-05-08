@@ -1,19 +1,26 @@
 package com.shma.yusuf.shma;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.NestedScrollView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -24,6 +31,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -44,16 +52,18 @@ import java.util.Locale;
 
 public class MemberArea extends AppCompatActivity {
     private View parentLayout;
+    private ProgressBar Progressbar;
     private Switch familyswitch;
-    private TextView Title, Info, Forgotpwd,lblAddchild, lblRemovechild;
+    private TextView Title, Forgotpwd,lblAddchild, lblRemovechild,Notice;
+    private WebView urlWebView;
     private EditText  SHMAid,FirstName,LastName,DOBfield,Adr1Field, Adr2Field,TownField, Password, Email, PostCodeField,PhoneNum;
     private NestedScrollView scrollview;
     private LinearLayout commentsLayout;
-    private Button LoginBtn, addChild, RemoveChild;
+    private Button LoginBtn, addChild, RemoveChild , AgreeButton;
     private int counter = 5;
     private FirebaseAuth mAuth;
-    String sessionId;
-    String usr_SHMAID,firstname,lastname,DOB,usr_email ,Phoneno, usr_password, addr1,addr2,townfield,postcode,MembershipType, Status;
+    String sessionId , OfflineMemSHMAID,ShmaIdsOnAppSHMAID;
+    String usr_SHMAID,firstname,lastname,DOB,usr_email ,MobileNumber, usr_password, addr1,addr2,townfield,postcode,MembershipType, Status;
     DatabaseReference mDatabase;
     List<User> users = new ArrayList<>();
     //checkall fields on entry
@@ -91,8 +101,7 @@ public class MemberArea extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked == true){
-                    addTings("Spouse First Name");
-                    addTings("Spouse Last Name");
+                    addTings("Spouse Full Name");
                     addTings("Spouse D.O.B");
                     addTings("Spouse Email");
                     addChildButtons();
@@ -194,7 +203,7 @@ private void addTings(String HintText){
             postcode =PostCodeField.getText().toString().trim();
             firstname = FirstName.getText().toString().trim();
             lastname =LastName.getText().toString().trim();
-            Phoneno = PhoneNum.getText().toString().trim();
+            MobileNumber = PhoneNum.getText().toString().trim();
             if(familyswitch.isChecked()){
                 MembershipType =  "Family";
             }else
@@ -204,9 +213,10 @@ private void addTings(String HintText){
 
     }
 
+
     private boolean CheckDate(){
 boolean fcheck, scheck = false;
-boolean bothcheck;
+boolean bothcheck = false;
         //check if date is in dd/MM/yyyy format
        fcheck = isValidFormat("dd/MM/yyyy",DOB);
        if (fcheck){
@@ -214,8 +224,10 @@ boolean bothcheck;
        }else{
            PopupMessage("Date must be in dd/MM/yyyy Format");
        }
+if ((fcheck && scheck)) {
+    bothcheck = true;
+}
 
-        bothcheck = (fcheck || scheck) != false;
        return bothcheck;
     }
 
@@ -226,7 +238,7 @@ boolean bothcheck;
          int month =Integer.valueOf(dateparts[1]) ;
          int day = Integer.valueOf(dateparts[0]);
         int age = getAge(year,month,day);
-if (age < 19){
+if (age <= 19){
     PopupMessage("You Must Be Over 19 To Register");
 }else{
     check = true;
@@ -246,13 +258,13 @@ return check;
             age--;
         }
 
+
         Integer ageInt = new Integer(age);
-      //  String ageS = ageInt.toString();
 
         return ageInt;
     }
 
-    public static boolean isValidFormat(String format, String value ) {
+     public static boolean isValidFormat(String format, String value ) {
         LocalDateTime ldt = null;
         DateTimeFormatter fomatter = DateTimeFormatter.ofPattern(format, Locale.ENGLISH);
 
@@ -288,6 +300,7 @@ public void SetUpUIelements() {
     parentLayout = findViewById(R.id.TheConstraintLayout);
     commentsLayout= findViewById(R.id.LinearLayoutscr);
     familyswitch = findViewById(R.id.FamilySwitch);
+    Notice = findViewById(R.id.MembersAreaTitle);
     Title = findViewById(R.id.Title);
     SHMAid = findViewById(R.id.SHMAfield);
     Password = findViewById(R.id.PasswordField);
@@ -295,7 +308,6 @@ public void SetUpUIelements() {
     DOBfield = findViewById(R.id.DobField);
     Adr1Field = findViewById(R.id.Address1Field);
     Adr2Field = findViewById(R.id.Address2Field);
-    Info = findViewById(R.id.LoginAttempts);
     TownField = findViewById(R.id.TownField);
     PostCodeField = findViewById(R.id.PostCodeField) ;
     LoginBtn = findViewById(R.id.LoginButton);
@@ -304,6 +316,9 @@ public void SetUpUIelements() {
     FirstName = findViewById(R.id.firstName);
     LastName = findViewById(R.id.lastName);
     PhoneNum = findViewById(R.id.Phonenum);
+    urlWebView = findViewById(R.id.PrivacyPolicy);
+    AgreeButton = findViewById(R.id.AgreeButton);
+    Progressbar = findViewById(R.id.Progressbar);
     }
     private void resizeElements(){
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) scrollview.getLayoutParams();
@@ -330,6 +345,29 @@ public void SetUpUIelements() {
         return true;
     }
 
+    private void EverythingGone(){
+        Notice.setVisibility(View.GONE);
+        SHMAid.setVisibility(View.GONE);
+        Email.setVisibility(View.GONE);
+        Password.setVisibility(View.GONE);
+        Title.setVisibility(View.GONE);
+        Forgotpwd.setVisibility(View.GONE);
+        familyswitch.setVisibility(View.GONE);
+        LoginBtn.setVisibility(View.GONE);
+        FirstName.setVisibility(View.GONE);
+        DOBfield.setVisibility(View.GONE);
+        LastName.setVisibility(View.GONE);
+        Adr1Field.setVisibility(View.GONE);
+        PhoneNum.setVisibility(View.GONE);
+        Adr2Field.setVisibility(View.GONE);
+        TownField.setVisibility(View.GONE);
+        PostCodeField.setVisibility(View.GONE);
+        addChild.setVisibility(View.GONE);
+        urlWebView.setVisibility(View.GONE);
+        AgreeButton.setVisibility(View.GONE);
+        RemoveChild.setVisibility(View.GONE);
+    }
+
     public void CorrectElements(){
         lblAddchild.setVisibility(View.GONE);
         lblRemovechild.setVisibility(View.GONE);
@@ -353,7 +391,6 @@ public void SetUpUIelements() {
             resizeElements();
             Title.setText("First Time Setup");
             Forgotpwd.setVisibility(View.GONE);
-            Info.setVisibility(View.GONE);
             familyswitch.setVisibility(View.GONE);
             LoginBtn.setText("Register");
             FirstName.setVisibility(View.GONE);
@@ -364,15 +401,14 @@ public void SetUpUIelements() {
             Adr2Field.setVisibility(View.GONE);
             TownField.setVisibility(View.GONE);
             PostCodeField.setVisibility(View.GONE);
+
         }else {
             Title.setText("Thinking of Joining?");
             Title.setTextSize(28);
             LoginBtn.setText("Register");
             SHMAid.setVisibility(View.GONE);
             Forgotpwd.setVisibility(View.GONE);
-            Info.setVisibility(View.GONE);
-
-        }
+                         }
 
     }
 
@@ -425,12 +461,7 @@ private void AddFieldsToList(){
                         checkEmailVerification();
                     } else {
                         PopupMessage("Login Failed");
-                        counter--;
-                        Info.setText("No of attempts remaining: " + counter);
-                        if (counter == 0) {
-                            Info.setText("Number of attempts exceeded");
-                            LoginBtn.setEnabled(false);
-                        }
+
                     }
                 }
             });
@@ -448,14 +479,27 @@ private void AddFieldsToList(){
                   if (sessionId.equals("ExistMemb")){
                             sendUserDataExistMem();
                             }else{
-                      sendUserDataNewMem();
+                      //sendUserDataNewMem();
+                      Query query = mDatabase.child("offline_members").orderByKey().limitToLast(1);
+                      query.addListenerForSingleValueEvent(new ValueEventListener() {
+                          @Override
+                          public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                              for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                                  OfflineMemSHMAID = childSnapshot.getKey();
+                                  //usr_SHMAID =   String.valueOf(OfflineMemSHMAID);
+                              }
+
+                              checkSHMAidsonApp();
+
+                          }
+
+                          @Override
+                          public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                          }
+                      });
                   }
 
-                        // mAuth.signOut();
-                        finish();
-                        Intent intent = new Intent(getApplicationContext(), WelcomeMessage.class);
-                        //intent.putExtra("EXTRA_SESSION_INFO","Login");
-                        startActivity(intent);
                     }else{
                         Toast.makeText(getApplicationContext(), "Verification mail has'nt been sent!", Toast.LENGTH_SHORT).show();
                     }
@@ -475,10 +519,65 @@ public void LoginNow(View v) {
         }
 
 
-    } else if (sessionId.equals("ExistMemb")) {
-       // usr_SHMAID = SHMAid.getText().toString().trim();
+    }Register();
+
+
+}
+
+    @Override
+    public void onBackPressed() {
+        // Here you want to show the user a dialog box
+       if (AgreeButton.getVisibility() == View.VISIBLE) {
+           new AlertDialog.Builder(MemberArea.this)
+                   .setTitle("Privacy Policy")
+                   .setMessage("If you do not agree then your account will not be created")
+                   .setPositiveButton("Agree", new DialogInterface.OnClickListener() {
+                       public void onClick(DialogInterface dialog, int whichButton) {
+                           // The user wants to leave - so dismiss the dialog and exit
+                           CreateUserAccount();
+                           dialog.dismiss();
+                       }
+                   }).setNegativeButton("Disagree", new DialogInterface.OnClickListener() {
+               public void onClick(DialogInterface dialog, int whichButton) {
+                   // The user is not sure, so you can exit or just stay
+                   finish();
+                   dialog.dismiss();
+               }
+           }).show();
+       }else{
+           super.onBackPressed();
+       }
+
+    }
+
+private void PrivacyPolicy(){
+    EverythingGone();
+    AgreeButton.setVisibility(View.VISIBLE);
+    urlWebView.setVisibility(View.VISIBLE);
+    DownloadPolicy();
+
+}
+private void DownloadPolicy(){
+    //urlWebView.setWebViewClient(new AppWebViewClients());
+    urlWebView.getSettings().setJavaScriptEnabled(true);
+    urlWebView.getSettings().setBuiltInZoomControls(true);
+    urlWebView.getSettings().setUseWideViewPort(true);
+    urlWebView.loadUrl("https://firebasestorage.googleapis.com/v0/b/shma-559f5.appspot.com/o/Privacy%20Policy%2FSHMAPrivacyPolicy.html?alt=media&token=0a15acd1-c098-4e1e-ad73-e03b31a36df4");
+
+}
+
+public void Agree(View v){
+
+    CreateUserAccount();
+
+}
+
+private void Register( ){
+    boolean empty = checkAllTV(lstTexts);
+        if (sessionId.equals("ExistMemb")) {
+        // usr_SHMAID = SHMAid.getText().toString().trim();
         //usr_email = Email.getText().toString().trim();
-       // usr_password = Password.getText().toString().trim();
+        // usr_password = Password.getText().toString().trim();
         if (empty == false) {
             PopupMessage("Please fill in all available fields");
         } else {
@@ -494,18 +593,9 @@ public void LoginNow(View v) {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
-                                    PopupMessage("You are already a member");
+                                    PopupMessage("This SHMA id is already registered");
                                 } else {
-                                    mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<AuthResult> task) {
-                                            if (task.isSuccessful()) {
-                                                sendEmailVerification();
-                                            } else {
-                                                PopupMessage("Could not create account. Please try again");
-                                            }
-                                        }
-                                    });
+                                   CheckEmailinUse();
                                 }
                             }
                             @Override
@@ -513,7 +603,7 @@ public void LoginNow(View v) {
                             }
                         });
                     }else{
-                        PopupMessage("SHMAid Does Not Exist");
+                        PopupMessage("SHMA id Does Not Exist");
                     }
                 }
 
@@ -524,38 +614,53 @@ public void LoginNow(View v) {
             });
 
 
-            }
+        }
 
     }else if ((sessionId.equals("Newmemb"))) {
         //Brand New Member -> Send the details to our Offline database
         if (empty == false) {
             PopupMessage("Please fill in all available fields");
         }else if (CheckDate()){
-            mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+            CheckEmailinUse();
 
-                    if (task.isSuccessful()) {
-                      //  sendUserDataNewMem();
-                       sendEmailVerification();
-                        /*PopupMessage("Account Created Successfully");
-                        FirebaseUser user = mAuth.getCurrentUser(); //You Firebase user
-                        // user registered, start profile activity
-                        finish();
-                        Intent intent = new Intent(getApplicationContext(), MemberArea.class);
-                        intent.putExtra("EXTRA_SESSION_INFO","Login");
-                        startActivity(intent);*/
-                    } else {
-                        PopupMessage("Could not create account. Please try again");
-                    }
+        }
+
+    }
+}
+
+private void CheckEmailinUse(){
+          mAuth.fetchSignInMethodsForEmail(usr_email)
+            .addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+                @Override
+                public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                    SignInMethodQueryResult result = task.getResult();
+                    List<String> signInMethods = result.getSignInMethods();
+if (signInMethods.size() > 0){
+    PopupMessage("Email Already in Use");
+}else{
+    PrivacyPolicy();
+}
                 }
             });
+
+}
+
+private void CreateUserAccount(){
+        EverythingGone();
+        Progressbar.setVisibility(View.VISIBLE);
+    mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        @Override
+        public void onComplete(@NonNull Task<AuthResult> task) {
+
+            if (task.isSuccessful()) {
+             sendEmailVerification();
+
+            } else {
+                PopupMessage("Email Already in Use. Please try again");
+
+            }
         }
-
-        }
-
-
-
+    });
 }
 
     private void sendUserDataExistMem() {
@@ -573,6 +678,7 @@ public void LoginNow(View v) {
                         MembershipType = dataSnapshot.child("membershipType").getValue(String.class);
                         User usr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email,MembershipType);
                         myRef.setValue(usr_profile);
+                    OpenWelcomePage("ExistMem");
                 }else{
                     Toast.makeText(getApplicationContext(), "Empty snapshot", Toast.LENGTH_SHORT).show();
                 }
@@ -586,15 +692,22 @@ public void LoginNow(View v) {
         });
     }
 
+    private void OpenWelcomePage(String type){
+        finish();
+        Intent intent = new Intent(getApplicationContext(), WelcomeMessage.class);
+        intent.putExtra("TYPE",type);
+        startActivity(intent);
+    }
+
     private void sendChildrendata(){
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference("children").child(mAuth.getUid());
 
         for (i=0;i<Children.size();i=i+2){
-            String FullName = Children.get(i).getText().toString();
-            String chDOB = Children.get(i+1).getText().toString();
-            Child younglings = new Child(FullName,chDOB);
-            myRef.setValue(younglings);
+            String Name = Children.get(i).getText().toString();
+            String DOB = Children.get(i+1).getText().toString();
+            Child younglings = new Child(Name,DOB);
+            myRef.push().setValue(younglings);
         }
 
 
@@ -604,24 +717,53 @@ public void LoginNow(View v) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference("spouse").child(mAuth.getUid());
 
-            String NameofSpouse = Spouse.get(0).getText().toString().trim();
-            String SpDob = Spouse.get(1).getText().toString().trim();
+            String fullName = Spouse.get(0).getText().toString().trim();
+            String DOB = Spouse.get(1).getText().toString().trim();
             String spEmail = Spouse.get(2).getText().toString().trim();
 
-        Spouse honey = new Spouse(NameofSpouse,SpDob, spEmail);
+        Spouse honey = new Spouse(fullName,DOB, spEmail);
         myRef.setValue(honey);
     }
-    private void sendUserDataNewMem() {
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
-if (!Children.isEmpty()){
-    sendChildrendata();
-}
-if(!Spouse.isEmpty()){
-    sendSpousedata();
-}
-       User NEWusr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email, addr1,addr2,townfield,postcode,Phoneno, MembershipType,Status);
-        myRef.setValue(NEWusr_profile);
+
+    private void  checkSHMAidsonApp(){
+          Query  query = mDatabase.child("shmaIdsOnApp").orderByKey().limitToLast(1);
+                query.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                            ShmaIdsOnAppSHMAID = childSnapshot.getKey();
+                        }
+
+                        int  offlinemem =   Integer.valueOf(OfflineMemSHMAID);
+                        int shmaonappid =  Integer.valueOf(ShmaIdsOnAppSHMAID);
+                     int newSHMAid = Math.max( offlinemem,shmaonappid) + 1  ;
+                       usr_SHMAID =   String.valueOf(newSHMAid);
+                        sendUserDataNewMem();
+
+
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+                    }
+                });
+
+
+    }
+
+      private void sendUserDataNewMem() {
+          FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+          DatabaseReference myRef = firebaseDatabase.getReference("members").child(mAuth.getUid());
+          User NEWusr_profile = new User(usr_SHMAID, firstname, lastname, DOB, usr_email, addr1,addr2,townfield,postcode,MobileNumber, MembershipType,Status);
+          myRef.setValue(NEWusr_profile);
+
+          if(!Spouse.isEmpty()){
+              sendSpousedata();
+          }
+          if (!Children.isEmpty()){
+              sendChildrendata();
+          }
+
+          OpenWelcomePage("NewMem");
     }
 }
 
