@@ -1,5 +1,6 @@
 package com.shma.yusuf.shma;
 
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,6 +16,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -238,10 +240,10 @@ if ((fcheck && scheck)) {
          int month =Integer.valueOf(dateparts[1]) ;
          int day = Integer.valueOf(dateparts[0]);
         int age = getAge(year,month,day);
-if (age <= 19){
-    PopupMessage("You Must Be Over 19 To Register");
-}else{
+if (age >= 19){
     check = true;
+}else{
+    PopupMessage("You Must Be Over 19 To Register");
 }
 return check;
     }
@@ -254,9 +256,9 @@ return check;
 
         int age = today.get(Calendar.YEAR) - dob.get(Calendar.YEAR);
 
-        if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
-            age--;
-        }
+     //   if (today.get(Calendar.DAY_OF_YEAR) < dob.get(Calendar.DAY_OF_YEAR)){
+      //      age--;
+      //  }
 
 
         Integer ageInt = new Integer(age);
@@ -427,11 +429,14 @@ private void AddFieldsToList(){
     public void PopupMessage(String Message){
         Snackbar mySnackbar;
         mySnackbar = Snackbar.make(parentLayout, Message, 2000);
-        mySnackbar.getView().setBackgroundColor(Color.RED);
+        View sbView = mySnackbar.getView();
+        sbView.setBackgroundColor(Color.RED);
         TextView mainTextView = (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
         mainTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         mainTextView.setTextColor(Color.BLACK);
         mainTextView.setTextSize(24);
+        InputMethodManager imm = (InputMethodManager)this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(parentLayout.getWindowToken(), 0);
         mySnackbar.show();
 
     }
