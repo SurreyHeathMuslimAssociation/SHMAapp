@@ -364,9 +364,12 @@ public void SetUpUIelements() {
         Adr2Field.setVisibility(View.GONE);
         TownField.setVisibility(View.GONE);
         PostCodeField.setVisibility(View.GONE);
+        lblAddchild.setVisibility(View.GONE);
+        lblRemovechild.setVisibility(View.GONE);
         addChild.setVisibility(View.GONE);
         urlWebView.setVisibility(View.GONE);
         AgreeButton.setVisibility(View.GONE);
+        scrollview.setVisibility(View.GONE);
         RemoveChild.setVisibility(View.GONE);
     }
 

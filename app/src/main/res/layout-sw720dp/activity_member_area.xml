@@ -1,36 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TheConstraintLayout"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/TheConstraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
     tools:context=".MemberArea">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Small"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.912"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.986" />
-
-    <TextView
         android:id="@+id/addchildlbl"
         android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:text="Add Child"
         android:textAlignment="center"
+        android:text="Add Child"
         app:layout_constraintBottom_toTopOf="@+id/AddChild"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -101,7 +84,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+       >
 
         <LinearLayout
             android:id="@+id/LinearLayoutscr"
@@ -114,20 +98,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:maxLength="15"
                 android:ems="10"
                 android:hint="First Name"
-                android:inputType="text"
-                android:maxLength="15" />
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/lastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:maxLength="15"
                 android:ems="10"
                 android:hint="Last Name"
-                android:inputType="text"
-                android:maxLength="15" />
+                android:inputType="text" />
 
             <EditText
                 android:id="@+id/DobField"
@@ -136,7 +120,7 @@
                 android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="Date of Birth"
-                android:inputType="date|textUri|datetime"
+                android:inputType="date|datetime|time"
                 android:maxLength="10" />
 
             <EditText
@@ -144,10 +128,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:maxLength="9"
                 android:ems="10"
                 android:hint="Post Code"
-                android:inputType="textPostalAddress"
-                android:maxLength="9" />
+                android:inputType="textPostalAddress" />
 
             <EditText
                 android:id="@+id/TownField"
@@ -181,20 +165,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:maxLength="3"
                 android:ems="10"
                 android:hint="SHMA ID"
-                android:inputType="number"
-                android:maxLength="3" />
+                android:inputType="number" />
 
             <EditText
                 android:id="@+id/Phonenum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
+                android:maxLength="11"
                 android:ems="10"
                 android:hint="Phone No."
-                android:inputType="phone"
-                android:maxLength="11" />
+                android:inputType="phone" />
 
             <EditText
                 android:id="@+id/EmailField"
@@ -264,8 +248,8 @@
         android:id="@+id/removechildlbl"
         android:layout_width="55dp"
         android:layout_height="wrap_content"
-        android:text="Remove Child"
         android:textAlignment="center"
+        android:text="Remove Child"
         app:layout_constraintBottom_toTopOf="@+id/RemoveChild"
         app:layout_constraintEnd_toStartOf="@+id/nestedScrollView"
         app:layout_constraintHorizontal_bias="0.5"
