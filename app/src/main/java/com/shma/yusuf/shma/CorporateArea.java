@@ -24,7 +24,6 @@ import java.util.List;
 
 public class CorporateArea extends AppCompatActivity {
     private TextView Surnametxt ;
-    private TextView dobback ;
     private Button mybutton;
     private static final String TAG = "firebase check";
     private static String date = "";
@@ -40,7 +39,6 @@ public class CorporateArea extends AppCompatActivity {
         final View parentLayout = findViewById(android.R.id.content);
         mDatabase = FirebaseDatabase.getInstance().getReference("member_search");
         Surnametxt = findViewById(R.id.SHMAid);
-        dobback  = findViewById(R.id.DOBtitle);
         mybutton = findViewById(R.id.searchme);
        mybutton.setOnClickListener(new View.OnClickListener() {
            @Override
