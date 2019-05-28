@@ -4,46 +4,50 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MemberProfile">
+    android:orientation="vertical"
 
-    <android.support.design.widget.BottomNavigationView
-        android:id="@+id/bottom_nav"
-        android:layout_width="match_parent"
+    tools:context=".BusinessInfo">
+
+    <TextView
+        android:id="@+id/BusinessTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="?android:attr/windowBackground"
-        app:itemIconTint="@color/common_google_signin_btn_text_dark_focused"
-        app:itemTextColor="@color/common_google_signin_btn_text_dark_focused"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:menu="@menu/bottomnavigation"
-        tools:layout_editor_absoluteX="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Business"
+        android:textColor="@android:color/black"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        />
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/my_toolbar"
+    <ImageView
+        android:id="@+id/ShopImage"
         android:layout_width="match_parent"
-        android:layout_height="53dp"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        android:layout_height="170dp"
+        android:layout_marginTop="24dp"
+        android:background="#2d2d2d"
+        android:scaleType="centerCrop"
+        app:layout_constraintTop_toBottomOf="@+id/BusinessTitle"
         tools:layout_editor_absoluteX="0dp" />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="450dp"
-        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="360dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/ShopImage"
         app:layout_constraintVertical_bias="0.262">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingBottom="30dp"
             android:orientation="vertical">
 
             <TextView
@@ -51,12 +55,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="SHMA ID"
-                android:textSize="16sp"
+                android:text="Address"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/usr_shmaid"
+                android:id="@+id/Address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -68,21 +72,22 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="First Name"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:text="Rating"
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/usr_firstname"
+                android:id="@+id/Rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp"
-
-                />
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="198dp"
+                tools:layout_editor_absoluteY="257dp" />
 
             <View
                 android:layout_width="match_parent"
@@ -90,20 +95,22 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
-
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Last Name"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:text="Type"
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/usr_surname"
+                android:id="@+id/Type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp" />
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="198dp"
+                tools:layout_editor_absoluteY="257dp" />
 
             <View
                 android:layout_width="match_parent"
@@ -111,19 +118,46 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Date of Birth"
-                android:textSize="18sp"
-                android:textStyle="bold" />
+                android:layout_weight="1"
+                android:text="Open Now"
+                android:textSize="18sp" />
 
             <TextView
-                android:id="@+id/usr_DOB"
+                android:id="@+id/OpenNow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp" />
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="198dp"
+                tools:layout_editor_absoluteY="257dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@android:color/darker_gray" />
+
+
+            <TextView
+                android:textStyle="bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:text="Opening Times"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/OpeningTimes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                tools:layout_editor_absoluteX="198dp"
+                tools:layout_editor_absoluteY="257dp" />
 
             <View
                 android:layout_width="match_parent"
@@ -131,77 +165,23 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Email"
+                android:layout_weight="1"
+                android:text="Phone Number"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/PhoneNumber"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/fui_bgTwitter"
                 android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/usr_Email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="16sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Membership Type"
-                android:textSize="18sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/membershipType"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="16sp" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="If you have any queries please contact us on"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/ContactInfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:textSize="16sp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Alternatively you can post to us on the following address"
-                android:textAlignment="center"
-                android:textSize="18dp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/ContactAdd"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textAlignment="center"
-                android:textSize="16sp" />
+                tools:layout_editor_absoluteX="198dp"
+                tools:layout_editor_absoluteY="257dp" />
 
             <View
                 android:layout_width="match_parent"
@@ -211,4 +191,30 @@
 
     </android.support.v4.widget.NestedScrollView>
 
+
+    <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottom_nav"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/common_google_signin_btn_text_dark_focused"
+        app:itemTextColor="@color/common_google_signin_btn_text_dark_focused"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:menu="@menu/bottomnavigation"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/Route"
+        style="@style/Widget.AppCompat.Button.Colored"
+        android:layout_width="76dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:onClick="Routeme"
+        android:text="Route"
+        app:layout_constraintBottom_toBottomOf="@+id/ShopImage"
+        app:layout_constraintEnd_toEndOf="@+id/ShopImage"
+        app:layout_constraintHorizontal_bias="0.949"
+        app:layout_constraintStart_toStartOf="@+id/ShopImage"
+        app:layout_constraintTop_toTopOf="@+id/ShopImage"
+        app:layout_constraintVertical_bias="0.942" />
 </android.support.constraint.ConstraintLayout>

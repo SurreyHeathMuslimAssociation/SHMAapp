@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="200dp"
-    android:layout_height="200dp"
+    android:layout_width="160dp"
+    android:layout_height="160dp"
     android:background="@drawable/dome"
    >
 
@@ -12,7 +12,7 @@
         android:layout_centerInParent="true"
         android:layout_weight="0.8"
         android:text="Label"
-        android:textSize="18sp" />
+        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/grid_prayertime"
@@ -23,6 +23,6 @@
         android:layout_marginTop="20dp"
         android:layout_weight="1"
         android:text="prayertime"
-        android:textSize="15sp" />
+        android:textSize="14sp" />
 
 </RelativeLayout>

@@ -31,8 +31,8 @@
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
-        android:layout_width="wrap_content"
-        android:layout_height="450dp"
+        android:layout_width="match_parent"
+        android:layout_height="487dp"
         android:layout_marginTop="8dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,28 +45,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
             <TextView
 
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="SHMA ID"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/usr_shmaid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="18sp" />
-
+                android:textSize="30sp"
+               />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -74,21 +71,18 @@
                 android:text="First Name"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
             <TextView
                 android:id="@+id/usr_firstname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp"
+                android:textSize="18sp"
 
-                />
-
+               />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray" />
-
             <TextView
 
                 android:layout_width="wrap_content"
@@ -103,13 +97,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp" />
+                android:textSize="18sp"
+              />
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray" />
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -123,12 +117,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp" />
+                android:textSize="18sp"
+                />
 
             <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="@android:color/darker_gray" />
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -143,8 +138,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp" />
-
+                android:textSize="18sp"
+                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -163,8 +158,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp" />
-
+                android:textSize="18sp"
+                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
@@ -176,33 +171,34 @@
                 android:layout_gravity="center"
                 android:text="If you have any queries please contact us on"
                 android:textSize="18dp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                />
 
             <TextView
                 android:id="@+id/ContactInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:textAlignment="center"
-                android:textSize="16sp" />
-
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="Alternatively you can post to us on the following address"
                 android:textAlignment="center"
+                android:text="Alternatively you can post to us on the following address"
                 android:textSize="18dp"
-                android:textStyle="bold" />
-
+                android:textStyle="bold"
+                />
             <TextView
                 android:id="@+id/ContactAdd"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:textAlignment="center"
-                android:textSize="16sp" />
-
+                android:layout_gravity="center"
+                android:textSize="18sp"
+                />
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
