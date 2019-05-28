@@ -107,9 +107,10 @@ public class MemberArea extends AppCompatActivity {
                     addTings("Spouse D.O.B");
                     addTings("Spouse Email");
                     addChildButtons();
-
+                    LoginBtn.setText("Register £7 Pcm");
                 }else{
                     RemoveWifenChildrenDetails();
+                    LoginBtn.setText("Register £4 Pcm");
              }
             }
         });
@@ -350,21 +351,10 @@ public void SetUpUIelements() {
 
     private void EverythingGone(){
         Notice.setVisibility(View.GONE);
-        SHMAid.setVisibility(View.GONE);
-        Email.setVisibility(View.GONE);
-        Password.setVisibility(View.GONE);
         Title.setVisibility(View.GONE);
         Forgotpwd.setVisibility(View.GONE);
         familyswitch.setVisibility(View.GONE);
         LoginBtn.setVisibility(View.GONE);
-        FirstName.setVisibility(View.GONE);
-        DOBfield.setVisibility(View.GONE);
-        LastName.setVisibility(View.GONE);
-        Adr1Field.setVisibility(View.GONE);
-        PhoneNum.setVisibility(View.GONE);
-        Adr2Field.setVisibility(View.GONE);
-        TownField.setVisibility(View.GONE);
-        PostCodeField.setVisibility(View.GONE);
         lblAddchild.setVisibility(View.GONE);
         lblRemovechild.setVisibility(View.GONE);
         addChild.setVisibility(View.GONE);
@@ -373,6 +363,15 @@ public void SetUpUIelements() {
         scrollview.setVisibility(View.GONE);
         RemoveChild.setVisibility(View.GONE);
     }
+    private void EverythingBack(){
+        Notice.setVisibility(View.VISIBLE);
+        Title.setVisibility(View.VISIBLE);
+        Forgotpwd.setVisibility(View.VISIBLE);
+        familyswitch.setVisibility(View.VISIBLE);
+        LoginBtn.setVisibility(View.VISIBLE);
+        scrollview.setVisibility(View.VISIBLE);
+           }
+
 
     public void CorrectElements(){
         lblAddchild.setVisibility(View.GONE);
@@ -411,7 +410,7 @@ public void SetUpUIelements() {
         }else {
             Title.setText("Thinking of Joining?");
             Title.setTextSize(28);
-            LoginBtn.setText("Register");
+            LoginBtn.setText("Register £4 Pcm");
             SHMAid.setVisibility(View.GONE);
             Forgotpwd.setVisibility(View.GONE);
                          }
@@ -671,16 +670,18 @@ if (signInMethods.size() > 0){
 
 private void CreateUserAccount(){
         EverythingGone();
-        Progressbar.setVisibility(View.VISIBLE);
         mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
         @Override
         public void onComplete(@NonNull Task<AuthResult> task) {
 
             if (task.isSuccessful()) {
-             sendEmailVerification();
+                Progressbar.setVisibility(View.VISIBLE);
+                sendEmailVerification();
 
             } else {
-                PopupMessage("Email Already in Use. Please try again");
+                PopupMessage("Please use more than 6 characters for password");
+                EverythingBack();
+                CorrectElements();
 
             }
         }

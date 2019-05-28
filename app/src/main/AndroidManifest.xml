@@ -6,42 +6,43 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".BusinessInfo"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity android:name=".member_business"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".member_funeral"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MemberSpace"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".WelcomeMessage"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".Password"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MemberProfile"
-            android:screenOrientation="portrait"/>
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/app_name"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+        android:usesCleartextTraffic="true"
+     android:allowBackup="true"
+     android:icon="@mipmap/ic_launcher"
+     android:label="@string/app_name"
+     android:roundIcon="@mipmap/ic_launcher_round"
+     android:supportsRtl="true"
+     android:theme="@style/AppTheme">
+     <activity android:name=".BusinessInfo"
+         android:screenOrientation="portrait">
+     </activity>
+     <activity android:name=".member_business"
+         android:screenOrientation="portrait"/>
+     <activity android:name=".member_funeral"
+         android:screenOrientation="portrait"/>
+     <activity android:name=".MemberSpace"
+         android:screenOrientation="portrait"/>
+     <activity android:name=".WelcomeMessage"
+         android:screenOrientation="portrait"/>
+     <activity android:name=".Password"
+         android:screenOrientation="portrait"/>
+     <activity android:name=".MemberProfile"
+         android:screenOrientation="portrait"/>
+     <activity
+         android:name=".MainActivity"
+         android:label="@string/app_name"
+         android:screenOrientation="portrait"
+         android:theme="@style/AppTheme.NoActionBar">
+         <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".Members"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".MemberArea"
-            android:screenOrientation="portrait"/>
-    </application>
+             <category android:name="android.intent.category.LAUNCHER" />
+         </intent-filter>
+     </activity>
+     <activity android:name=".Members"
+         android:screenOrientation="portrait"/>
+     <activity android:name=".MemberArea"
+         android:screenOrientation="portrait"/>
+ </application>
 
 </manifest>
