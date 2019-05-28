@@ -10,25 +10,21 @@
         android:id="@+id/Nametxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text=""
         android:textAlignment="center"
         android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/GreetingMsg"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.529" />
+        app:layout_constraintVertical_bias="0.808" />
 
     <TextView
         android:id="@+id/scndgreetingMsg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="160dp"
+        android:layout_marginBottom="148dp"
         android:text="We have sent you an email asking you to verify your account, you will be able to log in once it has been verified."
         android:textAlignment="center"
         android:textSize="16sp"
@@ -41,10 +37,6 @@
         android:id="@+id/loginButton"
         android:layout_width="172dp"
         android:layout_height="51dp"
-
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
         android:layout_marginBottom="44dp"
         android:onClick="backToLogin"
         android:text="Return to Login"
@@ -61,10 +53,6 @@
         android:id="@+id/GreetingMsg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
         android:text="Congratulations on signing up to our Surrey Heath Muslim Association App, this is another step to bringing our members closer."
         android:textAlignment="center"
         android:textSize="16sp"
@@ -73,6 +61,6 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.944" />
+        app:layout_constraintVertical_bias="0.858" />
 
 </android.support.constraint.ConstraintLayout>

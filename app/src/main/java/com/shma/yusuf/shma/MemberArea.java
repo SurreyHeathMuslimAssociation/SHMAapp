@@ -445,6 +445,21 @@ private void AddFieldsToList(){
 
     }
 
+    public void GreenMessage(String Message){
+        Snackbar mySnackbar;
+        mySnackbar = Snackbar.make(parentLayout, Message, 2000);
+        View sbView = mySnackbar.getView();
+        sbView.setBackgroundColor(Color.GREEN);
+        TextView mainTextView = (mySnackbar.getView()).findViewById(android.support.design.R.id.snackbar_text);
+        mainTextView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        mainTextView.setTextColor(Color.BLACK);
+        mainTextView.setTextSize(24);
+        InputMethodManager imm = (InputMethodManager)this.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(parentLayout.getWindowToken(), 0);
+        mySnackbar.show();
+
+    }
+
     private void checkEmailVerification(){
 
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
@@ -572,8 +587,7 @@ private void DownloadPolicy(){
     urlWebView.getSettings().setBuiltInZoomControls(true);
     urlWebView.getSettings().setUseWideViewPort(true);
     urlWebView.loadUrl("https://firebasestorage.googleapis.com/v0/b/shma-559f5.appspot.com/o/Privacy%20Policy%2FSHMAPrivacyPolicy.html?alt=media&token=0a15acd1-c098-4e1e-ad73-e03b31a36df4");
-
-}
+   }
 
 public void Agree(View v){
 
@@ -647,8 +661,9 @@ private void CheckEmailinUse(){
 if (signInMethods.size() > 0){
     PopupMessage("Email Already in Use");
 }else{
+    GreenMessage("Privacy Policy Loading...");
     PrivacyPolicy();
-}
+  }
                 }
             });
 
@@ -657,7 +672,7 @@ if (signInMethods.size() > 0){
 private void CreateUserAccount(){
         EverythingGone();
         Progressbar.setVisibility(View.VISIBLE);
-    mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(usr_email, usr_password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
         @Override
         public void onComplete(@NonNull Task<AuthResult> task) {
 

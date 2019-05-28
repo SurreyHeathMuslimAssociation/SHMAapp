@@ -262,7 +262,7 @@
     <WebView
         android:id="@+id/PrivacyPolicy"
         android:layout_width="wrap_content"
-        android:layout_height="460dp"
+        android:layout_height="440dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -275,14 +275,14 @@
 
     <Button
         android:id="@+id/AgreeButton"
-        android:layout_width="172dp"
-        android:layout_height="51dp"
+        android:layout_width="165dp"
+        android:layout_height="45dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
         android:onClick="Agree"
         android:text="Agree"
-        android:textSize="24sp"
+        android:textSize="18sp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
