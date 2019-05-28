@@ -328,6 +328,7 @@ public void SetUpUIelements() {
             newParams.bottomToBottom = params.bottomToBottom ;
             newParams.endToEnd = params.endToEnd ;
             newParams.horizontalBias = params.horizontalBias ;
+            newParams.verticalBias = params.verticalBias;
             newParams.startToStart = params.startToStart ;
             newParams.topToTop = params.topToTop ;
             //newParams.verticalBias = params.verticalBias;
