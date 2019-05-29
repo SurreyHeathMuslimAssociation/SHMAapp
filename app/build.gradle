@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         applicationId "com.shma.yusuf.shma"
-        minSdkVersion 26
-        targetSdkVersion 27
-        versionCode 20
-        versionName "bismillah09"
+        minSdkVersion 28
+        targetSdkVersion 28
+        versionCode 22
+        versionName "Alhamdullilah01"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -20,14 +20,14 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:27.1.1'
-    implementation 'com.android.support:recyclerview-v7:27.1.1'
-    implementation 'com.android.support:support-v4:27.1.1'
-    implementation 'com.android.support:support-media-compat:27.1.1'
-    implementation 'com.android.support:exifinterface:27.1.1'
-    implementation "com.android.support:customtabs:27.1.1"
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support:recyclerview-v7:28.0.0'
+    implementation 'com.android.support:support-v4:28.0.0'
+    implementation 'com.android.support:support-media-compat:28.0.0'
+    implementation 'com.android.support:exifinterface:28.0.0'
+    implementation "com.android.support:customtabs:28.0.0"
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:design:28.0.0'
     implementation 'com.google.firebase:firebase-messaging:18.0.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.google.android.libraries.places:places:1.1.0'

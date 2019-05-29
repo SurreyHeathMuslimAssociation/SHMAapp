@@ -8,11 +8,11 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="236dp"
+        android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:text="Members"
         android:textAlignment="center"
-        android:textSize="30sp"
+        android:textSize="28sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/titlemembers"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,8 +22,8 @@
 
     <Button
         android:id="@+id/Newmemb"
-        android:layout_width="310dp"
-        android:layout_height="55dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:onClick="openLoginPage"
         android:text="New Member Registration"
         android:textAlignment="center"
@@ -37,8 +37,8 @@
 
     <Button
         android:id="@+id/Existmemb"
-        android:layout_width="310dp"
-        android:layout_height="55dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:onClick="openLoginPage"
         android:text="Existing Member Registration"
         android:textSize="16sp"
@@ -51,8 +51,8 @@
 
     <Button
         android:id="@+id/Login"
-        android:layout_width="310dp"
-        android:layout_height="51dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:onClick="openLoginPage"
         android:text="Login"
         android:textSize="16dp"
@@ -66,7 +66,7 @@
     <TextView
         android:id="@+id/titlemembers"
         android:layout_width="wrap_content"
-        android:layout_height="34dp"
+        android:layout_height="wrap_content"
         android:text="Please select your preferred destination"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/Login"

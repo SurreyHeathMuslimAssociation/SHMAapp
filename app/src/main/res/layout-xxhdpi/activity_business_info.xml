@@ -25,7 +25,7 @@
     <ImageView
         android:id="@+id/ShopImage"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="170dp"
         android:layout_marginTop="24dp"
         android:background="#2d2d2d"
         android:scaleType="centerCrop"
@@ -35,7 +35,7 @@
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="360dp"
         android:layout_marginTop="15dp"
         app:layout_constraintBottom_toTopOf="@id/bottom_nav"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,8 +47,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:paddingBottom="30dp">
+            android:paddingBottom="30dp"
+            android:orientation="vertical">
 
             <TextView
 
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="Address"
-                android:textSize="14sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -72,13 +72,13 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Rating"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/Rating"
@@ -95,13 +95,13 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Type"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/Type"
@@ -118,13 +118,13 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Open Now"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/OpenNow"
@@ -142,13 +142,13 @@
 
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Opening Times"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/OpeningTimes"
@@ -165,13 +165,13 @@
                 android:background="@android:color/darker_gray" />
 
             <TextView
+                android:textStyle="bold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:text="Phone Number"
-                android:textSize="14sp"
-                android:textStyle="bold" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/PhoneNumber"
