@@ -585,7 +585,7 @@ private void DownloadPolicy(){
     urlWebView.getSettings().setJavaScriptEnabled(true);
     urlWebView.getSettings().setBuiltInZoomControls(true);
     urlWebView.getSettings().setUseWideViewPort(true);
-    urlWebView.loadUrl("https://firebasestorage.googleapis.com/v0/b/shma-559f5.appspot.com/o/Privacy%20Policy%2FSHMAPrivacyPolicy.html?alt=media&token=0a15acd1-c098-4e1e-ad73-e03b31a36df4");
+    urlWebView.loadUrl("https://firebasestorage.googleapis.com/v0/b/shma-559f5.appspot.com/o/Privacy%20Policy%2FPrivacyPolicy.html?alt=media&token=6f5455fe-e5e2-49ba-ba9a-5cd4cbf8527c");
    }
 
 public void Agree(View v){
